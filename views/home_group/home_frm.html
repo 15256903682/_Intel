@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>home</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/common.css"/>
+    <style>
+        body {
+           /* background-color: RGBA(238, 238, 238, 1);*/
+           background-color: #fff;
+
+        }
+
+        #wrap {
+            height: auto;
+        }
+
+        .border-1px-bottom:after {
+            color: #F8f8f8;
+        }
+
+        .home_nav_group {
+            width: 100%;
+            height: 8.1rem;
+            background-color: #ffffff;
+        }
+
+        .home_nav_group li {
+            display: inline-block;
+            width: 32%;
+            text-align: center;
+            padding: 20px 0 10px;
+            background-size: 40px;
+            background-repeat: no-repeat;
+            background-position-y: 30%;
+            background-position-x: center;
+        }
+
+        .home_nav_group li span {
+            margin: 35px 10px 0 10px;
+            font-size: 1.3rem;
+            color: #5F5F5F;
+        }
+
+        .home_technical_college {
+            background-image: url("../../image/home_tech_college.png");
+        }
+
+        .home_iotMatch {
+            background-image: url("../../image/home_itotMatch.png");
+        }
+
+        .home_community {
+            background-image: url("../../image/home/home_community.png");
+        }
+
+        .top_information, .discover_hot {
+            margin-bottom: 1rem;
+            /*background-color: #DDDDDD;*/
+        }
+
+        .home_news {
+
+            padding: 1rem;
+            background-color: #ffffff;
+        }
+
+        .home_news_titleWrap {
+            background-color: #ffffff;
+            display: -webkit-box;
+            height: 6rem;
+            -webkit-box-align: center;
+            -webkit-box-pack: center;
+        }
+
+        .home_news_titleWrap .title {
+            margin: 0 10px;
+            font-size: 2rem;
+        }
+
+        .home_news_title_line {
+            height: 0.1rem;
+            width: 3rem;
+            background-color: #C3C3C3;
+        }
+
+        .home_news_picture, .product_focus_picture {
+            height: 18.3rem;
+            position: relative;
+        }
+
+        .home_news_picturelable {
+            background-color: RGBA(0, 60, 114, 0.37);
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 30px;
+            line-height: 30px;
+            padding: 0 10px;
+            overflow: hidden;
+            color: #fff;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            font-size: 1.5rem;
+        }
+
+        .home_news_picture img, .product_focus_picture img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .home_news_brief {
+            margin-top: 10px;
+            /*height: 5.7rem;*/
+            font-size: 1.2rem;
+            line-height: 1.8rem;
+			word-break:break-all;
+			display:-webkit-box;
+			-webkit-line-clamp:3;
+			-webkit-box-orient:vertical;
+			overflow:hidden;
+            color: #7B7B7B;
+        }
+
+        .home_article {
+            position: relative;
+            /*
+                        margin-left: 3.9rem;
+                        margin-right: 2.1rem;*/
+            padding-top: 1.5rem;
+            padding-left: 3.9rem;
+            padding-right: 2.1rem;
+        }
+
+        .home_article_mark {
+            position: absolute;
+            top: 2rem;
+            left: 5px;
+            width: 2rem;
+            padding: 4px;
+            border-radius: 3px;
+            background-color: #E60112;
+            color: #ffffff;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .home_article_title {
+            font-size: 1.5rem;
+            color: #5E5E5E;
+        }
+
+        .home_article_content {
+            margin-top: 10px;
+            padding-bottom: 0.8rem;
+            color: #C4C4C4;
+            font-size: 1.4rem;
+        }
+
+        .home_article_proinfo {
+            padding: 10px 0;
+            display: -webkit-box;
+
+        }
+
+        .home_article_proinfo div {
+            -webkit-box-flex: 1;
+            font-size: 1.2rem;
+            line-height: 1.2rem;
+            color: #C4C4C4;
+            display: -webkit-box;
+            -webkit-box-align: center;
+            background-size: 15px;
+            background-repeat: no-repeat;
+            background-position: left center;
+        }
+
+        .home_article_proinfo span {
+            padding-left:25px;
+        }
+
+        .home_article_proinfo_viewIcon {
+            background-image: url("../../image/home_viewIcon.png");
+        }
+
+        .home_article_proinfo_commentIcon {
+            background-image: url("../../image/home_commentIcon.png");
+        }
+
+        .home_article_proinfo_topIcon {
+            background-image: url("../../image/home_topIcon.png");
+        }
+
+        .discover_hot_more {
+            margin-top: 10px;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .discover_hot_more .more_tbn {
+            width: 50%;
+            height: 3.8rem;
+            line-height: 3.8rem;
+            border: 1px solid #A2D6F6;
+            color: #12B1F0;
+            border-radius: 3px;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .product_focus_section {
+            padding: 1rem;
+        }
+
+        .product_focus_picture {
+            display: -webkit-box;
+        }
+
+        .product_focus_picture_box {
+            -webkit-box-flex: 1;
+            position: relative;
+            margin-top: 10px;
+            height: 11.4rem;
+        }
+
+        .product_focus_picture_box:first-child {
+            margin-right: 5px;
+        }
+
+        .product_focus_picture_box:last-child {
+            margin-left: 5px;
+        }
+
+        .product_focus_picture_box img {
+            width: 100%;
+            height: 100%;
+        }
+
+        #hots, #information {
+            background-color: RGBA(238, 238, 238, 1);
+        }
+
+        .home_article, .home_news {
+            background-color: #ffffff;
+        }
+
+        .home_article:not(:last-child), .home_news:not(:last-child) {
+            margin-bottom: 0.4rem;
+        }
+
+        .placeHolder {
+            background-color: RGBA(238, 238, 238, 1);
+            height: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+<div id="wrap">
+    <div id="main">
+        <div style="width: 100%; position: relative; padding-bottom: 53%;">
+            <div style="position: absolute; left: 0; top: 0; right: 0; bottom: 0;background-color:#F5F5F5;">
+
+            </div>
+        </div>
+        <ul class="home_nav_group">
+<!--             <li class="home_technical_college" onclick="openInstitute()" tapmode="">
+                <span>Tech College</span>
+            </li>
+            <li class="home_iotMatch" onclick="openVideos()" tapmode="">
+                <span>Maker Contest</span>
+            </li>
+            <li class="home_community" onclick="openBBS()" tapmode="">
+                <span>Community</span>
+            </li> -->
+            <li class="home_technical_college">
+                <span>--</span>
+            </li>
+            <li class="home_iotMatch">
+                <span>--</span>
+            </li>
+            <li class="home_community">
+                <span>--</span>
+            </li>
+        </ul>
+        <div class="placeHolder"></div>
+        <div class="top_information">
+            <div class="home_news_titleWrap border-1px-bottom">
+                <div class="home_news_title_line"></div>
+                <div class="title">--</div>
+                <div class="home_news_title_line"></div>
+            </div>
+            <div id="information">
+                <div class="home_news">
+                    <div class="home_news_picture">
+                        <img src="../../image/common/placeholderimg.png">
+                    </div>
+                </div>
+                <div class="home_news">
+                    <div class="home_news_picture">
+                        <img src="../../image/common/placeholderimg.png">
+                    </div>
+                </div>
+                <div class="home_news">
+                    <div class="home_news_picture">
+                        <img src="../../image/common/placeholderimg.png">
+                    </div>
+                </div>
+
+            </div>
+            <!-- <div class="discover_hot_more">
+                <span class="more_tbn" tapmode="" onclick="openInstitute('true')">
+                    More
+                </span>
+            </div> -->
+        </div>
+        <div class="placeHolder"></div>
+        <div class="discover_hot"><!-- 
+            <div class="home_news_titleWrap border-1px-bottom">
+                <div class="home_news_title_line"></div>
+                <div class="title">What's Hot</div>
+                <div class="home_news_title_line"></div>
+            </div>
+            <div id="hots">
+                <div class="home_article">
+                    <span class="home_article_mark">
+                        hot
+                    </span>
+                    <div class="home_article_title">
+                        这文章标题这文章标题这文章标题这文章标题这文章标题
+                    </div>
+                    <div class="home_article_content border-1px-bottom">
+                        这是文章内容这是文章内容这是文章内容这是文章内容这是文章内容这是文章内容
+                        这是文章内容这是文章内容这是文章内容这是文章内容
+                    </div>
+                    <div class="home_article_proinfo">
+                        <div class="home_article_proinfo_viewIcon"><span>24</span></div>
+                        <div class="home_article_proinfo_commentIcon"><span>24</span></div>
+                        <div class="home_article_proinfo_topIcon"><span>24</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="discover_hot_more">
+                <span class="more_tbn" tapmode="" onclick="openBBS('true')">
+                    More
+                </span>
+            </div> -->
+        </div>
+        <div class="placeHolder"></div>
+        <div class="product_focus">
+<!--             <div class="home_news_titleWrap">
+                <div class="home_news_title_line"></div>
+                <div class="title">What's Rising</div>
+                <div class="home_news_title_line"></div>
+            </div>
+            <div class="product_focus_section" id="products">
+                <div class="data">
+                    <div class="product_focus_picture">
+                        <img src="../../image/common/placeholderimg.png">
+                            <div class="home_news_picturelable ellipsis">文字</div> 
+                    </div>
+
+                    <div class="product_focus_picture" style="height: auto">
+                        <div class="product_focus_picture_box" >
+                            <img src="../../image/common/placeholderimg.png">
+                            <!-- <div class="home_news_picturelable ellipsis">文字</div> 
+                        </div>
+                        <div class="product_focus_picture_box">
+                            <img src="../../image/common/placeholderimg.png">
+                            <!-- <div class="home_news_picturelable ellipsis">文字</div> 
+                        </div>
+                    </div>
+                </div>
+                 <div class="discover_hot_more">
+                    <span class="more_tbn" tapmode="" onclick="openVideos()">
+                        More
+                    </span>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript" src="../../script/echo.min.js"></script>
+<script type="text/javascript" src="../../script/sha1.js"></script>
+<script type="text/javascript">
+    var pageParam;
+    var vGlobalParam = {};
+    var loginInfo = $api.getStorage('loginInfo');
+    var zhuge;
+
+    var myApi, getVedioUrlObj;
+    var UIScrollPicture = null,
+        UIScrollPictureData = [],
+        vGlobalParam = {};
+    apiready = function () {
+          zhuge = api.require('zhuge');
+        if (zhuge) {
+            zhuge.initZhuge();
+        }
+        $api.dom('.product_focus').innerHTML=
+        '        <div class="home_news_titleWrap">'+
+        '         <div class="home_news_title_line"></div>'+
+        '         <div class="title">'+fnLanguageSwitch('智能硬件大赛')+'</div>'+
+        '         <div class="home_news_title_line"></div>'+
+        '     </div>'+
+        '     <div class="product_focus_section" id="products">'+
+        '         <div class="data">'+
+        '             <div class="product_focus_picture">'+
+        '                 <img src="../../image/common/placeholderimg.png">'+
+                            // <!-- <div class="home_news_picturelable ellipsis">文字</div> -->
+        '            </div>'+
+
+        '            <div class="product_focus_picture" style="height: auto">'+
+        '                <div class="product_focus_picture_box" >'+
+        '                    <img src="../../image/common/placeholderimg.png">'+
+                            // <!-- <div class="home_news_picturelable ellipsis">文字</div> -->
+        '                </div>'+
+        '                <div class="product_focus_picture_box">'+
+        '                    <img src="../../image/common/placeholderimg.png">'+
+                            // <!-- <div class="home_news_picturelable ellipsis">文字</div> -->
+        '                </div>'+
+        '            </div>'+
+        '        </div>'+
+        '         <div class="discover_hot_more">'+
+        '            <span class="more_tbn" tapmode="" onclick="openVideos()">'+fnLanguageSwitch('更多')+''+
+        '            </span>'+
+        '        </div>'+
+        '    </div>';
+
+        UIScrollPicture = api.require('UIScrollPicture');
+        $api.dom( '.home_nav_group' ).innerHTML =
+        '<li class="home_technical_college" onclick="openInstitute()" tapmode="">'+
+        '    <span>'+fnLanguageSwitch( '技术学院' )+'</span>'+
+        '</li>'+
+        '<li class="home_iotMatch" onclick="openVideos()" tapmode="">'+
+        '    <span>'+fnLanguageSwitch( '智能硬件大赛' )+'</span>'+
+        '</li>'+
+        '<li class="home_community" onclick="openBBS()" tapmode="">'+
+        '    <span>'+fnLanguageSwitch( '社区' )+'</span>'+
+        '</li>';
+
+
+    	getProduct();
+
+        fnAjax({
+            url: 'activities/getApp'
+        }, function( ret, err ){
+            if( ret ){
+                if( ret.length ){
+                    UIScrollPictureData = ret;
+                    var _data = {
+                        paths: [],
+                        // captions: []
+                    };
+                    for( var x in ret ){
+                        _data.paths.push( ret[x].appPhoto );
+                        // _data.captions.push( ret[x].name );
+                    }
+                    openUIScrollPicture( _data );
+                }
+            }else{
+                api.toast({
+                   global: true,
+                    msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                });
+            }
+             if (zhuge) {
+                    zhuge.identify({
+                         uid:USER.userId,
+                        userPro: identifyUserInfo
+                        
+                    });
+                }
+        });
+        
+
+        fnAjax({
+            url: 'news/appHome'
+        }, function( ret, err ){
+            if( ret ){
+                if( ret.length ){
+                    var _information = '';
+                    for( var x in ret ){
+                        vGlobalParam[ ret[x].id ] = ret[x];
+                        _information +=
+                        '    <div class="home_news" onclick="fnOpenDetail( this );" data-id="'+ret[x].id+'" >'+
+                        '        <div class="home_news_picture">'+
+                        '            <img data-selectorid="'+ret[x].file1+'"" onload="getImageCache( this );" src="../../image/common/placeholderimg.png">'+
+                        '           <div class="home_news_picturelable ellipsis-1">' +ret[x].title+ '</div>'+
+                        '        </div>'+
+                        '       <div class="home_news_brief">' + ret[x].profile + '</div>'+
+                        '    </div>';
+                    }
+
+                    $api.dom( '.top_information' ).innerHTML =
+                    '<div class="home_news_titleWrap border-1px-bottom">'+
+                    '    <div class="home_news_title_line"></div>'+
+                    '    <div class="title">'+fnLanguageSwitch( '技术前沿' )+'</div>'+
+                    '    <div class="home_news_title_line"></div>'+
+                    '</div>'+
+                    '<div id="information">'+_information+'</div>'+
+                    '<div class="discover_hot_more">'+
+                    '    <span class="more_tbn" tapmode="" onclick="openInstitute( true )">'+fnLanguageSwitch( '更多' )+'</span>'+
+                    '</div>';   
+                }
+            }else{
+                api.toast({
+                   global: true,
+                    msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                });
+            }
+        });
+        
+        
+        fnAjax({
+            url: 'communityQuestions/questions',
+            data: {
+                values: {
+                    limit: 3,
+                    skip: 0
+                }
+            }
+        }, function( ret, err ){
+            if( ret ){
+                if( ret.data.length ){
+                    var _html = '';
+                    for( var x in ret.data ){
+                        vGlobalParam[ ret.data[x].id ] = ret.data[x];
+                        _html +=
+                        '<div class="home_article" tapmode onclick="fnOpenCommunity( this );" data-id="'+ret.data[x].id+'" >'+( ret.data[x].isTop == true ?
+                        '    <span class="home_article_mark">hot</span>' : '' )+
+                        '    <div class="home_article_title">'+ret.data[x].title+'</div>'+
+                        '    <div class="home_article_content border-1px-bottom">'+ret.data[x].content+'</div>'+
+                        '    <div class="home_article_proinfo">'+
+                        '        <div class="home_article_proinfo_viewIcon"><span>'+ret.data[x].browses+'</span></div>'+
+                        '        <div class="home_article_proinfo_commentIcon"><span>'+ret.data[x].comment+'</span></div>'+
+                        '        <div class="home_article_proinfo_topIcon"><span>'+ret.data[x].zambia+'</span></div>'+
+                        '    </div>'+
+                        '</div>';
+                    }
+                    $api.dom( '.discover_hot' ).innerHTML =
+                    '<div class="home_news_titleWrap border-1px-bottom">'+
+                    '    <div class="home_news_title_line"></div>'+
+                    '    <div class="title">'+fnLanguageSwitch( '社区热点' )+'</div>'+
+                    '    <div class="home_news_title_line"></div>'+
+                    '</div>'+
+                    '<div id="hots">'+_html+'</div>'+
+                    '<div class="discover_hot_more">'+
+                    '    <span class="more_tbn" tapmode="" onclick="openBBS( true )">'+fnLanguageSwitch( '更多' )+'</span>'+
+                    '</div>';
+                    api.parseTapmode();
+                }
+            }else{
+                api.toast({
+                   global: true,
+                    msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                });
+            }
+        });
+            identifyUserInfo = {
+                    '姓名':  USER.username || '',
+                    '手机号':  USER.info && USER.info.cellPhone || '',
+                    '用户类型': fnTypeJson()[USER.info.type]  || '',
+                    '公司名称': USER.info.company && USER.info.company.FullNameChinese || '',
+                    '职位': USER.info.profession && fnJobJson()[USER.info.profession] || '',
+                };
+                // debugAlert(identifyUserInfo)
+        // USER.info.username
+        // USER.info.cellPhone
+        // USER.roleId
+        // USER.info.company.FullNameChinese
+         
+        // fnJobJson()[USER.info.profession]
+        // 这里开始重构
+        return;
+        zhuge = api.require('zhuge');
+        if (zhuge) {
+            zhuge.initZhuge();
+        }
+        var identifyInfo = false, identifyIntegral = false, identifyProject = false;
+        api.addEventListener({
+            name: 'identify'
+        }, function (ret, err) {
+            var name = ret.value.name;
+            // info, integral, project;
+
+            if (name == 'info') {
+                identifyInfo = true
+            }
+            if (name == 'integral') {
+                identifyIntegral = true
+            }
+            if (name == 'project') {
+                identifyProject = true
+            }
+            if (identifyInfo && identifyIntegral && identifyProject) {
+                identifyUserInfo['项目数量'] = identifyProjectList;
+                identifyUserInfo['积分数量'] = identifyUserIntegral;
+                if (zhuge) {
+                    zhuge.identify({
+                        uid: loginInfo.userid,
+                        userPro: identifyUserInfo
+                    });
+                }
+
+            }
+            // identifyUserInfo, identifyUserIntegral, identifyProjectList
+        });
+
+        // init myAjax 
+        myApi = Models();
+        getVedioUrlObj = getVedioUrlFn();
+
+        getUserInfo();
+        getUserIntegral();
+        getProjectList();
+
+
+        showProduct();
+        if (loginInfo.usertype == CONST_SI) {
+            indexSI()
+        } else {
+            indexMaker()
+        }
+        getProduct();
+    };
+
+    function getProduct() {    
+    	//  	智能硬件大赛列表
+        fnAjax({
+            url: 'videos/getAppVideo',
+			data: {
+				values: {
+					limit: 3
+				}
+			}
+        }, function( ret, err){
+            if( ret ){
+				if( ret.length >= 3 ){
+                    vGlobalParam[ 'products' ] = ret;
+                    $api.dom( '#products .data' ).innerHTML =
+                    '<div class="product_focus_picture" tapmode onclick="openVideo( 0 )">'+
+                    '    <img src="../../image/common/placeholderimg.png" onload="getImageCache(this)" data-url="'+ret[0].file2+'" >'+
+                    '    <div class="home_news_picturelable ellipsis">'+ret[0].title+'</div>'+
+                    '</div>'+
+
+                    '<div class="product_focus_picture" style="height: auto">'+
+                    '    <div class="product_focus_picture_box" tapmode onclick="openVideo( 1 )">'+
+                    '        <img src="../../image/common/placeholderimg.png" onload="getImageCache(this)" data-url="'+ret[1].file2+'" >'+
+                    '        <div class="home_news_picturelable ellipsis">'+ret[1].title+'</div>'+
+                    '    </div>'+
+                    '    <div class="product_focus_picture_box" tapmode="" onclick="openVideo( 2 )">'+
+                    '        <img src="../../image/common/placeholderimg.png"onload="getImageCache(this)" data-url="'+ret[2].file2+'" >'+
+                    '        <div class="home_news_picturelable ellipsis">'+ret[1].title+'</div>'+
+                    '    </div>'+
+                    '</div>';
+                }
+            }else{
+                api.toast({
+	                global: true,
+                    msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                });
+            }
+        })
+
+        // 这里开始重构
+        return;
+        var now = Date.now();
+        var appKey = SHA1(appId + "UZ" + key + "UZ" + now) + "." + now;
+        api.ajax({
+            url: 'https://d.apicloud.com/mcm/api/product??filter={"where":{},"skip":0,"limit":3,"order":"sequence ASC"}',
+            method: 'get',
+            timeout: 30,
+            dataType: 'json',
+            headers: {
+                "Content-type": "application/json;charset=UTF-8",
+                "X-APICloud-AppId": appId,
+                "X-APICloud-AppKey": appKey
+            }
+        }, function (ret, err) {
+            if(ret){
+                var product0 = ret[0];
+                var product1 = ret[1];
+                var product2 = ret[2];
+                var productHtml = '<div class="product_focus_picture" tapmode="" onclick="openVideo(\''+product0.title+'\',\''+product0.video+'\')"><img data-echo="' + product0.pic.url + '" src="../../image/common/placeholderimg.png"><div class="home_news_picturelable ellipsis">'+product0.title+'</div></div><div class="product_focus_picture" style="height: auto"><div class="product_focus_picture_box" tapmode="" onclick="openVideo(\''+product1.title+'\',\''+product1.video+'\')"><img data-echo="' + product1.pic.url + '" src="../../image/common/placeholderimg.png"><div class="home_news_picturelable ellipsis">'+product1.title+'</div></div><div class="product_focus_picture_box" tapmode="" onclick="openVideo(\''+product2.title+'\',\''+product2.video+'\')"><img data-echo="' + product2.pic.url + '" src="../../image/common/placeholderimg.png"><div class="home_news_picturelable ellipsis">'+product2.title+'</div></div></div>';
+                $("#products").html(productHtml);
+                echo.init({
+                    offset: 100,
+                    throttle: 250
+                });
+            }else{
+                api.toast({
+	             global: true,
+                    msg: 'Server request error'
+                });
+            }
+
+        });
+    }
+
+    // 诸葛 个人信息
+    var identifyUserInfo = {};
+    var videoUserInfo = {};
+    function getUserInfo() {
+        var data = $api.getStorage('GetUserInfo');
+        if (api.connectionType == 'none') {
+            if (data) {
+                identifyUserInfo = {
+                    '姓名': data.RealName || '',
+                    '手机号': data.CellPhone || '',
+                    '用户类型': data.APPUserType || '',
+                    '公司名称': data.CompanyFullName || '',
+                    '职位': data.Profession || '',
+                };
+            }
+            api.sendEvent({
+                name: 'identify',
+                extra: {
+                    name: 'info'
+                }
+            });
+        } else {
+            ajaxRequest('APPUserInfo/GetUserInfo.aspx', 'get', {
+                UserID: loginInfo.userid,
+                BatchNo: loginInfo.batchno
+            }, function (ret, err) {
+                if (ret && ret.res == undefined) {
+                    // console.log('ret:normal===='+ JSON.stringify(ret));
+                    var data = ret.appdatalist[0];
+                    videoUserInfo = data;
+                    $api.setStorage('GetUserInfo', data);
+                    identifyUserInfo = {
+                        '姓名': data.RealName || '',
+                        '手机号': data.CellPhone || '',
+                        '用户类型': data.APPUserType || '',
+                        '公司名称': data.CompanyFullName || '',
+                        '职位': data.Profession || '',
+                    };
+                    api.sendEvent({
+                        name: 'identify',
+                        extra: {
+                            name: 'info'
+                        }
+                    });
+                } else {
+                    console.log('ret:err====' + JSON.stringify(ret));
+                }
+                if (err) {
+                    console.log('err====' + JSON.stringify(err));
+                }
+            });
+        }
+    }
+    ;
+
+
+
+    function fnOpenCommunity( el ){
+        fnOpen({
+          name:'details_win',
+          url: 'widget://' + DIR + '/web_page/details_win.html',
+          pageParam: vGlobalParam[ $api.attr(el, 'data-id' ) ]
+        });
+    }
+
+
+
+
+
+    // 获取积分信息
+    var identifyUserIntegral = 0;
+    function getUserIntegral() {
+        var data = $api.getStorage('APPGetUserIntegral');
+        if (api.connectionType == 'none') {
+            if (data) {
+                identifyUserIntegral = data.TotalIntegral;
+            }
+            api.sendEvent({
+                name: 'identify',
+                extra: {
+                    name: 'integral'
+                }
+            });
+        } else {
+            ajaxRequest('APPIntegral/APPGetUserIntegral.aspx', 'get', {
+                UserID: parseInt(loginInfo.userid),
+                BatchNo: loginInfo.batchno,
+            }, function (ret, err) {
+                if (ret && ret.res == undefined) {
+                    var data = ret.appdatalist[0];
+                    // data.TotalIntegral;
+                    $api.setStorage('APPGetUserIntegral', data);
+                    identifyUserIntegral = data.TotalIntegral;
+                    api.sendEvent({
+                        name: 'identify',
+                        extra: {
+                            name: 'integral'
+                        }
+                    });
+                } else {
+                    console.log('ret:err====' + JSON.stringify(ret));
+                }
+                if (err) {
+                    console.log('err====' + JSON.stringify(err));
+                }
+            });
+        }
+    }
+    ;
+    // 获取项目信息
+    var identifyProjectList = 0;
+    function getProjectList(page, type) {
+        var url = 'APPProjectManage/APPGetProjectList.aspx';
+        ajaxRequest(url, 'get', {
+            'UserID': loginInfo.userid,
+            'BatchNo': loginInfo.batchno,
+            'ActiveCityBaiduCode': 0,
+            'UserType': loginInfo.usertype,
+            'CurrentPage': 1,
+            'LineQTY': 1000
+        }, function (ret, err) {
+            if (ret && ret.res == undefined) {
+                // console.log('ret:normal===='+ JSON.stringify(ret));
+                var data = ret.appdatalist;
+                identifyProjectList = data.length;
+                api.sendEvent({
+                    name: 'identify',
+                    extra: {
+                        name: 'project'
+                    }
+                });
+            } else {
+                console.log('ret:err====' + JSON.stringify(ret));
+            }
+            if (err) {
+                console.log('err====' + JSON.stringify(err));
+            }
+
+        });
+    }
+    ;
+
+    // add for nijie
+    function getVedioUrlFn(){
+
+        var url = 'http://intel.r.wmwebpro.cn/0413/meeting.aspx';
+
+        myApi.getVedioUrl(function( data ){
+        	if( data ){
+            	url = data.url || ''
+        	}
+        })
+
+        return function(){
+            return url;
+        }
+    }
+    //Banner
+    var arrBanner = [];
+    function showProduct() {
+        var scrollData = $api.getStorage('scrollData');
+        if (api.connectionType == 'none') {
+            if (scrollData) {
+                arrBanner = scrollData;
+                openUIScrollPicture(scrollData)
+            }
+        } else {
+            var bodyParam = {
+                UserID: loginInfo.userid,
+                UserPhoneType: api.systemType == 'ios' ? 'I' : 'A',
+                ActiveType: 2
+            };
+            var url = 'AppSystemManage/ShowProduct.aspx';
+            ajaxRequest(url, 'get', bodyParam, function (ret, err) {
+                if (ret) {
+                    var showproduct = ret.showproduct;
+                    arrBanner = showproduct;
+                    var scrollData = {data:showproduct, url: []};
+                    for (var i = 0; i < showproduct.length; i++) {
+                        var item = showproduct[i];
+                        var itemid = item.itemid;
+                        var itemname = item.itemname;
+                        var BriefIntroduction = item.BriefIntroduction;
+                        var outurl = item.outurl;
+                        var SignUpEnable = item.SignUpEnable;
+                        var SubmitProjectEnable = item.SubmitProjectEnable;
+                        var SignUpText = item.SignUpText;
+                        var SubmitProjectText = item.SubmitProjectText;
+                        scrollData.url.push(item.itemurl);
+                    }
+                    $api.setStorage('scrollData', scrollData);
+                    openUIScrollPicture(scrollData);
+                } else {
+                    api.toast({
+                    	global: true,
+                        msg: err.msg
+                    });
+                    if (scrollData) {
+                        openUIScrollPicture(scrollData)
+                    }
+                }
+            });
+        }
+    }
+// debugAlert(arrBanner)
+    function openUIScrollPicture( _data ) {
+        UIScrollPicture.open({
+            rect: {
+                x: 0,
+                y: 0,
+                w: api.winWidth,
+                h: api.winWidth * 0.53
+            },
+            data: _data,
+            styles: {
+                indicator: {
+                    align: 'center',
+                    color: 'rgba(255, 255, 255, 0.6)',
+                    activeColor: 'rgba(255, 255, 255, 1)',
+                    bgColor: 'rgba(0, 0, 0, .5)'
+                }
+            },
+            placeholderImg: 'widget://image/common/placeholderimg.png',
+            contentMode: 'scaleToFill',
+            interval: 3,
+            loop: true,
+            fixedOn: api.frameName,
+            fixed: false
+        }, function (ret, err) {
+            if (ret.eventType == 'click') {
+                fnOpen({
+                    name: 'simple_win',
+                    url: 'widget://' + DIR + '/simple_page/simple_win.html',
+                    pageParam: {
+                        name: 'event_detail',
+                        title: fnLanguageSwitch( '活动详情' ),
+                        data: UIScrollPictureData[ ret.index ].id
+                    }
+                });
+            }
+
+            // if (ret.eventType == 'click') {
+            //     var url = arrBanner[ret.index].Detailturl;
+            //     var title = arrBanner[ret.index].itemname;
+            //     if(url==''){
+            //         var username = loginInfo.username;
+            //         var loginname = loginInfo.loginname;
+            //         title = 'Contest Live Broadcasting';
+            //         var email = videoUserInfo.Email;
+            //         var company = videoUserInfo.CompanyFullName;
+            //         var job = videoUserInfo.Profession;
+            //         var city = videoUserInfo.CityName;
+            //         /*http://intel.r.wmwebpro.cn/0413/meeting.aspx*/
+
+            //         var baseUrl = getVedioUrlObj();
+
+            //         url = baseUrl + '?name='+username+'&mobile='+loginname+'&email='+email+'&company='+company+'&Job='+job+'&city='+city+'&t=app';
+            //     }else{
+            //         url = host + arrBanner[ret.index].Detailturl;
+            //     }
+            //     var move = isHuawei();
+            //     var animation = {};
+            //     if (move) {
+            //         animation = {
+            //             type: 'movein',
+            //             subType: 'from_right'
+            //         }
+            //     }
+            //     // itemname outurl
+            //     api.openWin({
+            //         name: 'web_win',
+            //         url: 'widget://' + DIR + '/web_page/web_win.html',
+            //         bounces: false,
+            //         pageParam: {
+            //          item : arrBanner[ret.index] || {},
+            //             title: title,
+            //             url: url,
+            //             data: data.data ? data.data : false,
+            //             index: ret.index
+            //         },
+            //         animation: animation
+            //     });
+            //     if (zhuge) {
+            //         zhuge.track({
+            //             eventName: '发现_Banner',
+            //             eventPro: {
+            //                 '名称': arrBanner[ret.index].itemname
+            //             }
+            //         });
+            //     }
+
+            // } else {
+            // }
+        });
+    }
+
+    function indexMaker() {
+        var indexMaker = $api.getStorage('indexMaker');
+        if (api.connectionType == 'none') {
+            if (indexMaker) {
+                renderIndex(indexMaker);
+            }
+        } else {
+            var url = 'APPSystemManage/index.aspx';
+            var bodyParam = {
+                BatchNo: loginInfo.batchno,
+                UserID: loginInfo.userid
+            };
+            ajaxRequest(url, 'post', bodyParam, function (ret, err) {
+                if (ret) {
+                    $api.setStorage('indexMaker', ret);
+                    renderIndex(ret);
+                } else {
+                    api.toast({
+	                   global: true,
+                        msg: err.msg
+                    });
+                    if (indexMaker) {
+                        renderIndex(indexMaker);
+                    }
+                }
+            })
+        }
+    }
+
+    function renderIndex(ret) {
+        var School = ret.School;
+        var informationHtml = '';
+        for (var i = 0; i < School.length; i++) {
+            var information = School[i];
+            var url = information.url;
+            var BulletinTitle = information.BulletinTitle;
+            var Profile = information.Profile;
+            var BulletinTop = information.BulletinTop;
+            var Browses = information.Browses;
+            var UploadFile2 = host + information.UploadFile2.split('~')[1];
+            informationHtml += '<div class="home_news " tapmode="" onclick="infoDetail(\'' + url + '\', this)" data-title="' + BulletinTitle + '"><div class="home_news_picture"><img data-echo="' + UploadFile2 + '" src="../../image/common/placeholderimg.png"><div class="home_news_picturelable ellipsis-1">' + BulletinTitle + '</div></div><div class="home_news_brief">' + Profile + '</div></div>';
+        }
+        $("#information").html(informationHtml);
+
+        var community = ret.community;
+        var hotsHtml = '';
+        for (var j = 0; j < community.length; j++) {
+            var hot = community[j];
+            var hot_url = hot.url;
+            var TitleName = hot.TitleName;
+            var Contents = hot.Contents;
+            var hot_Browses = hot.Browses;
+            var Comment = hot.Comment;
+            var Zambia = hot.Zambia;
+            hotsHtml += '<div class="home_article " tapmode="" onclick="hotDetail(\'' + hot_url + '\', this)" data-title="' + TitleName + '" data-view="' + hot_Browses + '" data-comment="' + Comment + '" data-praise="' + Zambia + '"><span class="home_article_mark">hot</span><div class="home_article_title">' + TitleName + '</div><div class="home_article_content border-1px-bottom">' + Contents + '</div>' +
+                    '<div class="home_article_proinfo"><div class="home_article_proinfo_viewIcon"><span>' + hot_Browses + '</span></div><div class="home_article_proinfo_commentIcon"><span>' + Comment + '</span></div><div class="home_article_proinfo_topIcon"><span>' + Zambia + '</span></div></div></div>';
+        }
+        $("#hots").html(hotsHtml);
+        echo.init({
+            offset: 100,
+            throttle: 250
+        });
+    }
+
+    function fnOpenDetail( el ){
+        fnOpen({
+            name:'technical_details_win',
+            url: 'widget://' + DIR + '/home_group/technical_details_win.html',
+            pageParam: {
+                data: vGlobalParam[ $api.attr(el, 'data-id' ) ]
+            }
+        });
+    }
+
+    //indexSI.aspx
+    function indexSI() {
+        var indexSI = $api.getStorage('indexSI');
+        if (api.connectionType == 'none') {
+            if (indexSI) {
+                renderIndex(indexSI);
+            }
+        } else {
+            var url = 'APPSystemManage/indexSI.aspx';
+            var bodyParam = {
+                BatchNo: loginInfo.batchno,
+                UserID: loginInfo.userid
+            };
+            ajaxRequest(url, 'post', bodyParam, function (ret, err) {
+                if (ret) {
+                    $api.setStorage('indexSI', ret);
+                    renderIndex(ret);
+                } else {
+                    api.toast({
+	                   global: true,
+                        msg: err.msg
+                    });
+                    if (indexSI) {
+                        renderIndex(indexSI);
+                    }
+                }
+            })
+        }
+    }
+
+
+    function openInstitute( ) {
+        fnOpen({
+            name: 'cechnical_college_win',
+            url: 'widget://' + DIR + '/home_group/cechnical_college_win.html',
+            pageParam: {
+                title: fnLanguageSwitch( '技术学院' )
+            }
+        });
+          
+            if (zhuge) {
+                zhuge.track({
+                    eventName: '发现_查看更多',
+                    eventPro: {
+                        '内容类别': '技术前沿',
+                    }
+                });
+            }
+       else {
+            if (zhuge) {
+                zhuge.track({
+                    eventName: '发现_技术学院',
+                    eventPro: {}
+                });
+            }
+        }
+
+                return;
+        var move = isHuawei();
+        var animation = {};
+        if (move) {
+            animation = {
+                type: 'movein',
+                subType: 'from_right'
+            }
+        }
+
+        api.openWin({
+            name: 'cechnical_college_win',
+            url: 'cechnical_college_win.html',
+            bounces: false,
+            pageParam: {  
+                title: 'Tech College',
+                url: host+ 'APPCreateSchool/LoreLibraryShow.aspx'
+            },
+            animation: animation
+        });
+        if (flag) {
+            if (zhuge) {
+                zhuge.track({
+                    eventName: '发现_查看更多',
+                    eventPro: {
+                        '内容类别': '技术前沿',
+                    }
+                });
+            }
+        } else {
+            if (zhuge) {
+                zhuge.track({
+                    eventName: '发现_技术学院',
+                    eventPro: {}
+                });
+            }
+        }
+      
+
+    }
+    ;
+    function openVideo( index ) {
+        fnOpen({
+            name: 'web_win',
+            url: 'widget://' + DIR + '/web_page/web_win.html',
+            pageParam: vGlobalParam[ 'products' ],
+            pageParam: {
+                title: 'Video',
+                text: vGlobalParam[ 'products' ][ index ].title,
+                url: vGlobalParam[ 'products' ][ index ].url
+            }
+        });
+
+        if (zhuge) {
+            zhuge.track({
+                eventName: '发现_大赛聚焦',
+                eventPro: {
+                    '图片名称': vGlobalParam[ 'products' ][ index ].title,
+                }
+            });
+        }
+    }
+    ;
+    function openBBS(flag) {
+        fnOpen({
+            name: 'community_win',
+            url: 'widget://' + DIR + '/web_page/community_win.html',
+        });
+
+        if (flag) {
+            if (zhuge) {
+                zhuge.track({
+                    eventName: '发现_查看更多',
+                    eventPro: {
+                        '内容类别': '社区热点',
+                    }
+                });
+            }
+        } else {
+            if (zhuge) {
+                zhuge.track({
+                    eventName: '发现_社区',
+                    eventPro: {}
+                });
+            }
+        }
+    }
+    ;
+
+    function infoDetail(url, el) {
+        var move = isHuawei();
+        var animation = {};
+        if (move) {
+            animation = {
+                type: 'movein',
+                subType: 'from_right'
+            }
+        }
+        api.openWin({
+            name: 'web_win',
+            url: 'widget://' + DIR + '/web_page/web_win.html',
+            bounces: false,
+            pageParam: {
+                title: "What's New",
+                url: host +'APPCreateSchool/'+url,
+                description: el.getAttribute('data-title')
+            },
+            animation: animation
+        });
+        if (zhuge) {
+            zhuge.track({
+                eventName: '发现_阅读技术文章',
+                eventPro: {
+                    '名称': $api.attr(el, 'data-title'),
+                }
+            });
+        }
+    }
+
+    function hotDetail(url, el) {
+        var move = isHuawei();
+        var animation = {};
+        if (move) {
+            animation = {
+                type: 'movein',
+                subType: 'from_right'
+            }
+        }
+        api.openWin({
+            name: 'web_win',
+            url: 'widget://' + DIR + '/web_page/web_win.html',
+            bounces: false,
+            pageParam: {
+            	title: 'What\'s Hot',
+                text: el.getAttribute( 'data-title' ) ,
+                url: host +'APPCreateSchool/'+url
+            },
+            animation: animation
+        });
+        if (zhuge) {
+            zhuge.track({
+                eventName: '发现_社区帖子',
+                eventPro: {
+                    '名称': $api.attr(el, 'data-title'),
+                    '浏览量': $api.attr(el, 'data-view'),
+                    '评论量': $api.attr(el, 'data-comment'),
+                    '点赞量': $api.attr(el, 'data-praise')
+                }
+            });
+        }
+    }
+
+    function openVideos(flag) {
+        api.openWin({
+            name: 'home_product_win',
+            url: 'widget://' + DIR + '/home_group/home_product_win.html',
+            bounces: false
+        });
+        if (flag) {
+            if (zhuge) {
+                zhuge.track({
+                    eventName: '发现_查看更多',
+                    eventPro: {
+                        '内容类别': '大赛聚焦',
+                    }
+                });
+            }
+        } else {
+            if (zhuge) {
+                zhuge.track({
+                    eventName: '发现_智能硬件大赛',
+                    eventPro: {}
+                });
+            }
+        }
+        
+    }
+
+    function fnComingSoon(){
+        api.alert({
+            title: '', 
+            msg: 'Product video is coming soon…',
+                    buttons: ['OK']
+            
+        });
+    };
+
+</script>
+</html>

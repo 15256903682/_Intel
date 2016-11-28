@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>support</title>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/common.css"/>
+    <link rel="stylesheet" href="../../css/fonts_awesome/font-awesome.min.css">
+    <style>
+        [class*="border-1px"]:after, [class*="border-1px"]:before{
+            color: #E2E2E2;
+        }
+        body{
+            height: auto;
+            min-height: 100%;
+        }
+        .project-card{
+            background-color: #FFFFFF;
+            padding-left: 1rem;
+            margin-top: 2.5rem;
+        }
+        .project-card:first-child{
+            margin-top: 0;
+        }
+        .project-name{
+            background: url(../../image/Macthmaking/MacthmakingMain/MC_nametitleicon.png) 1rem 50% no-repeat;
+            background-size: 2.3rem;
+            font-size: 1.3rem;
+            color: #000000;
+            /*line-height: 3.8rem;*/
+            padding-top: 1.2rem;
+            padding-bottom: 1.2rem;
+        }
+        .project-name .name{
+            padding-left: 4rem;
+            margin-right: 7.8rem;
+            /*line-height: 2.1rem;*/
+        }
+        .project-name .project-state{
+            float: right;
+            color: #005BBC;
+            font-size: 1.2rem;
+            /*line-height: 3.8rem;*/
+            width: 7.7rem;
+            text-align: center;
+        }
+        .project-main{
+            padding-right: 10px;
+            padding-bottom: 10px;
+        }
+        .project-main .main-left{
+            background: url(../../image/project/project_divide_line.png) right center no-repeat;
+            background-size: 0.1rem 10rem;
+            padding-right: 20px;
+        }
+        .project-main .main-right{        }
+        .project-main .text{
+            color: #000000;
+            font-size: 1.3rem;
+            line-height: 2.3rem;
+            padding-top: 1rem;
+            text-indent: 0.8rem;
+        }
+        .project-main .text.full{
+            padding-top: 0;
+            text-indent: 0;
+        }
+        .project-main .date{
+            color: #000000;
+            font-size: 1.3rem;
+            line-height: 2.3rem;
+            text-indent: 1.7rem
+        }
+        .project-main .counting{
+            font-size: 1.5rem;
+            color: #F7AA00;
+            text-indent: 0.4rem;
+        }
+        .project-main .count{
+            font-size: 3.7rem;
+            line-height: 6rem;
+        }
+        .project-main .intel-list{
+            margin-top: 1.6rem;
+            padding-left: 0.8rem;
+        }
+        .project-main .intel-item{
+            color: #545454;
+            font-size: 1.1rem;
+            line-height: 1.5rem;
+            background: url(../../image/project/project_list_point.png) 0 0.5rem no-repeat;
+            background-size: 0.5rem;
+            padding-left: 1rem;
+        }
+
+        #project_history{
+
+        }
+        .history-card {
+            background-color: #FFFFFF;
+            padding-top: 1.3rem;
+            margin-top: 2.5rem;
+            color: #000000;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+        .history-card:first-child{
+            margin-top: 0;
+        }
+        .history-card .name{
+            font-size: 1.4rem;
+            line-height: 3.5rem;
+            padding: 0 0.8rem;
+        }
+        .history-card .history-row{
+            font-size: 1.2rem;
+            line-height: 2.1rem;
+        }
+        .history-row label{
+            width: 9.8rem;
+            text-align: right;
+        }
+        .history-row .text{
+            padding-left: 1.7rem;
+        }
+        .history-row .stars{
+            padding-left: 1.7rem;
+            color: #999999;
+            font-size: 1.8rem;
+            vertical-align: bottom;
+        }
+        .history-row .stars .fa-star{
+            color: #FFDA00;
+        }
+        .history-card .btn{
+            width: 8.1rem;
+            height: 2.8rem;
+            text-align: center;
+            /*color: #333333;
+            border: 1px solid;*/
+            line-height: 3rem;
+            font-size: 1.3rem;
+            position: absolute;
+            right: 0.8rem;
+            bottom: 1rem;
+            border-radius: 0.4rem;
+            border: 1px solid #C4C4C4;
+            color: #C4C4C4;
+        }
+        .history-card .btn.active{
+            color: #005BBC;
+        }
+        
+        #project_container.empty:after{
+            content: ' ';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url(../../image/project/file_pad.png) 50% 1rem no-repeat;
+            background-size: 9.5rem auto;
+        }
+        #project_container.empty:before{
+            content: '';
+            position: absolute;
+            width: 27rem;
+            left: 50%;
+            margin-left: -13.5rem;
+            top: 14.4rem;
+            font-size: 1.7rem;
+            color: #C4C4C4;
+            text-align: center;
+        }
+        #project_history .empty{
+            background: url(../../image/project/file_pad.png) center 100px no-repeat;
+            font-size: 1.7rem;
+            padding-top: 220px;
+            color: #C4C4C4;
+            text-align: center;
+        }
+        .project-empty{
+
+        }
+        .project-empty .bg{
+            height: 16.7rem;
+            background: url(../../image/project/support_empty_en.png) center center no-repeat;
+            background-size: contain;
+        }
+        .project-empty .text1{
+            margin-top: 2.4rem;
+            font-size: 1.2rem;
+            line-height: 1.2rem;
+            color: #666666;
+            text-align: center;
+        }
+        .project-empty .text2{
+            margin-top: 2.5rem;
+            font-size: 1.5rem;
+            line-height: 1.5rem;
+            color: #333333;
+            text-align: center;
+        }
+        .project-empty .text3{
+            margin-top: 2.2rem;
+            font-size: 1.2rem;
+            line-height: 1.2rem;
+            color: #999999;
+            text-align: center;
+        }
+        .project-empty .text4{
+            margin-top: 0.6rem;
+            font-size: 1.2rem;
+            line-height: 1.2rem;
+            color: #999999;
+            text-align: center;
+        }
+        .project-empty .btn-create{
+            width: 17.6rem;
+            height: 4rem;
+            color: #00AEEF;
+            border: 1px solid;
+            border-radius: 0.3rem;
+            font-size: 1.6rem;
+            line-height: 4rem;
+            text-align: center;
+            margin: 2.6rem auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="project_container" style="display: none;">
+        <!-- <div class="project-card border-1px-top border-1px-bottom"  data-state='+ appdatalist[i].ItemActive +' data-date='+ appdatalist[i].CreateDate +'>
+                <div class="project-name border-1px-bottom">
+                    <span class="project-state">Unapproved</span>
+                    <p class="name">项目名称</p>
+                </div>
+            <div class="project-main clearfix flex-wrap">
+                <div class="main-left">
+                    <p class="text">Project starts at</p>
+                    <p class="date">2015-01-20</p>
+                    <p class="counting">
+                        <span class="count">234</span>
+                    </p>
+                    <p class="text full">In Cultivate Stage</p>
+                </div>
+                <div class="main-right flex-con">
+                    <p class="text">Intel products used</p>
+                        <ul class="intel-list">
+                            <li class="intel-item">IntelProductType1</li>
+                        </ul>
+                </div>
+            </div>
+        </div> -->
+    </div>
+    <div id="project_history" >
+            <!-- <div class="empty">没有历史支持</div> -->
+<!--         <div class="history-card border-1px-top border-1px-bottom" tapmode onclick="goProjectService()">
+            <p class="name">ProjectName</p>
+            <div class="history-row">
+                <label>申请提交时间</label>
+                <span class="text">2016-10-14 11:32</span>
+            </div>
+            <div class="history-row">
+                <label>申请的支持类型</label>
+                <span class="text">技术信息咨询</span>
+            </div>
+            <div class="history-row">
+                <label>节省时间</label>
+                <span class="text"></span>
+            </div>
+            <div class="history-row">
+                <label>当前状态</label>
+                <span class="text">开放</span>
+            </div>
+            <div class="history-row">
+                <label>评分</label>
+                <span class="stars">
+                    <i class="fa-star fa" tapmode onclick="rankThis()"></i>
+                    <i class="fa-star-o fa" tapmode onclick="rankThis()"></i>
+                </span>
+            </div>
+            <span class="btn" tapmode onclick="submitOldComand()">重开放</span>
+        </div> -->
+<!--         <div class="project-empty">
+            <div style="height:3.3rem"></div>
+            <div class="bg"></div>
+            <p class="text1">15min极速响应</p>
+            <p class="text2">这里空空的哦，快来添加项目获取支持吧！</p>
+            <p class="text3">针对您在不同阶段的不同需求</p>
+            <p class="text4">英特尔官方技术支持中心为您助力！</p>
+            <div class="btn-create" tapmode onclick="createNewProject()">新增项目</div>
+            <div style="height:1px"></div>
+        </div> -->
+    </div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript" src="../../script/translation.js"></script>
+<script type="text/javascript">
+    var account = $api.getStorage('loginInfo'),
+        vGlobalParam = {};
+    var _LIMIT = 3,  //  条数
+        _SKIP = 0;   //  跳过条数
+
+
+    var project_container = $api.dom('#project_container');
+    var project_history = $api.dom('#project_history');
+    var curPage = 0;
+    var zhuge;
+
+	apiready = function(){
+        api.setRefreshHeaderInfo({
+            loadingImg: 'widget://image/common/blueArrow@2x.png',
+            textDown: fnLanguageSwitch( '下拉刷新' ),
+            textUp: fnLanguageSwitch( '松手加载' ),
+            textLoading: fnLanguageSwitch( '刷新中' ),
+            showTime: false,
+            bgColor: '#FFF',
+            textColor: '#000'
+        }, function(ret, err){
+            SKIP = 0;
+            _SKIP = 0;
+            getProjectList();
+        });
+        api.refreshHeaderLoading();
+
+        api.addEventListener({
+            name:'scrolltobottom',
+            extra:{
+                threshold: 50
+            }
+        }, function(ret, err){
+            getProjectList();
+        });
+
+        api.addEventListener({
+            name: 'changeSupportContent'
+        }, function(ret, err){
+            vGlobalParam.index = ret.value.index;
+            api.refreshHeaderLoading();
+        });
+
+
+        api.addEventListener({
+            name: 'projectDetailRefresh'
+        }, function(ret, err){
+            api.refreshHeaderLoading();
+        });
+
+
+        // 这里开始重构
+        return;
+        curPage = api.pageParam.supportId;
+
+        zhuge = api.require('zhuge');
+        if (zhuge) {
+            zhuge.initZhuge();
+        }
+        api.addEventListener({
+            name: 'refresh_support_frame'
+        }, function(ret, err){
+            if (curPage == 0) {
+                projectListPage = 1;
+                getProjectList(projectListPage, 'html');
+            } else {
+                projectHistoryListPage = 1;
+                getProjectHistoryList(projectHistoryListPage, 'html');
+            }
+        });
+		api.addEventListener({
+            name: 'changeSupportContent'
+        }, function(ret, err){
+            var index = ret.value.index;
+            curPage = index;
+            if (index == 0) {
+                $api.css(project_container, 'display: block;');
+                $api.css(project_history, 'display: none;');
+                projectListPage = 1;
+                getProjectList(projectListPage, 'html');
+            } else {
+                $api.css(project_container, 'display: none;');
+                $api.css(project_history, 'display: block;');
+                projectHistoryListPage = 1;
+                getProjectHistoryList(projectHistoryListPage, 'html');
+            }
+        });
+
+        // getProjectList(projectListPage, 'html');
+
+        api.setRefreshHeaderInfo({
+            visible: true,
+            loadingImg: 'widget://image/common/blueArrow@2x.png',
+            bgColor: '#FFF',
+            textColor: '#000000',
+            textDown: 'Pull-down for refresh',
+            textUp: 'Release for loading',
+            textLoading : 'Refresh',
+            showTime: false
+        }, function(ret, err){
+            if (curPage == 0) {
+                $api.css(project_container, 'display: block;');
+                $api.css(project_history, 'display: none;');
+                projectListPage = 1;
+                getProjectList(projectListPage, 'html');
+            } else {
+                $api.css(project_container, 'display: none;');
+                $api.css(project_history, 'display: block;');
+                projectHistoryListPage = 1;
+                getProjectHistoryList(projectHistoryListPage, 'html');
+            }
+        });
+        api.refreshHeaderLoading();
+
+        api.addEventListener({
+            name:'scrolltobottom',
+            extra:{
+                threshold: 5
+            }
+        }, function(ret, err){
+            if (curPage == 0) {
+                getProjectList(projectListPage, 'append');
+            } else {
+                getProjectHistoryList(projectHistoryListPage, 'append');
+            }
+        });
+        api.addEventListener({
+            name: 'projectDetailRefresh'
+        }, function(ret, err){
+            var data = ret.value;
+            location.reload();
+        });
+
+	};
+
+
+
+    var projectListSkip = 10;
+    var projectListPage = 1;
+    var projectHistoryListPage = 1;
+    var ajaxLock = false;
+
+    var projectStateJson1 = {
+        '0': '项目量产',
+        '1': '项目预研',
+        '2': '项目研发',
+    };
+    var projectStateJson2 = {
+        '0': '项目量产',
+        '1': '项目预研',
+        '2': '项目研发',
+    };
+
+    function getProjectList(){
+    	var loginInfo = $api.getStorage( 'loginInfo' );
+        if( vGlobalParam.index ){
+            $api.css($api.dom( '#project_container' ), 'display: none;');
+            $api.css($api.dom( '#project_history' ), 'display: block;');
+            fnAjax({
+                url: 'supports/appGetSupportList',
+                data: {
+                    values: {
+                        limit: _LIMIT,
+                        skip: _SKIP
+                    }
+                }
+            }, function( ret, err ){
+                api.refreshHeaderLoadDone()
+                if( ret ){
+                    if( ret.length ){
+                        if( ! _SKIP )$api.dom( '#project_history' ).innerHTML = '';
+                        _SKIP += _LIMIT;
+                        for( var x in ret ){
+                            vGlobalParam[ ret[x].id ] = ret[x];
+                            var _html = '';
+                            _html+=
+                            '<div class="history-card border-1px-top border-1px-bottom" tapmode data-id="'+ret[x].id+'" onclick="goProjectService( this )">'+
+                            '    <p class="name">'+ret[x].projectName+'</p>'+
+                            '    <div class="history-row">'+
+                            '        <label>'+fnLanguageSwitch( '申请提交时间' )+'</label>'+
+                            '        <span class="text">'+ret[x].created+'</span>'+
+                            '    </div>'+
+                            '    <div class="history-row">'+
+                            '        <label>'+fnLanguageSwitch( '申请的支持类型' )+'</label>'+
+                            '        <span class="text">'+fnTechnicalSupportStatusJson()[ ret[x].typeId ].name+'</span>'+
+                            '    </div>'+
+                            '    <div class="history-row">'+
+                            '        <label>'+fnLanguageSwitch( '节省时间' )+'</label>'+
+                            '        <span class="text">'+ret[x].daycounty+'</span>'+
+                            '    </div>'+
+                            '    <div class="history-row">'+
+                            '        <label>'+fnLanguageSwitch( '当前状态' )+'</label>'+
+                            '        <span class="text">'+fnCurrentStatusJson()[ ret[x].CurrentState ]+'</span>';
+
+                            var _score = '';
+                            for( var j = 0; j < 5; j++ ){
+                                _score += '<i class="'+( j < ret[x].score ? 'fa-star' : 'fa-star-o')+' fa" '+( [0,3].indexOf( +ret[x].CurrentState ) !== -1 ? 'tapmode onclick="rankThis( this, '+( j + 1 )+' )"' : '' )+'></i>';
+                            }
+
+                            _html+=
+                            '    </div>'+
+                            '    <div class="history-row">'+
+                            '        <label>'+fnLanguageSwitch( '评分' )+'</label>'+
+                            '        <span class="stars">'+_score+'</span>'+
+                            '    </div>'+
+                            '    <span class="btn '+( [0, 3].indexOf( +ret[x].CurrentState ) !== -1 && 'active' )+'" tapmode onclick="submitOldComand( this )">'+fnLanguageSwitch( '重开放' )+'</span>'+
+                            '</div>';
+                            $api.append($api.dom( '#project_history' ), _html);
+                        }
+                    }else{
+                        if( ! _SKIP ){
+                            $api.dom( '#project_history' ).innerHTML = '<div class="empty">'+fnLanguageSwitch('没有历史支持')+'</div>';   
+                        }
+                    }
+                }else{
+                    api.toast({
+	                   global: true,
+                        msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                    });
+                }
+            });
+        }else{
+            $api.css($api.dom( '#project_container' ), 'display: block;');
+            $api.css($api.dom( '#project_history' ), 'display: none;');
+            fnAjax({
+                url: 'projects/appGetProjectList',
+                data: {
+                    values: {
+                        limit: LIMIT,
+                        skip: SKIP
+                    }
+                }
+            }, function( ret, err ){
+                api.refreshHeaderLoadDone()
+                if( ret ){
+                    if( ret.length ){
+                        if( ! SKIP )$api.dom( '#project_container' ).innerHTML = '';
+                        SKIP += LIMIT;
+                        for( var x in ret ){
+                            vGlobalParam[ ret[x].id ] = ret[x];
+                            var _intelProducts = '';
+                            for( var j in ret[x].intelProducts ){
+                                ret[x].intelProducts[x] && ( _intelProducts+='<li class="intel-item">'+fnProductTypeJson( ret[x].typesOfProjects )[ ret[x].intelProducts[j].type ]+'</li>' );
+                            }
+                            $api.append( $api.dom( '#project_container' ),
+                            '<div class="project-card border-1px-top border-1px-bottom" tapmode onclick="goProjectDetail(\''+ret[x].id+'\', \''+ret[x].created+'\', '+ ret[x].active +')" >'+
+                            '        <div class="project-name border-1px-bottom">'+
+                            '            <span class="project-state">'+fnProjectStatusJson()[ ret[x].active ]+'</span>'+
+                            '            <p class="name">'+ret[x].projectName+'</p>'+
+                            '        </div>'+
+                            '    <div class="project-main clearfix flex-wrap">'+
+                            '        <div class="main-left">'+
+                            '            <p class="text">'+fnLanguageSwitch( '项目启动时间' )+'</p>'+
+                            '            <p class="date">'+ret[x].created+'</p>'+
+                            '            <p class="counting">'+
+                            '                <span class="count">'+ret[x].projectStartDay+'</span>'+
+                            '            </p>'+
+                            '            <p class="text full">'+fnLanguageSwitch( '已处于') +' '+fnProjectApprovalStatusJson( ret[x].typesOfProjects )[ ret[x].projectStatus ]+' '+fnLanguageSwitch( '阶段' )+'</p>'+
+                            '        </div>'+
+                            '        <div class="main-right flex-con">'+
+                            '            <p class="text">'+fnLanguageSwitch( '使用的英特尔产品')+'</p>'+
+                            '                <ul class="intel-list">'+_intelProducts+'</ul>'+
+                            '        </div>'+
+                            '    </div>'+
+                            '</div>');
+                        }
+                    }else{
+                        if( ! SKIP ){
+                            $api.dom( '#project_container' ).innerHTML =
+                            '<div class="project-empty">'+
+                            '    <div style="height:3.3rem"></div>'+
+                            '    <div class="bg"></div>'+
+                            '    <p class="text1">'+fnLanguageSwitch( '15min极速响应' )+'</p>'+
+                            '    <p class="text2">'+fnLanguageSwitch( '这里空空的哦，快来添加项目获取支持吧！' )+'</p>'+
+                            '    <p class="text3">'+fnLanguageSwitch( '针对您在不同阶段的不同需求' )+'</p>'+
+                            '    <p class="text4">'+fnLanguageSwitch( '英特尔官方技术支持中心为您助力！' )+'</p>'+
+                            '    <div class="btn-create" tapmode onclick="createNewProject()">'+fnLanguageSwitch( '新增项目' )+'</div>'+
+                            '    <div style="height:1px"></div>'+
+                            '</div>';   
+                        }
+                    }
+                }else{
+                    api.toast({
+	                    global: true,
+                        msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                    });
+                }
+            });
+        }
+	    
+	//  这里开始重构
+	return;
+        if (ajaxLock) {
+            return false;
+        }
+        ajaxLock = true;
+        if (type == 'append') {
+            api.showProgress({
+                title: 'Loading…',
+                text: '',
+                modal: false
+            });
+        }
+        // console.log(projectListPage)
+        var url = 'APPProjectManage/APPGetProjectList.aspx';
+        ajaxRequest(url, 'get', {
+            'UserID': account.userid,
+            'BatchNo': account.batchno,
+            'ActiveCityBaiduCode': 0,
+            'UserType': account.usertype,
+            'CurrentPage': projectListPage,
+            'LineQTY': projectListSkip
+        }, function(ret, err){
+            ajaxLock = false;
+            api.hideProgress();
+            api.refreshHeaderLoadDone()
+            if(ret && ret.res == undefined){
+                // console.log('ret:normal===='+ JSON.stringify(ret));
+                var str = '';
+                var appdatalist = ret.appdatalist;
+                if (appdatalist.length) {
+                    for (var i = 0; i < appdatalist.length; i++) {
+                        appdatalist[i]
+                        str+='<div class="project-card border-1px-top border-1px-bottom" tapmode onclick="goProjectDetail(\''+ appdatalist[i].ProjectID +'\', this)" data-state='+ appdatalist[i].ItemActive +' data-date='+ appdatalist[i].CreateDate +'>';
+                            str+='<div class="project-name border-1px-bottom">';
+                            if (appdatalist[i].ItemActive == '审批中') {
+                                str+='<span class="project-state">In Review</span>';
+                            } else if(appdatalist[i].ItemActive == '审批通过'){
+                                str+='<span class="project-state">Approved</span>';
+                            } else {
+                                str+='<span class="project-state">Unapproved</span>';
+                            }
+                                str+='<p class="name">'+ appdatalist[i].ProjectName +'</p>';
+                            str+='</div>';
+                            str+='<div class="project-main clearfix">';
+                                str+='<div class="main-left">';
+                                    str+='<p class="text">Project starts at</p>';
+                                    str+='<p class="date">'+ appdatalist[i].CreateDate +'</p>';
+                                    str+='<p class="counting">';
+                                        str+='<span class="count">'+ appdatalist[i].ProjectStartDay +'</span>';
+                                        str+='days';
+                                    str+='</p>';
+                                    if (appdatalist[i].ProjectStatus == '项目预研') {
+                                        str+='<p class="text full">In Cultivate Stage</p>';
+                                    } else if(appdatalist[i].ProjectStatus == '项目研发'){
+                                        str+='<p class="text full">In Design Stage</p>';
+                                    } else if(appdatalist[i].ProjectStatus == '原型完成'){
+                                        str+='<p class="text full">In Prototype Stage</p>';
+                                    } else{
+                                        str+='<p class="text full">In Production Stage</p>';
+                                    }
+                                str+='</div>';
+                                str+='<div class="main-right">';
+                                    str+='<p class="text">Intel products used</p>';
+                                    str+='<ul class="intel-list">';
+                                    if (appdatalist[i].IntelProductType1) {
+                                        str+='<li class="intel-item">';
+                                            str+=  fnTranslation(appdatalist[i].IntelProductType1, true) +' '+ appdatalist[i].IntelProductNum1;
+                                        str+='</li>';
+                                    }
+                                    if (appdatalist[i].IntelProductType2) {
+                                        str+='<li class="intel-item">';
+                                            str+=  fnTranslation( appdatalist[i].IntelProductType2, true) +' '+  appdatalist[i].IntelProductNum2; 
+                                        str+='</li>';
+                                    }
+                                    if (appdatalist[i].IntelProductType3) {
+                                        str+='<li class="intel-item">';
+                                            str+=  appdatalist[i].IntelProductType3 +' '+  appdatalist[i].IntelProductNum3; 
+                                        str+='</li>';
+                                    }
+                                    if (appdatalist[i].IntelProductType4) {
+                                        str+='<li class="intel-item">';
+                                            str+=  appdatalist[i].IntelProductType4 +' '+  appdatalist[i].IntelProductNum4; 
+                                        str+='</li>';
+                                    }
+                                    if (appdatalist[i].IntelProductType5) {
+                                        str+='<li class="intel-item">';
+                                            str+=  appdatalist[i].IntelProductType5 +' '+  appdatalist[i].IntelProductNum5; 
+                                        str+='</li>';
+                                    }
+                                    str+='</ul>';
+                                str+='</div>';
+                            str+='</div>';
+                        str+='</div>';
+                    }
+                    // console.log("str" + str)
+
+                    if (type == 'append') {
+                        $api.append(project_container, str);
+                    } else {
+                        $api.html(project_container, str);
+                    }
+                    api.sendEvent({
+                        name: 'support_tips_hidden',
+                        extra: {
+                            status: 'show'
+                        }
+                    });
+                } else{
+                    if (type == 'html') {
+                        api.sendEvent({
+                            name: 'support_tips_hidden',
+                            extra: {
+                                status: 'hidden'
+                            }
+                        });
+                        $api.html(project_container, container_empty);
+                    }
+                }
+                projectListPage++;
+                api.parseTapmode();
+            } else{
+                console.log('ret:err===='+ JSON.stringify(ret));
+            }
+            if (err) {
+                console.log('err===='+ JSON.stringify(err));
+            }
+            
+        });
+    };
+
+    function getProjectHistoryList(page, type){
+    	var loginInfo = $api.getStorage( 'loginInfo' );
+        fnAjax({
+            url: 'users/loginIOS',
+            headers: {
+                authorization: USER.token
+            }
+        }, function( ret, err ){
+        	debugAlert( arguments )
+        	if( ret ){
+        	
+            }else{
+                api.toast({
+	global: true,
+                    msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                });
+            }
+        });
+	    
+	//  这里开始重构
+	return;
+        if (ajaxLock) {
+            return false;
+        }
+        ajaxLock = true;
+        if (type == 'append') {
+            api.showProgress({
+                title: 'Loading…',
+                text: '',
+                modal: false
+            });
+        }
+        var url = '/APPSupportManage/APPGetSupportList.aspx';
+        ajaxRequest(url, 'get', {
+            'UserID': account.userid,
+            'BatchNo': account.batchno,
+            'CurrentPage': projectHistoryListPage,
+            'LineQTY': projectListSkip
+        }, function(ret, err){
+            ajaxLock = false;
+            api.hideProgress();
+            api.refreshHeaderLoadDone()
+            if(ret && ret.res == undefined){
+                var str = '';
+                var appdatalist = ret.appdatalist;
+                if (appdatalist.length) {
+                    // appdatalis【t[i]
+                    for (var i = 0; i < appdatalist.length; i++) {   
+                        str+='<div class="history-card border-1px-top border-1px-bottom" tapmode onclick="goProjectService(\''+ appdatalist[i].SupportTypeID +'\', \''+ appdatalist[i].SupportID +'\')">';
+                            str+='<p class="name">'+ appdatalist[i].ProjectName +'</p>';
+                            str+='<div class="history-row">';
+                                str+='<label>Submit Date</label>';
+                                str+='<span class="text">'+ appdatalist[i].CreateDate +'</span>';
+                            str+='</div>';
+                            str+='<div class="history-row">';
+                                str+='<label>Type of Request</label>';
+                                str+='<span class="text">'+ fnTranslation( appdatalist[i].SupportTypeName, true ) +'</span>';
+                            str+='</div>';
+                            str+='<div class="history-row">';
+                                str+='<label>Time Saved</label>';
+                                str+='<span class="text">'+ appdatalist[i].daycounty +'</span>';
+                            str+='</div> ';
+                            str+='<div class="history-row">';
+                                str+='<label>Status</label>';
+                                str+='<span class="text">'+ fnTranslation( appdatalist[i].Curre, true ) +'</span>';
+                            str+='</div> ';
+                            str+='<div class="history-row">';
+                                str+='<label>Rating</label>';
+                                str+='<span class="stars">';
+                                    for (var j = 0; j < 5; j++) {
+                                        if (j < appdatalist[i].Score) {
+                                            str+='<i class="fa-star fa" tapmode onclick="rankThis(this, \''+ appdatalist[i].SupportID +'\', '+ (j+1) + ', \'' + appdatalist[i].Currents +'\')"></i>';
+                                        } else {
+                                            str+='<i class="fa-star-o fa" tapmode onclick="rankThis(this, \''+ appdatalist[i].SupportID +'\', '+ (j+1) +', \'' + appdatalist[i].Currents +'\')"></i>';
+                                        } 
+                                    }
+                                str+='</span>';
+                            str+='</div>';
+                            if (appdatalist[i].Currents == '关闭' || appdatalist[i].Currents == '重关闭') {
+                                str+='<span class="btn active" tapmode onclick="submitOldComand(\''+ appdatalist[i].SupportID +'\', \''+ appdatalist[i].Currents +'\', this)" data-type='+ appdatalist[i].SupportTypeName +'>Re-open</span>';
+                            } else {
+                                str+='<span class="btn" tapmode onclick="submitOldComand()">Re-open</span>';
+                            }
+                            
+                        str+='</div>';
+                    }
+                    if (type == 'append') {
+                        $api.append(project_history, str);
+                    } else {
+                        $api.html(project_history, str);
+                    }
+                    $api.removeCls(project_history, 'empty');
+                } else{
+                    if (type == 'html') {
+                        $api.addCls(project_history, 'empty');
+                    }
+                }
+                projectHistoryListPage++;
+                api.parseTapmode();
+            } else{
+                console.log('ret:err===='+ JSON.stringify(ret));
+            }
+            if (err) {
+                console.log('err===='+ JSON.stringify(err));
+            }
+            
+        });
+    };
+
+    // View Projects详情
+    function goProjectDetail( id ){
+        fnOpen({
+            name: 'simple_win'+id,
+            url: 'widget://' + DIR + '/simple_page/simple_win.html',
+            pageParam: {
+                name: 'project_detail',
+                title: fnLanguageSwitch('项目详情'),
+                data: {id :id },
+                bounces: false
+            }
+        });
+    };
+
+  var project_service_json = {
+        '6': {
+            name: 'support_doc',
+            title: 'Tech Doc',
+            url: host +'APPSupportManage/SupportTechnologyDocDetail.aspx?supportid='
+        },
+        '12': {
+            name: 'support_doc',
+            title: 'Tech Doc',
+            url: host +'APPSupportManage/SupportTechnologyDocDetail.aspx?supportid='
+        },
+        '8': {
+            name: 'support_inquiry',
+            title: 'Inquiry',
+            url: host +'APPSupportManage/SupportNewsConsultDetail.aspx?supportid='
+        },
+        '14': {
+            name: 'support_inquiry',
+            title: 'Inquiry',
+            url: host +'APPSupportManage/SupportNewsConsultDetail.aspx?supportid='
+        },
+        '5': {
+            name: 'support_edc',
+            title: 'EDC A/C',
+            url: host +'APPSupportManage/SupportAccountOpenUpDetail.aspx?supportid='
+        },
+        '9': {
+            name: 'support_crb',
+            title: 'CRB Loan',
+            url: host +'APPSupportManage/SupportPlatformBuyDetail.aspx?supportid='
+        },
+        '1': {
+            name: 'support_schematic',
+            title: 'Schematic Review',
+            url: host +'APPSupportManage/SupportSchematicDiagramDetail.aspx?supportid='
+        },
+        '7': {
+            name: 'support_debug',
+            title: 'Debug',
+            url: host +'APPSupportManage/SupportDebugServeDetail.aspx?supportid='
+        },
+        '13': {
+            name: 'support_debug',
+            title: 'Debug',
+            url: host +'APPSupportManage/SupportDebugServeDetail.aspx?supportid='
+        },
+        '3': {
+            name: 'support_sample',
+            title: 'Free Sample',
+            url: host +'APPSupportManage/SupportFreeModelDetail.aspx?supportid='
+        },
+        '2': {
+            name: 'support_promotion',
+            title: 'Promotion',
+            url: host +'APPSupportManage/SupportProjectSpreadDetail.aspx?supportid='
+        },
+        '11': {
+            name: 'support_promotion',
+            title: 'Promotion',
+            url: host +'APPSupportManage/SupportProjectSpreadDetail.aspx?supportid='
+        },
+        '4': {
+            name: 'support_pricing',
+            title: 'Pricing',
+            url: host +'APPSupportManage/SupportCompetePriceNewDetail.aspx?supportid='
+        }
+    };
+
+
+    function goProjectService( el ){
+        fnOpen({
+            name: 'support',
+            url: 'widget://' + DIR + '/simple_page/support_win.html',
+            pageParam: {
+                data: vGlobalParam[ $api.attr(el, 'data-id' )]
+            }
+        });
+    };
+    function submitOldComand( el ){
+        // 只有 "关闭"、"重关闭" 可使用此接口
+        event.stopPropagation(); 
+        if( $api.hasCls(el, 'active') ){
+            var _data = vGlobalParam[ $api.attr($api.closest(el, '.history-card'), 'data-id' ) ];
+            api.confirm({
+                title: fnLanguageSwitch( '提示' ),
+                msg: fnLanguageSwitch( '是否重新提交' ),
+                buttons:[ fnLanguageSwitch( '取消' ), fnLanguageSwitch( '确定' ) ]
+            },function(ret,err){
+                if(ret.buttonIndex == 2){
+                    fnAjax({
+                        url: 'supports/open',
+                        headers: {
+                            authorization: USER.token
+                        },
+                        data: {
+                            values: {
+                                id: _data.id
+                            }
+                        }
+                    }, function( ret, err ){
+                        if( ret ){
+
+                            api.toast({
+	global: true,
+                                msg: fnLanguageSwitch( '重开需求成功' )
+                            });
+
+                            if (zhuge) {
+                                zhuge.track({
+                                    eventName: '发现_消息',
+                                    eventPro: {
+                                        '支持类型': _data.projectName
+                                    }
+                                });
+                            }
+
+                            api.refreshHeaderLoading();
+                        }else{
+                            api.toast({
+	global: true,
+                                msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                            });
+                        }
+                    });
+                }
+            })
+        }
+    };
+
+    var rankLock = false;
+    function rankThis( el, score ){
+        // 只有 "开放"、"重开放" 可以使用此功能
+        event.stopPropagation(); 
+        var _data = vGlobalParam[ $api.attr($api.closest(el, '.history-card'), 'data-id' ) ];
+        fnAjax({
+            url: 'supports/supportScore',
+            data: {
+                values: {
+                    id: _data.id,
+                    supportScore: score
+                }
+            },
+            progress: false
+        }, function( ret, err ){
+            if( ret ){
+
+                api.toast({
+                   global: true,
+                    msg: fnLanguageSwitch( '评分成功' ) +'!'
+                });
+
+                if (zhuge) {
+                    zhuge.track({
+                        eventName: '项目支持_历史支持获取_评分',
+                        eventPro: {}
+                    });
+                }
+
+                api.refreshHeaderLoading();
+            }else{
+                api.toast({
+global: true,
+                    msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                });
+            }
+        });
+    };
+</script>
+</html>

@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>技术信息咨询</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" href="../../css/common.css">
+    <style type="text/css">
+	    body{
+	    	height: auto;
+	    	min-height: 100%;
+	    	background-color: #FFFFFF;
+	    	padding: 0 1.5rem 0 1.5rem;
+	    }
+	    .description{
+	    	color: #5E5E5E;
+	    	font-size: 1.1rem;
+	    	line-height: 2.3rem;
+	    	padding-top: 2rem;
+	    }
+	    .tip{
+	    	color: #4D4D4D;
+	    	font-size: 1.1rem;
+	    	line-height: 2.3rem;
+	    }
+	    .color-red{
+	    	color: #FF0101;
+	    }
+	    .detail{
+	    	font-size: 1.6rem;
+	    	color: #0054B9;
+	    	padding: 0 2rem;
+	    }
+    </style>
+</head>
+<body>
+<!--     <p class="description">
+    	您想要咨询什么有关英特尔产品或技术相关的问题？或者获取有关英特尔什么产品/平台的第三方合作伙伴方案介绍？<span class="color-red">（必填）</span>
+    </p>
+    <p class="detail">
+    	xess
+    </p>
+    <p class="description" style="padding-top:0">
+    	请留下详尽电话联系方式，以便我们后续和您沟通？（选填）
+    </p>
+    <p class="detail">
+    	123
+    </p> -->
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript">
+
+    apiready = function(){
+        fnAjax({
+            url: 'supports/NewsConsultDetails?supportId='+api.pageParam.id,
+            headers: {
+                authorization: USER.token
+            }
+        }, function( ret, err ){
+            if( ret ){
+                var _html = 
+                '<p class="description">'+fnLanguageSwitch( '您想要咨询什么有关英特尔产品或技术相关的问题？或者获取有关英特尔什么产品/平台的第三方合作伙伴方案介绍？' )+'<span class="color-red">（'+fnLanguageSwitch( '必填' ) +'）</span>'+
+			    '</p>'+
+			    '<p class="detail">'+ret.NewsConsult.content+'</p>'+
+			    '<p class="description" style="padding-top:0">'+fnLanguageSwitch( '请留下详尽电话联系方式，以便我们后续和您沟通？' ) +'（'+fnLanguageSwitch( '选填' ) +'）</p>'+
+			    '<p class="detail">'+ret.NewsConsult.contact+'</p>';
+                $api.dom( 'body' ).innerHTML = _html;
+            }else{
+                api.toast({
+	global: true,
+                    msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                });
+            }
+        });
+    };
+</script>
+</html>

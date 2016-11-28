@@ -1,0 +1,1716 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>chain</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/common.css"/>
+    <link rel="stylesheet" href="../../css/fonts_awesome/font-awesome.min.css">
+    <style>
+        #main {
+            background-color: RGBA(237, 238, 239, 1);
+            padding-top: 1.5rem
+        }
+
+        /*如果是maker*/
+        .project {
+            margin-top: 1.5rem;
+            position: relative;
+            padding-bottom: 7.1rem;
+            background-color: #E0F2FF;
+        }
+
+        #main .si-project-item:first-child {
+            margin-top: 0;
+        }
+
+        #main .project:first-child {
+            margin-top: -1.5rem;
+        }
+
+        .project.border-1px-bottom:after {
+            color: #EEEEEE;
+        }
+
+        .project-title {
+            padding-top: 2.4rem;
+            padding-left: 5.4rem;
+            padding-right: 5.4rem;
+            font-size: 1.5rem;
+            text-align: center;
+            line-height: 2.4rem;
+        }
+
+        .project-subtitle {
+            padding-top: 1.9rem;
+            padding-left: 5.4rem;
+            padding-right: 5.4rem;
+            font-size: 1.2rem;
+            text-align: center;
+            line-height: 1.8rem;
+            color: #0071c5;
+        }
+
+        .project-icon {
+            top: 2rem;
+            left: 2rem;
+            width: 1.9rem;
+            height: 2.2rem;
+            background-image: url(../../image/Macthmaking/project.png);
+            background-size: 1.9rem 2rem;
+            background-position: center center;
+            background-repeat: no-repeat;
+            position: absolute;
+        }
+
+        .add-project {
+            position: absolute;
+            width: 10.5rem;
+            height: 3.1rem;
+            bottom: 1.8rem;
+            left: 50%;
+            -webkit-transform: translateX(-50%);
+            text-align: center;
+            background-color: #00AFF0;
+            color: #ffffff;
+            font-size: 1.2rem;
+            line-height: 3.1rem;
+            border-radius: 4px;
+            display: -webkit-box;
+            -webkit-box-align: center;
+            -webkit-box-pack: center;
+        }
+
+        .add-project .icon {
+            width: 1.2rem;
+            height: 1.2rem;
+            background-image: url("../../image/Macthmaking/add_project.png");
+            background-position: center center;
+            background-size: 1.2rem;
+            background-repeat: no-repeat;
+            display: inline-block;
+            position: relative;
+            top: 1.1px;
+            margin-right: 2px;
+        }
+
+        /*.project + .demand {
+            margin-top: 0;
+        }*/
+
+        .demand {
+            display: -webkit-box;
+            margin-top: 0.4rem;
+        }
+
+        .demand-status {
+            width: 3rem;
+            font-size: 1.2rem;
+            position: relative;
+            background-color: RGBA(0, 175, 240, 1);
+        }
+
+        .demand-status.error {
+            background-color: RGBA(190, 191, 192, 1);
+        }
+
+        .demand-status.process {
+            background-color: RGBA(125, 214, 249, 1);
+        }
+
+        .demand-status span {
+            -webkit-writing-mode: vertical-lr;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            width: 50%;
+            height: 50%;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .demand-content {
+            background-color: #ffffff;
+            -webkit-box-flex: 1;
+            padding: 3rem 1rem 2.5rem 1.5rem;
+            position: relative;
+        }
+
+        .demand-content .update-btn {
+            width: 4.3rem;
+            height: 1.9rem;
+            position: absolute;
+            right: 1rem;
+            top: 3rem;
+            text-align: center;
+            line-height: 1.9rem;
+            border: 1px solid #C4C4C4;
+            color: #C4C4C4;
+            border-radius: 3px;
+            font-size: 1.2rem;
+        }
+
+        .demand-content .update-btn.canUpdate {
+            border: 1px solid #00AEEF;
+            color: #00AEEF;
+        }
+
+        .demand-content .name {
+            font-size: 1.5rem;
+            margin-right: 5.5rem;
+        }
+
+        .demand-content .text {
+            margin-top: 5px;
+            color: #C4C4C4;
+            font-size: 1.2rem;
+        }
+
+        .demand .demand-content .skill {
+            margin-top: 1rem;
+            font-size: 1.3rem;
+            color: #CDCDCD;
+            line-height: 1.7rem;
+            position: relative;
+        }
+
+        .demand .demand-content .skill .skill-icon {
+            width: 1.7rem;
+            height: 1.3rem;
+            float: left;
+            margin-top: 0.2rem;
+            margin-right: 0.5rem;
+        }
+
+        .demand .demand-content .skill .text {
+            margin: 0;
+            margin-right: 4rem;
+            display: block;
+        }
+
+        .demand .demand-content .skill .seen-icon {
+            width: 1.3rem;
+            height: 0.9rem;
+            position: absolute;
+            right: 1.2rem;
+            top: 0.3rem;
+        }
+
+        .demand .demand-content .skill .seen {
+            position: absolute;
+            right: 0;
+            font-size: 1.2rem;
+            color: #C4C4C4;
+        }
+
+        .demand .data-box {
+            position: relative;
+            margin-top: 4rem;
+        }
+
+        .demand .data-help {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 1.6rem;
+            height: 1.6rem;
+        }
+
+        .demand .divide {
+            height: 4.4rem;
+            width: 0.1rem;
+            background-color: #e8e8e8;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+
+        .demand .data-box-main {
+            color: #FEA900;
+            font-size: 0;
+            position: relative;
+            margin-right: 1.6rem;
+        }
+
+        .demand .data-count-box, .demand .data-deadline-box {
+            float: left;
+            width: 11rem;
+            font-size: 3rem;
+            text-align: center;
+        }
+
+        .demand .data-deadline-box {
+            float: right;
+        }
+
+        .demand .count {
+            line-height: 5.4rem;
+            font-size: 3.6rem;
+        }
+
+        .demand .data-unit {
+            font-size: 1.2rem;
+        }
+
+        .demand .data-count-box p,
+        .demand .data-deadline-box p {
+            font-size: 1.2rem;
+        }
+
+        /*end如果是maker*/
+
+        /*如果是si*/
+        .si-project-item {
+            background-color: #ffffff;
+            margin: 0 1rem;
+            margin-top: 1.5rem;
+            position: relative;
+        }
+
+        .si-project-item.error:after, .si-project-item.close:after {
+            content: ' ';
+            display: block;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .demand-header-top, .project-header-top {
+            padding: 2rem 1rem 1rem;
+        }
+
+        .project-header-top {
+            padding: 1.5rem 1rem;
+        }
+
+        .inf-chainleft {
+            width: 2.4rem;
+            height: 2.4rem;
+            float: left;
+        }
+
+        .header-main {
+            position: relative;
+            margin-left: 3.7rem;
+        }
+
+        .header-title {
+            font-size: 1.5rem;
+            line-height: 2.4rem;
+            color: #000000;
+            margin-bottom: 1.5rem;
+            word-wrap: break-word;
+            word-break: break-all;
+        }
+
+        .skill, .projectApp {
+            background-size: 1.2rem 0.9rem;
+            padding-left: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.5rem;
+            color: #999999;
+            -webkit-box-flex: 1;
+            background-position: left center;
+            background-repeat: no-repeat no-repeat;
+        }
+
+        .projectApp {
+            background-image: url(../../image/projectApp.png);
+        }
+
+        .skill {
+            background-image: url(../../image/Macthmaking/project_skill.png);
+        }
+
+        .date-icon {
+            width: 1rem;
+            height: 1rem;
+            vertical-align: middle;
+        }
+
+        .comand-detail-desc {
+            font-size: 1.2rem;
+            color: #333333;
+            line-height: 2rem;
+            margin-top: 1.5rem;
+            word-wrap: break-word;
+            word-break: break-all;
+        }
+
+        .personInfo {
+            background-color: #ffffff;
+            padding: 1.5rem 1rem;
+        }
+
+        .person {
+            height: 5.5rem;
+            display: -webkit-box;
+        }
+
+        .person .left {
+            width: 5.5rem;
+            height: 5.5rem;
+        }
+
+        .person .left img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .person .right {
+            -webkit-box-flex: 1;
+            padding-left: 1.5rem;
+        }
+
+        .right .top, .right .bottom {
+            display: -webkit-box;
+            height: 2.75rem;
+            line-height: 2.75rem;
+            -webkit-box-align: center;
+        }
+        .right .top{ overflow: hidden; }
+
+        .top {
+            font-size: 1.5rem;
+            color: #2c2c2c;
+        }
+
+        .bottom {
+            font-size: 1.2rem;
+            color: #999999;
+        }
+
+        .top .name, .bottom .city {
+            width: 30%;
+        }
+
+        .top .name{ width: auto; }
+
+        .top .profession, .bottom .companyName {
+            -webkit-box-flex: 1;
+            padding-left: 1rem;
+        }
+
+        .divider {
+            height: 0.9rem;
+            width: 1px;
+            margin: 0 10px;
+            background-color: #DEDEDE;
+        }
+
+        .si-project-status {
+            height: 2rem;
+            line-height: 2rem;
+            background-color: #00AEEF;
+            color: #ffffff;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .timeWrap {
+            height: 1.2rem;
+            line-height: 1.2rem;
+            font-size: 1.2rem;
+            margin: 1.5rem 0 1rem;
+            color: #C4C4C4;
+        }
+
+        .timeWrap .date {
+            margin-left: 0.5rem;
+        }
+
+        .confirm-state {
+            color: #0070c5;
+            font-size: 1.2rem;
+            padding: 0 1rem;
+            line-height: 2rem;
+        }
+
+        .confirm-state.success {
+            color: #FFa300;
+            text-align: center;
+            height: 5.5rem;
+            line-height: 5.5rem;
+        }
+
+        .confirm-group {
+            text-align: center;
+            font-size: 0;
+            margin-top: 2rem;
+        }
+
+        .confirm-group .outer-box {
+            width: 49.9%;
+            display: inline-block;
+            margin: 1rem 0;
+        }
+
+        .confirm-btn {
+            width: 12rem;
+            height: 3rem;
+            border: 1px solid;
+            border-radius: 4px;
+            padding: 10px 0;
+            font-size: 1.5rem;
+            line-height: 3rem;
+            margin: 0 auto;
+            border-color: #999999;
+        }
+
+        .btn-accept {
+            background-color: #FFa300;
+            color: #FFFFFF;
+            border-color: #FFa300;
+        }
+
+        .btn-refuse, .btn-start {
+            background-color: #FFFFFF;
+            color: #00AEEF;
+            border-color: #00AEEF;
+        }
+
+        .btn-accept[disabled], .btn-refuse[disabled], .btn-start[disabled] {
+            background-color: #FFFFFF;
+            color: #BABABA;
+            border-color: #999999;
+        }
+
+        .si-demand-status {
+            height: 2rem;
+            line-height: 2rem;
+            text-align: end;
+            margin: 0 1rem;
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            color: #999999;
+            padding-bottom: 1rem;
+        }
+
+        .si-demand-status span {
+            background-color: #00AEEF;
+            font-size: 0.9rem;
+            text-align: center;
+            /* width: 5.3rem;*/
+            padding: 0 0.5rem;
+            color: #ffffff;
+            border-radius: 4px;
+        }
+
+        #no_project {
+            height: 100%;
+            background-color: #ffffff;
+            display: -webkit-box;
+            -webkit-box-align: center;
+            -webkit-box-pack: center;
+            -webkit-box-orient: vertical;
+        }
+
+        #no_project img {
+            margin-top: 5.4rem;
+            width: 31.75rem;
+            height: 16.85rem;
+        }
+
+        #no_project .title {
+            font-size: 1.5rem;
+            color: #333333;
+            line-height: 2.4rem;
+        }
+
+        #no_project .newProject {
+            margin-top: 2.8rem;
+            width: 15rem;
+            height: 4rem;
+            line-height: 4rem;
+            text-align: center;
+            background-color: #FFFFFF;
+            color: #00AEEF;
+            border: 1px solid #00AEEF;
+            font-size: 1.5rem;
+        }
+
+        #demand.empty:after {
+            content: ' ';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url(../../image/project/file_pad.png) 50% 3rem no-repeat;
+            background-size: 8rem auto;
+        }
+
+        #demand.empty:before {
+            content: '硬享公社服务于大量的智能硬件厂商和创客，您可以在此模块接收他们提出的对接需求，比如：寻找模具，ID设计，主板/接口板/整机的设计和生产等方面的合作伙伴。目前还没有收到的需求。如果有人提出相匹配的需求，您可以在这里看到概况，点击初步意向后可以查看更多。';
+            position: absolute;
+            width: 27rem;
+            left: 50%;
+            margin-left: -13.5rem;
+            top: 17rem;
+            font-size: 1.7rem;
+            color: #C4C4C4;
+            text-align: center;
+        }
+
+        /*end如果是si*/
+
+    </style>
+</head>
+<body>
+<div id="demand">
+
+</div>
+<div id="main" >
+
+    <!--si-->
+    <!-- <div class="si-project-item ">
+        <div class="si-project-status">
+            沟通中
+        </div>
+        <div class="demand-header-top border-1px-bottom">
+            <img class="inf-chainleft" src="../../image/comand_detail_titleIcon.png">
+
+            <div class="header-main">
+                <p class="header-title">
+                    需求标题:ddddddxxxddddddxxxddddddxxxddddddxxxddddddxxxddddddxxxddddddxxxddddddxxx
+                </p>
+
+                <div class="comand-detail-desc">
+                    需求描述：ddddddxxxddddddxxxddddddxxxddddddxxxddddddxxxddddddxxxddddddxxxddddddxxxddddddxxxddddddxxxddddddxxxddddddxxxddddddxxxddddddxxxddddddxxxddddddxxx
+                </div>
+                <div class="timeWrap">
+                    <img src="../../image/comand_detail_timeIcon.png" alt="" class="date-icon">
+                    <span class="date">2016/3/31</span>
+                </div>
+            </div>
+        </div>
+        <div class="project-header-top border-1px-bottom">
+            <img class="inf-chainleft" src="../../image/Macthmaking/project.png">
+
+            <div class="header-main">
+                <p class="header-title ">
+                    需求标题:这是项目标题这是项目标题这是项目标题这是项目标题这是项目标题这是项目标题这是项目标题这是项目标题这是项目标题这是项目标题这是项目标题这是项目标题这是项目标题这是项目标题这是项目标题这是项目标题这是项目标题这是项目标题这是项目标题这是项目标题这是项目标题这是项目标题这是项目标题这是项目标题
+                </p>
+
+                <div class="projectApp ellipsis-1">这是项目类型
+                    这是项目类型这是项目类型这是项目类型这是项目类型
+                    这是项目类型这是项目类型这是项目类型这是项目类型这是项目类型这是项目类型这是项目类型这是项目类型                </div>
+            </div>
+        </div>
+        <div class="personInfo border-1px-bottom">
+            <div class="person">
+                <div class="left">
+                    <img src="../../image/Macthmaking/MacthmakingNewneed/default.png" id="photo">
+                </div>
+                <div class="right">
+                    <div class="top ">
+                        <div class="name">
+                            这是姓名
+                        </div>
+                        <div class="divider"></div>
+                        <div class="position">
+                            这是职位
+                        </div>
+                    </div>
+                    <div class="bottom">
+                        <div class="city">
+                            这是城市
+                        </div>
+                        <div class="divider"></div>
+                        <div class="companyName">
+                            这是公司
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="si-demand-status">
+            目前：<span>沟通中</span>
+        </div>
+        <div class="demand-handle-box ">
+            <div class="confirm-state">
+                对方已经确认和您展开合作，您是否同意？对方已经确认和您展开合作，您是否同意？对方已经确认和您展开合作，您是否同意？
+            </div>
+            <div class="confirm-group ">
+                <span class="confirm-btn btn-start" disabled tapmode onclick="fnAccept(this)">初步意向</span>
+                <span class="confirm-btn btn-refuse" disabled tapmode onclick="fnRefuse(this)">不合作</span>
+            </div>
+            <div class="confirm-group ">
+                <span class="confirm-btn btn-start" tapmode onclick="fnAccept(this)">初步意向</span>
+                <span class="confirm-btn btn-refuse" tapmode onclick="fnRefuse(this)">不合作</span>
+            </div>
+            <div class="confirm-group">
+                <span class="confirm-btn btn-start" tapmode onclick="fnAccept(this)">展开合作</span>
+                <span class="confirm-btn btn-refuse" tapmode onclick="fnRefuse(this)">不合作</span>
+            </div>
+            <div class="confirm-group ">
+                <span class="confirm-btn btn-accept" tapmode onclick="fnAccept(this)">同意</span>
+                <span class="confirm-btn btn-refuse" tapmode onclick="fnRefuse(this)">不合作</span>
+            </div>
+        </div>
+    </div>
+    &lt;!&ndash; 新需求 &ndash;&gt;
+    <div class="demand-container test-si" tapmode onclick="needAgree()">
+        &lt;!&ndash; 需求标题 &ndash;&gt;
+        <div class="demand-title-box clearfix">
+            <div class="demand-contentbox-left">
+                    <span class="demand-content-title">
+                        需求标题：
+                    </span>
+                <img class="inf-chainleft" src="../image/Macthmaking/MacthmakingNewneed/Inf_ChainLeft_Icon.png" alt="">
+                <img class="new-need" src="../image/Macthmaking/MacthSI/SI_xinxuqiu101.png" alt="">
+            </div>
+            <div class="demand-contentbox-main">
+                <p class="new-need-title ellipsis-1">测试不合作推送问题</p>
+
+                <p class="new-need-description ellipsis-2">
+                    需求描述：笑嘻嘻笑嘻嘻笑嘻嘻惺惺惜惺惺犬瘟热犬瘟热
+                </p>
+
+                <p class="new-need-date">
+                    <img class="new-need-time" src="../image/Macthmaking/MacthmakingNewneed/time.png" alt="">
+                    2016/3/9
+                </p>
+                <img class="new-need-corner" src="../image/Macthmaking/MacthSI/SI_chubuyixiang2.png" alt="">
+            </div>
+        </div>
+        &lt;!&ndash; 项目名称 &ndash;&gt;
+        <div class="demand-name-box border-1px-top clearfix">
+            <div class="demand-contentbox-left">
+                    <span class="demand-content-title">
+                        项目名称：
+                    </span>
+                <img class="inf-chainleft" src="../image/Macthmaking/MacthmakingMain/MC_nametitleicon.png" alt="">
+            </div>
+            <div class="demand-contentbox-main">
+                <p class="new-need-title ellipsis-1">测试不合作推送问题</p>
+
+                <p class="new-need-project">
+                    <img class="new-need-file" src="../image/Macthmaking/MacthSI/MCSI_fileicon1.png" alt="">
+                    可穿戴设备啊啊啊
+                </p>
+            </div>
+        </div>
+        &lt;!&ndash; 提供者 &ndash;&gt;
+        <div class="demand-provider-box border-1px-top clearfix">
+            <img src="../image/superman.png" alt="">
+
+            <p>
+                    <span class="name">
+                        哇哈哈
+                    </span>
+                    <span class="address">
+                        北京市
+                    </span>
+            </p>
+        </div>
+        &lt;!&ndash; 操作 &ndash;&gt;
+        <div class="demand-handle-box border-1px-top clearfix">
+            <p class="handle-des">
+                如您想了解更多详情，请点击“有初步意向”；如不感兴趣，请点击“不合作”。
+            </p>
+
+            <div class="btn-box">
+                &lt;!&ndash; 此处图片要换成手写按钮 &ndash;&gt;
+                <img class="" src="../image/Macthmaking/MacthSI/SI_chubuyixiang.png" alt="" tapmode
+                     onclick="fnHaveAtention()">
+                <img class="" src="../image/Macthmaking/MacthmakingNewneed/MC_buhezuo1.png" alt="" tapmode
+                     onclick="fnRefuse()">
+            </div>
+
+        </div>
+    </div>
+    &lt;!&ndash; 沟通中 &ndash;&gt;
+    <div class="demand-container test-si" tapmode onclick="goSIComandDetail()">
+        &lt;!&ndash; 需求标题 &ndash;&gt;
+        <div class="demand-title-box clearfix">
+            <div class="demand-contentbox-left">
+                    <span class="demand-content-title">
+                        需求标题：
+                    </span>
+                <img class="inf-chainleft" src="../image/Macthmaking/MacthmakingNewneed/Inf_ChainLeft_Icon.png" alt="">
+                <img class="new-need" src="../image/Macthmaking/MacthSI/SI_xinxuqiu101.png" alt="">
+            </div>
+            <div class="demand-contentbox-main">
+                <p class="new-need-title ellipsis-1">测试不合作推送问题</p>
+
+                <p class="new-need-description ellipsis-2">
+                    需求描述：笑嘻嘻笑嘻嘻笑嘻嘻惺惺惜惺惺犬瘟热犬瘟热
+                </p>
+
+                <p class="new-need-date">
+                    <img class="new-need-time" src="../image/Macthmaking/MacthmakingNewneed/time.png" alt="">
+                    2016/3/9
+                </p>
+                <img class="new-need-corner" src="../image/Macthmaking/MacthSI/SI_chubugoutong2.png" alt="">
+            </div>
+        </div>
+        &lt;!&ndash; 项目名称 &ndash;&gt;
+        <div class="demand-name-box border-1px-top clearfix">
+            <div class="demand-contentbox-left">
+                    <span class="demand-content-title">
+                        项目名称：
+                    </span>
+                <img class="inf-chainleft" src="../image/Macthmaking/MacthmakingMain/MC_nametitleicon.png" alt="">
+            </div>
+            <div class="demand-contentbox-main">
+                <p class="new-need-title ellipsis-1">测试不合作推送问题</p>
+
+                <p class="new-need-project">
+                    <img class="new-need-file" src="../image/Macthmaking/MacthSI/MCSI_fileicon1.png" alt="">
+                    可穿戴设备啊啊啊
+                </p>
+            </div>
+        </div>
+        &lt;!&ndash; 提供者 &ndash;&gt;
+        <div class="demand-provider-box border-1px-top clearfix">
+            <img src="../image/superman.png" alt="">
+
+            <p>
+                    <span class="name">
+                        哇哈哈
+                    </span>
+                    <span class="address">
+                        北京市
+                    </span>
+            </p>
+        </div>
+        &lt;!&ndash; 操作 &ndash;&gt;
+        <div class="demand-handle-box border-1px-top clearfix">
+            <p class="handle-des" disabled>
+                如您想了解更多详情，请点击“有初步意向”；如不感兴趣，请点击“不合作”。
+            </p>
+
+            <div class="btn-box">
+                <span tapmode="" disabled class="button " onclick="fnHaveAtention()">展开合作</span>
+                <span tapmode="" class="button" onclick="fnRefuse()">不合作</span>
+            </div>
+
+        </div>
+    </div>
+    &lt;!&ndash; 对接成功 &ndash;&gt;
+    <div class="demand-container test-si success">
+        &lt;!&ndash; 需求标题 &ndash;&gt;
+        <div class="demand-title-box clearfix">
+            <div class="demand-contentbox-left">
+                    <span class="demand-content-title">
+                        需求标题：
+                    </span>
+                <img class="inf-chainleft" src="../image/Macthmaking/MacthmakingNewneed/Inf_ChainLeft_Icon.png" alt="">
+                <img class="new-need" src="../image/Macthmaking/MacthSI/SI_xinxuqiu101.png" alt="">
+            </div>
+            <div class="demand-contentbox-main">
+                <p class="new-need-title ellipsis-1">测试不合作推送问题</p>
+
+                <p class="new-need-description ellipsis-2">
+                    需求描述：笑嘻嘻笑嘻嘻笑嘻嘻惺惺惜惺惺犬瘟热犬瘟热
+                </p>
+
+                <p class="new-need-date">
+                    <img class="new-need-time" src="../image/Macthmaking/MacthmakingNewneed/time.png" alt="">
+                    2016/3/9
+                </p>
+                <img class="new-need-corner" src="../image/Macthmaking/MacthmakingNewneed/MC_zhankaihezuo1.png" alt="">
+            </div>
+        </div>
+        &lt;!&ndash; 项目名称 &ndash;&gt;
+        <div class="demand-name-box border-1px-top clearfix">
+            <div class="demand-contentbox-left">
+                    <span class="demand-content-title">
+                        项目名称：
+                    </span>
+                <img class="inf-chainleft" src="../image/Macthmaking/MacthmakingMain/MC_nametitleicon.png" alt="">
+            </div>
+            <div class="demand-contentbox-main">
+                <p class="new-need-title ellipsis-1">测试不合作推送问题</p>
+
+                <p class="new-need-project">
+                    <img class="new-need-file" src="../image/Macthmaking/MacthSI/MCSI_fileicon1.png" alt="">
+                    可穿戴设备啊啊啊
+                </p>
+            </div>
+        </div>
+        &lt;!&ndash; 提供者 &ndash;&gt;
+        <div class="demand-provider-box border-1px-top clearfix">
+            <img src="../image/superman.png" alt="">
+
+            <p>
+                    <span class="name">
+                        哇哈哈
+                    </span>
+                    <span class="address">
+                        北京市
+                    </span>
+            </p>
+
+            <p><span class="company">柚子科技</span></p>
+        </div>
+        &lt;!&ndash; 操作 &ndash;&gt;
+        <div class="demand-handle-box border-1px-top clearfix">
+            <p class="handle-des">
+                很遗憾，对方已经找到合适的合作伙伴了，下次尽快响应哦！
+            </p>
+        </div>
+    </div> -->
+    <!--maker-->
+    <!--<div class="project border-1px-bottom">
+        <div class="project-icon"></div>
+        <div class="project-title">
+            这是项目标题这是项目标题这是项目标题这是项目标题这是项目标题这是项目标题这是项目标题这是项目标题这是项目标题这是项目标题
+        </div>
+        <div class="project-subtitle">
+            如果您需要资源支持，快来新增需求吧！这样才可以找到合作伙伴呦！
+        </div>
+        <div class="add-project">
+            <span>
+               <span class="icon"></span>
+            新增需求
+            </span>
+        </div>
+    </div>-->
+     <!-- <div class="project">
+         <div class="project-icon"></div>
+         <div class="project-title">
+             <div class="project-title-text">这是项目标题这是项目标题这是项目标题这是项目标题这是项目标题这是项目标题这是项目标题这是项目标题这是项目标题这是项目标题</div>
+         </div>
+         <div class="add-project">
+             <span>
+                <span class="icon"></span>
+             新增需求
+             </span>
+         </div>
+     </div>
+     <div class="demand">
+         <div class="demand-status">
+             <span>已发布</span>
+         </div>
+         <div class="demand-content">
+             <span class="update-btn" tapmode>修改</span>
+
+             <div class="name ellipsis-2">
+                 我是需求名字我是需求名字我是需求名字我是需求名字我是需求名字我是需求名字我是需求名字我是需求名字
+                 我是需求名字我是需求名字我是需求名字我是需求名字
+             </div>
+             <div class="skill">
+                 <img class="skill-icon" src="../image/Macthmaking/project_skill.png" alt="">
+                 <span class="seen">1</span>
+                 <img class="seen-icon" src="../image/Macthmaking/demand_preview.png" alt="">
+             </div>
+             <div class="text ellipsis-1">
+                 我是详情我是详情我是详情我是详情我是详情
+             </div>
+             <div class="data-box">
+                 <img src="../image/Macthmaking/demand_help.png" class="data-help" tapmode="" onclick="goHelp()">
+
+                 <div class="data-box-main clearfix">
+                     <span class="divide"></span>
+
+                     <div class="data-count-box">
+                         <span class="count">4</span>
+                         <span class="data-unit">位</span>
+
+                         <p class="ellipsis-1">有初步意向的合作方</p>
+                     </div>
+                     <div class="data-deadline-box">
+                         <span class="count">21</span>
+                         <span class="data-unit">天</span>
+
+                         <p class="ellipsis-1">距离需求关闭时间</p>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+     <div class="demand">
+         <div class="demand-status">
+             <span>erdferdf</span>
+         </div>
+         <div class="demand-content">
+             <span class="update-btn canUpdate" tapmode>修改</span>
+
+             <div class="name">
+                 我是需求名字我是需求名字我是需求名字我是需求名字
+             </div>
+             <div class="skill">
+                 <img class="skill-icon" src="../image/Macthmaking/project_skill.png" alt="">
+                 <span class="seen">1</span>
+                 <img class="seen-icon" src="../image/Macthmaking/demand_preview.png" alt="">
+             </div>
+             <div class="text ellipsis-1">
+                 我是详情我是详情我是详情我是详情我是详情
+             </div>
+             <div class="data-box">
+                 <img src="../image/Macthmaking/demand_help.png" class="data-help" tapmode="" onclick="goHelp()">
+
+                 <div class="data-box-main clearfix">
+                     <span class="divide"></span>
+
+                     <div class="data-count-box">
+                         <span class="count">4</span>
+                         <span class="data-unit">位</span>
+
+                         <p class="ellipsis-1">有初步意向的合作方</p>
+                     </div>
+                     <div class="data-deadline-box">
+                         <span class="count">21</span>
+                         <span class="data-unit">天</span>
+
+                         <p class="ellipsis-1">距离需求关闭时间</p>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+     <div class="demand">
+         <div class="demand-status error">
+             <span>sdfsdsdsd</span>
+         </div>
+         <div class="demand-content">
+             <span class="update-btn" tapmode>修改</span>
+
+             <div class="name">
+                 我是需求名字我是需求名字我是需求名字我是需求名字
+             </div>
+             <div class="skill">
+                 <img class="skill-icon" src="../image/Macthmaking/project_skill.png" alt="">
+                 <span class="seen">1</span>
+                 <img class="seen-icon" src="../image/Macthmaking/demand_preview.png" alt="">
+             </div>
+             <div class="text ellipsis-1">
+                 我是详情我是详情我是详情我是详情我是详情
+             </div>
+             <div class="data-box">
+                 <img src="../image/Macthmaking/demand_help.png" class="data-help" tapmode="" onclick="goHelp()">
+
+                 <div class="data-box-main clearfix">
+                     <span class="divide"></span>
+
+                     <div class="data-count-box">
+                         <span class="count">4</span>
+                         <span class="data-unit">位</span>
+
+                         <p class="ellipsis-1">有初步意向的合作方</p>
+                     </div>
+                     <div class="data-deadline-box">
+                         <span class="count">21</span>
+                         <span class="data-unit">天</span>
+
+                         <p class="ellipsis-1">距离需求关闭时间</p>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div> -->
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript">
+    var account = $api.getStorage('loginInfo');
+    var pageParam, userStyle;
+    var loginInfo = $api.getStorage('loginInfo');
+    var userType = loginInfo.usertype;
+    var loading = false;
+    var loadEnd = false;
+    var zhuge;
+    var vGlobalParam = {},
+        vGlobalType = 0;
+    apiready = function () {
+         zhuge = api.require('zhuge');
+        if (zhuge) {
+            zhuge.initZhuge();
+        }
+        api.setRefreshHeaderInfo({
+            loadingImg: 'widget://image/common/blueArrow@2x.png',
+            textDown: fnLanguageSwitch( '下拉刷新' ),
+            textUp: fnLanguageSwitch( '松手加载' ),
+            textLoading: fnLanguageSwitch( '刷新中' ),
+            showTime: false,
+            bgColor: '#FFF',
+            textColor: '#000'
+        }, function(ret, err){
+            SKIP = 0;
+            fnGetProjectList();
+        });
+        api.refreshHeaderLoading();
+
+        api.addEventListener({
+            name:'scrolltobottom',
+            extra:{
+                threshold: 50
+            }
+        }, function(ret, err){
+            fnGetProjectList();
+        });
+
+        return;
+        zhuge = api.require('zhuge');
+        if (zhuge) {
+            zhuge.initZhuge();
+        }
+        api.setRefreshHeaderInfo({
+            visible: true,
+            loadingImg: 'widget://image/common/blueArrow@2x.png',
+            bgColor: '#FFF',
+            textColor: '#000000',
+            textDown: '下拉刷新',
+            textUp: '松手加载',
+            showTime: true
+        }, function (ret, err) {
+            loadEnd = false;
+            loading = false;
+            currentIndex = 1;
+            if (userType == CONST_SI) {
+                getDemandJieList();
+            } else {
+                fnGetProjectList();
+            }
+        });
+        //进入页面就开始下啦刷新
+        api.refreshHeaderLoading();
+        //监听到底部加载
+        api.addEventListener({
+            name: 'scrolltobottom',
+            extra: {
+                threshold: 0
+            }
+        }, function (ret, err) {
+            var $listView = $("#main");
+            if (!loadEnd && !loading) {
+                currentIndex++;
+                loading = true;
+                var loadingHtml = '<div class="ui-loading-wrap"><p>加载中</p><i class="ui-loading"></i></div>';
+                $listView.append(loadingHtml);
+                //传入'scrolltobottom' 这个动作 是要和下拉刷新的操作区别开
+                if (userType == CONST_SI) {
+                    getDemandJieList('scrolltobottom');
+                } else {
+                    fnGetProjectList('scrolltobottom');
+                }
+
+            }
+        });
+    };
+    //提供给其他页面调用的方法
+    function loadDataFromComandForSI() {
+        currentIndex = 1;
+        getDemandJieList();
+        pageUp(500)
+    }
+    function loadDataFromComandForMaker() {
+        currentIndex = 1;
+        fnGetProjectList();
+        pageUp(500)
+    }
+
+    var currentIndex = 1;
+    var perNum = 5;
+    /*maker版本*/
+    function fnGetProjectList( _type ){
+        if( _type ){
+            SKIP = 0;
+            vGlobalType = _type;
+        }
+        if( USER.roleId === CONST_SI ){
+            fnAjax({
+                url: 'projectDemands/appFindSiNeed',
+                data: {
+                    values: {
+                        limit: LIMIT,
+                        skip: SKIP,
+                        status: vGlobalType
+                    }
+                }
+            }, function( ret, err ){
+                api.refreshHeaderLoadDone();
+                if( ret ){
+                    if( ret.data.length ){
+                        if( ! SKIP )$api.dom( '#main' ).innerHTML = '';
+                        SKIP += LIMIT;
+                        for( var x in ret.data ){
+                            vGlobalParam[ ret.data[x].demandId ] = ret.data[x];
+                            var _filterDemandTypeId = [[1, 6, 7], [0, 3, 4], [0, 1]];
+                            var demandStatusClass = {
+                                '6': 'error',
+                                '7': 'close'
+                            }[ ret.data[x].demandStatus ] || '';
+                            var DemandStatusHtml =
+                            '<div class="demand-handle-box "><div class="confirm-state ">'+fnLanguageSwitch( '如您想了解更多详情，请点击“有初步意向”；如不感兴趣，请点击“不合作”。' ) +'</div>' +
+                            '<div class="confirm-group ">' +
+                            '   <div class="outer-box">' +
+                            '       <span class="confirm-btn btn-start" tapmode onclick="fnHaveAtention(this)">'+fnLanguageSwitch( '有初步意向' )+'</span>' +
+                            '   </div>' +
+                            '   <div class="outer-box">' +
+                            '   <span class="confirm-btn btn-refuse" tapmode onclick="refuseCooperationForIntent(this)">'+fnLanguageSwitch( '不合作' )+'</span></div></div>'+
+                            '</div>';
+                            //失败或者关闭
+                            if ( ret.data[x].demandStatus == 6 || ret.data[x].demandStatus == 7) {
+                                if ( ret.data[x].checkStatus == 5) {
+                                    DemandStatusHtml = '';
+                                    // DemandStatusHtml = '<div class="demand-handle-box hidden"><div class="confirm-state ">'+fnLanguageSwitch( '很遗憾，对方已经找到合适的合作伙伴了，下次尽快响应哦！' )+'</div></div>';
+                                } else if ( ret.data[x].checkStatus == 4) {
+                                    if ( ret.data[x].receiveStatus == 0) {
+                                        DemandStatusHtml = '<div class="demand-handle-box hidden"><div class="confirm-group "><div class="outer-box"><span tapmode="" class="confirm-btn btn-start" disabled>'+fnLanguageSwitch( '有初步意向' )+'</span></div><div class="outer-box"><span tapmode="" class="confirm-btn btn-refuse" disabled>'+fnLanguageSwitch( '不合作' )+'</span></div></div></div>';
+                                    } else {
+                                        DemandStatusHtml = '';
+                                        // DemandStatusHtml = '<div class="demand-handle-box hidden"><div class="confirm-group "><div class="outer-box"><span tapmode="" class="confirm-btn btn-start" disabled>'+fnLanguageSwitch( '展开合作' )+'</span></div><div class="outer-box"><span tapmode="" class="confirm-btn btn-refuse" disabled>'+fnLanguageSwitch( '不合作' )+'</span></div></div></div>';
+                                    }
+                                } else {
+                                    DemandStatusHtml = '';
+                                    // DemandStatusHtml = '<div class="demand-handle-box hidden"><div class="confirm-group"><div class="outer-box"><span tapmode="" class="confirm-btn btn-start" disabled>'+fnLanguageSwitch( '展开合作' )+'</span></div><div class="outer-box"><span tapmode="" class="confirm-btn btn-refuse" disabled>'+fnLanguageSwitch( '不合作' )+'</span></div></div></div>';
+                                }
+                                //沟通中
+                            } else if ( ret.data[x].demandStatus == 3) {
+                                DemandStatusHtml = '';
+                                // DemandStatusHtml = '<div class="demand-handle-box">';
+                                // DemandStatusHtml += '<div class="confirm-state">'+fnLanguageSwitch( '联系后感觉如何，是否决定开合作了？' )+'</div>';
+                                // DemandStatusHtml += '<div class="confirm-group" >';
+                                // DemandStatusHtml += '<div class="outer-box"><span tapmode="" class="confirm-btn btn-start" tapmode="" onclick="expandingCooperation(this)">'+fnLanguageSwitch( '展开合作' )+'</span></div>';
+                                // DemandStatusHtml += '<div class="outer-box"><span tapmode="" class="confirm-btn btn-refuse"  tapmode="" onclick="refuseCooperationForIntent(this, 2)">'+fnLanguageSwitch( '不合作' )+'</span></div>';
+                                // DemandStatusHtml += '</div>';
+                                // DemandStatusHtml += '</div>';
+                            } else if ( ret.data[x].demandStatus == 4) {
+                                if ( ret.data[x].receiveStatus == 5) {
+                                    DemandStatusHtml = '';
+                                    // DemandStatusHtml = '<div class="demand-handle-box hidden"><div class="confirm-state" disabled>'+fnLanguageSwitch( '您已经决定和对方合作，正在等待对方确认中！' )+'</div><div class="confirm-group"><div class="outer-box"><span tapmode="" class="confirm-btn btn-start" disabled>'+fnLanguageSwitch( '展开合作' )+'</span></div><div class="outer-box"><span tapmode="" class="confirm-btn btn-refuse" disabled>'+fnLanguageSwitch( '不合作' )+'</span></div></div></div>';
+                                } else {
+                                    DemandStatusHtml = '';
+                                    // DemandStatusHtml = '<div class="demand-handle-box">';
+                                    // DemandStatusHtml += '<div class="confirm-state" >'+fnLanguageSwitch( '对方已经确认和您展开合作，您是否同意？' )+'</div>';
+                                    // DemandStatusHtml += '<div class="confirm-group" >';
+                                    // DemandStatusHtml += '<div class="outer-box"><span tapmode="" class="confirm-btn btn-accept" onclick="agreeCooperation(this)">'+fnLanguageSwitch( '同意' )+'</span></div>';
+                                    // DemandStatusHtml += '<div class="outer-box"><span tapmode="" class="confirm-btn btn-refuse"  onclick="refuseCooperationForIntent(this, 3)">'+fnLanguageSwitch( '不合作' )+'</span></div>';
+                                    // DemandStatusHtml += '</div>';
+                                    // DemandStatusHtml += '</div>';
+                                }
+                            } else if ( ret.data[x].demandStatus == 5) {
+                                DemandStatusHtml = '';
+                                // DemandStatusHtml = '<div class="demand-handle-box hidden"><div class="confirm-state success">'+fnLanguageSwitch( '恭喜对接成功' )+'</div></div>';
+                            } else if ( ret.data[x].demandStatus == 0) {
+                                if ( ret.data[x].checkStatus == 6) {
+                                    demandStatusClass = 'error';
+                                    DemandStatusHtml = '<div class="demand-handle-box hidden"><div class="confirm-state">'+fnLanguageSwitch( '如您想了解更多详情，请点击“有初步意向”；如不感兴趣，请点击“不合作”。' )+'</div><div class="confirm-group"><div class="outer-box"><span tapmode="" class="confirm-btn btn-start" disabled>'+fnLanguageSwitch( '有初步意向' )+'</span></div><div class="outer-box"><span tapmode="" class="confirm-btn btn-refuse" disabled>'+fnLanguageSwitch( '不合作' )+'</span></div></div></div>';
+                                } else {
+
+                                }
+                            }
+
+                            $api.append($api.dom( '#main' ),
+                            '<div data-id="'+ret.data[x].demandId+'" class="si-project-item '+demandStatusClass+'">'+
+                            '    <div tapmode onclick="goSIComandDetail( this )"  class="si-project-status" >'+fnSubDemandDockingStatusJson()[ret.data[x].demandStatus]+'</div>'+
+                            '    <div tapmode onclick="goSIComandDetail( this )"  class="demand-header-top border-1px-bottom">'+
+                            '        <img class="inf-chainleft" src="../../image/comand_detail_titleIcon.png">'+
+                            '        <div class="header-main">'+
+                            '            <p class="header-title">'+fnLanguageSwitch( '需求标题' )+':'+ret.data[x].title+
+                            '            </p>'+
+                            '            <div class="comand-detail-desc">'+fnLanguageSwitch( '需求描述' )+'：'+ret.data[x].content+
+                            '            </div>'+
+                            '            <div class="timeWrap">'+
+                            '                <img src="../../image/comand_detail_timeIcon.png" alt="" class="date-icon">'+
+                            '                <span class="date">'+new Date( ret.data[x].created ).Format( 'yyyy/MM/dd' )+'</span>'+
+                            '            </div>'+
+                            '        </div>'+
+                            '    </div>'+
+                            '    <div tapmode onclick="goSIComandDetail( this )"   class="project-header-top border-1px-bottom">'+
+                            '        <img class="inf-chainleft" src="../../image/Macthmaking/project.png">'+
+                            '        <div class="header-main">'+
+                            '            <p class="header-title ">'+fnLanguageSwitch( '项目名称' )+':'+ret.data[x].projectName+
+                            '            </p>'+
+                            '            <div class="projectApp ellipsis-1">'+fnSingleTypeJson()[ ret.data[x].demandTypeId ]+'</div>'+
+                            '        </div>'+
+                            '    </div>'+
+                            '    <div tapmode onclick="goSIComandDetail( this )"    class="personInfo border-1px-bottom">'+
+                            '        <div class="person">'+
+                            '            <div class="left">'+
+                            '                <img onload="getImageCache( this )" data-selectorid="'+ret.data[x].photo+'" src="../../image/Macthmaking/MacthmakingNewneed/default.png" id="photo">'+
+                            '            </div>'+
+                            '            <div class="right">'+
+                            '                <div class="top ">'+
+                            '                    <div class="name">'+fnStringEmpty( ret.data[x].realname && ret.data[x].username )+'</div>'+
+                            '                    <div class="divider"></div>'+
+                            '                    <div class="position">'+fnStringEmpty( fnJobJson()[ret.data[x].profession] )+'</div>'+
+                            '                </div>'+
+                            '                <div class="bottom">'+
+                            '                    <div class="city">'+fnStringEmpty( ret.data[x].cityName )+'</div>'+
+                            '                    <div class="divider"></div>'+
+                            '                    <div class="companyName">'+fnStringEmpty( ret.data[x].companyName )+'</div>'+
+                            '                </div>'+
+                            '            </div>'+
+                            '        </div>'+
+                            '    </div>'+
+                            '    <div tapmode onclick="goSIComandDetail( this )"   class="si-demand-status">'+fnLanguageSwitch( '目前' )+'：<span>'+fnSubDemandDockingStatusJson()[ret.data[x].demandStatus]+'</span></div>'+DemandStatusHtml+'</div>');
+                        }
+                    }
+                    api.parseTapmode();
+                }else{
+                    api.toast({
+	                   global: true,
+                        msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                    });
+                }
+            });
+        }else{
+            fnAjax({
+                url: 'projects/appFindMakerNeed',
+                headers: {
+                    authorization: USER.token
+                },
+                data: {
+                    values: {
+                        limit: LIMIT,
+                        skip: SKIP
+                    }
+                }
+            }, function( ret, err ){
+                api.refreshHeaderLoadDone();
+                if( ret ){
+                    if( ret.data.length ){
+                        if( ! SKIP )$api.dom( '#main' ).innerHTML = '';
+                        SKIP += LIMIT;
+                        if( $api.dom( '#no_project' ) )$api.remove( $api.dom( '#no_project' ) );
+                        for( var x in ret.data ){
+                            vGlobalParam[ ret.data[x].id ] = ret.data[x];
+                            var _html = 
+                            '<div class="project">'+
+                            '     <div class="project-icon"></div>'+
+                            '     <div class="project-title">'+
+                            '         <div class="project-title-text">'+ret.data[x].projectName+'</div>'+
+                            ( ret.data[x].projectDemands.length ? '' : '<div class="project-subtitle">'+fnLanguageSwitch( '新增对接需求，可以找到多种合作伙伴（如：模具，ID设计，主板/接口板/整机的设计和生产等）快来新增需求吧！' )+'</div>')+
+                            '     </div>'+
+                            '     <div class="add-project" tapmode onclick="createNewComand( this )" data-id="'+ret.data[x].id+'" >'+
+                            '         <span>'+
+                            '            <span class="icon"></span>'+fnLanguageSwitch( '新增需求' )+'</span>'+
+                            '     </div>'+
+                            '</div>';
+
+                            for( var j in ret.data[x].projectDemands ){
+                                var _filterDemandTypeId = [[1, 6, 7], [0, 3, 4], [0, 1]],
+                                    _status = '',
+                                    _updateClass = '',
+                                    _source = ret.data[x].projectDemands[j];
+                                if( _filterDemandTypeId[0].indexOf( _source.checkStatus ) !== -1 ){
+                                    _status = 'error';
+                                }else if( _filterDemandTypeId[1].indexOf( _source.checkStatus ) !== -1 ){
+                                    _status = 'process';
+                                }
+
+                                if(  _filterDemandTypeId[2].indexOf( _source.checkStatus ) !== -1 ){
+                                    _updateClass = 'canUpdate';
+                                }
+
+                                _html+=
+                                ' <div data-id="'+ret.data[x].id+'" tapmode onclick="goMakerComandDetail(this, '+j+')" class="demand">'+
+                                '     <div class="demand-status '+_status+'">'+
+                                '         <span>'+fnDemandDockingStatusJson()[_source.checkStatus]+'</span>'+
+                                '     </div>'+
+                                '     <div class="demand-content">'+
+                                '         <span class="update-btn '+_updateClass+'" tapmode onclick="updateComand(this, '+j+')" data-id="'+ret.data[x].id+'">'+fnLanguageSwitch( '修改' )+'</span>'+
+                                '         <div class="name ellipsis-2">'+_source.title+'</div>'+
+                                '         <div class="skill">'+
+                                '             <img class="skill-icon" src="../../image/Macthmaking/project_skill.png" alt="">'+
+                                '             <span class="seen">'+( fnIsEmp( _source.lookCount ) ? _source.lookCount : 0 )+'</span>'+
+                                '             <img class="seen-icon" src="../../image/Macthmaking/demand_preview.png" alt="">'+
+                                '         </div>'+
+                                '         <div class="text ellipsis-1">'+fnSingleTypeJson()[ _source.demandTypeId ]+'</div>'+
+                                '         <div class="data-box">'+
+                                '             <img src="../../image/Macthmaking/demand_help.png" class="data-help" tapmode="" onclick="goHelp()">'+
+                                '             <div class="data-box-main clearfix">'+
+                                '                 <span class="divide"></span>'+
+                                '                 <div class="data-count-box">'+
+                                '                     <span class="count">'+_source.projectSubDemandNumber+'</span>'+
+                                '                     <span class="data-unit">'+fnLanguageSwitch( '位' )+'</span>'+
+                                '                     <p class="ellipsis-1">'+fnLanguageSwitch( '有初步意向的合作方' )+'</p>'+
+                                '                 </div>'+
+                                '                 <div class="data-deadline-box">'+
+                                '                     <span class="count">'+new Date( _source.firstStartDate ).getDate()+'</span>'+
+                                '                     <span class="data-unit">'+fnLanguageSwitch( '天' )+'</span>'+
+                                '                     <p class="ellipsis-1">'+fnLanguageSwitch( '距离需求关闭时间' )+'</p>'+
+                                '                 </div>'+
+                                '             </div>'+
+                                '         </div>'+
+                                '     </div>'+
+                                ' </div>';
+                            }
+                            $api.append($api.dom( '#main' ), _html);
+                        }
+                    }else{
+                        if( ! SKIP && ! $api.dom( '#no_project' ) ){
+                            $api.append($api.dom( 'body' ),
+                            '<div id="no_project">'+
+                            '    <p class="title">'+fnLanguageSwitch('在此发布项目和对接需求')+'</p>'+
+                            '    <p class="title">'+fnLanguageSwitch('可以找到五大类型产业链合作伙伴')+'</p>'+
+                            '    <img src="../../image/no_project_html.png">'+
+                            '    <div class="newProject" tapmode onclick="createNewProject()">'+fnLanguageSwitch('新增项目')+'</div>'+
+                            '</div>');   
+                        }
+                    }
+                    api.parseTapmode();
+                }else{
+                    api.toast({
+	                   global: true,
+                        msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                    });
+                }
+            });   
+        }
+    }
+    var SI_CheckStatusColorMap = {
+        '2': '#31c27C',
+        '3': '#00AEEF',
+        '4': '#f05E4b',
+        '5': '#F8a900',
+        '6': '#606060',
+        '7': '#606060'
+    };
+
+    var SI_CheckStatusMap = {
+        '0': '可接单',
+        '1': '审核未通过',
+        '2': '可接单',
+        '3': '可接单',
+        '4': '可接单',
+        '5': '对接成功',
+        '6': '已关闭',
+        '7': '已关闭'
+    };
+    var SI_DemandStatusMap = {
+        '0': '新需求',
+        '3': '沟通中',
+        '4': '合作确认中',
+        '5': '对接成功',
+        '6': '失败',
+        '7': '关闭'
+    };
+
+    // 根据不同状态修改项目不同背景色
+    // checkStatus = 主需求状态，分 7 中 SI_CheckStatusMap 集合中
+    // DemandStatus = 子需求状态，分 6 中 SI_DemandStatusMap 集合中, 我所能看到的自需求状态都是与我相关的，
+    // 同一个自需求在不同的 SI 账号中，状态不同
+    // 
+    function convertColorCode( CheckStatus, DemandStatus ) {
+        if( !CheckStatus ) return 2;
+
+        // 如果自需求状态为 合作确认中、沟通和新需求 都是 可接单状态(2)，颜色为 绿色
+        // if( DemandStatus == "0" || DemandStatus == "3" || DemandStatus == "4" ) return 2;
+
+        // 新修改，只能改变新需求的背景色
+        if( DemandStatus == "0" ) return 2;
+
+        // 若主需求对接成功，并自需求也是对接成功，那么就是对接成功(5), 颜色为黄色
+        if( CheckStatus == "5" && DemandStatus == "5" ) return 5;
+
+        // 自需求是失败或者关闭，那么状态就是关闭，颜色为灰色
+        if( DemandStatus == "6" || DemandStatus == "7" ) return 7;
+
+
+        return CheckStatus;
+    }
+
+
+    // 有初步意向
+    function fnHaveAtention(el) {
+        event.stopPropagation();   
+        debugAlert( 1 ) 
+        var _data = vGlobalParam[ $api.attr($api.closest(el, '.si-project-item'), 'data-id' ) ];
+        api.confirm({
+            title: fnLanguageSwitch( '提示' ),
+            msg: fnLanguageSwitch( '点击确定后，您即可看到需求提出方的详细信息；同时，我们也会把您的信息发送给对方，便于双方联系。' ),
+            buttons: [fnLanguageSwitch( '确定' ), fnLanguageSwitch( '取消' )]
+        }, function (ret, err) {
+            if (ret.buttonIndex == 1) {
+                fnAjax({
+                    url: 'projectSubDemands/addProjectSubDemand',
+                    data: {
+                        values: {
+                            demandId: _data.demandId
+                        }
+                    },
+                    debug: true
+                }, function( ret, err ){
+                    debugAlert( arguments )
+                    if( ret ){
+                        api.refreshHeaderLoading();
+                    }else{
+                        api.toast({
+                            global: true,
+                            msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                        });
+                    }
+                });
+                return;
+                var $apiThis = $api.closest(el, '.confirm-group');
+                if (zhuge) {
+                    zhuge.track({
+                        eventName: 'SI产业链对接_初步意向判断',
+                        eventPro: {
+                            '需求种类': $api.attr($apiThis, 'data-classify'),
+                            '项目市场应用': $api.attr($apiThis, 'data-app'),
+                            '需求提交时间': $api.attr($apiThis, 'data-date'),
+                            '需求标题': $api.attr($apiThis, 'data-title'),
+                            '需求描述': $api.attr($apiThis, 'data-content'),
+                            '判断结果': '有初步意向'
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+
+    // 不合作
+    function refuseCooperation(el) {
+        event.stopPropagation();    
+        var _data = vGlobalParam[ $api.attr($api.closest(el, '.si-project-item'), 'data-id' ) ];
+        debugAlert( _data )
+        api.confirm({
+            title: fnLanguageSwitch( '提示' ),
+            msg: fnLanguageSwitch( '您是否已经与对方进行电话或私信联系，并且确定放弃此次合作机会？' ),
+            buttons: [fnLanguageSwitch( '确定' ), fnLanguageSwitch( '取消' )]
+        }, function (ret, err) {
+            if (ret.buttonIndex == 1) {
+                fnAjax({
+                    url: 'projectSubDemands/updataProjectNoCooperation',
+                    data: {
+                        values: {
+                            demandId: _data.subDemandId
+                        }
+                    }
+                }, function( ret, err ){
+                    if( ret ){
+                        api.refreshHeaderLoading();
+                    }else{
+                        api.toast({
+                            global: true,
+                            msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                        });
+                    }
+                });
+            }
+        });
+    }
+
+
+    function refuseCooperationForIntent(el) {
+        if( typeof el === 'string' ){
+            var _data = vGlobalParam[ el ];
+        }else{ 
+            event.stopPropagation();    
+            var _data = vGlobalParam[ $api.attr($api.closest(el, '.si-project-item'), 'data-id' ) ];
+        }
+        //初步意向的不合作
+        debugAlert( _data )
+        api.confirm({
+            title: fnLanguageSwitch( '提示' ),
+            msg: fnLanguageSwitch( '您确定要放弃此次合作机会吗？' ),
+            buttons: [fnLanguageSwitch( '确定' ), fnLanguageSwitch( '取消' )]
+        }, function (ret, err) {
+            if (ret.buttonIndex == 1) {
+                fnAjax({
+                    url: 'projectSubDemands/updataProjectNoCooperation',
+                    data: {
+                        values: {
+                            demandId: _data.subDemandId
+                        }
+                    }
+                }, function( ret, err ){
+                    debugAlert( arguments )
+                    if( ret ){
+                        api.closeToWin({
+                            name: api.winName
+                        })
+                        api.refreshHeaderLoading();
+                    }else{
+                        api.toast({
+	                        global: true,
+                            msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                        });
+                    }
+                });
+            }
+        })
+    }
+
+
+   
+    //同意合作
+    function agreeCooperation(el) {
+        if( typeof el === 'string' ){
+            var _data = vGlobalParam[ el ];
+        }else{ 
+            event.stopPropagation();    
+            var _data = vGlobalParam[ $api.attr($api.closest(el, '.si-project-item'), 'data-id' ) ];
+        }
+        api.confirm({
+            title: fnLanguageSwitch( '提示' ),
+            msg: fnLanguageSwitch( '您同意和对方展开合作了？点击确认后，该需求即对接成功。' ),
+            buttons: [fnLanguageSwitch( '确定' ), fnLanguageSwitch( '取消' )]
+        }, function (ret, err) {
+            if (ret.buttonIndex == 1) {
+                fnAjax({
+                    url: 'projectSubDemands/updataProjectSubDemand',
+                    data: {
+                        values: {
+                            projectSubDemandId: _data.subDemandId
+                        }
+                    }
+                }, function( ret, err ){
+                    //debugAlert( arguments )
+                    if( ret ){
+                        api.closeToWin({
+                            name: api.winName
+                        })
+                        api.refreshHeaderLoading();
+                    }else{
+                        api.toast({
+	                    global: true,
+                            msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                        });
+                    }
+                    if (zhuge) {
+                    zhuge.track({
+                        eventName: 'SI产业链对接_合作状态最终回复',
+                        eventPro: {
+                            '回复结果': '同意',
+                            '点击页面来源': '接收的需求',
+                            '需求种类': $api.attr($apiThis, 'data-classify'),
+                            '项目市场应用': $api.attr($apiThis, 'data-app'),
+                            '需求标题': $api.attr($apiThis, 'data-title'),
+                            '需求描述': $api.attr($apiThis, 'data-content'),
+                            '对方的职位': $api.attr($apiThis, 'data-job'),
+                            '对方的城市': $api.attr($apiThis, 'data-city')
+                        }
+                    });
+                }
+                });
+            }
+        });
+    }
+
+    // si查看需求
+    function goSIComandDetail( el ) {
+        event.stopPropagation();  
+        var _data = vGlobalParam[ $api.attr($api.closest(el, '.si-project-item'), 'data-id' ) ];
+        if( [6, 7].indexOf( _data.demandStatus ) == -1  ){
+            if( _data.demandStatus ){
+                fnOpen({
+                    name: 'simple_win',
+                    url: 'widget://' + DIR + '/simple_page/simple_win.html',
+                    pageParam: {
+                        name: 'comand_detail_si',
+                        title: fnLanguageSwitch( '需求详情' ),
+                        data: _data
+                    }
+                });      
+            }else{
+                api.alert({
+                    title: fnLanguageSwitch( '提示' ),
+                    msg: fnLanguageSwitch( '请您先判断，对此需求是否有初步意向？ 点击“初步意向”后，可以查看详细信息。' ),
+                    buttons: [ fnLanguageSwitch( '我知道了' ) ]
+                });
+            }
+        }
+    }
+
+    // 查看需求
+    function goMakerComandDetail(el, index) {
+        debugAlert( 2 )
+        fnOpen({
+            name: 'simple_win',
+            url: 'widget://' + DIR + '/simple_page/simple_win.html',
+            pageParam: {
+                name: 'comand_detail',
+                title: fnLanguageSwitch( '需求详情' ),
+                data: vGlobalParam[ $api.attr(el, 'data-id' ) ].projectDemands[ index ]
+            }
+        });
+
+        if (zhuge) {
+            zhuge.track({
+                eventName: 'MAKER产业链对接_  需求选项卡查看',
+                eventPro: {
+                    '需求状态': $api.attr(el, 'data-stage'),
+                    '需求种类': $api.attr(el, 'data-type'),
+                    '距离需求关闭时间': $api.attr(el, 'data-deadline'),
+                    '有初步意向的合作伙伴数': $api.attr(el, 'data-count')
+                }
+            });
+        }
+    };
+
+    // 新增需求
+    function createNewComand( el ) {
+        fnOpen({
+            name: 'simple_win',
+            url: 'widget://' + DIR + '/simple_page/simple_win.html',
+            pageParam: {
+                name: 'create_new_comand',
+                title: fnLanguageSwitch( '新增需求' ),
+                data: vGlobalParam[ $api.attr(el, 'data-id' ) ]
+            }
+        });
+        if (zhuge) {
+            zhuge.track({
+                eventName: 'MAKER产业链对接_新增需求',
+                eventPro: {}
+            });
+        }
+    }
+
+    // 更新需求
+    function updateComand(el, index) {
+        if( $api.hasCls(el, 'canUpdate') ){
+            event.stopPropagation();
+            fnOpen({
+                name: 'simple_win',
+                url: 'widget://' + DIR + '/simple_page/simple_win.html',
+                pageParam: {
+                    name: 'create_new_comand',
+                    title: fnLanguageSwitch( '修改需求' ),
+                    data: vGlobalParam[ $api.attr(el, 'data-id' ) ].projectDemands[ index ],
+                    hasUpdata: true
+                }
+            });
+            if (zhuge) {
+                zhuge.track({
+                    eventName: 'MAKER产业链对接_修改',
+                    eventPro: {
+                        '需求种类': $api.attr(el, 'data-type'),
+                        '需求名称': $api.attr(el, 'data-title'),
+                        '需求描述': $api.attr(el, 'data-content'),
+                    }
+                });
+            }
+        }
+    }
+
+    // 查看帮助
+    function goHelp(el) {
+        api.openFrame({
+            name: 'comand_question_frm',
+            url: '../simple_page/comand_question_frm.html',
+            bounces: false,
+        });
+        if (zhuge) {
+            zhuge.track({
+                eventName: 'MAKER产业链对接_天数问号',
+                eventPro: {
+                    '距离需求关闭天数': $api.attr(el, 'data-deadline'),
+                }
+            });
+        }
+        if( event ){event.cancelBubble = true;}
+        event.defaultPrevented = true;
+        return false;
+    }
+
+</script>
+</html>

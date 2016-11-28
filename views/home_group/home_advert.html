@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/common.css"/>
+</head>
+<body>
+
+</body>
+<script>
+    apiready = function () {
+        setTimeout(function(){
+            api.closeWin({
+                animation:{
+                    type:'reveal',
+                    subType:'from_top'
+                }
+            });
+        },3000);
+        api.openWin({
+            name: 'index',
+            url: 'widget://' + DIR + '/index.html',
+            vScrollBarEnabled: false,
+            hScrollBarEnabled: false,
+            bounces: false,
+            slidBackEnabled: false
+        });
+    }
+</script>
+</html>

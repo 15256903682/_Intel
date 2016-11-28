@@ -1,0 +1,215 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <style type="text/css">
+        a {
+            text-decoration: none;
+            display: block;
+            width: 100%;
+        }
+
+        .areatable {
+            border-width: 1px;
+            width: 100%;
+            border-color: #7f8993;
+            border-style: none none dashed none;
+            text-align: center;
+
+        }
+
+        .areatr1 {
+            border-width: 1px;
+            width: 30%;
+            border-color: #A0A0A0;
+            border-style: none;
+            background-color: #7F8993;
+            height: 50px;
+            font-size: 12px;
+            color: #FEFEFE;
+
+        }
+
+        .areatr2 {
+            border-width: 1px;
+            width: 65%;
+            border-color: #A0A0A0;
+            border-style: none none dashed none;
+            background-color: #F5F5F5;
+            height: 40px;
+            font-size: 12px;
+            color: #060606;
+        }
+
+        .divinterval {
+            width: 100%;
+            height: 20px;
+            background-color: white;
+            padding: 20px;
+
+        }
+    </style>
+    <script type="text/javascript" src="../../script/api.js"></script>
+    <script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+    <script type="text/javascript" src="../../script/translation.js"></script>
+</head>
+<body>
+<div id="Projectdata">
+</div>
+
+</body>
+<script type="text/javascript">
+
+    apiready = function () {
+        var loginInfo = $api.getStorage('loginInfo');
+        var bodyParam = {
+            UserID: loginInfo.userid,
+            BatchNo: loginInfo.batchno,
+            ProjectStatus: fnTranslation( api.pageParam.ProjectStatus )
+        };
+        var url = 'APPGetDataType/APPGetPartnerProject.aspx';
+        ajaxRequest(url,'get',bodyParam,function(ret,err){
+            if(ret){
+                var obj = ret;
+                var data1 = obj[0].data0;
+                if (data1.length > 0) {
+                    //a.ProjectName,a.ProjectApp,a.ProjectStatus,b.RealName,b.Email,b.CellPhone
+                    var divtable = "";
+                    var ProjectID = [];
+                    var ProjectName = [];
+                    //var ProjectApp = [];
+                    // var ProjectStatus = [];
+                    /// var RealName = [];
+                    //var Email = [];
+                    //var CellPhone = [];
+                    // var Active = [];
+                    for (var i = 0; i < data1.length; i++) {
+                        ProjectName.push(data1[i].ProjectName);
+                        ProjectID.push(data1[i].ProjectID);
+                        // ProjectStatus.push(data1[i].ProjectStatus);
+                        // Active.push(data1[i].Active);
+                        //RealName.push(data1[i].RealName);
+                        //Email.push(data1[i].Email);
+                        // CellPhone.push(data1[i].CellPhone);
+                    }
+                    $(function () {
+                        //set line value
+                        var line = ProjectName.length;
+                        //set column value
+                        var list = 1;
+                        var table = document.createElement("table");
+                        table.setAttribute("class", "areatable");
+                        for (var i = 0; i <= line; i++) {
+                            //create tr
+                            var tr = document.createElement("tr");
+                            var aa = document.createElement("a");
+                            for (var j = 0; j < list; j++) {
+                                //create td
+                                var td = document.createElement("td");
+                                var text = null;
+                                if (i == 0) {
+                                    tr.setAttribute("class", "areatr1");
+                                    //Load title
+                                    if (j == 0) {
+                                        text = document.createTextNode("Project name");
+                                    }
+                                    td.appendChild(text);
+                                }
+                                else {
+                                    tr.setAttribute("class", "areatr2");
+                                    //Load data
+                                    if (j == 0) {
+                                        /*var urltext = "APPpartnerProjectDetail.htm?ProjectID=" + ProjectID[i - 1];
+                                        aa.setAttribute("href", urltext);
+                                        console.log(urltext);*/
+                                        aa.onclick = (function(i){
+                                            return function(){
+                                                var move = isHuawei();
+                                                var animation = {/*
+                                                 type:"none",
+                                                 subType:"from_right",
+                                                 duration:300*/
+                                                };
+                                                if (move) {
+                                                    animation = {
+                                                        type: 'movein',
+                                                        subType: 'from_right'
+                                                    }
+                                                }
+                                                api.openWin({
+                                                    name: 'win_APPpartnerProjectDetail',
+                                                    url: 'widget://' + DIR + '/dashBoard/win_APPpartnerProjectDetail.html',
+                                                    bounces: false,
+                                                    animation: animation,
+                                                    pageParam:{
+                                                        ProjectID:ProjectID[i - 1],
+                                                        ProjectName:ProjectName[i - 1]
+                                                    }
+                                                });
+                                            }
+                                        })(i);
+                                        text = document.createTextNode(ProjectName[i - 1]);
+                                        aa.appendChild(text);
+                                    }
+                                    td.appendChild(aa);
+                                }
+                                tr.appendChild(td);
+                            }
+                            table.appendChild(tr);
+                        }
+                        document.getElementById("Projectdata").appendChild(table);
+                    });
+                }else{
+                    $("#Projectdata").html("No Data");
+                }
+            }else{
+                api.toast({
+	global: true,
+                    msg: err.msg
+                });
+            }
+        })
+    };
+    function createtabledata(line, list, name1, value1) {
+        //Create table
+        var table = document.createElement("table");
+        table.setAttribute("class", "areatable");
+        for (var i = 0; i <= line; i++) {
+            //create tr
+            console.log("d");
+            console.log(line);
+            var tr = document.createElement("tr");
+            for (var j = 0; j < list; j++) {
+                //create td
+                var td = document.createElement("td");
+                var text = null;
+                if (i == 0) {
+                    tr.setAttribute("class", "areatr1");
+                    //Load title
+                    if (j == 0) {
+                        text = document.createTextNode("Project Quantity");
+                    }
+                }
+                else {
+                    tr.setAttribute("class", "areatr2");
+                    //Load data
+                    if (j == 0) {
+                        var tda = document.createElement("a");
+                        var url = "APPpartnerProjectDetail.htm?ProjectID"
+                        tda.setAttribute("href", "areatable");
+                        text = document.createTextNode(name1[i - 1]);
+                    }
+                }
+                td.appendChild(text);
+                tr.appendChild(td);
+            }
+            table.appendChild(tr);
+        }
+        document.getElementById("Projectdata").appendChild(table);
+    }
+</script>
+</html>

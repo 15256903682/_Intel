@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="api.css"/>
+    <style>
+        body{
+	         background-color: #EEEEEE;   
+	         padding: 0px;
+	         margin:0px;
+        }
+        .top{
+        	background-color: #fff;
+        	border-bottom: 1px solid #F7F7F7;
+        }
+        .prospect{
+        	padding: 10px;
+        }
+        .top_1{
+        	font-size: 14px;
+        	color:#333333;
+        }
+        .con{ padding: 5px 0; 
+              font-size: 11px; 
+              display:-webkit-box;
+              -webkit-line-clamp:3;
+              -webkit-box-orient:vertical;
+              overflow:hidden;
+               color: #666666;}
+        .time{
+        	font-size: 9px;
+        	color:#A1A1A1;
+        	margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+ <!-- <div class="top">
+       <div tamode onclick="api.openWin({name:'quiz_win',url:'./quiz_win.html'});" class="prospect">
+           <div class="top_1">您怎么看虚拟现实已应用前景</div>
+           <div class="top_1 con">您怎么看虚拟现实已应用前景</div>
+    	   <div class="time">2016-11-12 10:04:53</div>
+       </div>	
+    </div>  -->
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript">
+    var vGlobalParam = {};
+    apiready = function(){
+        
+        api.setRefreshHeaderInfo({
+            loadingImg: 'widget://image/common/blueArrow@2x.png',
+            textDown: fnLanguageSwitch( '下拉刷新' ),
+            textUp: fnLanguageSwitch( '松手加载' ),
+            textLoading: fnLanguageSwitch( '刷新中' ),
+            showTime: false,
+            bgColor: '#FFF',
+            textColor: '#000'
+        }, function(ret, err){
+            SKIP = 0;
+            fnGetProjectList();
+        });
+        api.refreshHeaderLoading();
+
+        api.addEventListener({
+            name:'scrolltobottom',
+            extra:{
+                threshold: 50
+            }
+        }, function(ret, err){
+            fnGetProjectList();
+        });
+
+    };
+
+    function fnGetProjectList( _type ){
+      fnAjax({
+          url: 'communityQuestions/myQuestion',
+          data: {
+              values: {
+                  limit: LIMIT,
+                  skip: SKIP
+              }
+          }
+      }, function( ret, err ){
+          api.refreshHeaderLoadDone();
+          if( ret ){
+              if( ret.data.length ){
+                  if( ! SKIP )$api.dom( 'body' ).innerHTML = '';
+                  SKIP += LIMIT;
+                  for( var x in ret.data ){
+                      vGlobalParam[ ret.data[x].id ] = ret.data[x];
+                      $api.append($api.dom('body'), 
+                      '<div class="top">'+
+                      '   <div tamode onclick="fnOpenDetail( this );" data-id="'+ret.data[x].id+'" class="prospect">'+
+                      '       <div class="top_1">'+ret.data[x].title+'</div>'+
+                      '       <div class="top_1 con">'+ret.data[x].content+'</div>'+
+                      '     <div class="time">'+new Date( ret.data[x].created ).Format( 'yyyy/MM/dd hh:mm:ss' )+'</div>'+
+                      '   </div>'+
+                      '</div>');
+                  }
+              }else{
+                if( ! SKIP ){
+                    $api.dom( 'body' ).innerHTML = '<div class="empty" >'+fnLanguageSwitch( '暂无数据' )+'</div>'
+                }
+              }
+          }else{
+              api.toast({
+                  msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+              });
+          }
+      })
+    }
+
+    // function fnOpenDetail( el ){
+    //   name:'quiz_win',url:'./quiz_win.html'
+
+    // }
+
+  function fnOpenDetail( el ){
+    fnOpen({
+      name:'details_win',
+      url: 'widget://' + DIR + '/web_page/details_win.html',
+      pageParam: vGlobalParam[ $api.attr(el, 'data-id' ) ],
+      animation: {
+        type: 'movein'
+      }
+    });
+  }
+</script>
+</html>

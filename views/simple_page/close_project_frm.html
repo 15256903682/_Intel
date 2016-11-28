@@ -1,0 +1,159 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>Close this request-frm</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" href="../../css/common.css">
+    <style type="text/css">
+        body {
+            height: auto;
+            min-height: 100%;
+        }
+        p.title{
+        	font-size: 1.3rem;
+        	padding-top: 2rem;
+        	line-height: 4rem;
+        	text-indent: 2rem;
+        }
+        .textareaLabel{
+            height: 4rem;
+            line-height: 4rem;
+            padding-left: 10px;
+            font-size: 1.6rem;
+            position: relative;
+        }
+        .propose-note-tip{
+            position: absolute;
+            color: red;
+            bottom: 2px;
+            right: 12px;
+        }
+        .textWrap{
+            height: 10rem;
+            background-color: #ffffff;
+            margin: 10px;
+            border: 1px solid #D6D6D6;
+            display: -webkit-box;
+            margin-bottom: 0;
+        }
+        textarea{
+            display: block;
+            -webkit-box-flex: 1;
+            resize: none;
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        .submitWrap{
+            text-align: center;
+            margin-top: 4rem;
+            height: 4rem;
+            line-height: 4rem;
+            padding-bottom: 4rem;
+        }
+        .submitWrap span{
+            width: 50%;
+            color: #ffffff;
+            background-color: #00AEEF;
+            border-radius: 3px;
+            font-size: 1.8rem;
+        }
+    </style>
+</head>
+<body>
+<div class="propose">
+	<!-- <p class="title">Close this request：</p>
+    <div class="textWrap">
+        <textarea id="textarea"></textarea>
+    </div>
+    <div class="submitWrap">
+        <span class="btn" tapmode onclick="submitClose(this)">
+            Submit
+        </span>
+    </div> -->
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript">
+    var zhuge = null;
+    apiready = function () {
+       $api.dom('.propose').innerHTML=
+        '    <p class="title">'+fnLanguageSwitch('申请关闭原因')+':</p>'+
+        '    <div class="textWrap">'+
+        '        <textarea id="textarea"></textarea>'+
+        '    </div>'+
+        '    <div class="submitWrap">'+
+        '        <span class="btn" tapmode onclick="submitClose(this)"> '+fnLanguageSwitch('提交')+'</span>'+
+        '    </div>';
+
+
+
+        zhuge = api.require('zhuge');
+        if (zhuge) {
+            zhuge.initZhuge();
+        }
+    };
+
+    function submitClose(el){
+        var _reason = $api.dom( '#textarea' ).value;
+        if( !_reason.trim() ){
+            api.toast({
+	            global: true,
+                msg: fnLanguageSwitch( '申请关闭原因不能为空' )
+            });   
+        }else{
+            fnAjax({
+                url: 'projects/shenQingCloseOneProject',
+                headers: {
+                    authorization: USER.token
+                },
+                data: {
+                    values: {
+                        reason: _reason,
+                        projectId: api.pageParam.data.id
+                    }
+                }
+            }, function( ret, err ){
+                if( ret ){
+                    if (zhuge) {
+                        zhuge.track({
+                            eventName: '项目支持_申请关闭',
+                            eventPro: {
+                                'Project Status': api.pageParam.data.projectStatus
+                            }
+                        });
+                    }
+                    api.toast({
+	               global: true,
+                        msg: fnLanguageSwitch( '您决定删除项目' )+'：'+api.pageParam.data.projectName+'!'+fnLanguageSwitch( '请等待后台审核' )
+                    });
+
+                    api.sendEvent({
+                        name: 'projectDetailRefresh',
+                        extra: {
+                            id: api.pageParam.data.id
+                        }
+                    });
+
+                    setTimeout(function(){
+                        api.closeToWin({
+                            name: 'index'
+                        });
+                    }, 1000);
+                }else{
+                    api.toast({
+	                global: true,
+                        msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                    });
+                }
+            });   
+        }
+    };
+</script>
+</html>

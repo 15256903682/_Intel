@@ -1,0 +1,1342 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>edc-frm</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" href="../../css/common.css">
+    <style type="text/css">
+        body {
+            height: auto;
+            min-height: 100%;
+        }
+        /*大体上通用的部分 start*/
+        .common-part-service {
+
+        }
+
+        .whats-this {
+            background-color: #F0F0F0;
+            padding-top: 1.5rem;
+        }
+
+        .whats-this .this-name {
+            font-size: 1.5rem;
+            line-height: 2.5rem;
+            color: #000000;
+            background: url(../../image/project/icon_edc.png) 1rem 50% no-repeat;
+            background-size: 2.5rem 2.5rem;
+            text-indent: 4rem;
+        }
+
+        .whats-this .this-description {
+            padding: 0.8rem 2.2rem 1rem 4rem;
+            font-size: 1.3rem;
+            line-height: 1.6rem;
+            color: #515458;
+            border-bottom: 0.2rem solid #C8C8C8;
+        }
+
+        .whats-this .design {
+            padding-left: 4rem;
+        }
+
+        .whats-this .text, .whats-this .designer {
+            font-size: 1.2rem;
+            line-height: 2.6rem;
+            color: #000000;
+        }
+
+        .whats-this .rank {
+
+        }
+
+        .whats-this .stars {
+            color: #999999;
+            font-size: 1.8rem;
+            vertical-align: bottom;
+            line-height: 2.6rem;
+        }
+
+        .whats-this .stars .fa-star {
+            color: #FFDA00;
+        }
+
+        /*已选择的项目*/
+        .project-header {
+            padding: 0 1rem;
+            background-color: #FFFFFF;
+        }
+
+        .project-header label {
+            font-size: 1.6rem;
+            line-height: 5.5rem;
+        }
+
+        .header-inner {
+            width: 33.9rem;
+            height: 8.4rem;
+            border: 0.1rem solid #005BBC;
+            border-radius: 0.6rem;
+            position: relative;
+        }
+
+        .header-inner-img {
+            position: absolute;
+            left: 50%;
+            margin-left: -1.6rem;
+            top: -1.6rem;
+            width: 3.2rem;
+            height: 3.2rem;
+            background: #FFFFFF url(../../image/project/project_list_icon.png) center center no-repeat;
+            background-size: 1.9rem 2.2rem;
+        }
+
+        .header-inner .name {
+            font-size: 1.5rem;
+            color: #005BBC;
+            text-align: center;
+            line-height: 3rem;
+            padding-top: 1.3rem;
+            font-weight: bold;
+        }
+
+        .header-inner .date-group {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+
+        .header-inner .date-group .text, .header-inner .date-group .date {
+            font-size: 1.2rem;
+            line-height: 2.1rem;
+            color: #000000;
+            padding-left: 1rem;
+        }
+
+        .header-inner .date-counting {
+            width: 11.7rem;
+            margin: 0 auto;
+            text-align: center;
+            color: #F7AA00;
+            font-size: 1.2rem;
+        }
+
+        .header-inner .date-counting .count {
+            font-size: 2.8rem;
+            line-height: 4rem;
+        }
+
+        .header-inner .project-state {
+            position: absolute;
+            right: 0;
+            bottom: 0.6rem;
+            font-size: 1.2rem;
+            line-height: 2rem;
+            padding-right: 0.5rem;
+        }
+
+        .project-header .create-group {
+            font-size: 1.3rem;
+            line-height: 4.5rem;
+            text-align: right;
+            color: #595C60;
+        }
+
+        .project-header .create-group .btn-create {
+            background-color: #00AEEF;
+            border-radius: 0.3rem;
+            width: 7.9rem;
+            height: 2.8rem;
+            color: #FFFFFF;
+            text-align: center;
+            line-height: 2.8rem;
+        }
+
+        /*大体上通用的部分 end*/
+        .propose-title {
+            height: 3.7rem;
+            line-height: 3.7rem;
+            font-size: 1.5rem;
+            background-color: #DBF0FF;
+            color: #0271C5;
+            background-image: url("../../image/project/icon_quote_right.png");
+            background-position-x: 1.5rem;
+            background-position-y: center;
+            background-repeat: no-repeat;
+            background-size: 2rem;
+            padding-left: 3.8rem;
+            font-weight: bold;
+        }
+        .form{
+            padding-left: 1rem;
+            background-color: #FFFFFF;
+        }
+        .form.no-padded{
+            padding-left: 0;
+            background-color: transparent;
+        }
+        .form .form-title{
+            height: 2.8rem;
+            line-height: 2.8rem;
+            color: #0271C5;
+            background-color: #F0F0F0;
+            font-size: 1.3rem;
+            text-indent: 1rem;
+        }
+        .form .form-title-desc{
+            color: #000000;
+            font-size: 1.1rem;
+            padding: 1rem;
+            line-height: 1.4rem;
+        }
+        .form .form-group{
+            background-color: #FFFFFF;
+            border-top: 0.1rem solid #DEDEDE;
+            overflow: hidden;
+        }
+        .form.no-padded .form-group{
+            padding-left: 1rem;
+        }
+        .form .form-group label{
+            height: 3.8rem;
+            line-height: 3.8rem;
+            width: 18rem;
+            text-indent: 1.5rem;
+            font-size: 1.4rem;
+            color: #000000;
+        }
+        .form.no-padded .form-group label{
+            text-indent: 0;
+        }
+        .form .form-group label.important{
+            position: relative;
+        }
+        .form .form-group label.important:before{
+            content: '*';
+            position: absolute;
+            left: 0;
+            top: 0.2rem;
+            color: #F35C2C;
+            text-align: left;
+            text-indent: 0;
+        }
+        .form .form-group .form-text-right{
+            text-align: right;
+            float: right;
+            margin-right: 2rem;
+            height: 3.8rem;
+            line-height: 3.8rem;
+            font-size: 1.4rem;
+            color: #C9C9CF;
+            width: 14.5rem;
+        }
+        /*.form .form-group input.form-text-right{
+            color: #333333;
+        }
+        .form .form-group input.form-text-right[disabled]{
+            color: #666666;
+        }*/
+        .form .current-board{
+            height: 3rem;
+            line-height: 3rem;
+            padding: 0 1rem;
+            font-size: 1.1rem;
+            color: #5B5E61;
+        }
+        .fake-link{
+            color: #0071C5;
+            text-decoration: underline;
+        }
+        .form .current-board .fake-link{
+            font-size: 1.1rem;
+            line-height: 3rem;
+            margin-left: 2.3rem;
+        }
+        .form .radio-group{
+            padding-top: 1.4rem;
+        }
+        .form .radio-group .radio-title{
+            height: 3rem;
+            line-height: 3rem;
+            padding: 0 1rem;
+            font-size: 1.1rem;
+            color: #5B5E61;
+        }
+
+        /*radio*/
+        .propose-select, .fileuploadLabel {
+            padding-left: 10px;
+            font-size: 1.6rem;
+            position: relative;
+        }
+        .radioSwitch.show {
+            background-image: url('../../image/project/promotion_circle_highlight.png');
+        }
+        .radioSwitch {
+            width: 7.7rem;
+            background-image: url('../../image/project/promotion_circle_normal.png');
+            background-size: 1.5rem;
+            background-repeat: no-repeat;
+            background-position: left center;
+            line-height: 4.5rem;
+            font-size: 1rem;
+            text-indent: 2rem;
+        }
+        .show.selectSwitch,.checked.selectSwitch {
+            background-image: url('../../image/project/MCSI_Selected2.png');
+            background-size: 2rem 1.8rem;
+            background-position: 0 44%;
+        }
+        .selectSwitch {
+            background-image: url('../../image/project/MCSI_Selected1.png');
+            background-size: 1.5rem;
+            background-repeat: no-repeat;
+            background-position: 0 50%;
+            font-size: 1.1rem;
+            color: #5B5E61;
+            padding: 0.7rem 2rem;
+            display: inline-block;
+        }
+        .propose-select .fake-link{
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        label.fake-link{
+            text-decoration: none;
+            font-size: 1.4rem;
+            line-height: 2.5rem;
+            height: 2.5rem;
+            text-indent: 1rem;
+        }
+        /*radio*/
+
+        .btn-submit{
+            width: 18rem;
+            height: 3.8rem;
+            margin: 3rem auto;
+            text-align: center;
+            color: #FFFFFF;
+            background-color: #00AEEF;
+            border-radius: 0.4rem;
+            line-height: 3.8rem;
+            font-size: 1.6rem;
+        }
+        p.fake-link{
+            font-size: 1.1rem;
+            padding: 0 1rem;
+            text-decoration: none;
+            line-height: 1.4rem;
+        }
+        
+        .clause-box{
+            padding: 1rem;
+            margin-top: 1.5rem;
+        }
+        .clause-box p{
+            color: #000000;
+            font-size: 1.1rem;
+            line-height: 1.4rem;
+        }
+        .clause-box .fake-link{
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+
+    </style>
+</head>
+<body>
+<!-- <div class="common-part-service">
+    
+    <div class="whats-this">
+        <p class="this-name">
+            EDC网站特权账户开通
+        </p>
+
+        <p class="this-description">
+            获得EDC网站特权账户，英特尔智能计算系统开发合作伙伴能够方便的下载到英特尔已发布产品的技术文档（包括：原理图、参考电路、设计手册等），申请CPU及芯片组样品和参考版。
+        </p>
+
+        <div class="design">
+            <div class="rank">
+                <span class="text">客户满意度：</span>
+                    <span class="stars">
+                        <!-- <i class="fa-star fa"></i>
+                        <i class="fa-star fa"></i>
+                        <i class="fa-star fa"></i>
+                        <i class="fa-star fa"></i>
+                        <i class="fa-star fa"></i>
+                    </span>-->
+              <!--   <span class="text"></span>
+            </div>
+        </div>
+    </div> -->
+    <!-- 已选择的项目 
+    <div class="project-header">
+        <label>您已选择的项目为：</label>
+
+        <div class="header-inner">
+            <div class="header-inner-img"></div>
+            <p class="name"></p>
+
+            <div class="header-bottom">
+                <div class="date-group">
+                    <p class="text">项目启动时间</p>
+
+                    <p class="date"></p>
+                </div>
+                <div class="date-counting">
+                    <span class="count"></span>
+                    天
+                </div>
+                <div class="project-state">已处于项目预研阶段</div>
+            </div>
+        </div>
+        <p class="create-group">
+            如果您不是为这个项目申请支持，请先
+            <span class="btn-create" tapmode onclick="createNewProject()">添加项目</span>
+        </p>
+    </div>
+</div>
+
+<div class="propose">
+    <div class="propose-title border-1px-top border-1px-bottom">
+        请填写以下表格
+    </div>
+    
+    <div class="form">
+        <div class="form-group clearfix">
+            <label class="pull-left important">姓名</label>
+            <input class="edc-name form-text-right" type="text" placeholder="必填">
+        </div>
+        <div class="form-group clearfix">
+            <label class="pull-left important">公司域名的Email地址</label>
+            <input class="edc-email form-text-right" type="text" placeholder="即EDC网站ID">
+        </div>
+        <div class="form-group clearfix">
+            <label class="pull-left important">CNDA（保密协议）</label>
+            <input class="edc-cnda form-text-right" type="text" placeholder="默认">
+        </div>
+        <div class="form-group clearfix">
+            <label class="pull-left important">职位</label>
+            <span class="edc-job form-text-right" tapmode onclick="getJob(this)">---请选择---</span>
+        </div>
+        <div class="form-group clearfix">
+            <label class="pull-left important">行业</label>
+            <span class="edc-industry form-text-right ellipsis-1" tapmode onclick="getIndustry( this )">---请选择---</span>
+        </div>
+        <div class="form-group clearfix">
+            <label class="pull-left important">公司名称</label>
+            <input class="edc-company-name form-text-right" type="text" placeholder="默认值">
+        </div>
+        <div class="form-group clearfix">
+            <label class="pull-left important">公司英文地址</label>
+            <input class="edc-address-en form-text-right" type="text" placeholder="必填">
+        </div>
+        <div class="form-group clearfix">
+            <label class="pull-left important">公司中文地址</label>
+            <input class="edc-address-zh form-text-right" type="text" placeholder="必填">
+        </div>
+        <div class="form-group clearfix">
+            <label class="pull-left important">联系电话</label>
+            <input class="edc-company-tel form-text-right" type="tel" placeholder="必填">
+        </div>
+        <div class="form-group clearfix">
+            <label class="pull-left important">邮政编码</label>
+            <input class="edc-postcode form-text-right" type="tel" placeholder="必填">
+        </div>
+        <div class="form-group clearfix">
+            <label class="pull-left important">省</label>
+            <span class="edc-province form-text-right" tapmode onclick="getProvince(this)">---请选择---</span>
+        </div>
+        <div class="form-group clearfix">
+            <label class="pull-left important">城市</label>
+            <span class="edc-city form-text-right" tapmode onclick="getCity(this)">---请选择---</span>
+        </div>
+    </div>
+
+    <div class="form no-padded">
+        <p class="form-title">
+            是否需要我们主动联系
+        </p>
+        <p class="form-title-desc">
+            让英特尔代表在2个工作日内与我联系，来讨论我的嵌入式项目
+        </p>
+        <div class="form-group border-1px-top clearfix">
+            <label class="edc-contact pull-left important" tapmode onclick="getContact(this)">是，请与我联系</label>
+        </div>
+        <div class="propose-select">
+            <div class="selectSwitch" id="toNews" tapmode="" onclick="toggleSwitch(this,'selectSwitch')">
+                向我发送有关最新英特尔嵌入式产品、设计资源、培训和活动的电子更新。
+            </div>
+        </div>
+    </div>
+
+    <div class="clause-box">
+        <p>随时获得最新的英特尔技术资料。大家快来注册吧！</p>
+        <p>
+            单击“提交”即表示您接受英特尔
+            <span class="fake-link" tapmode onclick="fnOpenClause()">服务条款</span>
+        </p>
+        <p>
+            以及我们的
+            <span class="fake-link" tapmode onclick="fnOpenClause()">隐私条款</span>
+        </p>
+    </div>
+
+    <div class="btn-submit btn" tapmode onclick="fnSubmit(this)">提交</div>
+    <div style="height: 1px"></div>
+</div>
+<div id="modal_selector" tapmode="" onclick="selectCancel()">
+    <div class="select">
+        <div class="select-control">
+            <div class="select-control-cancel" tapmode="" onclick="selectCancel()">取消</div>
+            <div class="select-control-placeHolder"></div>
+            <div class="select-control-ok" tapmode="" onclick="selectCancel()">完成</div>
+        </div>
+        <div class="select-content">
+
+        </div>
+    </div>
+</div>
+<div id="modal_demand_type">
+    <div class="demand-content">
+        <p class="content-title">
+            请修改您的接单类别
+        </p>
+        <ul class="content-list">
+
+        </ul>
+        <div class="btn-group">
+            <span class="btn btn-cancel" tapmode onclick="setDemandType(this, 'cancel')">取消</span>
+            <span class="btn btn-ensure" tapmode onclick="setDemandType(this, 'ensure')">确定</span>
+        </div>
+    </div>
+</div> -->
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript">
+
+    // 以下通用
+    var account = $api.getStorage('loginInfo');
+    var pageParam = {};
+    var projectID = '';
+    var typeid = 5;
+    var UICustomPicker;
+    var zhuge;
+    apiready = function () {
+          zhuge = api.require('zhuge');
+        if (zhuge) {
+            zhuge.initZhuge();
+        }
+        UICustomPicker = api.require('UICustomPicker');
+        fnAjax({
+            url: 'appDimCommons/findEDCIndustry'
+        }, function( ret, err ){
+            if( ret ){
+                $api.setStorage('findEDCIndustry', ret);
+            }
+        });
+
+        fnAjax({
+            url: 'provinces'
+        }, function( ret, err ){
+            if( ret ){
+                var _provinces = [];
+                for( var x in ret ){
+                    _provinces.push({
+                        id: ret[x].provinceId,
+                        name: ret[x].provinceFullName
+                    })
+                }
+                $api.setStorage('provinces', _provinces);
+            }
+        });
+
+        fnAjax({
+            url: 'supports/findSupportScore?typeId=5'
+        }, function( ret, err ){
+            if( ret ){
+                var _average = '';
+                for( var i = 0; i < 5; i++ ){
+                    _average += '<i class="'+( i < ret.average ? 'fa-star' : 'fa-star-o' )+' fa"></i>'
+                }
+                with( api.pageParam.data.data ){
+                    $api.dom( 'body' ).innerHTML = 
+                '            <div class="common-part-service">'+
+                                
+                '                <div class="whats-this">'+
+                '                    <p class="this-name">  '+fnLanguageSwitch('EDC网站特权账户开通')+'  </p>'+
+
+                '                    <p class="this-description"> '+fnLanguageSwitch('获得EDC网站特权账户，英特尔智能计算系统开发合作伙伴能够方便的下载到英特尔已发布产品的技术文档（包括：原理图、参考电路、设计手册等），申请CPU及芯片组样品和参考版.')+'</p>'+
+
+                '                    <div class="design">'+
+                '                        <div class="rank">'+
+                '                            <span class="text">'+fnLanguageSwitch('客户满意度')+'：</span>'+
+                '                          <span class="stars">'+_average+'</span>'+
+                '                            <span class="text"></span>'+
+                '                        </div>'+
+                '                    </div>'+
+                '                </div>'+
+                                // <!-- 已选择的项目 -->
+                     '           <div class="project-header">'+
+                    '        <label>'+fnLanguageSwitch( '您已选择的项目为' )+'：</label>'+
+                    '        <div class="header-inner">'+
+                    '            <div class="header-inner-img"></div>'+
+                    '            <p class="name">'+projectName+'</p>'+
+                    '            <div class="header-bottom">'+
+                    '                <div class="date-group">'+
+                    '                    <p class="text">'+fnLanguageSwitch( '项目启动时间' )+'</p>'+
+                    '                    <p class="date">'+created+'</p>'+
+                    '                </div>'+
+                    '                <div class="date-counting">'+
+                    '                   <span class="count">'+fnStringEmpty( projectStartDay )+'</span>'+fnLanguageSwitch( '天')+
+                    '                </div>'+
+                    '                <div class="project-state">'+fnLanguageSwitch( '已处于') +' '+fnProjectApprovalStatusJson()[ projectStatus ]+' '+fnLanguageSwitch( '阶段' )+'</div>'+
+                    '            </div>'+
+                    '        </div>'+
+                    '        <p class="create-group">'+fnLanguageSwitch( '如果您不是为这个项目申请支持，请先' )+
+                    '            <span class="btn-create" tapmode onclick="createNewProject()">'+fnLanguageSwitch( '添加项目' )+'</span>'+
+                    '        </p>'+
+                    '         </div>'+
+                    '        </div>'+
+
+                    '        <div class="propose">'+
+                    '            <div class="propose-title border-1px-top border-1px-bottom">  '+fnLanguageSwitch( '请填写以下表格')+'</div>'+
+                                
+                    '            <div class="form">'+
+                    '                <div class="form-group clearfix">'+
+                    '                    <label class="pull-left important">'+fnLanguageSwitch( '姓名')+'</label>'+
+                    '                    <input class="edc-name form-text-right" type="text" placeholder="'+fnLanguageSwitch( '必填')+'">'+
+                    '                </div>'+
+                    '                 <div class="form-group clearfix">'+
+                    '                    <label class="pull-left">'+fnLanguageSwitch( '公司域名的Email地址')+'</label>'+
+                    '                    <input class="edc-email form-text-right" type="text" placeholder="'+fnLanguageSwitch( '即EDC网站ID')+'" value="'+fnStringEmpty( USER.info.email )+'">'+
+                    '                </div>'+
+                    '                <div class="form-group clearfix">'+
+                    '                    <label class="pull-left">'+fnLanguageSwitch( 'CNDA（保密协议）')+'</label>'+
+                    '                    <input class="edc-cnda form-text-right" type="text" value="'+fnStringEmpty( USER.CNDA )+'" placeholder="'+fnLanguageSwitch( '默认')+'">'+
+                    '                </div>'+
+                    '                <div class="form-group clearfix">'+
+                    '                    <label class="pull-left important">'+fnLanguageSwitch( '职位')+'</label>'+
+                    '                    <span class="edc-job form-text-right" tapmode onclick="getJob(this)">'+fnLanguageSwitch( '---请选择---')+'</span>'+
+                    '                </div>'+
+                    '                <div class="form-group clearfix">'+
+                    '                    <label class="pull-left important">'+fnLanguageSwitch( '行业')+'</label>'+
+                    '                    <span class="edc-industry form-text-right ellipsis-1" tapmode onclick="getIndustry( this )">'+fnLanguageSwitch( '---请选择---')+'</span>'+
+                    '                </div>'+
+                    '                <div class="form-group clearfix">'+
+                    '                    <label class="pull-left important">'+fnLanguageSwitch( '公司名称')+'</label>'+
+                    '                    <input class="edc-company-name form-text-right" type="text" placeholder="'+fnLanguageSwitch( '默认值')+'" value="'+fnStringEmpty( USER.company && USER.company.FullNameChinese )+'">'+
+                    '                </div>'+
+                    '                <div class="form-group clearfix">'+
+                    '                    <label class="pull-left important">'+fnLanguageSwitch( '公司英文地址')+'</label>'+
+                    '                    <input class="edc-address-en form-text-right" type="text" placeholder="'+fnLanguageSwitch( '必填')+'">'+
+                    '                </div>'+
+                    '                <div class="form-group clearfix">'+
+                    '                    <label class="pull-left important">'+fnLanguageSwitch( '公司中文地址')+'</label>'+
+                    '                    <input class="edc-address-zh form-text-right" type="text" placeholder="'+fnLanguageSwitch( '必填')+'">'+
+                    '                </div>'+
+                    '                <div class="form-group clearfix">'+
+                    '                    <label class="pull-left important">'+fnLanguageSwitch( '联系电话')+'</label>'+
+                    '                    <input class="edc-company-tel form-text-right" type="tel" placeholder="'+fnLanguageSwitch( '必填')+'">'+
+                    '                </div>'+
+                    '                <div class="form-group clearfix">'+
+                    '                   <label class="pull-left important">'+fnLanguageSwitch( '邮政编码')+'</label>'+
+                    '                    <input class="edc-postcode form-text-right" type="tel" placeholder="'+fnLanguageSwitch( '必填')+'">'+
+                    '                </div>'+
+                    '                <div class="form-group clearfix">'+
+                    '                    <label class="pull-left important">'+fnLanguageSwitch( '省')+'</label>'+
+                    '                    <span class="edc-province form-text-right" tapmode onclick="getProvince(this)">'+fnLanguageSwitch( '---请选择---')+'</span>'+
+                    '                </div>'+
+                    '                <div class="form-group clearfix">'+
+                    '                    <label class="pull-left important">'+fnLanguageSwitch( '城市')+'</label>'+
+                    '                    <span class="edc-city form-text-right" tapmode onclick="getCity(this)">'+fnLanguageSwitch( '---请选择---')+'</span>'+
+                    '                </div>'+
+                    '            </div>'+
+
+                    '            <div class="form no-padded">'+
+                    '                <p class="form-title"> '+fnLanguageSwitch( '是否需要我们主动联系')+'  </p>'+
+                    '                <p class="form-title-desc">'+fnLanguageSwitch( '让英特尔代表在2个工作日内与我联系，来讨论我的嵌入式项目')+'    </p>'+
+                    '                <div class="form-group border-1px-top clearfix">'+
+                    '                    <label class="edc-contact pull-left" tapmode data-selectorid="true" onclick="getContact(this)">'+fnLanguageSwitch( '是，请与我联系')+'</label>'+
+                    '                </div>'+
+                    '                <div class="propose-select">'+
+                    '                    <div class="selectSwitch" id="toNews" tapmode="" onclick="toggleSwitch(this,\'selectSwitch\')">'+fnLanguageSwitch( '向我发送有关最新英特尔嵌入式产品、设计资源、培训和活动的电子更新.')+'     </div>'+
+                    '               </div>'+
+                    '            </div>'+
+
+                    '            <div class="clause-box">'+
+                    '                <p>'+fnLanguageSwitch( '随时获得最新的英特尔技术资料。大家快来注册吧！')+'</p>'+
+                    '                <p> '+fnLanguageSwitch( '单击“提交”即表示您接受英特尔')+'.'+
+                    '                    <span class="fake-link" tapmode onclick="fnOpenClause()">'+fnLanguageSwitch( '服务条款')+'.</span>'+
+                    '                </p>'+
+                    '                <p>   '+fnLanguageSwitch( '以及我们的')+''+
+                    '                    <span class="fake-link" tapmode onclick="fnOpenClause()">'+fnLanguageSwitch( '隐私条款')+'</span>'+
+                    '                </p>'+
+                    '            </div>'+
+
+                    '            <div class="btn-submit btn" tapmode onclick="fnSubmit(this)">'+fnLanguageSwitch( '提交')+'</div>'+
+                    '            <div style="height: 1px"></div>'+
+                     '       </div>'+
+                    '        <div id="modal_selector" tapmode="" onclick="selectCancel()">'+
+                    '            <div class="select">'+
+                    '                <div class="select-control">'+
+                    '                    <div class="select-control-cancel" tapmode="" onclick="selectCancel()">'+fnLanguageSwitch( '取消')+'</div>'+
+                    '                    <div class="select-control-placeHolder"></div>'+
+                    '                    <div class="select-control-ok" tapmode="" onclick="selectCancel()">'+fnLanguageSwitch( '完成')+'</div>'+
+                    '                </div>'+
+                    '                <div class="select-content">'+
+
+                    '                </div>'+
+                    '            </div>'+
+                    '        </div>'+
+                    '        <div id="modal_demand_type">'+
+                    '            <div class="demand-content">'+
+                    '                <p class="content-title"> '+fnLanguageSwitch( '请修改您的接单类别')+' </p>'+
+                    '                <ul class="content-list">'+
+
+                    '                </ul>'+
+                    '                <div class="btn-group">'+
+                    '                    <span class="btn btn-cancel" tapmode onclick="setDemandType(this, \'cancel\')">'+fnLanguageSwitch( '取消')+'</span>'+
+                    '                    <span class="btn btn-ensure" tapmode onclick="setDemandType(this, \'ensure\')">'+fnLanguageSwitch( '确定')+'</span>'+
+                    '                </div>'+
+                    '            </div>'+
+                    '        </div>';
+
+
+
+                }
+            }else{
+                api.toast({
+	             global: true,
+                    msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                });
+            }
+        });
+        return;
+        projectID = pageParam.id;
+        zhuge = api.require('zhuge');
+        if (zhuge) {
+            zhuge.initZhuge();
+        }
+        getProjectDetail();
+        getProjectDesigner();
+        getFormInfo();
+
+        api.addEventListener({
+            name: 'getIndustrys'
+        }, function(ret, err){
+            var industry = ret.value.industry;
+            $api.text($api.dom('.edc-industry'), industry);
+        });
+
+    };
+
+    function getProjectDesigner(){
+        ajaxRequest('/APPSupportManage/GetSupportAppraise.aspx', 'get', {
+            UserID: account.userid,
+            BatchNo: account.batchno, 
+            SupportTypeID: typeid
+        }, function(ret, err){
+            if(ret && ret.res == undefined){
+                // console.log('ret:normal===='+ JSON.stringify(ret));
+                var data = ret.appdatalist[0];
+                $api.html($api.dom('.designer'), data.UserName);
+                
+                var len = parseInt(data.EvaluateNumber);
+                var str = '';
+                for (var i = 0; i < len; i++) {
+                    str+= '<i class="fa-star fa"></i>';
+                }
+                $api.html($api.dom('.stars'), str);
+                $api.html($api.domAll('.rank .text')[1], '('+ data.UserNum +'人)');
+            } else{
+                console.log('ret:err===='+ JSON.stringify(ret));
+            }
+            if (err) {
+                console.log('err===='+ JSON.stringify(err));
+            }
+
+        });
+        
+    };
+
+    function getProjectDetail(){
+        ajaxRequest('/APPProjectManage/APPGetProjectDetail.aspx', 'get', {
+            UserID: account.userid,
+            BatchNo: account.batchno,
+            ProjectID: projectID
+        }, function(ret, err){
+            if(ret && ret.res == undefined){
+                var data = ret.appdatalist[0];
+                $api.html($api.dom('.project-header .header-inner .name'), data.ProjectName);
+                $api.html($api.dom('.project-header .header-inner .date'), data.CreateDate);
+                $api.html($api.dom('.project-header .header-inner .count'), data.ProjectStartDay);
+                $api.html($api.dom('.project-header .header-inner .project-state'), '已处于'+ data.ProjectStatus +'阶段');
+                
+                // 已处于项目预研阶段
+                
+                
+            } else{
+                console.log('ret:err===='+ JSON.stringify(ret));
+            }
+            if (err) {
+                console.log('err===='+ JSON.stringify(err));
+            }
+        });
+    };
+    // 以上通用
+
+    function toggleSwitch(obj,clz){
+        var $selectSwitch = $api.domAll('.'+clz);
+        var reg = /radio/g;
+        if (reg.test(clz)) {
+            for(var i=0;i<$selectSwitch.length;i++){
+                $api.removeCls($selectSwitch[i],'show');
+            }
+        } else {
+
+        }
+        if($api.hasCls(obj,'show')){
+            $api.removeCls(obj,'show');
+        }else{
+            $api.addCls(obj,'show');
+        }
+    };
+
+    // 获取表单信息
+    function getFormInfo(){
+        ajaxRequest('/APPSupportManage/APPGetSupportUserInfo.aspx', 'get', {
+            UserID: account.userid,
+            BatchNo: account.batchno
+        }, function(ret, err){
+            if (ret && ret.res == undefined) {
+                // console.log('ret:normal===='+ JSON.stringify(ret));
+                var data = ret.appdatalist[0];
+                // data.RealName && $api.val($api.dom('.edc-name'), data.RealName);
+                // data.Email && $api.val($api.dom('.edc-email'), data.Email);
+                data.CNDA && $api.val($api.dom('.edc-cnda'), data.CNDA);
+                // data.Profession && $api.text($api.dom('.edc-job'), data.Profession);
+                // $api.text($api.dom('.edc-industry'));
+                data.CompanyFullName && $api.val($api.dom('.edc-company-name'), data.CompanyFullName);
+                data.CompanyAddressEnglish && $api.val($api.dom('.edc-address-en'), data.CompanyAddressEnglish);
+                data.CompanyAddressChinese && $api.val($api.dom('.edc-address-zh'), data.CompanyAddressChinese);
+                data.OfficePhone && $api.val($api.dom('.edc-company-tel'), data.OfficePhone);
+                data.PostalCode && $api.val($api.dom('.edc-postcode'), data.PostalCode);
+                // data.CompanyFullName;
+                // data.CompanyEnglish;
+                // data.CompanyFullNameNew;
+                // data.CompanyAddressChinese;
+                // data.CompanyAddressEnglish;
+                // data.CNDA;
+                // data.CompanyFullNameNew;
+                // data.CompanyWebSite;
+                // data.OfficePhone;
+                // data.PostalCode;
+                // data.UserId;
+            } else {
+                api.toast({
+	               global: true,
+                    msg: JSON.stringify(ret),
+                    duration: 2000,
+                    location: 'middle'
+                });
+            }
+            if (err) {
+                api.toast({
+	                 global: true,
+                    msg: JSON.stringify(err),
+                    duration: 2000,
+                    location: 'bottom'
+                });
+            }
+        });
+    };
+
+    // 获取职位
+    function getJob(el){
+        
+        openSelector(el, fnJobJson(), function( id ){
+
+        })
+        return;
+        var data = $api.getStorage('APPGetPositionList');
+        if (api.connectionType == 'none') {
+            if (data) {
+                openSelector(el, data);
+            } else {
+                api.toast({
+	                   global: true,
+                    msg: fnLanguageSwitch('尚未获取到该信息'),
+                    duration: 2000,
+                    location: 'middle'
+                });
+            }
+            
+        } else{
+            ajaxRequest('/APPGetDataType/APPGetPositionList.aspx', 'get', {
+                UserID: account.userid,
+                BatchNo: account.batchno
+            }, function(ret, err){
+                // 职位Value CommonValue
+                // 职位名称 CommonName
+                if (ret && ret.res == undefined) {
+                // console.log('ret:normal===='+ JSON.stringify(ret));
+                    var data = ret.appdatalist;
+
+                    var scope = [];
+                    for (var i = 0; i < data.length; i++) {
+                        scope.push({
+                            value: data[i].CommonName,
+                            id: data[i].CommonValue
+                        });
+                    }
+                    $api.setStorage('APPGetPositionList', scope);
+                    openSelector(el, scope);
+
+                } else {
+                    api.toast({
+	                global: true,
+                        msg: JSON.stringify(ret),
+                        duration: 2000,
+                        location: 'middle'
+                    });
+                }
+                if (err) {
+                    api.toast({
+	                     global: true,
+                        msg: JSON.stringify(err),
+                        duration: 2000,
+                        location: 'bottom'
+                    });
+                }
+            });
+        }
+            
+    };
+    // 获取行业
+    function getIndustry( el ){
+        setDemandType(el, 'select', $api.getStorage( 'findEDCIndustry' ) );
+    };
+    // 获取省份
+    function getProvince(el){
+        openSelector(el, $api.getStorage( 'provinces' ));        
+    };
+    // 获取城市
+    function getCity(el){
+        var _id = $api.attr( $api.dom( '.edc-province' ), 'data-selectorid' );
+        if( _id ){
+            fnAjax({
+                // url: 'cities?filter=where{"provinceId": '+_id+'}',
+                url: 'cities?filter={"where":{"provinceId":'+_id+'}}'
+            }, function( ret, err ){
+                if( ret ){
+                    var _provinces = [];
+                    for( var x in ret ){
+                        _provinces.push({
+                            id: ret[x].cityId,
+                            name: ret[x].cityFullName
+                        })
+                    }
+                    openSelector(el, _provinces); 
+                }
+            });
+        }
+    };
+
+        function toggleSwitch(obj,clz){
+            var $selectSwitch = $api.domAll('.'+clz);
+            var reg = /radio/g;
+            if (reg.test(clz)) {
+                for(var i=0;i<$selectSwitch.length;i++){
+                    $api.removeCls($selectSwitch[i],'checked');
+                }
+            } else {
+
+            }
+            if($api.hasCls(obj,'checked')){
+                $api.removeCls(obj,'checked');
+            }else{
+                $api.addCls(obj,'checked');
+            }
+        };
+
+        function setDemandType(el, type, arr){
+            if (type == 'select') {
+                var _SingleType = arr,
+                    _html = '',
+                    _Ids = $api.attr(el, 'data-selectorid' ) && JSON.parse( $api.attr(el, 'data-selectorid' ) );
+                for( var x in _SingleType ){
+                    _html +=
+                    '<li class="content-item ellipsis-1 '+( _Ids && ( _Ids.indexOf( _SingleType[x].id ) !== -1 && 'checked' ) )+'" tapmode onclick="toggleSwitch(this,\'content-item\')" data-selectorid="'+ _SingleType[x].id +'">'+_SingleType[x].name+'</li>';
+                }
+                $api.html($api.dom('#modal_demand_type .content-list'), _html);
+                $api.addCls( $api.dom('#modal_demand_type'), 'active');
+            } else if(type == 'ensure'){
+                var demandChecked = $api.domAll('#modal_demand_type .content-item.checked');
+                var typeNames = [];
+                var typeIds = [];
+                for (var j = 0; j < demandChecked.length; j++) {
+                    typeNames.push( $api.trim($api.text(demandChecked[j])) );
+                    typeIds.push( $api.attr(demandChecked[j], 'data-selectorid') );
+                }
+                $api.dom('.edc-industry').innerHTML = typeNames.join( '；<br />' )+'。';
+                $api.attr($api.dom('.edc-industry'), 'data-selectorid', JSON.stringify( typeIds ) );
+                $api.removeCls($api.dom('#modal_demand_type'), 'active');
+            } else{
+                $api.removeCls($api.dom('#modal_demand_type'), 'active');
+            }
+                
+        };
+
+    // 获取是否联系我们
+    function getContact(el){
+        openSelector(el, {true: '是，请与我联系', false: '不，请不要与我联系'})
+    };
+
+    // 打开两个远程地址
+    function fnOpenClause() {
+        var move = isHuawei();
+        var animation = {};
+        if (move) {
+            animation = {
+                type: 'movein',
+                subType: 'from_right'
+            }           
+        }
+        var url = 'https://ccechina.intel.com/SystemManage/ProceduralClause.aspx';
+        api.openWin({
+            name: 'web_clause_win',
+            url: 'widget://' + DIR + '/web_page/web_win.html',
+            bounces: false,
+            vScrollBarEnabled: false,
+            hScrollBarEnabled: false,
+            pageParam: {
+                title: fnLanguageSwitch('服务与隐私条款'),
+                url: url
+            },
+            animation: animation
+        });
+    };
+
+
+    // 提交EDC
+    var submitLock = false;
+    function isEmepty(str){
+        if (str == undefined || str == null) {
+            return true;
+        } else {}
+        if ($api.trim(str) == '' || $api.trim(str) == fnLanguageSwitch('---请选择---')) {
+            return true;
+        } else {
+            return false;
+        }
+    };
+
+    function fnSubmit(el){
+        var name = $api.dom( '.edc-name' ).value.trim(),
+            account = $api.dom( '.edc-email' ).value.trim(),
+            CNDA = $api.dom( '.edc-cnda' ).value.trim(),
+            position = $api.attr($api.dom( '.edc-job' ), 'data-selectorid' ),
+            industry = $api.attr($api.dom( '.edc-industry' ), 'data-selectorid' ),
+            companyName = $api.dom( '.edc-company-name' ).value.trim(),
+            companyChineseAddress = $api.dom( '.edc-address-zh' ).value.trim(),
+            companyEnglishAddress = $api.dom( '.edc-address-en' ).value.trim(),
+            telephone = $api.dom( '.edc-company-tel' ).value.trim(),
+            zipcode = $api.dom( '.edc-postcode' ).value.trim(),
+            province = $api.attr($api.dom( '.edc-province' ), 'data-selectorid' ),
+            companyCity = $api.attr($api.dom( '.edc-city' ), 'data-selectorid' ),
+            toContact = $api.attr($api.dom( '.edc-contact' ), 'data-selectorid' );
+
+        if( ! name ){
+            api.toast({
+                msg: fnLanguageSwitch( '请输入姓名' )
+            });
+        // }else if( ! account ){
+        //     api.toast({
+        //         msg: fnLanguageSwitch( '请输入公司域名的Email地址' )
+        //     });
+        // }else if( ! CNDA ){
+        //     api.toast({
+        //         msg: fnLanguageSwitch( '请输入CNDA' )
+        //     });
+        }else if( position === null ){
+            api.toast({
+                msg: fnLanguageSwitch( '请选择职位' )
+            });
+        }else if( industry === null ){
+            api.toast({
+                msg: fnLanguageSwitch( '请选择行业' )
+            });
+        }else if( ! companyName ){
+            api.toast({
+                msg: fnLanguageSwitch( '请输入公司名' )
+            });
+        }else if( ! companyChineseAddress ){
+            api.toast({
+                msg: fnLanguageSwitch( '请输入公司中文地址' )
+            });
+        }else if( ! companyEnglishAddress ){
+            api.toast({
+                msg: fnLanguageSwitch( '请输入公司英文地址' )
+            });
+        }else if( ! telephone ){
+            api.toast({
+                msg: fnLanguageSwitch( '请输入联系电话' )
+            });
+        }else if( ! zipcode ){
+            api.toast({
+                msg: fnLanguageSwitch( '请输入邮政编码' )
+            });
+        }else if( ! province ){
+            api.toast({
+                msg: fnLanguageSwitch( '请选择省份' )
+            });
+        }else if( ! companyCity ){
+            api.toast({
+                msg: fnLanguageSwitch( '请选择城市' )
+            });
+        }else{
+            industry = JSON.parse( industry );
+            fnAjax({
+                url: 'supports/EDCAccount',
+                data: {
+                    values: {
+                        projectId: api.pageParam.data.id,
+                        EDCAccount: {
+                            name: name,
+                            companyChineseAddress: companyChineseAddress,
+                            companyEnglishAddress: companyEnglishAddress,
+                            account: account,
+                            CNDA: CNDA,
+                            companyName: companyName,
+                            telephone: telephone,
+                            zipcode: zipcode,
+                            position: position,
+                            industry: industry,
+                            companyCity: [province, companyCity],
+                            toContact:  toContact,
+                            toNews: $api.hasCls( $api.dom( '#toNews' ), 'checked')
+                        }
+                    }
+                }
+            }, function( ret, err ){
+                if( ret ){
+                    api.toast({
+                        msg: fnLanguageSwitch( 'EDC特权帐号提交成功' )
+                    });
+                    setTimeout(function(){
+                        api.closeWin();
+                    },1000);
+                }else{
+                    api.toast({
+                global: true,
+                        msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                    });
+                }
+            }); 
+              if (zhuge) {
+            zhuge.track({
+                eventName: '项目支持_技术支持提交按钮',
+                eventPro: {
+                    '模块来源': 'EDC特权帐号'
+                }
+            });
+        }  
+        }
+
+
+        return;
+        
+        var Name = $api.trim($api.val($api.dom('.edc-name')));
+        if (isEmepty(Name)) {
+            api.alert({
+                title: fnLanguageSwitch('提醒'), 
+                msg: fnLanguageSwitch('请输入姓名')
+            });
+            return false;
+        }
+        var Email = $api.trim($api.val($api.dom('.edc-email')));
+        if (isEmepty(Email)) {
+            api.alert({
+                title: fnLanguageSwitch('提醒'), 
+                msg: fnLanguageSwitch('请输入公司域名的Email地址')
+            });
+            return false;
+        }
+        var Postion = $api.trim($api.text($api.dom('.edc-job')));
+        if (isEmepty(Postion)) {
+            api.alert({
+                title: fnLanguageSwitch('提醒'), 
+                msg: fnLanguageSwitch('请选择职位')
+            });
+            return false;
+        }
+        var ProjectProduct = $api.trim($api.text($api.dom('.edc-industry')));
+        if (isEmepty(ProjectProduct)) {
+            api.alert({
+                title: fnLanguageSwitch('提醒'), 
+                msg: fnLanguageSwitch('请选择行业')
+            });
+            return false;
+        }
+        var CompanyName = $api.trim($api.val($api.dom('.edc-company-name')));
+        if (isEmepty(CompanyName)) {
+            api.alert({
+                title: fnLanguageSwitch('提醒'), 
+                msg: fnLanguageSwitch('请输入公司名')
+            });
+            return false;
+        }
+        var CompanyEnglishAddress = $api.trim($api.val($api.dom('.edc-address-en')));
+        if (isEmepty(CompanyEnglishAddress)) {
+            api.alert({
+                title: fnLanguageSwitch('提醒'), 
+                msg: fnLanguageSwitch('请输入公司英文地址')
+            });
+            return false;
+        }
+        var CompanyAddress = $api.trim($api.val($api.dom('.edc-address-zh')));
+        if (isEmepty(CompanyAddress)) {
+            api.alert({
+                title: fnLanguageSwitch('提醒'), 
+                msg: fnLanguageSwitch('请输入公司中文地址')
+            });
+            return false;
+        }
+        var CompanyTel = $api.trim($api.val($api.dom('.edc-company-tel')));
+        if (isEmepty(CompanyTel)) {
+            api.alert({
+                title:fnLanguageSwitch( '提醒'), 
+                msg: fnLanguageSwitch('请输入联系电话')
+            });
+            return false;
+        }
+        var PostCode = $api.trim($api.val($api.dom('.edc-postcode')));
+        if (isEmepty(PostCode)) {
+            api.alert({
+                title: fnLanguageSwitch('提醒'), 
+                msg: fnLanguageSwitch('请输入邮政编码')
+            });
+            return false;
+        }
+        var Province = $api.trim($api.text($api.dom('.edc-province')));
+        if (isEmepty(Province)) {
+            api.alert({
+                title:fnLanguageSwitch( '提醒'), 
+                msg: fnLanguageSwitch('请选择省份')
+            });
+            return false;
+        }
+        var City = $api.trim($api.text($api.dom('.edc-city')));
+        if (isEmepty(City)) {
+            api.alert({
+                title: fnLanguageSwitch('提醒'), 
+                msg: fnLanguageSwitch('请选择城市')
+            });
+            return false;
+        }
+        var IfContactMe = $api.trim($api.text($api.dom('.edc-contact')));
+
+        var IfSendData = $api.domAll('.selectSwitch.show').length;
+
+        var data = {
+            Name: Name,
+            Email: Email,
+            Postion: Postion,
+            ProjectProduct: ProjectProduct,
+            CompanyName: CompanyName,
+            CompanyEnglishAddress: CompanyEnglishAddress,
+            CompanyAddress: CompanyAddress,
+            CompanyTel: CompanyTel,
+            PostCode: PostCode,
+            Province: Province,
+            City: City,
+            IfContactMe: IfContactMe,
+            IfSendData: IfSendData,
+        }
+        // console.log(data)
+        if (submitLock) {
+            return false;
+        } else {
+            submitLock = true;
+            $api.attr(el, 'disabled', 'disabled');
+        }
+        if (zhuge) {
+            zhuge.track({
+                eventName: '项目支持_技术支持提交按钮',
+                eventPro: {
+                    '模块来源': 'EDC特权帐号'
+                }
+            });
+        }
+        // codes there
+        ajaxRequest('/APPSupportManage/APPSupportAccountOpenUp.aspx', 'post', {
+            UserID: account.userid,
+            BatchNo: account.batchno,
+            ItemNameID: projectID,
+            Name: Name,
+            Email: Email,
+            Postion: Postion,
+            ProjectProduct: ProjectProduct,
+            CompanyName: CompanyName,
+            CompanyEnglishAddress: CompanyEnglishAddress,
+            CompanyAddress: CompanyAddress,
+            CompanyTel: CompanyTel,
+            PostCode: PostCode,
+            Province: Province,
+            City: City,
+            IfContactMe: IfContactMe,
+            IfSendData: IfSendData,
+        }, function(ret, err){
+            submitLock = false;
+            $api.removeAttr(el, 'disabled');
+            if(ret && ret.res){
+                // console.log('ret:normal===='+ JSON.stringify(ret));
+                api.toast({
+	global: true,
+                    msg: fnLanguageSwitch('EDC特权帐号提交成功'),
+                    duration: 2000,
+                    location: 'middle'
+                });
+                setTimeout(function(){
+                    api.closeWin();
+                },2000);
+            } else{
+                api.toast({
+	global: true,
+                    msg: JSON.stringify(ret),
+                    duration: 2000,
+                    location: 'middle'
+                });
+            }
+            if (err) {
+                api.toast({
+	global: true,
+                    msg: JSON.stringify(err),
+                    duration: 2000,
+                    location: 'middle'
+                });
+            }
+        });
+    };
+
+
+    // 调用selector
+    var UICustomPickerElement,
+        UICustomPickerId,
+        selectorValue,
+        selectorId,
+        blurInput = $api.domAll('input'),
+        blurText = $api.domAll('textarea');
+
+</script>
+</html>

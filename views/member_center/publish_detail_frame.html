@@ -1,0 +1,233 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>Product Post</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" href="../../css/common.css">
+    <style type="text/css">
+    body{
+    	height: auto;
+    	min-height: 100%;
+        background-color: #FFFFFF;
+        padding: 0 1.1rem;
+    }
+    .form{
+
+    }
+    .form .form-group{
+
+    }
+    .form-group label{
+        font-size: 1.6rem;
+        line-height: 4.9rem;
+        color: #121212;
+    }
+    .form-group input{
+        font-size: 1.5rem;
+        line-height: 4.3rem;
+        height: 4.3rem;
+        width: 100%;
+        border: 1px solid #BDBDBD;
+        text-indent: 0.3rem;
+    }
+    .form-group img{
+        display: block;
+        width: 9rem;
+        height: 9rem;
+    }
+    .form-group p.desc{
+        color: #7F7F7F;
+        font-size: 1.5rem;
+        line-height: normal;
+        margin-bottom: 1.3rem;
+    }
+    .form-group .product-description{
+        width: 100%;
+        height: 14.4rem;
+        resize: none;
+        border: 1px solid #BCBCBC;
+        font-size: 1.2rem;
+        line-height: 1.5rem;
+        padding: 0.5rem 1.2rem;
+        -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+        color: #808080;
+    }
+    .form .btn-submit{
+        width: 27rem;
+        height: 4.5rem;
+        color: #FFFFFF;
+        background-color: #0071C5;
+        line-height: 4.5rem;
+        font-size: 2.1rem;
+        margin: 0 auto;
+        margin-top: 4rem;
+        margin-bottom: 5rem;
+        text-align: center;
+        border-radius: 0.3rem;
+    }
+    .hidden{
+        display: none !important;
+    }
+    </style>
+</head>
+<body>
+    <div class="form">
+        <div class="form-group">
+            <label>Project name</label>
+            <input type="text" class="form-control product-name" disabled>  
+        </div>
+        <div class="form-group">
+            <label>Project Platform</label>
+            <input type="text" class="form-control product-platform" disabled> 
+        </div>
+        <div class="form-group">
+            <label>Product Image</label>
+            <img class="product-image" src="../../image/project/add_pic.png" alt="">
+        </div>
+        <div class="form-group">
+            <label>Insert the link of product</label>
+            <input type="text" class="form-control product-link" placeholder="Please input the link here (Tencent links only)"> 
+        </div>
+        <div class="form-group desc-form">
+            <label>Project Descriptions</label>
+            <p class="desc">Please fill in the description to make your product more attractive.！</p>
+            <textarea class="product-description"></textarea>
+        </div>
+        <div class="btn-submit btn" tapmode onclick="toProductPreview()">
+            Preview
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript">
+    var account = $api.getStorage('loginInfo');
+    var thisData;
+	apiready = function(){
+	  	var pageParam = api.pageParam;
+        thisData = pageParam.thisData || {};
+        setInfo();
+        getProductDetail();
+	};
+
+    function setInfo(){
+        if (account.usertype == 1 || account.usertype == 5) {
+            $api.addCls($api.dom('.desc-form'), 'hidden');
+        }
+        // console.log(JSON.stringify(thisData))
+        thisData.ProjectName && $api.val($api.dom('.product-name'), thisData.ProjectName);
+        thisData.ProductName && $api.val($api.dom('.product-name'), thisData.ProductName);
+        thisData.Photo && getImageCache($api.dom('.product-image'), (host + thisData.Photo.replace('~/', '')));
+        thisData.ProductPath && getImageCache($api.dom('.product-image'), (host + thisData.ProductPath.replace('~/', '')));
+        var strPlat = '';
+        thisData.IntelProductType1 && (strPlat += thisData.IntelProductType1);
+        thisData.IntelProductType2 && (strPlat += ('/' + thisData.IntelProductType2));
+        thisData.IntelProductType3 && (strPlat += ('/' + thisData.IntelProductType3));
+        thisData.IntelProductType4 && (strPlat += ('/' + thisData.IntelProductType4));
+        thisData.IntelProductType5 && (strPlat += ('/' + thisData.IntelProductType5));
+        $api.val($api.dom('.product-platform'), strPlat);
+        thisData.ProPlatform && $api.val($api.dom('.product-platform'), thisData.ProPlatform);
+        thisData.VideoPath && $api.val($api.dom('.product-link'), thisData.VideoPath);
+    };
+
+    // APPUserInfo / APPGetProdyctDetail.aspx
+    function getProductDetail(){
+        ajaxRequest('/APPUserInfo/APPGetProdyctDetail.aspx', 'get', {
+            UserID: parseInt(account.userid),
+            BatchNo: account.batchno,
+            ProductID: thisData.ProductID
+        }, function(ret, err){
+            // console.log(JSON.stringify(ret))
+            if (ret && ret.res == undefined) {
+                var data = ret.appdatalist[0];
+                if (data.ProductName) {
+                    thisData.ProductID = data.ProductID;
+                    thisData.ProductName = data.ProductName;
+                    thisData.ProductPath = data.ProductPath;
+                    thisData.ProjectID = data.ProjectID;
+                    thisData.ProductProfile = data.ProductProfile;
+                    thisData.VideoPath = data.VideoPath;
+                    thisData.ProApplication = data.ProApplication;
+                    thisData.ProPlatform = data.ProPlatform;
+                    setInfo();
+                } else {
+
+                }
+
+            } else {
+
+            }
+            if(err){
+                console.log('err======'+ JSON.stringify(err));
+            }
+        });
+    };
+
+    function getImageCache(el, url){
+        // var url = $api.attr(el, 'data-url');
+        api.imageCache({
+            url: url,
+            thumbnail: false
+        }, function(ret, err){
+            if ( ret && ret.status) {
+                $api.attr(el, 'src', ret.url);
+                // $api.css(el, 'background-image: url('+ ret.url +')');
+            }
+            if (err) {}
+        });
+    };
+
+
+    function toProductPreview(){
+        var move = isHuawei();
+        var animation = {};
+        if (move) {
+            animation = {
+                type: 'movein',
+                subType: 'from_right'
+            }            
+        }
+        if (account.usertype == 1 || account.usertype == 5) {
+
+        } else if($api.trim($api.val($api.dom('.product-platform'))) == ''){
+            api.alert({
+                title: 'Notice', 
+                msg: 'Please fill in the project description',
+                    buttons: ['OK']
+                
+            });
+            return false;
+        }
+
+        var tempData = {
+            ProductID: thisData.ProductID,
+            ProductName: thisData.ProjectName || thisData.ProductName,
+            ProductPath: thisData.Photo || thisData.ProductPath,
+            ProjectID: thisData.ProjectID,
+            ProductProfile: $api.trim($api.val($api.dom('.product-description'))),
+            VideoPath: $api.trim($api.val($api.dom('.product-link'))),
+            ProApplication: thisData.ProjectApp || thisData.ProApplication,
+            ProPlatform: $api.trim($api.val($api.dom('.product-platform'))),
+            SubType: thisData.SubType || 2
+        };
+        api.openWin({
+            name: 'product_preview_win',
+            url: 'widget://' + DIR + '/simple_page/simple_win.html',
+            bounces: false,
+            pageParam: {
+                name: 'product_preview',
+                title: 'Product preview',
+                bounces: false,
+                thisData: tempData
+            },
+            animation: animation
+        });
+    };
+
+</script>
+</html>

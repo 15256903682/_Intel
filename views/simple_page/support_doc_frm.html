@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>查看技术文档支持</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" href="../../css/common.css">
+    <style type="text/css">
+	    body{
+	    	height: auto;
+	    	min-height: 100%;
+	    	background-color: #FFFFFF;
+	    	padding: 0 1.5rem 0 1.5rem;
+	    }
+	    .description{
+	    	color: #5E5E5E;
+	    	font-size: 1.1rem;
+	    	line-height: 2.3rem;
+	    	padding-top: 2rem;
+	    }
+	    .tip{
+	    	color: #4D4D4D;
+	    	font-size: 1.1rem;
+	    	line-height: 2.3rem;
+	    }
+	    .color-red{
+	    	color: #FF0101;
+	    }
+	    .detail{
+	    	font-size: 1.6rem;
+	    	color: #0054B9;
+	    }
+    </style>
+</head>
+<body>
+<!--     <p class="description">目前我们可以提供的技术文档包括平台简介，数据手册，设计指南，库文件，原理图及版图设计检查手册，等长表，参考设计（包含原理图，版图，BIOS）等。</p>
+    <p class="tip">您需要什么文档：<span class="color-red">（必填）</span></p>
+    <p class="detail">激动激动激动激动呢讷讷讷讷恩恩恩</p> -->
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript">
+
+    apiready = function(){
+        fnAjax({
+            url: 'supports/TechnologyDocDetails?supportId='+api.pageParam.id,
+            headers: {
+                authorization: USER.token
+            }
+        }, function( ret, err ){
+            if( ret ){
+                var _html = 
+				'<p class="description">'+fnLanguageSwitch( '目前我们可以提供的技术文档包括平台简介，数据手册，设计指南，库文件，原理图及版图设计检查手册，等长表，参考设计（包含原理图，版图，BIOS）等。')+'</p>'+
+				'<p class="tip">'+fnLanguageSwitch( '您需要什么文档' )+'：<span class="color-red">（'+fnLanguageSwitch( '必填' )+'）</span></p>'+
+				'<p class="detail">'+ret.TechnologyDoc.content+'</p>';
+                $api.dom( 'body' ).innerHTML = _html;
+            }else{
+                api.toast({
+	            global: true,
+                    msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                });
+            }
+        });
+    };
+</script>
+</html>

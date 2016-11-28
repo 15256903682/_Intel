@@ -1,0 +1,1459 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>Project Details</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/fonts_awesome/font-awesome.min.css">
+    <style type="text/css">
+		body {
+			height: auto;
+			min-height: 100%;
+		}
+
+		.project-header {
+			padding: 2rem 1rem 1.2rem 1rem;
+			background-color: #F5F5F5;
+		}
+
+		.header-inner {
+			height: 8.4rem;
+			border: 0.1rem solid #005BBC;
+			border-radius: 0.6rem;
+			position: relative;
+		}
+
+		.header-inner-img {
+			position: absolute;
+			left: 50%;
+			margin-left: -1.6rem;
+			top: -1.6rem;
+			width: 3.2rem;
+			height: 3.2rem;
+			background: #F5F5F5 url(../../image/project/project_list_icon.png) center center no-repeat;
+			background-size: 1.9rem 2.2rem;
+		}
+
+		.header-inner .name {
+			font-size: 1.2rem;
+			color: #005BBC;
+			text-align: center;
+			line-height: 3rem;
+			padding-top: 1.3rem;
+		}
+
+		.header-inner .date-group {
+			position: absolute;
+			left: 0;
+			bottom: 0;
+		}
+
+		.header-inner .date-group .text, .header-inner .date-group .date {
+			font-size: 1.2rem;
+			line-height: 2.1rem;
+			color: #000000;
+			padding-left: 1rem;
+		}
+
+		.header-inner .date-counting {
+			width: 11.7rem;
+			margin: 0 auto;
+			text-align: center;
+			color: #F7AA00;
+			font-size: 1.2rem;
+		}
+
+		.header-inner .date-counting .count {
+			font-size: 1.3rem;
+			line-height: 4rem;
+		}
+
+		.header-inner .project-state {
+			position: absolute;
+			right: 0;
+			bottom: 0;
+			font-size: 1.2rem;
+			line-height: 2rem;
+			padding-right: 0.5rem;
+		}
+
+		.support-service {
+			/*height: 12.8rem;*/
+		}
+
+		.support-service label {
+			color: #1367A7;
+			font-size: 1.3rem;
+			line-height: 2.3rem;
+			padding: 0 1.2rem;
+		}
+
+		.support-service .service-group {
+			background-color: #F0F0F0;
+		}
+
+		.support-service .service-group {
+			font-size: 0;
+			overflow: hidden;
+			padding-top: 1rem;
+		}
+
+		.support-service .service-group .service {
+			width: 20%;
+			padding: 6px 0;
+			float: left;
+			overflow: hidden;
+			text-align: center;
+		}
+
+		.support-service .service .icon {
+			display: inline-block;
+			width: 3.5rem;
+			height: 3.5rem;
+			background: transparent center center no-repeat;
+			background-size: 3.5rem;
+		}
+
+		.support-service .service .text {
+			text-align: center;
+			font-size: 1rem;
+			display: block;
+			padding: 10px;
+			color: #999999;
+		}
+
+		.support-service .service.active .text {
+			color: #005BBC;
+		}
+
+		.support-service .service .icon-chain {
+			background-image: url(../../image/project/chain_normal.png);
+		}
+
+		.support-service .service .icon-doc {
+			background-image: url(../../image/project/doc_normal.png);
+		}
+
+		.support-service .service .icon-discus {
+			background-image: url(../../image/project/discus_normal.png);
+		}
+
+		.support-service .service .icon-debug {
+			background-image: url(../../image/project/debug_normal.png);
+		}
+
+		.support-service .service .icon-promotion {
+			background-image: url(../../image/project/spread_normal.png);
+		}
+
+		.support-service .service .icon-crb {
+			background-image: url(../../image/project/crb_normal.png);
+		}
+
+		.support-service .service .icon-edc {
+			background-image: url(../../image/project/edc_normal.png);
+		}
+
+		.support-service .service .icon-pricing {
+			background-image: url(../../image/project/pricing_normal.png);
+		}
+
+		.support-service .service .icon-sample {
+			background-image: url(../../image/project/sample_normal.png);
+		}
+
+		.support-service .service .icon-schematic {
+			background-image: url(../../image/project/schematic_normal.png);
+		}
+
+		.support-service .service.active .icon-chain {
+			background-image: url(../../image/project/chain_highlight.png);
+		}
+
+		.support-service .service.active .icon-doc {
+			background-image: url(../../image/project/doc_highlight.png);
+		}
+
+		.support-service .service.active .icon-discus {
+			background-image: url(../../image/project/discus_highlight.png);
+		}
+
+		.support-service .service.active .icon-debug {
+			background-image: url(../../image/project/debug_highlight.png);
+		}
+
+		.support-service .service.active .icon-promotion {
+			background-image: url(../../image/project/spread_highlight.png);
+		}
+
+		.support-service .service.active .icon-crb {
+			background-image: url(../../image/project/crb_highlight.png);
+		}
+
+		.support-service .service.active .icon-edc {
+			background-image: url(../../image/project/edc_highlight.png);
+		}
+
+		.support-service .service.active .icon-pricing {
+			background-image: url(../../image/project/pricing_highlight.png);
+		}
+
+		.support-service .service.active .icon-sample {
+			background-image: url(../../image/project/sample_highlight.png);
+		}
+
+		.support-service .service.active .icon-schematic {
+			background-image: url(../../image/project/schematic_highlight.png);
+		}
+
+		.support-service .goSeeMore {
+			padding: 6px 10px;
+			color: #1B5B98;
+			display: -webkit-box;
+		}
+
+		.support-service .goSeeMore .fa {
+			font-size: 1.7rem;
+			vertical-align: bottom;
+			position: relative;
+			display:block;
+		}
+
+		.support-service .goSeeMore span {
+			text-decoration: underline;
+			font-size: 1rem;
+			margin-left:0.5rem;
+			display:block;
+			-webkit-box-flex: 1;
+		}
+
+		/*项目详细信息*/
+		.project-detail-info {
+
+		}
+
+		.project-detail-info .header-title {
+			height: 3.5rem;
+			line-height: 3.5rem;
+			font-size: 1.3rem;
+			color: #005BBC;
+			margin-bottom: 0.5rem;
+			text-indent: 1.2rem;
+		}
+
+		.project-detail-info .header-title.border-1px-bottom:after {
+			color: #005BBC;
+		}
+
+		.project-detail-info .project-row {
+			position: relative;
+		}
+
+		.project-detail-info .project-row.row-lg {
+
+		}
+
+		.project-detail-info .project-row.row-lg label {
+
+		}
+
+		.project-detail-info .project-row img {
+			width: 7.7rem;
+			height: 7.7rem;
+			display: inline-block;
+		}
+
+		.project-detail-info .project-row label {
+			line-height: 2.5rem;
+			font-size: 1.2rem;
+			color: #000000;
+			text-align: right;
+			width: 140px;
+		}
+
+		.project-detail-info .project-row .text {
+			line-height: 2.5rem;
+			font-size: 1.2rem;
+			color: #5E5E5E;
+		}
+
+		/*使用英特尔的产品*/
+		.product-intel {
+			margin-bottom: 2.5rem;
+		}
+
+		.product-intel .header-title {
+			height: 3.5rem;
+			line-height: 3.5rem;
+			font-size: 1.3rem;
+			color: #005BBC;
+			margin-bottom: 0.5rem;
+			text-indent: 1.2rem;
+		}
+
+		.product-intel .header-title.border-1px-bottom:after {
+			color: #005BBC;
+		}
+
+		.product-intel .intel-list {
+			padding-left: 1.2rem;
+		}
+
+		.product-intel .intel-item {
+			color: #545454;
+			font-size: 1.1rem;
+			line-height: 1.5rem;
+			background: url(../../image/project/project_list_point.png) 0 0.4rem no-repeat;
+			background-size: 0.6rem;
+			padding-left: 1rem;
+			margin-bottom: 2rem;
+		}
+
+		/**/
+		.handle-box {
+			text-align: center;
+		}
+
+		.btn-group .btn {
+			width: 40%;
+			margin: 0 4% 20px;
+		}
+
+		.btn {
+			width: 24rem;
+			height: 3.2rem;
+			line-height: 3.2rem;
+			font-size: 1.3rem;
+			color: #FFFFFF;
+			background-color: #00AEEF;
+			border-radius: 0.2rem;
+			margin-bottom: 1rem;
+		}
+
+		.upgrade{ padding: 0 20px; margin-top: 20px; }
+		.upgrade .btn{ padding: 0 20px; width: auto; }
+		.btn[disabled] {
+			background-color: #CCCCCC;
+		}
+    </style>
+</head>
+<body id="container">
+<!-- 	<div class="project-header">
+		<div class="header-inner">
+			<div class="header-inner-img"></div>
+			<p class="name">--</p>
+			<div class="header-bottom">
+				<div class="date-group">
+					<p class="text">--</p>
+					<p class="date">--</p>
+				</div>
+				<div class="date-counting">
+					<span class="count">天</span>
+				</div>
+				<div class="project-state">--</div>
+			</div>
+		</div>
+	</div>
+	<div class="support-service">
+		<label>可获取的支持服务：</label>
+		<div class="service-group">
+			<div class="service-group">
+				<div class="service">
+    				<i class="icon icon-chain"></i>
+    				<span class="text">产业链对接</span>
+    			</div>
+				<div class="service">
+    				<i class="icon icon-doc"></i>
+    				<span class="text">技术文档申请</span>
+    			</div>
+				<div class="service">
+    				<i class="icon icon-discus"></i>
+    				<span class="text">咨询方案讨论</span>
+    			</div>
+				<div class="service">
+    				<i class="icon icon-edc"></i>
+    				<span class="text">EDC特权帐号</span>
+    			</div>
+				<div class="service">
+    				<i class="icon icon-crb"></i>
+    				<span class="text">开发板借测</span>
+    			</div>
+				<div class="service">
+    				<i class="icon icon-schematic"></i>
+    				<span class="text">原理图审阅</span>
+    			</div>
+				<div class="service">
+    				<i class="icon icon-debug"></i>
+    				<span class="text">项目Debug</span>
+    			</div>
+				<div class="service">
+    				<i class="icon icon-sample"></i>
+    				<span class="text">免费样片</span>
+    			</div>
+				<div class="service">
+    				<i class="icon icon-promotion"></i>
+    				<span class="text">方案推广</span>
+    			</div>
+				<div class="service">
+    				<i class="icon icon-pricing"></i>
+    			<span class="text">竞争性价格支持</span>
+    			</div>
+			</div>
+			<p class="goSeeMore" tapmode onclick="getExplain()">
+			<i class="fa-question-circle fa"></i>
+				<span>您现在是个人用户 >></span>
+			</p>
+			<div tapmode onclick="fnUpgrade()" class="upgrade"><span class="btn">升级成为企业用户</span></div>
+	    </div>
+	</div>
+	<div class="project-detail-info">
+		<p class="header-title border-1px-bottom">--：</p>
+		<div class="project-row clearfix">
+			<label>--：</label>
+			<span class="text">--</span>
+		</div>
+		<div class="project-row clearfix">
+			<label>--：</label>
+			<span class="text">--</span>
+		</div>
+		<div class="project-row clearfix">
+			<label>--：</label>
+			<span class="text">--</span>
+		</div>
+		<div class="project-row row-lg clearfix">
+			<label>--：</label>
+				<img src="../../image/project/add_pic.png" data-url="'+ data.Photo +'" alt="">
+		</div>
+	</div>
+	<div class="product-intel">';
+		<p class="header-title border-1px-bottom">--：</p>
+		<ul class="intel-list">
+			<li class="intel-item">--</li>
+		</ul>
+	</div>
+	<div class="handle-box">
+		<div class="btn-group">
+			<span class="btn" tapmode onclick="goCloseProject()">--</span>
+			<span class="btn" tapmode onclick="goUpdateProject()">--</span>
+		</div>
+	</div> -->
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript">
+	var loginInfo = $api.getStorage( 'loginInfo' );
+	var account = $api.getStorage('loginInfo');
+	var thisProjectID = '';
+	var thisData;
+	var zhuge;
+	var vGlobalParam = {};
+
+	apiready = function(){
+        var getPurchaseChannel = {};
+        fnAjax({
+            url: 'companies/getPurchaseChannel'
+        }, function( ret, err ){
+            if( ret ){
+                if( ret.length ){
+                    for( var x in ret ){
+                        getPurchaseChannel[ ret[x].id ] = ret[x].companyFullName;
+                    }
+                }
+                $api.setStorage('getPurchaseChannel', getPurchaseChannel);
+                getProjectDetail( api.pageParam.data.id );
+            }
+        });
+
+
+
+		return;
+		// console.log('userInfo' + JSON.stringify( account ) );
+		// console.log('pageParam' + JSON.stringify( api.pageParam ) );
+
+	  	var pageParam = api.pageParam;
+	  	zhuge = api.require('zhuge');
+		if (zhuge) {
+		    zhuge.initZhuge();
+		}
+	  	api.addEventListener({
+	  	    name: 'projectDetailRefresh'
+	  	}, function(ret, err){
+	  		var data = ret.value;
+	  		location.reload();
+	  	});
+
+	};
+	var container = $api.dom('#container');
+	//todo !!!!!
+	var moreSupport = account.usertype == 2 ? 'In different Status Project, you can enjoy different support services. Click here to learn more.' : 'You are now a personal user and enterprise user can enjoy more support services, such as free samples; in addition in different project status, you can enjoy the different services. Click here to learn more.';
+
+	function getProjectDetail( id ){
+        fnAjax({
+            url: 'projects/appGetProjectDetails?projectId='+id
+        }, function( ret, err ){
+        	if( ret ){
+        		// 如果当前项目是转型前的项目，则使用前用户进行更新
+        		if( USER.roleId === CONST_MAKER_ENTERPRISE && ret.typesOfProjects === CREATE_USER_PARTNER ){
+        			USER.roleId = CONST_MAKER_PARTNER;
+        		}
+        		var _html = '';
+        		api.pageParam.data.data = ret;
+        		_html += 
+        		'<div class="project-header">'+
+				'	<div class="header-inner">'+
+				'		<div class="header-inner-img"></div>'+
+				'		<p class="name">'+ret.projectName+'</p>'+
+				'		<div class="header-bottom">'+
+				'			<div class="date-group">'+
+				'				<p class="text">'+fnLanguageSwitch( '项目启动时间' )+'</p>'+
+				'				<p class="date">'+ret.created+'</p>'+
+				'			</div>'+
+				'			<div class="date-counting">'+
+				'				<span class="count">'+ret.projectStartDay+' '+fnLanguageSwitch( '天' )+'</span>'+
+				'			</div>'+
+				'			<div class="project-state">'+fnLanguageSwitch( '已处于') +' '+fnProjectApprovalStatusJson()[ ret.projectStatus ]+' '+fnLanguageSwitch( '阶段' )+'</div>'+
+				'		</div>'+
+				'	</div>'+
+				'</div>';
+				var _SupportServices = fnSupportServicesJson(),
+					_SupportServicesHTML = '';
+				for( var x in _SupportServices ){
+					var _active = '';
+					if( x === 'icon-chain' ){
+						_active = _SupportServices[x].type.indexOf( +ret.active ) !== -1 && 'active';
+					}else{
+						if( [1, 4].indexOf( +ret.active ) !== -1 ){
+							_active = _SupportServices[x].type.indexOf( +ret.projectStatus ) !== -1 && 'active';	
+						}
+					}
+
+					_SupportServicesHTML+=
+					'<div class="service '+_active+'" tapmode data-name="tech_'+x.replace( /icon-/, '' )+'" onclick="goNewComand( this )" >'+
+	    			'	<i class="icon '+x+'"></i>'+
+	    			'	<span class="text">'+_SupportServices[x].name+'</span>'+
+	    			'</div>';
+				}
+
+				_html +=
+				'<div class="support-service">'+
+				'	<label>'+fnLanguageSwitch( '可获取的支持服务' )+'：</label>'+
+				'	<div class="service-group">'+
+				'		<div class="service-group">'+_SupportServicesHTML+'</div>'+
+				'		<p class="goSeeMore" tapmode onclick="getExplain()">'+
+				'			<i class="fa-question-circle fa"></i>'+
+				'			<span>'+fnLanguageSwitch( USER.roleId === CONST_MAKER_PARTNER ? '您现在是个人用户，企业用户可以享受更多支持服务，如免费样片等；此外在不同的项目阶段，您可以享受不同的支持服务。点击此处了解更多。' : '在不同的项目阶段，您可以享受不同的支持服务。点击此处了解更多' )+' >></span>'+
+
+				'		</p>'+( loginInfo.roleId === CONST_MAKER_PARTNER && '<div tapmode onclick="fnUpgrade()" class="upgrade"><span class="btn">'+fnLanguageSwitch( '升级成为企业用户' )+'</span></div>')+
+				
+				'    </div>'+
+				'</div>';
+
+				api.pageParam.data.projectAppId = ret.projectAppId;
+				_html+=
+				'<div class="project-detail-info">'+
+				'	<p class="header-title border-1px-bottom">'+fnLanguageSwitch( '项目详细信息' )+'：</p>'+
+				'	<div class="project-row clearfix">'+
+				'		<label>'+fnLanguageSwitch( '市场应用' )+'：</label>'+
+				'		<span class="text">'+fnApplicationMarketJson()[ ret.projectAppId ]+'</span>'+
+				'	</div>'+( USER.roleId === CONST_MAKER_ENTERPRISE ? 
+				'	<div class="project-row clearfix">'+
+				'		<label>'+fnLanguageSwitch( '预计年销量' )+'：</label>'+
+				'		<span class="text">'+ret.planQty+'</span>'+
+				'	</div>'+
+				'	<div class="project-row clearfix">'+
+				'		<label>'+fnLanguageSwitch( '主板类型' )+'：</label>'+
+				'		<span class="text">'+( typeof ret.projectType !== 'undefined' ? fnMainBoardTypeJson()[ ret.projectType ] : '--' )+'</span>'+
+				'	</div>'+
+				'	<div class="project-row clearfix">'+
+				'		<label>'+fnLanguageSwitch( '小批量采购时间' )+'：</label>'+
+				'		<span class="text">'+( fnIsEmp( ret.purchaseQty ) ? ret.purchaseQty : '--' )+'</span>'+
+				'	</div>'+
+				'	<div class="project-row clearfix">'+
+				'		<label>'+fnLanguageSwitch( '预计小批量采购量' )+'：</label>'+
+				'		<span class="text">'+( fnIsEmp( ret.purchaseDate ) ? ret.purchaseDate : '--' )+'</span>'+
+				'	</div>'+
+				'	<div class="project-row clearfix">'+
+				'		<label>'+fnLanguageSwitch( '预计采购渠道' )+'：</label>'+
+				'		<span class="text">'+( fnIsEmp( ret.expectedPurChan ) ? $api.getStorage('getPurchaseChannel')[ret.expectedPurChan] : '--' )+'</span>'+
+				'	</div>' : '' )+( USER.roleId === CONST_MAKER_PARTNER ? 
+				'	<div class="project-row clearfix">'+
+				'		<label>'+fnLanguageSwitch( '预计量产时间' )+'：</label>'+
+				'		<span class="text">'+ret.planDate+'</span>'+
+				'	</div>'+
+				'	<div class="project-row clearfix">'+
+				'		<label>'+fnLanguageSwitch( '项目描述' )+'：</label>'+
+				'		<span class="text">'+fnStringEmpty( ret.productDescription )+'</span>'+
+				'	</div>' : '')+
+				'	<div class="project-row row-lg clearfix">'+
+				'		<label>'+fnLanguageSwitch( '图片' )+'：</label>'+
+				'			<img src="../../image/project/add_pic.png" onload="getImageCache(this)" data-selectorid="'+ret.photo+'" >'+
+				'	</div>'+
+				'</div>';
+
+
+
+                var _intelProducts = '';
+                for( var x in ret.intelProducts ){
+                    _intelProducts+='<li class="intel-item">'+fnProductTypeJson()[ ret.intelProducts[x].type ]+'</li>';
+                }
+				_html+=
+				'<div class="product-intel">'+
+				'	<p class="header-title border-1px-bottom">'+fnLanguageSwitch( '使用的英特尔产品' )+'：</p>'+
+				'	<ul class="intel-list">'+_intelProducts+'<ul>'+
+				'</div>';
+
+				var _ProjectStatus = 'disabled';
+				if( [0, 1, 2].indexOf( ret.active ) !== -1 ){
+					_ProjectStatus = '';
+				}
+				_html+=
+				'<div class="handle-box">'+
+				'	<div class="btn-group">'+
+				'		<span class="btn" '+_ProjectStatus+' tapmode onclick="goCloseProject( this )">'+fnLanguageSwitch( '申请关闭' )+'</span>'+
+				'		<span class="btn" '+_ProjectStatus+' tapmode onclick="goUpdateProject( this )">'+fnLanguageSwitch( '更新状态' )+'</span>'+
+				'	</div>'+
+				'</div>';
+				
+		        if (zhuge) {
+		            zhuge.track({
+		                eventName: '项目支持_进入项目详情',
+		                eventPro: {
+		                    '状态': ret.active,
+		                    '时间': ret.created
+		                }
+		            });
+		        }
+
+        		$api.dom( 'body' ).innerHTML = _html;
+        		api.parseTapmode();
+            }else{
+                api.toast({
+					global: true,
+                    msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                });
+            }
+        });
+	    
+	//  这里开始重构
+	return;
+		ajaxRequest('/APPProjectManage/APPGetProjectDetail.aspx', 'get',{
+			UserID: account.userid,
+			BatchNo: account.batchno,
+			ProjectID: id
+		}, function(ret, err){
+			if(ret && ret.res == undefined){
+				var str = '';
+				var data = ret.appdatalist[0];
+				thisProjectID = data.ProjectID;
+				thisProjectName = data.ProjectName;
+				thisData = data;
+				// console.log('ret:normal===='+ JSON.stringify(ret));
+				str+='<div class="project-header">';
+			    	str+='<div class="header-inner">';
+			    		str+='<div class="header-inner-img"></div>';
+			    		str+='<p class="name">'+ data.ProjectName +'</p>';
+			    		str+='<div class="header-bottom">';
+			    			str+='<div class="date-group">';
+			    				str+='<p class="text">Project starts at</p>';
+			    				str+='<p class="date">'+ data.CreateDate +'</p>';
+			    			str+='</div>';
+			    			str+='<div class="date-counting">';
+			    				str+='<span class="count">'+ data.ProjectStartDay +'</span>';
+			    				str+='days';
+			    			str+='</div>';
+			    			if (data.ProjectStatus == '项目预研') {
+                                str+='<div class="project-state">In Cultivate Stage</div>';
+                            } else if(data.ProjectStatus == '项目研发'){
+                                str+='<div class="project-state">In Design Stage</div>';
+                            } else if(data.ProjectStatus == '原型完成'){
+                                str+='<div class="project-state">In Prototype Stage</div>';
+                            } else{
+                                str+='<div class="project-state">In Production Stage</div>';
+                            }
+			    			window.zhuge_stage = data.ProjectStatus;
+			    		str+='</div>';
+			    	str+='</div>';
+			    str+='</div>';
+			    str+='<div class="support-service">';
+			    	str+='<label>Available Service：</label>';
+			    	str+='<div class="service-group">';
+			    		str+='<div class="service-group">';
+			    			if (account.usertype == 1 || account.usertype == 5) {
+			    				for (var i = 0; i < 5; i++) {
+			    					if (i < data.SupportNumber) {
+			    						if (i == 0) {
+			    							str+='<div class="service service-chain active" tapmode onclick="goNewComand()">';
+							    				str+='<i class="icon icon-chain"></i>';
+							    				str+='<span class="text">Matchmaking</span>';
+						    				str+='</div>';
+			    						} else if(i == 1){
+			    							str+='<div class="service service-doc active" tapmode onclick="goNewTechDoc()">';
+							    				str+='<i class="icon icon-doc"></i>';
+							    				str+='<span class="text">Tech Doc</span>';
+							    			str+='</div>';
+			    						} else if(i == 2){
+			    							str+='<div class="service service-discus active" tapmode onclick="goInquiry()">';
+							    				str+='<i class="icon icon-discus"></i>';
+							    				str+='<span class="text">Inquiry</span>';
+							    			str+='</div>';
+			    						} else if(i == 3){
+			    							str+='<div class="service service-debug active" tapmode onclick="goDebug()">';
+							    				str+='<i class="icon icon-debug"></i>';
+							    				str+='<span class="text">Debug</span>';
+							    			str+='</div>';
+			    						} else if(i == 4){
+			    							str+='<div class="service service-promotion active" tapmode onclick="goPromotion()">';
+							    				str+='<i class="icon icon-promotion"></i>';
+							    				str+='<span class="text">Promotion</span>';
+							    			str+='</div>';
+			    						}
+			    						
+			    					} else {
+			    						if (i == 0) {
+			    							str+='<div class="service service-chain">';
+							    				str+='<i class="icon icon-chain"></i>';
+							    				str+='<span class="text">Matchmaking</span>';
+						    				str+='</div>';
+			    						} else if(i == 1){
+			    							str+='<div class="service service-doc">';
+							    				str+='<i class="icon icon-doc"></i>';
+							    				str+='<span class="text">Tech Doc</span>';
+							    			str+='</div>';
+			    						} else if(i == 2){
+			    							str+='<div class="service service-discus">';
+							    				str+='<i class="icon icon-discus"></i>';
+							    				str+='<span class="text">Inquiry</span>';
+							    			str+='</div>';
+			    						} else if(i == 3){
+			    							str+='<div class="service service-debug">';
+							    				str+='<i class="icon icon-debug"></i>';
+							    				str+='<span class="text">Debug</span>';
+							    			str+='</div>';
+			    						} else if(i == 4){
+			    							str+='<div class="service service-promotion">';
+							    				str+='<i class="icon icon-promotion"></i>';
+							    				str+='<span class="text">Promotion</span>';
+							    			str+='</div>';
+			    						}
+			    					}
+			    				}
+			    			} else {
+
+			    				for (var j = 0; j < 10; j++) {
+			    					if (j < data.SupportNumber) {
+			    						if (j == 0) {
+			    							str+='<div class="service service-chain active" tapmode onclick="goNewComand()">';
+							    				str+='<i class="icon icon-chain"></i>';
+							    				str+='<span class="text">Matchmaking</span>';
+							    			str+='</div>';
+			    						} else if(j == 1){
+			    							str+='<div class="service service-doc active" tapmode onclick="goNewTechDoc()">';
+							    				str+='<i class="icon icon-doc"></i>';
+							    				str+='<span class="text">Tech Doc</span>';
+							    			str+='</div>';
+			    						} else if(j == 2){
+			    							str+='<div class="service service-discus active" tapmode onclick="goInquiry()">';
+							    				str+='<i class="icon icon-discus"></i>';
+							    				str+='<span class="text">Inquiry</span>';
+							    			str+='</div>';
+			    						} else if(j == 3){
+			    							str+='<div class="service service-edc active" tapmode onclick="goEDC()">';
+							    				str+='<i class="icon icon-edc"></i>';
+							    				str+='<span class="text">EDC A/C</span>';
+							    			str+='</div>';
+			    						} else if(j == 4){
+			    							str+='<div class="service service-crb active" tapmode onclick="goCRB()">';
+							    				str+='<i class="icon icon-crb"></i>';
+							    				str+='<span class="text">CRB Loan</span>';
+							    			str+='</div>';
+			    						} else if(j == 5){
+			    							str+='<div class="service service-schematic active" tapmode onclick="goSchematic()">';
+							    				str+='<i class="icon icon-schematic"></i>';
+							    				str+='<span class="text">Schematic</span>';
+							    				// Schematic Review
+							    			str+='</div>';
+			    						} else if(j == 6){
+			    							str+='<div class="service service-debug active" tapmode onclick="goDebug()">';
+							    				str+='<i class="icon icon-debug"></i>';
+							    				str+='<span class="text">Debug</span>';
+							    			str+='</div>';
+			    						} else if(j == 7){
+			    							str+='<div class="service service-sample active" tapmode onclick="goSample()">';
+							    				str+='<i class="icon icon-sample"></i>';
+							    				str+='<span class="text">Free Sample</span>';
+							    			str+='</div>';
+			    						} else if(j == 8){
+			    							str+='<div class="service service-promotion active" tapmode onclick="goPromotion()">';
+							    				str+='<i class="icon icon-promotion"></i>';
+							    				str+='<span class="text">Promotion</span>';
+							    			str+='</div>';
+			    						} else if(j == 9){
+			    							str+='<div class="service service-pricing active" tapmode onclick="goPricing()">';
+							    				str+='<i class="icon icon-pricing"></i>';
+							    				str+='<span class="text">Pricing</span>';
+							    			str+='</div>';
+			    						}
+									} else {
+										if (j == 0) {
+											str+='<div class="service service-chain">';
+							    				str+='<i class="icon icon-chain"></i>';
+							    				str+='<span class="text">Matchmaking</span>';
+							    			str+='</div>';
+			    						} else if(j == 1){
+			    							str+='<div class="service service-doc">';
+							    				str+='<i class="icon icon-doc"></i>';
+							    				str+='<span class="text">Tech Doc</span>';
+							    			str+='</div>';
+			    						} else if(j == 2){
+			    							str+='<div class="service service-discus">';
+							    				str+='<i class="icon icon-discus"></i>';
+							    				str+='<span class="text">Inquiry</span>';
+							    			str+='</div>';
+			    						} else if(j == 3){
+			    							str+='<div class="service service-edc">';
+							    				str+='<i class="icon icon-edc"></i>';
+							    				str+='<span class="text">EDC A/C</span>';
+							    			str+='</div>';
+			    						} else if(j == 4){
+			    							str+='<div class="service service-crb">';
+							    				str+='<i class="icon icon-crb"></i>';
+							    				str+='<span class="text">CRB Loan</span>';
+							    			str+='</div>';
+			    						} else if(j == 5){
+			    							str+='<div class="service service-schematic">';
+							    				str+='<i class="icon icon-schematic"></i>';
+							    				str+='<span class="text">Schematic</span>';
+							    				// Schematic Review
+							    			str+='</div>';
+			    						} else if(j == 6){
+			    							str+='<div class="service service-debug">';
+							    				str+='<i class="icon icon-debug"></i>';
+							    				str+='<span class="text">Debug</span>';
+							    			str+='</div>';
+			    						} else if(j == 7){
+			    							str+='<div class="service service-sample">';
+							    				str+='<i class="icon icon-sample"></i>';
+							    				str+='<span class="text">Free Sample</span>';
+							    			str+='</div>';
+			    						} else if(j == 8){
+			    							str+='<div class="service service-promotion">';
+							    				str+='<i class="icon icon-promotion"></i>';
+							    				str+='<span class="text">Promotion</span>';
+							    			str+='</div>';
+			    						} else if(j == 9){
+			    							str+='<div class="service service-pricing">';
+							    				str+='<i class="icon icon-pricing"></i>';
+							    				str+='<span class="text">Pricing</span>';
+							    			str+='</div>';
+			    						}
+			    					}
+			    				}			
+			    			}
+			    		str+='</div>';
+			    		str+='<p class="goSeeMore" tapmode onclick="getExplain()">';
+			    			str+='<i class="fa-question-circle fa"></i>';
+			    			str+='<span>'+ moreSupport +'>></span>';
+			    		str+='</p>';
+				        if( account.usertype == 1 ){
+				        	str += '<div tapmode onclick="fnUpgrade()" class="upgrade"><span class="btn">Upgrade to enterprise users</span></div>';
+				        }
+			    	str+='</div>';
+			    str+='</div>';
+			    str+='<div class="project-detail-info">';
+			    	str+='<p class="header-title border-1px-bottom">Project Details：</p>';
+			    	// 具体内容待确认
+		    	if (account.usertype == 1 || account.usertype == 5) {
+		    		str+='<div class="project-row clearfix">';
+			    		str+='<label>Application：</label>';
+			    		str+='<span class="text">'+ fnTranslation( data.ProjectApp, true ) +'</span>';
+			    		window.zhuge_app = data.ProjectApp;
+			    	str+='</div>';
+			    	str+='<div class="project-row clearfix">';
+			    		str+='<label>Est. Prod. Date：</label>';
+			    		str+='<span class="text">'+ fnFormatDate( data.PurchaseDate, true) +'</span>';
+			    	str+='</div>';
+			    	str+='<div class="project-row clearfix">';
+			    		str+='<label>Project Descriptions：</label>';
+			    		str+='<span class="text">'+ data.ProjectDepict +'</span>';
+			    	str+='</div>';
+		    	} else {
+		    		str+='<div class="project-row clearfix">';
+			    		str+='<label>Application：</label>';
+			    		str+='<span class="text">'+ fnTranslation( data.ProjectApp, true ) +'</span>';
+			    		window.zhuge_app = data.ProjectApp;
+			    	str+='</div>';
+			    	str+='<div class="project-row clearfix">';
+			    		str+='<label>Est. Annual Sale：</label>';
+			    		str+='<span class="text">'+ data.PlanQty +'</span>';
+			    	str+='</div>';
+			    	str+='<div class="project-row clearfix" style="margin-bottom:3rem">';
+			    		str+='<label>Type of Motherboard：</label>';
+			    		str+='<span class="text">'+ fnTranslation( data.ProjectType, true ) +'</span>';
+			    	str+='</div>';
+			    	str+='<div class="project-row clearfix">';
+			    		str+='<label>Est. Pilot. Date：</label>';
+			    		str+='<span class="text">'+ fnFormatDate( data.PurchaseDate, true ) +'</span>';
+			    	str+='</div>';
+			    	str+='<div class="project-row clearfix">';
+			    		str+='<label>Est. Pilot. Volume：</label>';
+			    		str+='<span class="text">'+ data.PurchaseQTY +'</span>';
+			    	str+='</div>';
+			    	str+='<div class="project-row clearfix">';
+			    		str+='<label>Est. Order Channel：</label>';
+			    		str+='<span class="text">'+ data.ExpectedPurChan +'</span>';
+			    	str+='</div>';
+
+		    	}
+			    	
+			    	str+='<div class="project-row row-lg clearfix" style="margin-top:3rem">';
+			    		str+='<label>Images：</label>';
+
+			    		if (data.Photo) {
+			    			str+='<img src="../../image/project/add_pic.png" data-url="'+ (host + data.Photo.replace('~/', '')) +'" alt="" onload="getImageCache(this)">';
+			    		} else {
+			    			str+='<img src="../../image/project/add_pic.png" data-url="'+ data.Photo +'" alt="">';
+			    		}
+			    		
+			    	str+='</div>';
+			    str+='</div>';
+			    str+='<div class="product-intel">';
+			    	str+='<p class="header-title border-1px-bottom">Intel products used：</p>';
+			    	str+='<ul class="intel-list">';
+		            if (data.IntelProductType1) {
+                        str+='<li class="intel-item">';
+                            str+= fnTranslation( data.IntelProductType1, true) +' '+ data.IntelProductNum1 ;
+                        str+='</li>';
+                    }
+                    if (data.IntelProductType2) {
+                        str+='<li class="intel-item">';
+                            str+= data.IntelProductType2 +' '+ data.IntelProductNum2;
+                        str+='</li>';
+                    }
+                    if (data.IntelProductType3) {
+                        str+='<li class="intel-item">';
+                            str+=  data.IntelProductType3 +' '+ data.IntelProductNum3; 
+                        str+='</li>';
+                    }
+                    if (data.IntelProductType4) {
+                        str+='<li class="intel-item">';
+                            str+=  data.IntelProductType4 +' '+ data.IntelProductNum4; 
+                        str+='</li>';
+                    }
+                    if (data.IntelProductType5) {
+                        str+='<li class="intel-item">';
+                            str+=  data.IntelProductType5 +' '+ data.IntelProductNum5; 
+                        str+='</li>';
+                    }
+			        str+='</ul>';
+			    str+='</div>';
+			    str+='<div class="handle-box">';
+			    	str+='<div class="btn-group">';
+			    	if (data.ItemActive == '审核未通过' || data.ItemActive == '申请删除') {
+			    		str+='<span class="btn" disabled>Close Project</span>';
+			    		str+='<span class="btn" disabled>Update</span>';
+			    	} else {
+			    		str+='<span class="btn" tapmode onclick="goCloseProject()">Close Project</span>';
+			    		str+='<span class="btn" tapmode onclick="goUpdateProject()">Update</span>';
+			    	}
+			    	str+='</div>';
+
+			    str+='</div>';
+
+			    $api.html(container, str);
+			    // console.log(JSON.stringify(ret))
+			} else{
+				console.log('ret:err===='+ JSON.stringify(ret));
+			}
+			if (err) {
+				console.log('err===='+ JSON.stringify(err));
+			}
+		});
+	};
+
+	// 解释
+	function getExplain(){
+        event.stopPropagation();    
+        fnOpen({
+            name: 'close_btn_win',
+            url: 'widget://' + DIR + '/simple_page/close_btn_win.html',
+            pageParam: {
+                name: 'get_support_explain',
+                title: fnLanguageSwitch( '获取支持' ),
+                bounces: false
+            }
+        });
+        if (zhuge) {
+            zhuge.track({
+                eventName: '项目支持_点击问号',
+                eventPro: {}
+            });
+        }
+	};
+
+	// 新增需求
+	function goNewComand( el ){
+		if( $api.hasCls(el, 'active') ){
+			if( $api.attr(el, 'data-name' ) === 'tech_chain'){
+		        fnOpen({
+		            name: 'create_new_comand_win',
+		            url: 'widget://' + DIR + '/simple_page/simple_win.html',
+		            pageParam: {
+		                name: 'create_new_comand',
+		                title: fnLanguageSwitch( '新增需求' ),
+		                data: api.pageParam.data
+		            }
+		        });
+		        if (zhuge) {
+		            zhuge.track({
+		                eventName: 'MAKER产业链对接_新增需求',
+		                eventPro: {}
+		            });
+		        }
+			}else{
+				if (zhuge) {
+				    zhuge.track({
+				        eventName: '项目支持_技术支持模块点击',
+				        eventPro: {
+				            '支持模块名称': el.querySelector( 'span' ).innerHTML,
+				            'Project Status': api.pageParam.data.projectStatus,
+							'市场应用': fnApplicationMarketJson()[ api.pageParam.data.projectAppId ]
+				        } 
+				    });
+				}
+		        fnOpen({
+		            name: 'simple_win_project',
+		            url: 'widget://' + DIR + '/simple_page/simple_win.html',
+		   		    pageParam: {
+		                name: $api.attr(el, 'data-name' ),
+		                title: el.querySelector( '.text' ).innerHTML,
+		                bounces: false,
+		                data: api.pageParam.data
+		   		    }
+		        });
+			};	
+		}
+	};
+
+	// 技术文档支持
+	function goNewTechDoc(){
+		var move = isHuawei();
+        var animation = {};
+        if (move) {
+            animation = {
+                type: 'movein',
+                subType: 'from_right'
+            }           
+        }
+		api.openWin({
+            name: 'simple_win_Techdoc',
+            url: 'widget://' + DIR + '/simple_page/simple_win.html',
+            bounces: false,
+            pageParam: {
+                name: 'doc_request',
+                title: 'Tech Doc',
+                bounces: false,
+                id: thisProjectID,
+            },
+            animation: animation
+        });
+        if (zhuge) {
+		    zhuge.track({
+		        eventName: '项目支持_技术支持模块点击',
+		        eventPro: {
+		            '支持模块名称': '技术文档申请',
+		            'Project Status': window.zhuge_stage,
+					'市场应用': window.zhuge_app,
+		        }
+		    });
+		}
+        if( event ){event.cancelBubble = true;}
+        return false;
+	};
+	// 咨询方案讨论
+	function goInquiry(){
+		var move = isHuawei();
+        var animation = {};
+        if (move) {
+            animation = {
+                type: 'movein',
+                subType: 'from_right'
+            }           
+        }
+		api.openWin({
+            name: 'simple_win_inquiry',
+            url: 'widget://' + DIR + '/simple_page/simple_win.html',
+            bounces: false,
+            pageParam: {
+                name: 'inquiry',
+                title: 'Inquiry',
+                bounces: false,
+                id: thisProjectID,
+            },
+            animation: animation
+        });
+        if (zhuge) {
+		    zhuge.track({
+		        eventName: '项目支持_技术支持模块点击',
+		        eventPro: {
+		            '支持模块名称': '资讯方案讨论',
+		            'Project Status': window.zhuge_stage,
+					'市场应用': window.zhuge_app,
+		        }
+		    });
+		}
+        if( event ){event.cancelBubble = true;}
+        return false;
+	};
+	// Debug
+	function goDebug(){
+		var move = isHuawei();
+        var animation = {};
+        if (move) {
+            animation = {
+                type: 'movein',
+                subType: 'from_right'
+            }           
+        }
+		api.openWin({
+            name: 'simple_win_debug',
+            url: 'widget://' + DIR + '/simple_page/simple_win.html',
+            bounces: false,
+            pageParam: {
+                name: 'debug',
+                title: 'Debug',
+                bounces: false,
+                id: thisProjectID,
+            },
+            animation: animation
+        });
+        if (zhuge) {
+		    zhuge.track({
+		        eventName: '项目支持_技术支持模块点击',
+		        eventPro: {
+		            '支持模块名称': 'Debug',
+		            'Project Status': window.zhuge_stage,
+					'市场应用': window.zhuge_app,
+		        }
+		    });
+		}
+        if( event ){event.cancelBubble = true;}
+        return false;
+	};
+	// 方案推广
+	function goPromotion(){
+		var move = isHuawei();
+        var animation = {};
+        if (move) {
+            animation = {
+                type: 'movein',
+                subType: 'from_right'
+            }           
+        }
+		api.openWin({
+            name: 'simple_win_promotion',
+            url: 'widget://' + DIR + '/simple_page/simple_win.html',
+            bounces: false,
+            pageParam: {
+                name: 'promotion',
+                title: 'Promotion',
+                bounces: false,
+                id: thisProjectID,
+            },
+            animation: animation
+        });
+        if (zhuge) {
+		    zhuge.track({
+		        eventName: '项目支持_技术支持模块点击',
+		        eventPro: {
+		            '支持模块名称': '方案推广',
+		            'Project Status': window.zhuge_stage,
+					'市场应用': window.zhuge_app,
+		        }
+		    });
+		}
+        if( event ){event.cancelBubble = true;}
+        return false;
+	};
+	// DEC特权帐号
+	function goEDC(){
+		var move = isHuawei();
+        var animation = {};
+        if (move) {
+            animation = {
+                type: 'movein',
+                subType: 'from_right'
+            }           
+        }
+		api.openWin({
+            name: 'simple_win_promotion',
+            url: 'widget://' + DIR + '/simple_page/simple_win.html',
+            bounces: false,
+            pageParam: {
+                name: 'edc',
+                title: 'EDC A/C',
+                bounces: false,
+                id: thisProjectID
+            },
+            animation: animation
+        });
+        if (zhuge) {
+		    zhuge.track({
+		        eventName: '项目支持_技术支持模块点击',
+		        eventPro: {
+		            '支持模块名称': 'EDC特权账号',
+		            'Project Status': window.zhuge_stage,
+					'市场应用': window.zhuge_app,
+		        }
+		    });
+		}
+        if( event ){event.cancelBubble = true;}
+        return false;
+	};
+	// 开发版借测
+	function goCRB(){
+		var move = isHuawei();
+        var animation = {};
+        if (move) {
+            animation = {
+                type: 'movein',
+                subType: 'from_right'
+            }           
+        }
+		api.openWin({
+            name: 'simple_win_promotion',
+            url: 'widget://' + DIR + '/simple_page/simple_win.html',
+            bounces: false,
+            pageParam: {
+                name: 'crb',
+                title: 'CRB Loan',
+                bounces: false,
+                id: thisProjectID
+            },
+            animation: animation
+        });
+        if (zhuge) {
+		    zhuge.track({
+		        eventName: '项目支持_技术支持模块点击',
+		        eventPro: {
+		            '支持模块名称': '开发板借测',
+		            'Project Status': window.zhuge_stage,
+					'市场应用': window.zhuge_app,
+		        }
+		    });
+		}
+        if( event ){event.cancelBubble = true;}
+        return false;
+	};
+	// Schematic Review
+	function goSchematic(){
+		var move = isHuawei();
+        var animation = {};
+        if (move) {
+            animation = {
+                type: 'movein',
+                subType: 'from_right'
+            }           
+        }
+		api.openWin({
+            name: 'simple_win_promotion',
+            url: 'widget://' + DIR + '/simple_page/simple_win.html',
+            bounces: false,
+            pageParam: {
+                name: 'schematic',
+                title: 'Schematic Review',
+                bounces: false,
+                id: thisProjectID
+            },
+            animation: animation
+        });
+        if (zhuge) {
+		    zhuge.track({
+		        eventName: '项目支持_技术支持模块点击',
+		        eventPro: {
+		            '支持模块名称': 'Schematic Review',
+		            'Project Status': window.zhuge_stage,
+					'市场应用': window.zhuge_app,
+		        }
+		    });
+		}
+        if( event ){event.cancelBubble = true;}
+        return false;
+	};
+	// 免费样片
+	function goSample(){
+		var move = isHuawei();
+        var animation = {};
+        if (move) {
+            animation = {
+                type: 'movein',
+                subType: 'from_right'
+            }           
+        }
+		api.openWin({
+            name: 'simple_win_promotion',
+            url: 'widget://' + DIR + '/simple_page/simple_win.html',
+            bounces: false,
+            pageParam: {
+                name: 'sample',
+                title: 'Free Sample',
+                bounces: false,
+                id: thisProjectID
+            },
+            animation: animation
+        });
+        if (zhuge) {
+		    zhuge.track({
+		        eventName: '项目支持_技术支持模块点击',
+		        eventPro: {
+		            '支持模块名称': '免费样片',
+		            'Project Status': window.zhuge_stage,
+					'市场应用': window.zhuge_app,
+		        }
+		    });
+		}
+        if( event ){event.cancelBubble = true;}
+        return false;
+	};
+	// 竞争性价格支持
+	function goPricing(){
+		var move = isHuawei();
+        var animation = {};
+        if (move) {
+            animation = {
+                type: 'movein',
+                subType: 'from_right'
+            }           
+        }
+		api.openWin({
+            name: 'simple_win_promotion',
+            url: 'widget://' + DIR + '/simple_page/simple_win.html',
+            bounces: false,
+            pageParam: {
+                name: 'pricing',
+                title: 'Pricing',
+                bounces: false,
+                id: thisProjectID
+            },
+            animation: animation
+        });
+        if (zhuge) {
+		    zhuge.track({
+		        eventName: '项目支持_技术支持模块点击',
+		        eventPro: {
+		            '支持模块名称': '竞争性价格支持',
+		            'Project Status': window.zhuge_stage,
+					'市场应用': window.zhuge_app,
+		        }
+		    });
+		}
+        if( event ){event.cancelBubble = true;}
+        return false;
+	};
+
+	function goCloseProject( el ){
+		if( typeof $api.attr(el, 'disabled') !== 'string' ){
+			api.confirm({
+	            title: fnLanguageSwitch( '确定删除项目' ),
+	            msg: api.pageParam.data.data.projectName + ' ?',
+	            buttons: [fnLanguageSwitch( '取消' ), fnLanguageSwitch( '确定' )]
+			}, function(ret, err){
+			    if(ret.buttonIndex == 2){
+                    fnOpen({
+			   		    name: 'close_project_win',
+			   		    url: 'widget://' + DIR + '/simple_page/close_btn_win.html',
+			   		    pageParam: {
+			   		    	title: fnLanguageSwitch( '申请关闭' ),
+			   		    	name: 'close_project',
+			   		    	data: api.pageParam.data
+			   		    }
+                    });
+			    }
+			});	
+		}
+	};
+
+	function goUpdateProject( el ){
+		// if( typeof $api.attr(el, 'disabled') !== 'string' ){
+			// "量产阶段"、"原型完成" 不能使用此功能
+			if ( api.pageParam.data.projectStatus == 3 ){
+	            api.alert({
+	                title: fnLanguageSwitch( '提醒' ),
+	                msg: fnProjectApprovalStatusJson()[ api.pageParam.data.projectStatus ] + fnLanguageSwitch( '阶段不能更改项目' ),
+	                buttons: [ fnLanguageSwitch( '我知道了' ) ]
+	            });
+			}else{
+				api.pageParam.data.name = fnLanguageSwitch( '更新状态' );
+		        fnOpen({
+		            // name: 'update_project_win',
+		            // url: 'widget://' + DIR + '/simple_page/simple_win.html',
+		            name: 'create_new_project',
+		            url: 'widget://' + DIR + '/simple_page/create_new_project_win.html',
+		   		    pageParam: api.pageParam.data
+		        });	
+			}
+    	// }
+	};
+
+	function goPublishToMatch(){
+		api.confirm({
+		    msg: 'Are you sure to post your product to IDF Contest? Perfect the description will make your product more attractive!',
+		    buttons: ['cancel', 'Credit']
+		},function(ret,err){
+		    if(ret.buttonIndex == 2){
+		    	thisData.SubType = 1;
+		    	var move = isHuawei();
+        		var animation = {};
+		        if (move) {
+		            animation = {
+		                type: 'movein',
+		                subType: 'from_right'
+		            }           
+		        }
+		    	api.openWin({
+		    	    name: 'publish_win',
+		    	    url: 'widget://' + DIR + '/member_center/publish_detail.html',
+		    	    bounces: false,
+		    	    pageParam: {
+		    	    	thisData: thisData
+		    	    },
+		    	    reload: true,
+		    	    animation: animation
+		    	});
+		    }
+		});
+		// APPGetProdyctDetail
+	};
+	function goEditPublishToMatch(){
+		api.confirm({
+		    msg: 'Whether to edit the product？',
+		    buttons: ['cancel', 'Credit']
+		},function(ret,err){
+		    if(ret.buttonIndex == 2){
+		    	thisData.SubType = 2;
+		    	var move = isHuawei();
+        		var animation = {};
+		        if (move) {
+		            animation = {
+		                type: 'movein',
+		                subType: 'from_right'
+		            }           
+		        }
+		    	api.openWin({
+		    	    name: 'publish_win',
+		    	    url: 'widget://' + DIR + '/member_center/publish_detail.html',
+		    	    bounces: false,
+		    	    pageParam: {
+		    	    	thisData: thisData
+		    	    },
+		    	    reload: true,
+		    	    animation: animation
+		    	});
+		    }
+		});
+	};
+</script>
+</html>

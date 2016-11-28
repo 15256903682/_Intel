@@ -1,0 +1,171 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>查看方案推广</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/fonts_awesome/font-awesome.min.css">
+    <style type="text/css">
+    body{
+        height: auto;
+        min-height: 100%;
+        background-color: #FFFFFF;
+    }
+    .placeholder{
+        height: 2.5rem;
+    }
+    .container{
+        padding: 0 1rem;
+    }
+    .container label.text{
+        font-size: 1.7rem;
+        line-height: 4.7rem;
+        color: #000000;
+    }
+    .table{
+        margin: 0 auto;
+        margin-bottom: 1.5rem;
+        width: 100%;
+    }
+    .table td{
+        font-size: 1.6rem;
+        line-height: 2rem;
+        padding: 0.9rem 0;
+        color: #101010;
+        /*border: 1px solid #AEAEAE;*/
+    }
+    .table tr td:nth-child(odd){
+        width: 37%;
+        font-size: 1.3rem;
+        color: #5A5A5A;
+    }
+    .table tr td:nth-child(even){
+        width: 63%;
+        font-size: 1.9rem;
+        color: #0070C5;
+    }
+    p.notice{
+        font-size: 1.9rem;
+        line-height: 2.2rem;
+        color: #0070C5;
+    }
+
+    span.normal-text{
+        color: #5A5A5A;
+        font-size: 1.3rem;
+    }
+
+    p.content{
+        color: #5A5A5A;
+        font-size: 1.3rem;
+        line-height: 1.6rem;
+    }
+    
+    label[for="checkbox1"], label[for="checkbox5"]{
+        color: #5A5A5A;
+        font-size: 1.3rem;
+    }
+
+    label[for="checkbox2"], label[for="checkbox3"], label[for="checkbox4"]{
+        font-size: 1.9rem;
+        color: #0070C5;
+        display: block;
+    }
+
+    .fake-link{
+        color: #0071C5 !important;
+    }
+
+    </style>
+</head>
+<body>
+<!--     <div class="placeholder"></div>
+    <div class="container">
+        <p class="content" style="margin-bottom: 1.8rem">
+            您希望我们帮助您如何推广产品：
+        </p>
+        <p class="notice" style="margin-bottom: 1.8rem">
+            新浪微博
+        </p>
+        <p class="content" style="margin-bottom: 1.8rem">
+            是否需要Intel推荐上游合作伙伴：
+        </p>
+        <p class="notice" style="margin-bottom: 1.8rem">
+            是
+        </p>
+        <p class="content" style="margin-bottom: 1.8rem">
+            填写原因：
+        </p>
+        <p class="notice" style="margin-bottom: 1.8rem">
+            好后后悔我后悔我复活我额哈佛我I好
+        </p>
+        <p class="content" style="margin-bottom: 1.8rem">
+            上传此产品的产品单页：
+        </p>
+        <img src="../../image/superman.png" style="width: 18rem" alt="">
+        <div class="placeholder"></div>
+    </div> -->
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript">
+
+    apiready = function(){
+        fnAjax({
+            url: 'supports/ProjectSpreadDetails?supportId='+api.pageParam.id,
+            headers: {
+                authorization: USER.token
+            }
+        }, function( ret, err ){
+            if( ret ){
+                var _html = 
+                '<div class="placeholder"></div>'+
+                '<div class="container">'+
+                '    <p class="content" style="margin-bottom: 1.8rem">'+fnLanguageSwitch( '您希望我们帮助您如何推广产品' )+'：</p>'+
+                '    <p class="notice" style="margin-bottom: 1.8rem">'+ret.ProjectSpread.channel.join( ',' )+'</p>'+
+                '    <p class="content" style="margin-bottom: 1.8rem">'+fnLanguageSwitch( '是否需要Intel推荐上游合作伙伴' )+'：</p>'+
+                '    <p class="notice" style="margin-bottom: 1.8rem">'+( ret.ProjectSpread.isRecommend == 1 ?fnLanguageSwitch( '是') : fnLanguageSwitch('否') )+'</p>'+
+                '    <p class="content" style="margin-bottom: 1.8rem">'+fnLanguageSwitch( '填写原因' )+'：</p>'+
+                '    <p class="notice" style="margin-bottom: 1.8rem">'+ret.ProjectSpread.content+'</p>'+
+                '    <p class="content" style="margin-bottom: 1.8rem">'+fnLanguageSwitch( '请上传此产品的产品单页' )+'：</p>'+
+                '    <img src="../../image/common/placeholderimg.png" onload="getImageCache( this )" data-selectorid="'+ret.ProjectSpread.files+'" style="width: 18rem" alt="">'+
+                '    <div class="placeholder"></div>'+
+                '</div>';
+                $api.dom( 'body' ).innerHTML = _html;
+            }else{
+                api.toast({
+	        global: true,
+                    msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                });
+            }
+        });
+    };
+
+
+    // 打开网页
+    function openWebPage(el){
+        var url = $api.html(el);
+        var animation = {};
+        if (move) {
+            animation = {
+                type: 'movein',
+                subType: 'from_right'
+            }           
+        }
+        api.openWin({
+            name: 'web_win',
+            url: 'widget://' + DIR + '/web_page/web_win.html',
+            bounces: false,
+            pageParam: {
+                title: '开放套件',
+                url: url
+            },
+            animation: animation
+        });
+    };
+</script>
+</html>

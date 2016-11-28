@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/common.css"/>
+    <style>
+        header{ line-height: 48px; background:#0071c5; font-size: 20px; color:#fff; }
+        header .header{  position: relative; }
+        header .title{ color: white; text-align: center; }
+        header span[class^=ic_]{  width: 60px; height: 48px; position: absolute; bottom: 0; background-size: 50% auto; }
+        header span.ic_btn_back{ left: 0;}
+        header span.ic_add{ height: 50px; right: 0; font-size: 12px; }
+        nav{ text-align: center; background-color: #fff; color: #858585; font-size: 15px; }
+         nav .flex-con{ line-height: 22px; padding: 12px 0; background-size: 60px auto; background-position: center bottom; border-bottom: 2px solid #E0E0E0; }
+         nav .flex-con.ic_nav_hover{ color: #42C2FF;  border-color: #42C2FF; font-size:15px;font-weight: bold;}
+         nav .flex-con span{  display: block;  }
+         nav .flex-con:not(:first-child) span{ border-left: 1px solid white; font-size: 15px; font-weight: bold;}
+         nav .flex-con:not(:last-child) span{ border-right: 1px solid #ccc; font-size: 15px;font-weight: bold;}
+        .middle{
+            height: 52px;
+            background-color: #EEEEEE;
+            overflow: hidden;
+            line-height: 32px;
+            border-bottom:1px solid #ddd;
+        }
+        .middle_text{
+            height:32px;
+            margin-top: 10px;
+            margin-left: 15px;
+            margin-right:15px;
+            
+           
+        }
+
+        .search{
+            background-color: #fff;
+            border-radius: 4px;
+            padding: 0 10px;
+            text-align: center;
+        }
+
+
+        .middle_text .submit{ background: #0071c5; padding: 0 20px; margin-left: 10px; font-size: 14px; display: none; }
+
+        .middle_text.active .search{
+            text-align: left;
+        }
+        .middle_text.active .search input{ text-align: left; background-position: left center; }
+        .middle_text.active .submit{ display: block;  }
+
+        .search input{
+            display: block;
+            line-height: 32px;
+            text-align: center;
+            width: 100%;
+            color:#AAAAAA;
+            font-size: 15px;    
+            padding-left: 17px;
+            background: url(../../image/home/discover_normal.png) no-repeat 40% center;
+            background-size: 13px auto;
+        }
+
+        .quark{
+            font-size: 13px;
+           border-bottom: 1px solid #eee;
+             text-align: center;
+              background-color: #fff;
+              display: -webkit-box; display: -webkit-flex;  display: flex;
+       }     
+       .quark span{ align-self: center; display: block; width: 100%; }
+
+       .quark.active{
+           color:#32BEFF;
+       }
+
+
+    .wrap_con{
+        height: 43px;
+        line-height: 43px;
+        border-bottom: 1px solid #eee;
+    }
+    .matter{
+        font-size: 15px;
+        border-right: 1px solid #eee;
+        color: #333333;
+         background-color: #fff;
+        width: 100px;
+        text-align: center;
+        font-weight: bold;
+
+    }
+    .tags{
+        font-size: 15px;
+        color: #333333;
+        text-align: center;
+        font-weight: bold;
+         background-color: #fff;
+        
+    }
+    .batch{
+        font-size: 11px;
+        color:#32BEFF;
+        width:64px;
+        text-align: center;
+         background-color: #fff;
+        
+
+    }
+    .hover{
+        background-color: #0060A8 !important;
+    }
+    .nav{ width: 100px; border-right: 1px solid #eee; background-color: white; line-height: 42px; }
+      
+    </style>
+</head>
+<body class="flex-wrap flex-vertical" >
+<!--     <header>
+        <div class="header">
+            <span tapmode="hover" onclick="api.closeWin();" class="ic_btn_back"></span>
+            <p class="title">--</p>
+        </div>
+        <div class="middle">
+            <div class="middle_text flex-wrap">
+                <div class="search flex-con" onclick="fnStartSearch()"><input id="search" type="search" onclick="fnStartSearch()" placeholder="--"></div>
+                <div class="submit" onclick="fnSearch( this )">--</div>
+            </div>
+        </div>
+    </header>
+    <div class="flex-con flex-wrap flex-vertical">
+        <div class="flex-wrap wrap_con">
+            <div class="matter"><span>--</span></div>
+            <div class="flex-con tags"><span>--</span></div>
+            <div class="batch"><span>--</span></div>
+         </div>
+         <div class="flex-con flex-wrap">
+            <div class="flex-wrap flex-vertical nav">
+                <div class="quark active" ><span>热门</span></div>
+                <div class="quark"><span>所有</span></div>
+            </div>
+            <div class="flex-con main"></div>
+         </div>
+    </div> -->
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript">
+    var vGlobalIndex = 0;
+    var rets;
+    apiready = function(){
+        fnAjax({
+            url: 'communityTypes/findType',
+            method: 'post'
+        }, function( ret, err ){
+            // debugAlert(JSON.stringify(ret))
+            if( ret ){
+            
+                if( ret.length ){
+                    var _nav = '',
+                        _frames = [];
+                    ret.unshift({
+                    	type: '所有',
+                    	id: ''
+                    });
+                    
+                    ret.push({
+                    	type: '我的提问',
+                    	id: 'communityQuestions/myQuestion'
+                    },{
+                    	type: '未解答',
+                    	id: 'communityQuestions/unCommentQuestion'
+                    });
+                    
+                    for( var x in ret ){
+                        _nav += '<div class="quark '+( ! +x && 'active' )+'" data-id="'+ret[x].id+'"  tapmode onclick="fnSwitch( this, '+(+x)+' )"><span>'+ret[x].type+'</span></div>';
+
+                        _frames.push({
+                            name: api.winName+'_'+x,
+                            url: './community_frm.html',
+                            pageParam: ret[x]
+                        })
+                    }
+                    $api.dom( 'body' ).innerHTML =
+                    '<header>'+
+                    '    <div class="header">'+
+                    '        <span tapmode="hover" onclick="api.closeWin();" class="ic_btn_back"></span>'+
+                    '        <p class="title">'+fnLanguageSwitch( '社区' )+'</p>'+
+                    '    </div>'+
+                    '    <div class="middle">'+
+                    '        <div class="middle_text flex-wrap">'+
+                    '            <div class="search flex-con" onclick="fnStartSearch()"><input id="search" type="search" onclick="fnStartSearch()" placeholder="'+fnLanguageSwitch( '搜索' )+'"></div>'+
+                    '            <div class="submit" onclick="fnSearch( this )">'+fnLanguageSwitch( '搜索' )+'</div>'+
+                    '        </div>'+
+                    '    </div>'+
+                    '</header>'+
+                    '<div class="flex-con flex-wrap flex-vertical">'+
+                    '    <div class="flex-wrap wrap_con">'+
+                    '        <div class="matter"><span>'+fnLanguageSwitch( '问题分类' )+'</span></div>'+
+                    '        <div class="flex-con tags"><span>'+fnLanguageSwitch( '所有' )+'</span></div>'+
+                    '        <div tatpmode onclick="fnChangeAlot( this )" class="batch"><span>'+fnLanguageSwitch( '换一批' )+'</span></div>'+
+                    '     </div>'+
+                    '     <div class="flex-con flex-wrap">'+
+                    '        <div class="flex-wrap flex-vertical nav">'+_nav+'</div>'+
+                    '        <div class="flex-con main"></div>'+
+                    '     </div>'+
+                    '</div>';
+                    api.parseTapmode();
+                     $api.fixStatusBar($api.dom( 'header'));
+                    var _rect = $api.dom( '.main' ).getBoundingClientRect();
+                    api.openFrameGroup ({
+                        name: api.winName,
+                        scrollEnabled: false,
+                        rect: {
+                             x: _rect.left, 
+                             y: _rect.top, 
+                             w: _rect.width
+                        },
+                        frames:_frames
+                    }, function(ret, err){
+                        if( ret ){
+                            vGlobalIndex = ret.index;
+                             // alert( JSON.stringify( ret ) );
+                        }else{
+                             // alert( JSON.stringify( err ) );
+                        }
+                    });
+                }
+            }else{
+                api.toast({
+                    msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                });
+            }
+        });
+   }
+
+   function fnStartSearch(){
+        event.stopPropagation(); 
+        $api.addCls( $api.dom('.middle_text'), 'active');
+    }
+
+    function fnSearch( el ){
+        event.stopPropagation(); 
+        var _title = $api.dom( '#search' ).value.trim();
+        if( ! _title ){
+            api.toast({
+                msg: fnLanguageSwitch( '搜索字段不能为空' )
+            });
+        }else{
+            $api.removeCls( $api.dom('.middle_text'), 'active');
+            api.execScript({
+                frameName: api.winName+'_'+ vGlobalIndex,
+                script: 'fnGetProjectList( \''+_title+'\' );'
+            });
+        }
+    }
+
+    function fnChangeAlot( el ){
+        api.execScript({
+            frameName: api.winName+'_'+ vGlobalIndex,
+            script: 'apiready( '+( typeof el === 'undefined' ? undefined : true ) +' );'
+        });
+    }
+     
+    function fnSwitch( el, index ){
+        $api.removeCls($api.dom( '.quark.active' ), 'active');
+        $api.addCls(el, 'active');
+        $api.dom('.tags').innerHTML=$api.dom('.active').innerHTML;
+      
+        api.setFrameGroupIndex({
+            name: api.winName,
+            index: index,
+            scroll: true
+        });
+    }
+
+    function fnSearchTitle(el){
+        return;
+        event.stopPropagation(); 
+        var _txt = el.value.trim();
+        fnAjax({
+            url: 'news/appGetTitle?title='+_txt,
+            progress: false
+        }, function( ret, err ){
+            if( ret ){
+                if( $api.hasCls( $api.dom('.middle_text'), 'openFrame') ){
+                    api.execScript({
+                        frameName: 'cechnical_college_select',
+                        script: 'apiready('+JSON.stringify( ret )+');'
+                    });
+                }else{
+                    api.openFrame({
+                        name: 'cechnical_college_select',
+                        url: './cechnical_college_select.html',
+                        rect: {
+                            y: $api.dom('header').offsetHeight - $api.dom( 'nav' ).offsetHeight
+                        },
+                        pageParam: {
+                            data: ret
+                        },
+                        bounces: true,
+                        bgColor: 'rgba(0,0,0,.6)'
+                    });
+                    $api.addCls( $api.dom('.middle_text'), 'openFrame');   
+                }
+            }else{
+                api.toast({
+                    global: true,
+                    msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                });
+            }
+        });
+    }
+
+</script> 
+</html>

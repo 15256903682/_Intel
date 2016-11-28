@@ -1,0 +1,299 @@
+        <!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>simple-page</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/fonts_awesome/font-awesome.min.css">
+    <style type="text/css">
+    #header{
+        display: none;
+    }
+    #header.active{
+        display: block;
+    }
+    #header .header-multi.active{
+        display: block;
+    }
+    #header .header-multi .header-normal{
+        display: none;
+    }
+    #header .header-multi .header-normal.active{
+        display: block;
+    }
+    #header .header-normal .header-btn [class*="fa-"] {
+	    font-size: 3rem;
+	}
+      .tap-active{background-color: #0060A8 !important;}
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <div id="header" class="active">
+            <div class="header-multi">
+                <div class="header-normal header-normal-home active">
+                    <div class="header-btn pull-left" tapmode="tap-active" onclick="fnClose()">
+                        <span class="fa fa-angle-left"></span>
+                    </div>
+                    <div class="header-center">
+                        <span class="title">Add new project</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="main">
+                
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript">
+	var header = $api.dom('#header'),
+        vGlobalIndex = 0;
+
+	apiready = function(){
+        $api.dom( '.title' ).innerHTML = fnStringEmpty( api.pageParam.name || api.pageParam.data.name );
+        // 如果当前项目是转型前的项目，则使用前用户进行更新
+        if( api.pageParam.id ){
+            if( USER.roleId === CONST_MAKER_ENTERPRISE && api.pageParam.typesOfProjects === CREATE_USER_PARTNER ){
+                USER.roleId = CONST_MAKER_PARTNER;
+            }
+        }
+        
+        var getPurchaseChannel = {};
+        fnAjax({
+            url: 'companies/getPurchaseChannel'
+        }, function( ret, err ){
+            if( ret ){
+                if( ret.length ){
+                    for( var x in ret ){
+                        getPurchaseChannel[ ret[x].id ] = ret[x].companyFullName;
+                    }
+                }
+                $api.setStorage('getPurchaseChannel', getPurchaseChannel);
+            }
+        });
+
+	  	$api.fixStatusBar(header);
+        api.addEventListener({
+            name: 'keyback'
+        }, function(ret, err){
+            fnClose();
+        });
+        if( api.pageParam.id ){
+            fnAjax({
+                url: 'projects/appGetProjectDetails?projectId='+api.pageParam.id
+            }, function( ret, err ){
+                if( ret ){
+                    fnInitLayout( ret );
+                }else{
+                    api.toast({
+	global: true,
+                        msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                    });
+                }
+            })
+        }else{
+            fnInitLayout();
+        }
+	};
+
+    function fnInitLayout( data ){
+        api.openFrameGroup ({
+            name: 'create_new_project_frm',
+            scrollEnabled: false,
+            rect: {
+                y:  $api.offset($api.dom('#header')).h
+            },
+            frames: [{
+                name: 'create_new_project_frm0',
+                url: './create_new_project_frm.html',
+                bounces: false,
+                pageParam: {
+                    index: 0,
+                    data: data
+                }
+            }, {
+                name: 'create_new_project_frm1',
+                url: './create_new_project_frm.html',
+                bounces: false,
+                pageParam: {
+                    index: 1,
+                    data: data
+                }
+            }, {
+                name: 'create_new_project_frm2',
+                url: './create_new_project_frm.html',
+                bounces: false,
+                pageParam: {
+                    index: 2,
+                    data: data
+                }
+            }]
+        }, function(ret, err){
+            vGlobalIndex = ret.index;
+        });
+    }
+
+    var vGlobalSubmit = {};
+    function fnSubmit( data, isSub ){
+        for( var x in data ){
+            vGlobalSubmit[x] = data[x];
+        }
+        if( isSub ){
+            if( USER.roleId === CONST_MAKER_PARTNER ){
+
+                if( api.pageParam.id ){
+                    vGlobalSubmit.id = api.pageParam.id;
+                    fnAjax({
+                        url: 'projects/upDataPersonProject',
+                        data: {
+                            values: vGlobalSubmit
+                        }
+                    }, function( ret, err ){
+                        if( ret ){
+                            api.execScript({
+                                name: 'index',
+                                frameName: 'frm_support',
+                                script: 'api.refreshHeaderLoading();'
+                            });
+                            api.toast({
+	                           global: true,
+                                msg: fnLanguageSwitch( '项目更新成功' )
+                            });
+                            setTimeout(function(){
+                                api.closeToWin({
+                                    name: 'index'
+                                })
+                            }, 1000);
+                        }else{
+                            api.toast({
+	                           global: true,
+                                msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                            });
+                        }
+                    });
+                }else{
+                    fnAjax({
+                        url: 'projects/person',
+                        data: {
+                            values: vGlobalSubmit
+                        }
+                    }, function( ret, err ){
+                        if( ret ){
+                            api.execScript({
+                                name: 'index',
+                                frameName: 'frm_support',
+                                script: 'api.refreshHeaderLoading();'
+                            });
+                            api.toast({
+	                           global: true,
+                                msg: fnLanguageSwitch( '项目创建成功' )
+                            });
+                            setTimeout(function(){
+                                api.closeToWin({
+                                    name: 'index'
+                                })
+                            }, 1000);
+                        }else{
+                            api.toast({
+	                           global: true,
+                                msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                            });
+                        }
+                    });
+                }
+        }else{
+            if( api.pageParam.id ){
+                vGlobalSubmit.id = api.pageParam.id;
+                fnAjax({
+                    url: 'projects/upDataPersonProject',
+                    data: {
+                        values: vGlobalSubmit
+                    }
+                }, function( ret, err ){
+                    if( ret ){
+                        api.execScript({
+                            name: 'index',
+                            frameName: 'frm_support',
+                            script: 'api.refreshHeaderLoading();'
+                        });
+                        api.toast({
+	                       global: true,
+                            msg: fnLanguageSwitch( '项目更新成功' )
+                        });
+                        setTimeout(function(){
+                            api.closeToWin({
+                                name: 'index'
+                            })
+                        }, 1000);
+                    }else{
+                        api.toast({
+	                       global: true,
+                            msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                        });
+                    }
+                });
+            }else{
+                fnAjax({
+                    url: 'projects/addCreate',
+                    data: {
+                        values: vGlobalSubmit
+                    }
+                }, function( ret, err ){
+                    if( ret ){
+                        api.execScript({
+                            name: 'index',
+                            frameName: 'frm_support',
+                            script: 'api.refreshHeaderLoading();'
+                        });
+                        api.toast({
+	                       global: true,
+                            msg: fnLanguageSwitch( '项目创建成功' )
+                        });
+                        setTimeout(function(){
+                            api.closeToWin({
+                                name: 'index'
+                            })
+                        }, 1000);
+                    }else{
+                        api.toast({
+	                       global: true,
+                            msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                        });
+                    }
+                });
+            }
+        }
+	}
+}
+    function fnClose(){
+        if( vGlobalIndex ){
+            fnGroupIndex( false );
+        }else{
+            api.confirm({
+                title: fnLanguageSwitch( '退出将不会保留未提交的内容' ),
+                msg: fnLanguageSwitch( '确认退出' )+'?',
+                buttons: [fnLanguageSwitch( '取消' ), fnLanguageSwitch( '确定' )]
+            }, function(ret, err){
+                if(ret.buttonIndex == 2){
+                    api.closeWin();
+                }
+            }); 
+        }
+    }
+
+    function fnGroupIndex( hasNext ){
+        api.setFrameGroupIndex({
+            name: 'create_new_project_frm',
+            index: hasNext ? ++vGlobalIndex : --vGlobalIndex,
+            scroll: false
+        });
+    }
+</script>
+</html>

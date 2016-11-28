@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <style>
+        body, html{
+            background-color: white;
+            height: 100%;
+        }
+        .skill{
+           width:90%; 
+
+        }
+        .skill_l{
+            background: url(../../image/membercenter/publish.png)no-repeat 0 0;
+            background-size: 20px 20px;
+            width:20px;
+            height:20px;
+        }
+        .skill_r{
+            font-size: 15px;
+            color:#333;
+            font-weight: bold;
+        }
+         .photo img{
+            width:321px;
+            height:180px;
+            margin-top:  15px;
+         }
+         .text{color: #8C8C8C;
+              font-size: 12px;
+              margin-top:  15px;
+              line-height: 22px;
+          }
+         .text img{ max-width: 100%; margin: 10px auto; display: block;}
+         iframe{ border: 0; display: block; width: 100%; height: 100%; }
+         .con{ padding: 20px 10px; }
+    </style>
+</head>
+<body>
+<!--     <div class="con">
+        <div class="skill flex-wrap">
+            <div class="skill_l"></div>
+            <div class="skill_r flex-con">标题</div>
+        </div>
+        <div class="text">内容</div>
+    </div> -->
+    <!-- <iframe src="http://www.baidu.com"></iframe> -->
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript">
+    apiready = function(){
+        fnAjax({
+            url: 'news/appDetails?id='+api.pageParam.data.id
+        }, function( ret, err ){
+            if( ret ){
+                if( api.pageParam.hasVideo ){
+                    $api.dom( 'body' ).innerHTML = ret.content;   
+                }else{
+                    $api.dom( 'body' ).innerHTML =
+                    ' <div class="con" >'+
+                        '<div class="skill flex-wrap">'+( ret.isTop ?
+                        '    <div class="skill_l"></div>' : '')+
+                        '    <div class="skill_r flex-con">'+ret.title+'</div>'+
+                        '</div>'+
+                        '<div class="text">'+ret.content+'</div>'+
+                    '</div>';
+                }
+            }else{
+                api.toast({
+                    global: true,
+                    msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                });
+            }
+        });
+    };
+</script>
+</html>

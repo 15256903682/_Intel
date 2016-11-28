@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>my</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/common.css"/>
+    <style>
+        html {
+            height: 100%;
+        }
+
+        body {
+            width: 100%;
+            height: auto;
+            min-height: 100%;
+            background-color: #f0eff7;
+        }
+
+        .share {
+            height: 26.5rem;
+            display: -webkit-box;
+            -webkit-box-pack: center;
+            -webkit-box-align: center;
+            -webkit-box-orient: vertical;
+            font-size: 1rem;
+            color: #A0A0A2;
+        }
+
+        .share img {
+            width: 11.5rem;
+            /*height: 5rem;*/
+        }
+
+        .share .title {
+            margin-top: 20px;
+        }
+
+        #life ul {
+            overflow: hidden;
+        }
+
+        #life ul li {
+            text-align: center;
+            float: left;
+            width: 33%;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        #life ul li a {
+            display: block;
+            padding-top: 72px;
+            padding-bottom: 16px;
+            color: #0A679E;
+            background-repeat: no-repeat;
+            background-position: center 16px;
+            background-size: 50px;
+            overflow: hidden;
+          /*  white-space: nowrap;*/
+            text-overflow: ellipsis;
+            font-size: 1.3rem;
+        }
+
+        .qq a {
+            background-image: url(../../image/home/InfIntelshare_QQ_icon.png);
+        }
+
+        .tweibo a {
+            background-image: url(../../image/home/InfIntelshare_Tecent_icon.png);
+        }
+
+        .wechat a {
+            background-image: url(../../image/home/InfIntelshare_We_icon.png);
+        }
+
+        .timeline a{
+            background-image: url(../../image/home/InfIntelshare_timeline_icon.png);
+        }
+
+        .weibo a {
+            background-image: url(../../image/home/InfIntelshare_Sina_icon.png);
+        }
+
+        .contact a {
+            background-image: url(../../image/home/InfIntelshare_Sms_icon.png);
+        }
+
+        .qcode a {
+            background-image: url(../../image/home/InfIntelshare_er_icon.png);
+        }
+    </style>
+</head>
+<body>
+<!-- <div class="share">
+    <img src="../../image/home/InfIntel_share_icon.png">
+    <div class="title">快邀请小伙伴来安装英特尔硬享公社APP吧</div>
+</div>
+<div id="life">
+    <ul>
+        <li class="qq"><a tapmode="active" onclick="getShareDetail('e')">QQ friends<br />invitation</a></li>
+        <li class="wechat"><a tapmode="active" onclick="getShareDetail('c')">Wechat friends<br />invitation</a></li>
+        <li class="timeline"><a tapmode="active" onclick="getShareDetail('h')">Wechat moments<br />invitation</a></li>
+        <li class="weibo"><a tapmode="active" onclick="getShareDetail('d')">Weibo friends<br />invitation</a></li>
+        <li class="contact"><a tapmode="active" onclick="getShareDetail('a')">Address book<br />invitation</a></li>
+        <li class="qcode"><a tapmode="active" onclick="getShareDetail('g')">QR Code<br />invitation</a></li>
+    </ul>
+</div> -->
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript">
+    apiready = function () {
+        $api.dom( 'body' ).innerHTML =
+        '<div class="share">'+
+        '    <img src="../../image/home/InfIntel_share_icon.png">'+
+        '    <div class="title">'+fnLanguageSwitch('快邀请小伙伴来安装英特尔硬享公社APP吧')+'</div>'+
+        '</div>'+
+        '<div id="life">'+
+        '    <ul>'+
+        '        <li class="qq"><a tapmode="active" onclick="getShareDetail(\'e\')">'+fnLanguageSwitch('QQ好友邀请')+'</a></li>'+
+        '        <li class="wechat"><a tapmode="active" onclick="getShareDetail(\'c\')">'+fnLanguageSwitch('微信好友邀请')+'</a></li>'+
+        '        <li class="timeline"><a tapmode="active" onclick="getShareDetail(\'h\')">'+fnLanguageSwitch('微信朋友圈邀请')+'</a></li>'+
+        '        <li class="weibo"><a tapmode="active" onclick="getShareDetail(\'d\')">'+fnLanguageSwitch('新浪微博邀请')+'</a></li>'+
+        '        <li class="contact"><a tapmode="active" onclick="getShareDetail(\'a\')">'+fnLanguageSwitch('通讯录邀请')+'</a></li>'+
+        '        <li class="qcode"><a tapmode="active" onclick="getShareDetail(\'g\')">'+fnLanguageSwitch('二维码邀请')+'</a></li>'+
+        '    </ul>'+
+        '</div>';
+    };
+    function getShareDetail(shareID) {
+        var url ='widget://' + DIR + '/home_group/home_share_action_win.html',
+            name = 'home_share_action_win';
+        if(shareID=='g'){
+            url = 'widget://' + DIR + '/home_group/home_share_action_QR_win.html';
+            name = 'home_share_action_QR_win';
+        }
+        var move = isHuawei();
+        var animation = {};
+        if (move) {
+            animation = {
+                type: 'movein',
+                subType: 'from_right'
+            }
+        }
+        api.openWin({
+            name:name,
+            url: url,
+            bounces: false,
+            animation: animation,
+            pageParam:{
+                shareID:shareID
+            }
+        });
+    }
+</script>
+
+</html>

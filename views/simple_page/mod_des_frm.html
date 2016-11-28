@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>simple-page</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/fonts_awesome/font-awesome.min.css">
+    <style type="text/css">
+        body{
+            height: auto;
+            min-height: 100%;
+        }
+        img{
+            width: 100%;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<img src="../../image/common/placeholderimg.png">
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript" src="../../script/echo.min.js"></script>
+<script type="text/javascript" src="../../script/sha1.js"></script>
+<script type="text/javascript">
+    var loginInfo = $api.getStorage('loginInfo');
+    apiready = function(){
+        var pageParam = api.pageParam;
+        getImage();
+    };
+    function getImage() {
+        var lang = window.localStorage.getItem('app_language')=='html'?'cn':'en';
+        var now = Date.now();
+        var appKey = SHA1(appId + "UZ" + key + "UZ" + now) + "." + now;
+        var userType = loginInfo.usertype == 4 ? 4 : 0;
+        api.ajax({
+            url: 'https://d.apicloud.com/mcm/api/help?filter={"where":{"type":"chain","userType":'+userType+',"lang":\"'+lang+'\"},"skip":0,"limit":20}',
+            method: 'get',
+            timeout: 30,
+            dataType: 'json',
+            headers: {
+                "Content-type": "application/json;charset=UTF-8",
+                "X-APICloud-AppId": appId,
+                "X-APICloud-AppKey": appKey
+            }
+        }, function (ret, err) {
+            if(ret){
+                var item = ret[0];
+                var itemHtml = '<img data-echo="' + item.pic.url + '" src="../../image/common/placeholderimg.png">';
+                $("body").html(itemHtml);
+                echo.init({
+                    offset: 100,
+                    throttle: 250
+                });
+            }else{
+                api.toast({
+	global: true,
+                    msg: 'Server request error'
+                });
+            }
+
+        });
+    }
+</script>
+</html>

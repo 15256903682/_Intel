@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+        <title>my</title>
+        <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+        <style>
+            html {
+                height: 100%;
+            }
+            
+            body {
+                width: 100%;
+                height: auto;
+                min-height: 100%;
+                background-color: #f0eff7;
+            }
+            
+            .list {
+                position: relative;
+                box-sizing: border-box;
+                padding: 16px;
+                height: auto;
+            }
+            
+            .list .publish {
+                position: relative;
+                box-sizing: border-box;
+                width: 100%;
+                height: auto;
+                background-color: #fff;
+                margin-bottom: 8px;
+                box-shadow: 0 0 1px 1px #ddd;
+                border-radius: 3px;
+                background-clip: border-box;
+            }
+            
+            .list .publish .title-bar {
+                position: relative;
+                box-sizing: border-box;
+                padding-left: 8px;
+                padding-right: 8px;
+                width: 100%;
+                height: 40px;
+            }
+            
+            .list .publish .title-bar .title {
+                position: relative;
+                box-sizing: border-box;
+                padding-right: 80px;
+                width: 100%;
+                height: 40px;
+                color: #000;
+                font-size: 16px;
+                text-align: left;
+                line-height: 40px;
+                border-bottom: 1px solid #eee;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            
+            .list .publish .title-bar .status {
+                position: absolute;
+                box-sizing: border-box;
+                top: 0;
+                right: 8px;
+                width: 72px;
+                height: 40px;
+                font-size: 14px;
+                text-align: right;
+                line-height: 40px;
+            }
+            
+            .list .publish .title-bar .status-checking {
+                color: #0171c5;
+            }
+            
+            .list .publish .title-bar .status-published {
+                color: #aaa;
+            }
+            
+            .list .publish .photo {
+                position: relative;
+                box-sizing: border-box;
+                padding: 8px;
+                width: 100%;
+                height: 140px;
+                /*background-image: url(../image/Macthmaking/MacthmakingMain/MC_morentu.png);
+                background-repeat: no-repeat;
+                background-position: center center;
+                background-size: auto 124px;*/
+            }
+            .list .publish .photo img{
+                height: 100%;
+                max-width: 100%;
+                margin: 0 auto;
+                display: block;
+            }
+            
+            .highlight {
+                opacity: 0.7;
+            }
+        </style>
+    </head>
+
+    <body>
+        <section id="list" class="list">
+
+        </section>
+    </body>
+    <script type="text/javascript" src="../../script/api.js"></script>
+    <script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+    <script type="text/javascript">
+        var account = $api.getStorage('loginInfo');
+        var CurrentPage = 1,
+            LineQTY = 10;
+        apiready = function() {
+            fnGetPublishList('html');
+            api.setRefreshHeaderInfo({
+                visible: true,
+                loadingImg: 'widget://' + DIR + '/refresh.png',
+                bgColor: '#ccc',
+                textColor: '#fff',
+                textDown: 'Pull-down for refresh...',
+                textUp: 'Release for loading...',
+                textLoading : 'Refresh',
+                textTime : "Last update",
+                showTime: false,
+            }, function(ret, err){
+                CurrentPage = 1;
+                fnGetPublishList('html');
+            });
+            api.addEventListener({
+                name:'scrolltobottom',
+                extra:{
+                    threshold:5
+                }
+            }, function(ret, err){
+                fnGetPublishList('append');
+            });
+            api.addEventListener({
+                name: 'projectDetailRefresh'
+            }, function(ret, err){
+                var data = ret.value;
+                location.reload();
+            });
+        };
+
+        var ajaxLock = false;
+        function fnGetPublishList(type){
+            if (ajaxLock) {
+                return false;
+            }
+            ajaxLock = true;
+            // /APPUserInfo/APPMyProduct.aspx
+            // BatchNo U0AKVB31R91WEVBBB3
+            // CurrentPage 1
+            // LineQTY 10
+            // UserID  5873
+            ajaxRequest('/APPUserInfo/APPMyProduct.aspx', 'get', {
+                UserID: parseInt(account.userid),
+                BatchNo: account.batchno, 
+                CurrentPage: CurrentPage,
+                LineQTY: LineQTY
+            }, function(ret, err){
+                ajaxLock = false;
+                api.refreshHeaderLoadDone()
+                // console.log(JSON.stringify(ret))
+                if (ret && ret.res == undefined) {
+                    var data = ret.appdatalist;
+
+        
+                    if (data.length) {} else {
+                        if(type == 'html'){
+                            $api.html($api.dom('#list'), '<p>You haven\'t post any products.</p>');
+                        }
+                        return false;
+                    }
+
+                    var str = '';
+                    for (var i = 0; i < data.length; i++) {
+                        str += '<div class="publish" tapmode="highlight" onclick="fnOpenPublishDetail(this)" data-productid="'+ data[i].ProductID +'" data-projectid="'+ data[i].ProjectID +'">';
+                            str += '<div class="title-bar">';
+                                str += '<div class="title">'+ data[i].ProductName +'</div>';
+                                if (data[i].Active == '已发布') {
+                                    str += '<div class="status status-published">'+ data[i].Active +'</div>';
+                                } else {
+                                    str += '<div class="status status-checking">'+ data[i].Active +'</div>';
+                                }
+                            str += '</div>';
+                            // console.log(data[i].ProductPath)
+                            str += '<div class="photo">';
+                                str += '<img src="../image/Macthmaking/MacthmakingMain/MC_morentu.png" data-url="'+ data[i].ProductPath +'" onload="getImageCache(this)">';
+                            str += '</div>';
+                        str += '</div>';
+                    }
+                    CurrentPage ++;
+                    if (type == 'html') {
+                        $api.html($api.dom('#list'), str);
+                    } else {
+                        $api.append($api.dom('#list'), str);
+                    }
+                } else {
+                    api.toast({
+	global: true,
+                        msg: JSON.stringify(ret),
+                        duration: 2000,
+                        location: 'middle'
+                    });
+                }
+                if (err) {
+                    api.toast({
+	global: true,
+                        msg: JSON.stringify(err),
+                        duration: 2000,
+                        location: 'middle'
+                    });
+                }
+            });
+
+        };
+        // var list;
+
+        // function fnInit() {
+        //     list = $api.byId('list');
+        // };
+
+        function fnOpenPublishDetail(el) {
+            var move = isHuawei();
+            var animation = {};
+            if (move) {
+                animation = {
+                    type: 'movein',
+                    subType: 'from_right'
+                }           
+            }
+            var ProjectID = $api.attr(el, 'data-projectid');
+            var ProductID = $api.attr(el, 'data-productid');
+            api.openWin({
+                name: 'publish_detail',
+                url: 'widget://' + DIR + '/member_center/publish_detail.html',
+                bounces: false,
+                pageParam: {
+                    thisData: {
+                        ProjectID: ProjectID,
+                        ProductID: ProductID,
+                    }
+                },
+                animation: animation
+            });
+        };
+
+        function getImageCache(el){
+            var url = host + $api.attr(el, 'data-url').replace('~/','');
+            api.imageCache({
+                url: url,
+                thumbnail: false
+            }, function(ret, err){
+                if ( ret && ret.status) {
+                    $api.attr(el, 'src', ret.url);
+                    // $api.css(el, 'background-image: url('+ ret.url +')');
+                }
+                if (err) {}
+            });
+        };
+    </script>
+
+</html>

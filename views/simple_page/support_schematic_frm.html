@@ -1,0 +1,249 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>查看原理图审阅</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/fonts_awesome/font-awesome.min.css">
+    <style type="text/css">
+    body{
+        height: auto;
+        min-height: 100%;
+        background-color: #FFFFFF;
+    }
+    .placeholder{
+        height: 2.5rem;
+    }
+    .container{
+        padding: 0 1rem;
+    }
+    .container label.text{
+        font-size: 1.7rem;
+        line-height: 4.7rem;
+        color: #000000;
+    }
+    .table{
+        margin: 0 auto;
+        margin-bottom: 1.5rem;
+        width: 100%;
+    }
+    .table td{
+        font-size: 1.6rem;
+        line-height: 2rem;
+        padding: 0.9rem 0;
+        color: #101010;
+        /*border: 1px solid #AEAEAE;*/
+    }
+    .table tr td:nth-child(odd){
+        width: 37%;
+        font-size: 1.3rem;
+        color: #5A5A5A;
+    }
+    .table tr td:nth-child(even){
+        width: 63%;
+        font-size: 1.9rem;
+        color: #0070C5;
+    }
+    p.notice{
+        font-size: 1.9rem;
+        line-height: 2.2rem;
+        color: #0070C5;
+    }
+
+    span.normal-text{
+        color: #5A5A5A;
+        font-size: 1.3rem;
+    }
+
+    p.content{
+        color: #5A5A5A;
+        font-size: 1.3rem;
+        line-height: 1.6rem;
+    }
+    
+    label[for="checkbox1"], label[for="checkbox5"]{
+        color: #5A5A5A;
+        font-size: 1.3rem;
+    }
+
+    label[for="checkbox2"], label[for="checkbox3"], label[for="checkbox4"]{
+        font-size: 1.9rem;
+        color: #0070C5;
+        display: block;
+    }
+
+    .fake-link{
+        color: #0071C5 !important;
+    }
+
+    </style>
+</head>
+<body>
+ <!--    <div class="placeholder"></div>
+    <div class="container">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="checkbox1">
+                            <input type="checkbox" id="checkbox1" disabled="" checked="">
+                            原理图审阅：
+                        </label>
+                    </td>
+                    <td>
+                        <label for="checkbox2">
+                            <input type="checkbox" id="checkbox2" disabled="" checked="">
+                            CPU
+                        </label>
+                        <label for="checkbox2">
+                            <input type="checkbox" id="checkbox3" disabled="" checked="">
+                            Chipset周边
+                        </label>
+                        <label for="checkbox2">
+                            <input type="checkbox" id="checkbox4" disabled="" checked="">
+                            DRAM
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="checkbox5">
+                            <input type="checkbox" id="checkbox5" disabled="" checked="">
+                            部分电路图分析：
+                        </label>
+                    </td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="content" style="margin-bottom: 1.8rem">
+            注释需要核对的疑问以及希望得到哪方面的回答
+        </p>
+        <p class="notice" style="margin-bottom: 1.8rem">
+            好后后悔我后悔我复活我额哈佛我I好
+        </p>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>
+                    </th>
+                </tr>
+                <tr>
+                    <td>您的联系号码：</td>
+                    <td>11322322222</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="content" style="margin-bottom: 1.8rem">
+            原理图或疑问部分截图上传：
+        </p>
+        <img src="../../image/superman.png" style="width: 18rem" alt="">
+        <div class="placeholder"></div>
+    </div> -->
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript">
+
+    apiready = function(){
+        fnAjax({
+            url: 'supports/SchematicDiagramDetails?supportId='+api.pageParam.id,
+            headers: {
+                authorization: USER.token
+            }
+        }, function( ret, err ){
+            if( ret ){
+                var _html = 
+                '<div class="placeholder"></div>'+
+                '<div class="container">'+
+                '    <table class="table">'+
+                '        <tbody>'+
+                '            <tr>'+
+                '                <th>'+
+                '                </th>'+
+                '            </tr>'+
+                '            <tr>'+
+                '                <td>'+
+                '                    <label for="checkbox1">'+
+                '                        <input type="checkbox" id="checkbox1" disabled="" checked="">'+
+                '                        '+fnLanguageSwitch('原理图审阅')+'：'+
+                '                    </label>'+
+                '                </td>'+
+                '                <td>'+ret.SchematicDiagram.type+'</td>'+
+                '            </tr>'+
+                '            <tr>'+
+                '                <td>'+
+                '                    <label for="checkbox5">'+
+                '                        <input type="checkbox" id="checkbox5" disabled="" checked="">'+
+                '                        '+fnLanguageSwitch('部分电路图分析')+'：'+
+                '                    </label>'+
+                '                </td>'+
+                '                <td>'+ret.SchematicDiagram.content+'</td>'+
+                '            </tr>'+
+                '        </tbody>'+
+                '    </table>'+
+                // '    <p class="content" style="margin-bottom: 1.8rem">'+
+                // '        注释需要核对的疑问以及希望得到哪方面的回答'+
+                // '    </p>'+
+                // '    <p class="notice" style="margin-bottom: 1.8rem">'+
+                // '        好后后悔我后悔我复活我额哈佛我I好'+
+                // '    </p>'+
+                '    <table class="table">'+
+                '        <tbody>'+
+                '            <tr>'+
+                '                <th>'+
+                '                </th>'+
+                '            </tr>'+
+                '            <tr>'+
+                '                <td>'+fnLanguageSwitch('您的联系号码')+'：</td>'+
+                '                <td>'+ret.SchematicDiagram.phone+'</td>'+
+                '            </tr>'+
+                '        </tbody>'+
+                '    </table>'+
+                '    <p class="content" style="margin-bottom: 1.8rem">'+
+                '        '+fnLanguageSwitch('原理图或疑问部分截图上传')+'：'+
+                '    </p>'+
+                '    <img src="../../image/common/placeholderimg.png" onload="getImageCache( this )" data-selectorid="'+ret.SchematicDiagram.files+'" style="width: 18rem" alt="">'+
+                '    <div class="placeholder"></div>'+
+                '</div>';
+                $api.dom( 'body' ).innerHTML = _html;
+            }else{
+                api.toast({
+	               global: true,
+                    msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                });
+            }
+        });
+    };
+
+    // 打开网页
+    function openWebPage(el){
+        var url = $api.html(el);
+        var animation = {};
+        if (move) {
+            animation = {
+                type: 'movein',
+                subType: 'from_right'
+            }           
+        }
+        api.openWin({
+            name: 'web_win',
+            url: 'widget://' + DIR + '/web_page/web_win.html',
+            bounces: false,
+            pageParam: {
+                title: '开放套件',
+                url: url
+            },
+            animation: animation
+        });
+    };
+</script>
+</html>

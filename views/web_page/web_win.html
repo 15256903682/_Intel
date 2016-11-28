@@ -1,0 +1,422 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>web_win</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" href="../../css/common.css">
+    <style type="text/css">
+    #header{
+        display: none;
+    }
+    #header.active{
+        display: block;
+    }
+    #header .header-multi.active{
+        display: block;
+    }
+    #header .header-multi .header-normal{
+        display: none;
+    }
+    #header .header-multi .header-normal.active{
+        display: block;
+    }
+    #header .header-normal .header-center{
+    	margin: 0 9rem;
+    }
+    #header .header-normal .header-btn .icon-close {
+	    background: url(../../image/project/icon_close.png) center center no-repeat;
+	    background-size: 1.6rem;
+	    width: 100%;
+	    height: 100%;
+	}
+	#header .header-normal .header-btn .fa-angle-left{
+		font-size: 2.8rem;
+	}
+    .footer{
+        position: fixed;
+        left : 0px;
+        bottom : 0px;
+        z-index: 10;
+        width : 100%;
+        height : 48px;
+        line-height : 48px;
+        border-top : 1px solid #e2e2e2;
+        background-color : #fff;
+        overflow: hidden;
+
+        display: none;
+    }
+
+    .footer .btn-wrap{
+        width : 50%;
+        height: 100%;
+        float : left;
+        text-align: center;
+    }
+
+    .footer .btn{
+        height : 30px;
+        line-height : 30px;
+        width : 120px;
+        border-radius: 5px;
+        background-color: rgba(0, 113, 197, 1);
+        color : #fff;
+
+        display: none;
+    }
+    
+    #header .icon {
+        width: 4.4rem;
+        height: 4.4rem;
+        background: center center no-repeat;
+        background-size: 2rem;
+        position: relative;
+    }
+
+    #header .icon-share {
+        background-image: url(../../image/home/icon_share.png);
+    }
+    .tap-active{
+        background-color: #0060A8 !important;
+    }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <div id="header" class="active">
+            <div class="header-multi">
+                <div class="header-normal header-normal-home active">
+                    <div class="header-btn pull-right" tapmode="tap-active" onclick="openShare()">
+                        <span class="icon icon-share" tapmode="tap-active" ></span>
+                    </div>
+                	<div class="header-btn pull-left" tapmode="tap-active" onclick="historyBack()">
+                        <span class="fa-angle-left"></span>
+                    </div>
+                    <div class="header-btn pull-left" tapmode="tap-active" onclick="closeWindow()">
+                        <span class="icon-close"></span>
+                    </div>
+                    <!-- <div class="header-btn pull-right">
+                        <span class="fa fa-share-alt" tapmode="tap-active" onclick=""></span>
+                    </div> -->
+                    <div class="header-center">
+                        <span class="title"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="main">
+                
+        </div>
+        <footer id="footer" class="footer">
+            <div class="btn-wrap">
+                <button id="btnSignUp" tapmode onclick="openProfile()" class="btn btn-info">registration</button>
+            </div>
+            <div class="btn-wrap">
+                <button id="btnSubmitProject" tapmode onclick="openProject()" class="btn btn-info">Fill in the project</button>
+            </div>
+        </footer>
+    </div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript">
+	var header = $api.dom('#header');
+	var header_title = $api.dom('#header .title');
+
+	apiready = function(){
+	  	var pageParam = api.pageParam;
+	  	$api.fixStatusBar(header);
+	  	var header_h = $api.offset(header).h;
+	  	$api.text(header_title, pageParam.title);
+        api.showProgress({
+            title: 'Loading',
+            text: 'Waiting…',
+            modal: true
+        });
+        setTimeout(function(){
+            api.openFrame({
+                name: 'web_frm',
+                url: pageParam.url,
+                bounces: pageParam.bounces,
+                rect: {
+                    x: 0,
+                    y: header_h,
+                    w: 'auto',
+                    h: 'auto'
+                },
+                pageParam: pageParam,
+                progress: {
+                    type: 'page',
+                    title: 'default',
+                    text: 'default',
+                    color: '#0171c5'
+                }
+            });
+            api.hideProgress();
+        },300);
+		
+
+        setFooterConfigsByParams( pageParam.item );
+	};
+	
+	function openShare(){	  	
+        var dialogBox = api.require('dialogBox');
+	    dialogBox.actionMenu({
+	        rect: {
+	            h: api.systemType === 'ios' ? 180 : 150
+	        },
+	        items: [{
+	            text: fnLanguageSwitch('分享朋友圈'),
+	            icon: 'widget://image/friend.png'
+	        }, {
+	            text: fnLanguageSwitch('分享到微信'),
+	            icon: 'widget://image/weifriend.png'
+	        }, {
+	            text: fnLanguageSwitch('分享到微博'),
+	            icon: 'widget://image/weibo64.png'
+	        }, {
+	            text: fnLanguageSwitch('分享到QQ') ,
+	            icon: 'widget://image/QQ.png'
+	        }],
+	        styles: {
+	            bg: '#FFF',
+	            corner: 6,
+	            column: 4,
+	            itemText: {
+	                color: '#000',
+	                size: 14,
+	                marginT: 10
+	            },
+	            itemIcon: {
+	                size: 54
+	            }
+	        },
+	        tapClose: true
+	    }, function(ret) {
+	    	if( ret.eventType === 'click' ){
+	    		if( !!api.pageParam.data){
+	    			var url = host+api.pageParam.data[ api.pageParam.index ].outurl;
+	    			var title = api.pageParam.title;
+	    		}else if( api.pageParam.text ){
+	    			var url = api.pageParam.url;
+	    			var title = api.pageParam.text;
+	    		}else{
+	    			var url = api.pageParam.url;
+	    			var title = api.pageParam.description;
+	    		}
+	    		if( ret.index  === 0 ){
+		    		var wx = api.require('wx');
+		    		wx.isInstalled(function(ret, err){
+	                    if(ret.installed){
+							wx.shareWebpage({
+							    scene: 'timeline',
+							    title: title,
+		//					    description: '分享内容的描述',
+							    thumb: 'widget://image/logo.png',
+							    contentUrl: url
+							}, function(ret, err){
+							    if(ret.status){
+//							        alert('分享成功');
+							    }else{
+		                            api.toast({
+	global: true,
+		                                msg: 'Failed'
+		                            });
+							    }
+							});
+	                    }else{
+	                        api.alert({
+	                    title: 'Notice',
+	
+	                            msg:'Please install WeChat client',
+	                    buttons: ['OK']
+	                            
+	                        });
+	                    }
+	                });
+	    		}else if( ret.index  === 1 ){
+		    		var wx = api.require('wx');
+					wx.isInstalled(function(ret, err){
+	                    if(ret.installed){
+							wx.shareWebpage({
+							    scene: 'session',
+							    title: title,
+//							    description: '分享内容的描述',
+							    thumb: 'widget://image/logo.png',
+							    contentUrl: url
+							}, function(ret, err){
+							    if(ret.status){
+//							        alert('分享成功');
+							    }else{
+		                            api.toast({
+	global: true,
+		                                msg: 'Failed'
+		                            });
+							    }
+							});
+	                    }else{
+	                        api.alert({
+	                    		title: 'Notice',
+	
+	                            msg:'Please install WeChat client',
+	                    		buttons: ['OK']
+	                            
+	                        });
+	                    }
+	                });
+	    		}else if( ret.index === 2 ){
+	    			var weibo = api.require('weibo');
+					weibo.shareWebPage({
+//					    text: '这里是测试的内容',
+					    title: title,
+//					    description: '分享内容的描述',
+					    thumb: 'widget://image/logo.png',
+					    contentUrl: url
+					},function(ret,err){
+					    if(ret.status){
+//					        alert('分享成功');
+					    }else{
+                            api.toast({
+	global: true,
+                                msg: 'Failed'
+                            });
+					    }
+					});
+	    		}else if( ret.index === 3 ){
+	                var qq = api.require('qq');
+	                qq.installed(function(ret,err){
+	                    if(ret.status){
+							qq.shareNews({
+					    		url: url,
+					    		title: title,
+//							    description:'新闻描述',
+								type: 'QZone',
+							    imgUrl: 'http://www.apicloud.com/icon/59/5c/595c8c1fe8eff324da8d329f2fb6a3f7.png',
+							},function(ret,err){
+							    if(ret.status){
+//							        alert('分享成功');
+							    }else{
+		                            api.toast({
+	global: true,
+		                                msg: 'Failed'
+		                            });
+							    }
+							});
+	                    }else{
+	                        api.alert({msg: "Please install QQ first"});
+	                    }
+	                });
+	    		}
+	    	}
+	    });
+	}
+	
+     var setFooterConfigsByParams = function(){
+
+        var $footer = $('#footer'),
+
+            $btnSignUp = $('#btnSignUp'),
+
+            $btnSubmitProject = $('#btnSubmitProject'),
+
+            $main = $('#main');
+
+        var $wrap = $api.dom('#wrap');
+
+        var clienH = $api.offset( $wrap ).h;
+        
+        var header_h = $api.offset(header).h;
+
+        var userInfo =  $api.getStorage('loginInfo');
+
+        function showFooterView(){
+            $footer.show();
+            $main.css("margin-bottom", '60px');
+        }
+
+        function handlerFooterView( itemData ){
+            if( !itemData ) return;
+
+            showFooterView();
+
+
+            if( itemData.SignUpEnable == "1" ){
+
+                $btnSignUp.html( itemData.SignUpText ).show();
+            }
+            // console.log('userInfo.userType' + JSON.stringify( userInfo ))
+            if( itemData.SubmitProjectEnable == "1" && userInfo.usertype != CONST_SI) {
+
+                $btnSubmitProject.html( itemData.SubmitProjectText ).show();
+            }
+        }
+
+        function setFrameAttr(){
+            // console.log("height" + clienH +"," + header_h ) 
+
+            setTimeout(function(){
+                api.setFrameAttr({
+                    name : 'web_frm',
+                    rect : {
+                        h : clienH - header_h - 48 - 20
+                    }
+                })                
+            },500)
+        }
+
+        return function( itemData ){
+            if( !itemData ) return;
+            // console.log( JSON.stringify( itemData ) )
+
+            if( itemData.SignUpEnable == "1" || itemData.SubmitProjectEnable == "1"){
+                setFrameAttr();
+                handlerFooterView( itemData );
+            }
+
+        }
+    }()
+
+    function openProfile(){
+        
+        $api.setStorage('ITEMIDFORWEBWINPAGE', api.pageParam.item ? api.pageParam.item.itemid : 0);
+
+        _.openWin({
+            name: 'profile_win',
+            url: 'widget://' + DIR + '/member_center/profile.html',
+            bounces: false
+        });
+    }
+
+    function openProject(){
+
+
+        $api.setStorage('ITEMIDFORWEBWINPAGE', api.pageParam.item ? api.pageParam.item.itemid : 0);
+        
+        _.openWin({
+            name: 'create_new_project',
+            url: 'widget://' + DIR + '/simple_page/create_new_project_win.html',
+            bounces: false,
+            pageParam: {
+                from: ''
+            }
+        });
+    }
+    
+	function historyBack(){
+		var str = 'try{api.historyBack(function(ret,err){if(!ret.status){api.closeWin();}})}catch(e){}';
+		api.execScript({
+		    name: api.winName,
+		    frameName: 'web_frm',
+		    script: str
+		});
+	}
+
+	function closeWindow(){
+		api.closeWin();
+	};
+</script>
+</html>

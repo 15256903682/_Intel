@@ -1,0 +1,689 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>Promotion</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" href="../../css/common.css">
+    <!-- <link rel="stylesheet" href="../../css/fonts_awesome/font-awesome.min.css"> -->
+    <style type="text/css">
+        body {
+            height: auto;
+            min-height: 100%;
+        }
+        /*大体上通用的部分 start*/
+        .common-part-service {
+
+        }
+
+        .whats-this {
+            background-color: #F0F0F0;
+            padding-top: 1.5rem;
+        }
+
+        .whats-this .this-name {
+            font-size: 1.5rem;
+            line-height: 2.5rem;
+            color: #000000;
+            background: url(../../image/project/icon_promotion.png) 1rem 50% no-repeat;
+            background-size: 2.5rem 2.5rem;
+            text-indent: 4rem;
+        }
+
+        .whats-this .this-description {
+            padding: 0.8rem 2.2rem 1rem 4rem;
+            font-size: 1.3rem;
+            line-height: 1.6rem;
+            color: #515458;
+            border-bottom: 0.2rem solid #C8C8C8;
+        }
+
+        .whats-this .design {
+            padding-left: 4rem;
+        }
+
+        .whats-this .text, .whats-this .designer {
+            font-size: 1.2rem;
+            line-height: 2.6rem;
+            color: #000000;
+        }
+
+        .whats-this .rank {
+
+        }
+
+        .whats-this .stars {
+            color: #999999;
+            font-size: 1.8rem;
+            vertical-align: bottom;
+            line-height: 2.6rem;
+        }
+
+        .whats-this .stars .fa-star {
+            color: #FFDA00;
+        }
+
+        /*已选择的项目*/
+        .project-header {
+            padding: 0 1rem;
+            background-color: #FFFFFF;
+        }
+
+        .project-header label {
+            font-size: 1.6rem;
+            line-height: 5.5rem;
+        }
+
+        .header-inner {
+            width: 33.9rem;
+            height: 8.4rem;
+            border: 0.1rem solid #005BBC;
+            border-radius: 0.6rem;
+            position: relative;
+        }
+
+        .header-inner-img {
+            position: absolute;
+            left: 50%;
+            margin-left: -1.6rem;
+            top: -1.6rem;
+            width: 3.2rem;
+            height: 3.2rem;
+            background: #FFFFFF url(../../image/project/project_list_icon.png) center center no-repeat;
+            background-size: 1.9rem 2.2rem;
+        }
+
+        .header-inner .name {
+            font-size: 1.5rem;
+            color: #005BBC;
+            text-align: center;
+            line-height: 3rem;
+            padding-top: 1.3rem;
+            font-weight: bold;
+        }
+
+        .header-inner .date-group {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+
+        .header-inner .date-group .text, .header-inner .date-group .date {
+            font-size: 1.2rem;
+            line-height: 2.1rem;
+            color: #000000;
+            padding-left: 1rem;
+        }
+
+        .header-inner .date-counting {
+            width: 11.7rem;
+            margin: 0 auto;
+            text-align: center;
+            color: #F7AA00;
+            font-size: 1.2rem;
+        }
+
+        .header-inner .date-counting .count {
+            font-size: 2.8rem;
+            line-height: 4rem;
+        }
+
+        .header-inner .project-state {
+            position: absolute;
+            right: 0;
+            bottom: 0.6rem;
+            font-size: 1.2rem;
+            line-height: 2rem;
+            padding-right: 0.5rem;
+        }
+
+        .project-header .create-group {
+            font-size: 1.3rem;
+            line-height: 4.5rem;
+            text-align: right;
+            color: #595C60;
+        }
+
+        .project-header .create-group .btn-create {
+            background-color: #0071C5;
+            border-radius: 0.3rem;
+            width: 10.9rem;
+            height: 2.8rem;
+            color: #FFFFFF;
+            text-align: center;
+            line-height: 2.8rem;
+        }
+
+        /*大体上通用的部分 end*/
+        .propose-title{
+            height: 3.7rem;
+            line-height: 3.7rem;
+            font-size: 1.5rem;
+            background-color: #DBF0FF;
+            color: #0271C5;
+            background-image: url("../../image/project/icon_quote_right.png");
+            background-position-x: 1rem;
+            background-position-y: center;
+            background-repeat: no-repeat;
+            background-size: 2rem;
+            padding-left: 3.8rem;
+            font-weight: bold;
+        }
+
+        .propose-note {
+            padding: 10px;
+            position: relative;
+            font-size: 1.5rem;
+        }
+
+        .propose-select,.fileuploadLabel {
+            padding-left: 10px;
+            font-size: 1.5rem;
+            position: relative;
+        }
+        .fileuploadLabel{
+            height: 4rem;
+            line-height: 4rem;
+        }
+        .selectSwitch{
+
+            background-image:url('../../image/project/MCSI_Selected1.png');
+            background-size:20px;
+            background-repeat: no-repeat no-repeat;
+            background-position: left center;
+            line-height: 40px;
+            padding-left:25px;
+            font-size : 1.3rem;
+        }
+        .show.selectSwitch{
+            background-image:url('../../image/project/MCSI_Selected2.png');
+        }
+        .textWrap {
+            height: 10rem;
+            background-color: #ffffff;
+            margin: 0 10px;
+            border: 1px solid #D6D6D6;
+            display: -webkit-box;
+        }
+
+        textarea {
+            display: block;
+            -webkit-box-flex: 1;
+            resize: none;
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        .image-list {
+            height: 85px;
+            background-size: cover;
+            padding: 10px 10px;
+            overflow: hidden;
+        }
+
+        .image-item.space {
+            border: none;
+        }
+
+        .image-item {
+            width: 65px;
+            height: 65px;
+            background-image: url(../../image/project/add_pic.png);
+            background-size: 100% 100%;
+            display: inline-block;
+            position: relative;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            border: solid 1px #e8e8e8;
+        }
+
+        .image-item .image-close {
+            position: absolute;
+            display: inline-block;
+            right: -6px;
+            top: -6px;
+            width: 20px;
+            height: 20px;
+            text-align: center;
+            line-height: 20px;
+            border-radius: 12px;
+            background-color: #FF5053;
+            color: #f3f3f3;
+            border: solid 1px #FF5053;
+            font-size: 9px;
+            font-weight: 200;
+            z-index: 1;
+        }
+
+        .image-item.space .image-close {
+            display: none;
+        }
+
+        .image-item input[type="file"] {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+            z-index: 0;
+        }
+
+        input, textarea {
+            border: none !important;
+        }
+        /*upload start*/
+        .upload-group{
+            position: relative;
+            margin-bottom: 3rem;
+            padding-left: 1rem;
+        }
+        .upload-label{
+            color: #000000;
+            font-size: 1.1rem;
+            padding: 1rem;
+            padding-left: 0;
+            line-height: 1.4rem;
+        }
+        .upload-group img{
+            width: 7.7rem;
+            height: 7.7rem;
+        }
+        .upload-group .image-name{
+            position: absolute;
+            left: 9.2rem;
+            bottom: 3.5rem;
+            font-size: 0.9rem;
+            color: #999999;
+            line-height: 1.9rem;
+        }
+        .upload-group .notice{
+            position: absolute;
+            left: 9.2rem;
+            bottom: 0;
+            font-size: 0.9rem;
+            color: #999999;
+            line-height: 1.9rem;
+        }
+        /*upload end*/
+        .submitWrap {
+            text-align: center;
+            margin-top: 4rem;
+            height: 4rem;
+            line-height: 4rem;
+            padding-bottom: 4rem;
+        }
+
+        .submitWrap span {
+            width: 18rem;
+            height: 3.8rem;
+            /*margin: 3rem auto;*/
+            text-align: center;
+            color: #FFFFFF;
+            background-color: #0071C5;
+            border-radius: 0.4rem;
+            line-height: 3.8rem;
+            font-size: 1.6rem;
+        }
+
+        .radioSwitch{
+            width: 8rem;
+            background-image:url('../../image/project/promotion_circle_normal.png');
+            background-size:20px;
+            background-repeat: no-repeat no-repeat;
+            background-position: left center;
+            line-height: 40px;
+            padding-left:25px;
+            font-size: 1.3rem;
+        }
+        .radioSwitch.show{
+            background-image:url('../../image/project/promotion_circle_highlight.png');
+        }
+
+    </style>
+</head>
+<body>
+<div class="common-part-service">
+    <div class="whats-this">
+        <p class="this-name">
+            Promotion
+        </p>
+
+        <p class="this-description">
+           Intel Online Sales Group(OSG) have cooperated with 1000 intelligent computer system development platform partners in China, part of clients in the partner are looking for the third party /solution in the development of production.
+        </p>
+
+        <div class="design">
+            <span class="text">Designer：</span>
+				<span class="designer">
+					
+				</span>
+
+            <div class="rank">
+                <span class="text">Satisfaction</span>
+					<span class="stars">
+	                    <!-- <i class="fa-star fa"></i>
+	                    <i class="fa-star fa"></i>
+	                    <i class="fa-star fa"></i>
+	                    <i class="fa-star fa"></i>
+	                    <i class="fa-star fa"></i> -->
+	                </span>
+                <span class="text"></span>
+            </div>
+        </div>
+    </div>
+    <!-- 已选择的项目 -->
+    <div class="project-header">
+        <label>The project you have selected：</label>
+
+        <div class="header-inner">
+            <div class="header-inner-img"></div>
+            <p class="name"></p>
+
+            <div class="header-bottom">
+                <div class="date-group">
+                    <p class="text">Project starts at</p>
+
+                    <p class="date"></p>
+                </div>
+                <div class="date-counting">
+                    <span class="count"></span>
+                    day
+                </div>
+                <div class="project-state">In Cultivate Stage</div>
+            </div>
+        </div>
+        <p class="create-group">
+            If you are not applying support for this project, please first
+            <span class="btn-create" tapmode onclick="createNewProject()">add new project</span>
+        </p>
+    </div>
+</div>
+
+<div class="propose">
+    <div class="propose-title border-1px-top border-1px-bottom">
+        Please fill in the table below
+    </div>
+    <div class="propose-note">
+        Because the sample is limited, so after submitting application, we will put your company into the waiting list of CRB loan.
+    </div>
+    <div class="propose-select">
+        <div class="selectSwitch spreadType" tapmode="" onclick="toggleSwitch(this,'selectSwitch')">
+            In CCE market
+        </div>
+        <div class="selectSwitch spreadType" tapmode="" onclick="toggleSwitch(this,'selectSwitch')">
+            Weibo
+        </div>
+        <div class="selectSwitch spreadType" tapmode="" onclick="toggleSwitch(this,'selectSwitch')">
+            QQ Group
+        </div>
+    </div>
+    <div class="propose-note">
+        Do you need Intel to recommend upstream partner to you:
+    </div>
+    <div class="propose-select" style="margin-left: 30px">
+        <span class="radioSwitch show" tapmode="" onclick="toggleSwitch(this,'radioSwitch')">
+            Yes
+        </span>
+        <span class="radioSwitch" tapmode="" onclick="toggleSwitch(this,'radioSwitch')">
+            No
+        </span>
+    </div>
+    <div class="textWrap">
+        <textarea id="textarea"></textarea>
+    </div>
+    <div class="fileuploadLabel">
+        Please upload this product image:
+    </div>
+    <div class="upload-group">
+        <img id="upload_img" src="../../image/project/add_pic.png" data-url="" alt="" tapmode onclick="chooseGetType()">
+        <p class="image-name ellepsis-1">No uploaded images</p>
+        <p class="notice ellepsis-1">please upload images (maximum 10M)</p>
+    </div>
+    <div class="submitWrap">
+        <span class="btn" id="submit" tapmode onclick="fnSubmit(this)">
+            Submit
+        </span>
+    </div>
+</div>
+
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript" src="../../script/translation.js"></script>
+<script type="text/javascript">
+    // 以下通用
+    var account = $api.getStorage('loginInfo');
+    var pageParam = {};
+    var projectID = '';
+    var typeid = 2;
+    var zhuge;
+    apiready = function () {
+        pageParam = api.pageParam;
+        projectID = pageParam.id;
+        zhuge = api.require('zhuge');
+        if (zhuge) {
+            zhuge.initZhuge();
+        }
+        getProjectDetail();
+        getProjectDesigner();
+    };
+
+    function getProjectDesigner(){
+        ajaxRequest('/APPSupportManage/GetSupportAppraise.aspx', 'get', {
+            UserID: account.userid,
+            BatchNo: account.batchno, 
+            SupportTypeID: typeid
+        }, function(ret, err){
+            if(ret && ret.res == undefined){
+                // console.log('ret:normal===='+ JSON.stringify(ret));
+                var data = ret.appdatalist[0];
+                $api.html($api.dom('.designer'), data.UserName);
+                
+                var len = parseInt(data.EvaluateNumber);
+                var str = '';
+                for (var i = 0; i < len; i++) {
+                    str+= '<i class="fa-star fa"></i>';
+                }
+                $api.html($api.dom('.stars'), str);
+                $api.html($api.domAll('.rank .text')[1], '('+ data.UserNum +'Person)');
+            } else{
+                console.log('ret:err===='+ JSON.stringify(ret));
+            }
+            if (err) {
+                console.log('err===='+ JSON.stringify(err));
+            }
+
+        });
+        
+    };
+
+    function getProjectDetail(){
+        ajaxRequest('/APPProjectManage/APPGetProjectDetail.aspx', 'get', {
+            UserID: account.userid,
+            BatchNo: account.batchno,
+            ProjectID: projectID
+        }, function(ret, err){
+            if(ret && ret.res == undefined){
+                var data = ret.appdatalist[0];
+                $api.html($api.dom('.project-header .header-inner .name'), data.ProjectName);
+                $api.html($api.dom('.project-header .header-inner .date'), data.CreateDate);
+                $api.html($api.dom('.project-header .header-inner .count'), data.ProjectStartDay);
+                $api.html($api.dom('.project-header .header-inner .project-state'), 'In '+ ( fnTranslation( data.ProjectStatus, true) )  +' stage');
+                
+                // In Cultivate Stage
+                
+                
+            } else{
+                console.log('ret:err===='+ JSON.stringify(ret));
+            }
+            if (err) {
+                console.log('err===='+ JSON.stringify(err));
+            }
+        });
+    };
+    // 以上通用
+
+
+    function toggleSwitch(obj,clz){
+        var $selectSwitch = $api.domAll('.'+clz);
+        var reg = /radio/g;
+        if (reg.test(clz)) {
+            for(var i=0;i<$selectSwitch.length;i++){
+                $api.removeCls($selectSwitch[i],'show');
+            }
+        } else {
+
+        }
+        if($api.hasCls(obj,'show')){
+            $api.removeCls(obj,'show');
+        }else{
+            $api.addCls(obj,'show');
+        }
+    };
+
+    var uploadImg = $api.dom('#upload_img');
+    // 获取图片方式选择
+    function chooseGetType(){
+        api.actionSheet({
+            title: 'Select',
+            cancelTitle: 'Cancel',
+            buttons: ['Photo upload', 'Album']
+        },function(ret,err){
+            if (ret.buttonIndex == 1) {
+                getPicture('camera');
+            } else if(ret.buttonIndex == 2){
+                getPicture('library');
+            }
+        });
+    };
+
+    // 获取图片
+    function getPicture(type){
+        // library camera
+        api.getPicture({
+            sourceType: type,
+            encodingType: 'png',
+            mediaValue: 'pic',
+            destinationType: 'url',
+            allowEdit: true,
+            quality: 50,
+            targetWidth: 400,
+            targetHeight: 400,
+            saveToPhotoAlbum: false
+        }, function(ret, err){ 
+            if (ret && ret.data) {
+                $api.attr(uploadImg, 'src', ret.data);
+                $api.attr(uploadImg, 'data-url', ret.data);
+                $api.html($api.dom($api.closest(uploadImg, '.upload-group'), '.image-name'), ret.data.substring(ret.data.lastIndexOf('/') + 1));
+                
+            }
+        });
+    };
+
+    // 提交推广
+    var submitLock = false;
+
+    function fnSubmit(el){
+        var SpreadType = '';
+        var SpreadTypeBtns = $api.domAll('.propose-select .spreadType.show');
+        if (SpreadTypeBtns.length) {
+            for (var i = 0; i < SpreadTypeBtns.length; i++) {
+                 SpreadType += $api.text(SpreadTypeBtns[i]);
+            }
+        } else {
+            api.alert({
+                title: 'Notice', 
+                msg: 'Please Select Promotion Method',
+                buttons: ['OK']
+
+            });
+            return false;
+        }
+
+        var RecommendedPartners = $api.trim($api.text($api.dom('.propose-select .radioSwitch.show')));
+        var Reason = $api.trim($api.val($api.dom('#textarea')));
+        if (Reason == '' && RecommendedPartners == '是') {
+            api.alert({
+                title: 'Notice', 
+                msg: 'Please fill in Reason',
+                buttons: ['OK']
+                
+            });
+            return false;
+        } else{
+            Reason = '';
+        }
+        var Photo = $api.attr(uploadImg, 'data-url');
+        if (Photo == '') {
+            api.alert({
+                title: 'Notice', 
+                msg: 'Please upload image',
+                buttons: ['OK']
+                
+            });
+            return false;
+        }
+
+        if (submitLock) {
+            return false;
+        } else {
+            submitLock = true;
+            $api.attr(el, 'disabled', 'disabled');
+        }
+        if (zhuge) {
+            zhuge.track({
+                eventName: '项目支持_技术支持提交按钮',
+                eventPro: {
+                    '模块来源': '方案推广'
+                }
+            });
+        }
+        ajaxRequest('/APPSupportManage/APPSupportProjectSpread.aspx', 'post', {
+            UserID: account.userid,
+            BatchNo: account.batchno,
+            ItemNameID: projectID,
+            SpreadType: SpreadType,
+            RecommendedPartners: RecommendedPartners,
+            Reason: Reason,
+        }, {
+            Photo: Photo
+        }, function(ret, err){
+            submitLock = false;
+            $api.removeAttr(el, 'disabled');
+            if(ret && ret.res){
+                // console.log('ret:normal===='+ JSON.stringify(ret));
+                api.toast({
+	global: true,
+                    msg: 'The request for Promotion Support has been submitted successfully',
+                    duration: 2000,
+                    location: 'middle'
+                });
+                setTimeout(function(){
+                    api.closeWin();
+                },2000);
+            } else{
+                api.toast({
+	global: true,
+                    msg: JSON.stringify(ret),
+                    duration: 2000,
+                    location: 'middle'
+                });
+            }
+            if (err) {
+                api.toast({
+	global: true,
+                    msg: JSON.stringify(err),
+                    duration: 2000,
+                    location: 'middle'
+                });
+            }
+        });
+    };
+</script>
+</html>

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <style>
+        body{
+            background-color: #EEEEEE;
+        }
+        .header{
+        	
+        	background-color: #fff;
+        }
+        .middle{
+        	background-color: #fff;
+        }
+        .title p{
+        	font-size: 14px;
+        	color: #303030;
+        	font-weight: bold;
+        	margin-bottom: 14px;
+        	padding: 10px 25px 0px 20px;
+        }
+        .Buy{
+          border-top: 1px solid #DEDEDE;	
+          border-bottom: 1px solid #DEDEDE;
+          padding: 0px 25px 0px 20px;
+
+        }
+        .ectype{
+        	font-size: 13px;
+        	color:#333;
+        	margin-top: 10px;
+        }
+        .zan{
+        	background: url('../../image/activity_ckmd_navigation_good_normal.png')no-repeat 0 0;
+        	background-size: 15px 14px;
+        	width:15px;
+        	height:14px;
+        	margin-right: 15px;
+        }
+        .grey{
+          background: url('../../image/online_zan_no.png')no-repeat center;
+          background-size: 15px 14px;
+          width:0px;
+          height:32px;
+          margin-right: 15px;
+        }
+        .middle .grey{
+          margin-right: 0;
+        }
+
+        .grey.active{ background-image: url('../../image/activity_ckmd_navigation_good_normal.png'); }
+
+        .time .grey{ font-size: 12px; line-height: 32px; color: #999; background-position: left center; padding-left: 20px; }
+        .discuss{
+          background: url('../../image/home_commentIcon.png')no-repeat center;
+          background-size: 15px 14px;
+          width:42px;
+          height:32px;
+        }
+        .data{
+        	font-size: 9px;
+          line-height: 32px;
+        	color: #999999;
+        }
+        /*.time{
+        	margin-top: 5px;
+        	margin-bottom: 5px;
+        }*/
+        .middle{
+        	 padding: 5px 25px 5px 20px;
+        	 margin-top: 5px;
+        }
+        .middle div .top{
+        	font-size: 12px;
+        	color: #474747;
+        }
+        .middle div p.bottom{
+        	font-size: 11px;color:#606060;
+          line-height: 16px;
+        }
+         .ground{
+           background-color: #fff;
+           margin-top: 5px;
+           border-bottom: 1px solid #DEDEDE;
+        }
+        .correlation p{
+          height:44px;
+          line-height: 44px;
+          font-size:15px;
+          color:#474747;
+          padding-left: 20px; 
+          border-bottom: 1px solid #DEDEDE;
+          
+        }
+       .virtual{
+        font-size: 11px;
+        color:#6E6E6E;
+        position: relative;
+         height:44px;
+         border-bottom: 1px solid #DEDEDE;
+         padding-top: 10px;
+          
+       }
+       .virtual p{
+        padding-left: 20px;
+        position: relative;
+
+       }
+       b{
+        display: inline-block;
+        margin-right: 5px;
+        
+       }
+       .numbel{
+        position: absolute;
+        right: 15px;
+       }
+       .numbel2{
+         position: absolute;
+        right: 15px;
+       }
+       .yuyan{
+        background: url('../../image/d_03.jpg')no-repeat 0 0;
+        background-size: 14px 13px;
+        width:14px;
+        height:13px;
+       }
+       .theoretical{font-size: 10px;
+        color:#32BEFF;
+        vertical-align: top;}
+    </style>
+</head>
+<body>
+<!--   <div class="header">
+   		<div class="title">
+    		<p>标题淘宝推出全新购物方式Buy+,您看好VR前景吗？</p>
+    	</div>
+   	    <div class="Buy">
+    		<p class="ectype">淘宝推出全新的购物方式Buy+,Buy+使用VirtualReality(虚拟现实)技术,利用计算机图形系统和辅助传感器,生成可交互的三位购物环境。您怎么看虚拟现实已应用前景?</p>
+    		<div class="flex-wrap time">
+    			<div class="flex-con data">2016-11-12</div>
+    			<div class="grey"></div>
+    			<div class="discuss"></div>
+    		</div>
+    	</div>
+    </div> 
+   <div class="middle">
+      <div>
+      	 <p class="top">大脸猫</p>
+      </div>
+      <div class="">
+      	<p class="bottom">虚拟现实的事情是一个发展趋势，这样的感触可以贴近人的生活。促进购买信任度</p>
+      </div>
+      <div class="flex-wrap time">
+    			<div class="flex-con data">2016-11-12</div>
+    			<div class="grey active">1</div>
+      </div>
+   </div> 
+    <div class="ground">
+      <div class="correlation">
+         <p>相关文档</p>
+      </div>
+      <div class="virtual">
+         <p>虚拟现实的事情是一个发展趋势，这样的感触可以贴近人的生活。促进购买信任度</p>
+          <span class="numbel"><b class="yuyan"></b><b class="theoretical">5</b></span>
+      </div>
+    </div>  -->
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript">
+    var vGlobalParam = {};
+    apiready = function(){
+        api.setRefreshHeaderInfo({
+            loadingImg: 'widget://image/common/blueArrow@2x.png',
+            textDown: fnLanguageSwitch( '下拉刷新' ),
+            textUp: fnLanguageSwitch( '松手加载' ),
+            textLoading: fnLanguageSwitch( '刷新中' ),
+            showTime: false,
+            bgColor: '#FFF',
+            textColor: '#000'
+        }, function(ret, err){
+            fnGetData();
+        });
+        api.refreshHeaderLoading();
+
+    };
+
+    function fnGetData(){
+      fnAjax({
+          url: 'communityQuestions/qDetail?id='+api.pageParam.id
+        }, function( ret, err ){
+          api.refreshHeaderLoadDone();
+          if( ret ){
+              api.pageParam.data = ret;
+              vGlobalParam = ret;
+              $api.dom( 'body' ).innerHTML = 
+              ' <div class="header">'+
+              '  <div class="title">'+
+              '    <p>'+ret.title+'</p>'+
+              '  </div>'+
+              '    <div class="Buy">'+
+              '    <p class="ectype">'+fnStringEmpty( ret.content )+'</p>'+
+              '    <div class="flex-wrap time">'+
+              '      <div class="flex-con data">'+new Date( ret.created ).Format( 'yyyy/MM/dd' )+'</div>'+
+              '      <div tapmode onclick="fnDian( this )" class="grey '+( ret.isPraise == true ? 'active' : '' )+'">'+fnStringEmpty( ret.zambia )+'</div>'+
+              '      <div tapmode onclick="fnOpenAnswer( this )" class="discuss"></div>'+
+              '    </div>'+
+              '  </div>'+
+              '</div>';
+              if( ret.comments.length ){
+                for( var x in ret.comments ){
+                    $api.after( $api.dom( '.header' ), 
+                    '<div class="middle">'+
+                    '    <div>'+
+                    '       <p class="top">'+fnStringEmpty(ret.comments[x].nickname)+'</p>'+
+                    '    </div>'+
+                    '    <div class="">'+
+                    '      <p class="bottom">'+fnStringEmpty( ret.comments[x].answer )+'</p>'+
+                    '    </div>'+
+                    '    <div class="flex-wrap time">'+
+                    '        <div class="flex-con data">'+new Date( ret.comments[x].created ).Format( 'yyyy/MM/dd' )+'</div>'+
+                    '        <div tapmode onclick="fnDianPerson( this )" data-id="'+ret.comments[x].id+'" class="grey '+( ret.comments[x].isPraise == true ? 'active' : '' )+'">'+fnStringEmpty( ret.comments[x].zambia )+'</div>'+
+                    '    </div>'+
+                    ' </div>');
+                }
+              }
+
+          fnAjax({
+              url: 'communityQuestions/qTypeList?id='+api.pageParam.id,
+              progress: false
+            }, function( ret, err ){
+              if( ret ){
+                  if( ret.length ){
+                    var _html = '';
+                    for( var x in ret ){
+                      vGlobalParam[ ret[x].id ] = ret[x];
+                      _html +=
+                      '  <div class="virtual" tapmode onclick="fnOpenDetail( this );"  data-id="'+ret[x].id+'">'+
+                      '     <p>'+fnStringEmpty( ret[x].title )+'</p>'+
+                      '      <span class="numbel"><b class="yuyan"></b><b class="theoretical">'+ret[x].comment+'</b></span>'+
+                      '  </div>';
+                    }
+                    $api.append($api.dom('body'), 
+                    '<div class="ground">'+
+                    '  <div class="correlation">'+
+                    '     <p>'+fnLanguageSwitch( '相关问题' )+'</p>'+
+                    '  </div>'+_html+
+                    '</div>');
+                  }
+              }else{
+                  api.toast({
+                      msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                  });
+              }
+            });
+          }else{
+                api.toast({
+                    msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                });
+            }
+        });
+    }
+
+    function fnOpenAnswer( el ){
+      fnOpen({
+        name: 'answer_win',
+        url: 'widget://' + DIR + '/member_center/answer_win.html',
+        pageParam: api.pageParam
+      });
+    }
+
+      function fnOpenDetail( el ){
+        fnOpen({
+          name:'details_win'+Math.random() * 10000 + 10,
+          url: 'widget://' + DIR + '/web_page/details_win.html',
+          pageParam: vGlobalParam[ $api.attr(el, 'data-id' ) ]
+        });
+      }
+
+    function fnDian( el ){
+        if ( ! $api.hasCls(el, 'active') ){
+            fnAjax({
+                url: 'communityQuestions/zambiaAdd',
+                data: {
+                  values: {
+                    qid: vGlobalParam.id
+                  }
+                }
+            }, function( ret, err ){
+              if( ret ){
+                  api.refreshHeaderLoading();  
+                }else{
+                    api.toast({
+                        msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                    });
+                }
+            });
+        }
+    }
+
+
+    function fnDianPerson( el ){
+        if( ! $api.hasCls(el, 'active') ){
+            fnAjax({
+                url: 'communityComments/zambiaAdd',
+                data: {
+                  values: {
+                    id: $api.attr(el, 'data-id' )
+                  }
+                }
+            }, function( ret, err ){
+              if( ret ){
+                  api.refreshHeaderLoading();  
+              }else{
+                    api.toast({
+                        msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                    });
+                }
+            });
+        }
+    }
+
+</script>
+</html>

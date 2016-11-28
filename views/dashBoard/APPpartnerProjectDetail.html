@@ -1,0 +1,207 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <link rel="stylesheet"  href="../../css/api.css"/>
+    <link rel="stylesheet" href="../../css/common.css">
+    <style type="text/css">
+        body{
+            background-color: #ffffff;
+        }
+        #Projectdata{
+            padding: 10px;
+        }
+        .item{
+            display: -webkit-box;
+            line-height: 3rem;
+            font-size: 1.5rem;
+        }
+        .item .name{
+            width:40%;
+        }
+        .item .value{
+            -webkit-box-flex: 1;
+        }
+        .item .value img{
+            width: 100%;
+        }
+    </style>
+
+</head>
+<body>
+<div id="Projectdata">
+
+</div>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript" src="../../script/translation.js"></script>
+<script type="text/javascript">
+    var loginInfo = $api.getStorage('loginInfo');
+    apiready = function () {
+        var bodyParam = {
+            UserID: loginInfo.userid,
+            BatchNo: loginInfo.batchno,
+            ProjectID: api.pageParam.ProjectID
+        };
+        var url = 'APPGetDataType/APPGetPartnerProjectDetail.aspx';
+        ajaxRequest(url, 'get', bodyParam, function (ret, err) {
+            if (ret) {
+                var obj = ret;
+                var data1 = obj[0].data0;
+                if (data1.length > 0) {
+                    //a.ProjectName,a.ProjectApp,a.ProjectStatus,b.RealName,b.Email,b.CellPhone
+                    var divtable = "";
+                    var ProjectName = [];
+                    var ProjectApp = [];
+                    var ProjectStatus = [];
+                    var RealName = [];
+                    var Email = [];
+                    var CellPhone = [];
+                    var Active = [];
+
+                    var IntelProductType = [];
+                    var IntelProductNum = [];
+                    var ProjectType = [];
+                    var MotherBoard = [];
+                    var StartDate = [];
+                    var PurchaseDate1 = [];
+                    var PlanQTY = [];
+                    var PurchaseQTY = [];
+                    var PurchaseDate2 = [];
+                    var CreateDate = [];
+                    var Photo = [];
+
+                    for (var i = 0; i < data1.length; i++) {
+                        ProjectName.push(data1[i].ProjectName);
+                        Active.push(fnTranslation(data1[i].Active, true));
+                        ProjectApp.push( fnTranslation(data1[i].ProjectApp, true) );
+                        RealName.push(data1[i].RealName);
+
+                        if (loginInfo.usertype == CONST_DISTI_FAE) {
+                            IntelProductType.push(data1[i].IntelProductType);
+                            IntelProductNum.push(data1[i].IntelProductNum);
+                            ProjectType.push(data1[i].ProjectType);
+                            MotherBoard.push(data1[i].MotherBoard);
+                            StartDate.push(data1[i].StartDate);
+                            PurchaseDate1.push(data1[i].PurchaseDate1);
+                            PlanQTY.push(data1[i].PlanQTY);
+                            PurchaseQTY.push(data1[i].PurchaseQTY);
+                            PurchaseDate2.push(data1[i].PurchaseDate2);
+                            CreateDate.push(data1[i].CreateDate);
+                            Photo.push(data1[i].Photo);
+
+                        } else {
+                            ProjectStatus.push(fnTranslation(data1[i].ProjectStatus, true) );
+                            CellPhone.push(data1[i].CellPhone);
+                            Email.push(data1[i].Email);
+                        }
+                    }
+                    $(function () {
+                        var line = ProjectName.length;
+                        var list = loginInfo.usertype == CONST_DISTI_FAE ? 15 : 7;
+                        for (var i = 1; i <= line; i++) {
+                            var itemHtml = '';
+                            for (var j = 0; j < list; j++) {
+                                var name = '',value='';
+                                if (j == 0) {
+                                    name = 'Project Name';
+                                    value = ProjectName[i - 1];
+                                }
+                                if (j == 1) {
+                                    name = 'Application';
+                                    value = ProjectApp[i - 1];
+                                }
+                                if (j == 3) {
+                                    name = 'Project Status';
+                                    value = Active[i - 1];
+                                }
+                                if (j == 4) {
+                                    name = 'Name';
+                                    value = RealName[i - 1];
+                                }
+                                if (loginInfo.usertype == CONST_DISTI_FAE) {
+                                    if (j == 2) {
+                                        name = 'Type of Motherboard';
+                                        value = ProjectType[i - 1];
+                                    }
+                                    if (j == 5) {
+                                        name = 'Motherboard MDF.';
+                                        value = MotherBoard[i - 1];
+                                    }
+                                    if (j == 6) {
+                                        name = 'Intel Product Type';
+                                        value = IntelProductType[i - 1];
+                                    }
+                                    if (j == 7) {
+                                        name = 'Product Model';
+                                        value = IntelProductNum[i - 1];
+                                    }
+                                    if (j == 8) {
+                                        name = 'Project starts at';
+                                        value = StartDate[i - 1];
+                                    }
+                                    if (j == 9) {
+                                        name = 'Project starts at';
+                                        value = StartDate[i - 1];
+                                        text = document.createTextNode("Est. Prod. Date：");
+                                        text2 = document.createTextNode(PurchaseDate1[i - 1]);
+                                    }
+                                    if (j == 10) {
+                                        name = 'Est. Annual Sale';
+                                        value = PlanQTY[i - 1];
+                                    }
+                                    if (j == 11) {
+                                        name = 'Est. Pilot. Date';
+                                        value = PurchaseQTY[i - 1];
+                                    }
+                                    if (j == 12) {
+                                        name = 'Est. Pilot. Volume';
+                                        value = PurchaseDate2[i - 1];
+                                    }
+                                    if (j == 13) {
+                                        name = 'Submission Date';
+                                        value = CreateDate[i - 1];
+                                    }
+                                    if (j == 14) {
+                                        name = 'Image';
+                                        var url = host + Photo[i - 1].split('~')[1];
+                                        value = '<img src="'+url+'">';
+                                    }
+                                } else {
+                                    if (j == 2) {
+                                        name = 'Project Status';
+                                        value = ProjectStatus[i - 1];
+                                    }
+                                    if (j == 5) {
+                                        name = 'Tel';
+                                        value = CellPhone[i - 1];
+                                    }
+                                    if (j == 6) {
+                                        name = 'E-mail';
+                                        value = Email[i - 1];
+                                    }
+                                }
+                                itemHtml +='<div class="item border-1px-bottom"><div class="name">'+name+'</div><div class="value">'+value+'</div></div>';
+                            }
+                            $("#Projectdata").html(itemHtml);
+                        }
+                    });
+                }
+                else {
+                    $('#Projectdata').html('not Data');
+                }
+            } else {
+                api.toast({
+	global: true,
+                    msg: err.msg
+                });
+            }
+        });
+    };
+</script>
+</body>
+</html>

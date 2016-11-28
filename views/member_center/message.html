@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>my</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/common.css"/>
+    <style>
+        .header {
+            position: relative;
+            width: 100%;
+            height: 4.4rem;
+            background-color: #0171c5;
+        }
+
+        .header .back {
+            position: absolute;
+            box-sizing: border-box;
+            bottom: 0;
+            padding-left: 16px;
+            width: 4.4rem;
+            height: 4.4rem;
+            background-image: url(../../image/arrow-left-white.png);
+            background-repeat: no-repeat;
+            background-size: 2rem;
+            background-position: center center;
+            z-index: 2;
+        }
+
+        .header .title {
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            height: 4.4rem;
+            font-size: 1.9rem;
+            line-height:4.4rem;
+            color: #fff;
+            text-align: center;
+        }
+
+        .nav {
+            position: relative;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-orient: horizontal;
+            -webkit-flex-flow: row;
+            flex-flow: row;
+            width: 100%;
+            height: 44px;
+            background-color: #fff;
+        }
+
+        .nav .menu {
+            position: relative;
+            box-sizing: border-box;
+            padding-top: 13px;
+            -webkit-box-flex: 1;
+            -webkit-flex: 1;
+            flex: 1;
+            height: 44px;
+            color: #444;
+            font-size: 16px;
+            text-align: center;
+            border-bottom: 2px solid #9c9c9c;
+        }
+
+        .nav .menu .badge {
+            position: absolute;
+            top: 1px;
+            left: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+            padding: 3px;
+            width: auto;
+            min-width: 18px;
+            height: 18px;
+            font-size: 12px;
+            color: #fff;
+            text-align: center;
+            background-image: url(../../image/membercenter/badge.png);
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: 30px 30px;
+            background-clip: border-box;
+            border-radius: 9px;
+        }
+
+        .nav .menu .badge-sys {
+            margin-left: 31px;
+        }
+
+        .nav .menu .badge-whisper {
+            margin-left: 16px;
+        }
+
+        .nav .selected {
+            color: #0073c3;
+        }
+
+        .nav .cursor {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50%;
+            height: 3px;
+            background-color: #0073c3;
+            transition: all 100ms;
+            -webkit-transition: all 100ms;
+        }
+
+        .nav .cursor.selected-0 {
+            transform: translateX(0);
+            -webkit-transform: translateX(0);
+        }
+
+        .nav .cursor.selected-1 {
+            transform: translateX(100%);
+            -webkit-transform: translateX(100%);
+        }
+
+        .hover {
+            opacity: 0.7;
+            background-color: #0060A8 !important;
+        }
+    </style>
+</head>
+
+<body>
+<!-- <header id="header" class="header">
+    <div class="back" tapmode="hover" onclick="api.closeWin()"></div>
+    <div class="title">My Message</div>
+</header>
+<nav id="nav" class="nav">
+    <div class="menu selected" tapmode="highlight" onclick="fnNavChange(0)">
+        System Message
+        <div id="badgeSys" class="badge badge-sys hidden"></div>
+    </div>
+    <div class="menu" tapmode="highlight" onclick="fnNavChange(1)">
+        Direct Message
+        <div id="badgeWhisper" class="badge badge-whisper hidden"></div>
+    </div>
+    <div id="cursor" class="cursor selected-0"></div>
+</nav> -->
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript" src="../../script/translation.js"></script>
+<script type="text/javascript" src="../../script/md5.js"></script>
+<script type="text/javascript">
+    var index = 0;
+    var zhuge;
+    apiready = function () {
+        $api.dom('body').innerHTML=
+    '    <header id="header" class="header">'+
+    '        <div class="back" tapmode="hover" onclick="api.closeWin()"></div>'+
+    '        <div class="title">'+fnLanguageSwitch('我的消息')+'</div>'+
+    '    </header>'+
+    '    <nav id="nav" class="nav">'+
+    '        <div class="menu selected" tapmode="highlight" onclick="fnNavChange(0)">'+fnLanguageSwitch('系统消息')+'<div id="badgeSys" class="badge badge-sys hidden"></div>'+
+    '        </div>'+
+    '        <div class="menu" tapmode="highlight" onclick="fnNavChange(1)">'+fnLanguageSwitch('私信')+'<div id="badgeWhisper" class="badge badge-whisper hidden"></div>'+
+    '        </div>'+
+    '        <div id="cursor" class="cursor selected-0"></div>'+
+    '    </nav> ';    
+           
+        zhuge = api.require('zhuge');
+        if (zhuge) {
+            zhuge.initZhuge();
+        }
+        fnInit();
+
+        fnInitMessageList();
+    };
+
+    var navs, headerHeight, cursor;
+
+    function fnInit() {
+        var header = $api.byId('header'),
+                nav = $api.byId('nav');
+        navs = $api.domAll(nav, '.menu');
+        cursor = $api.byId('cursor');
+        $api.fixStatusBar(header);
+        headerHeight = $api.offset(header).h + $api.offset(nav).h;
+    }
+    ;
+
+    function fnInitMessageList() {
+        api.openFrameGroup({
+            name: 'message_group',
+            scrollEnabled: true,
+            rect: {
+                x: 0,
+                y: headerHeight,
+                w: 'auto',
+                h: 'auto'
+            },
+            index: api.pageParam.index || 0,
+            preload: 0,
+            frames: [{
+                name: 'message_sys_frame',
+                url: 'widget://' + DIR + '/member_center/message_sys_frame.html',
+                bounces: true,
+                vScrollBarEnabled: false,
+                hScrollBarEnabled: false,
+                pageParam: api.pageParam
+            }, {
+                name: 'message_whisper_frame',
+                url: 'widget://' + DIR + '/member_center/message_whisper_frame.html',
+                bounces: true,
+                vScrollBarEnabled: false,
+                hScrollBarEnabled: false
+            }]
+        }, function (ret, err) {
+            cursor.className = 'cursor selected-' + ret.index;
+            for (var i = 0; i < navs.length; i++) {
+                if (i == ret.index) {
+                    $api.addCls(navs[i], 'selected');
+                } else {
+                    $api.removeCls(navs[i], 'selected');
+                }
+            }
+            if (ret.index == 0) {
+                zhuge.track({
+                    eventName: '我的_我的消息-系统消息',
+                    eventPro: {}
+                });
+            } else {
+                zhuge.track({
+                    eventName: '我的_我的消息-私信',
+                    eventPro: {}
+                });
+            }
+        });
+    }
+    ;
+
+    function fnNavChange(index) {
+        api.setFrameGroupIndex({
+            name: 'message_group',
+            index: index,
+            scroll: true
+        });
+    }
+
+    function setMessageBadge(sys,whisper){
+        var ajpush = api.require('ajpush');
+        ajpush.setBadge({
+            badge:sys
+        });
+        if(sys>0){
+            $("#badgeSys").html(sys).removeClass('hidden');
+            api.execScript({
+                name: 'index',
+                script: '$("#messageBadge").removeClass("hidden")'
+            });
+        }else{
+            $("#badgeSys").html(0).addClass('hidden');
+            api.execScript({
+                name: 'index',
+                script: '$("#messageBadge").addClass("hidden")'
+            });
+        }
+        if(whisper>0){
+            $("#badgeWhisper").html(whisper).removeClass('hidden');
+        }else{
+            $("#badgeWhisper").html(0).addClass('hidden');
+        }
+    }
+
+</script>
+
+</html>

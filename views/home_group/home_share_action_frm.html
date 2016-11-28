@@ -1,0 +1,222 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>simple-page</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" href="../../css/common.css">
+    <style type="text/css">
+        .textWrap {
+            height: 10rem;
+            background-color: #ffffff;
+            margin: 1rem;
+            border: 1px solid #D6D6D6;
+            display: -webkit-box;
+        }
+
+        textarea {
+            display: block;
+            -webkit-box-flex: 1;
+            resize: none;
+            padding: 1rem;
+            font-size: 1.4rem;
+            height: 100%;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            line-height: 1.9rem;
+        }
+
+        .shareBtn {
+            margin-top: 3rem;
+            text-align: center;
+            line-height: 4rem;
+            height: 4rem;
+        }
+
+        .shareBtn span {
+            width: 50%;
+            text-align: center;
+            color: #ffffff;
+            background-color: #00AEEF;
+        }
+    </style>
+</head>
+<body>
+<div class="textWrap">
+    <textarea id="textarea"></textarea>
+</div>
+<div class="shareBtn">
+   <!--  <span tapmode="" onclick="share()">Share</span> -->
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript">
+   var loginInfo = $api.getStorage('loginInfo');
+    var shareID;
+    var shareDetailList = $api.getStorage('shareDetailList') || {};
+    apiready = function () {
+        $api.dom('.shareBtn').innerHTML=
+       '<span tapmode="" onclick="share()">'+fnLanguageSwitch('分享')+'</span>';
+        shareID = api.pageParam.shareID;
+        var loginInfo = $api.getStorage('loginInfo');
+        //      获取分享内容
+        fnAjax({
+            url: 'shares/getShareDetail?shareId='+shareID
+        }, function( ret, err){
+            if( ret ){
+                $api.dom('#textarea').value = fnLanguageSwitch( ret.shareDetail );
+                vGlobalParam = ret;
+            }else{
+                api.toast({
+                    global: true,
+                    msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                });
+            }
+        });
+    }
+
+    function share() {
+        switch (shareID) {
+            case 'a':
+                var smsText = $api.dom('#textarea').value + vGlobalParam.url+USER.userId;
+                api.sms({
+                    numbers: [],
+                    text: smsText
+                }, function (ret, err) {
+                    if (ret && ret.status) {
+                        SubmitShareSuccess(shareID)
+                    } else {
+                        api.toast({
+                            msg: err&&err.msg || fnLanguageSwitch( '发送失败' )
+                        });
+                    }
+                });
+                break;
+            case 'b':
+
+                break;
+            case 'c':
+                var wx = api.require('wx');
+                var wxText = $api.dom('#textarea').value + vGlobalParam.url+USER.userId;
+                wx.isInstalled(function(ret, err){
+                    if(ret.installed){
+                        wx.shareText({
+                            apiKey: '',
+                            scene: 'session',
+                            text: wxText
+                        }, function(ret, err){
+                            if(ret.status){
+                                SubmitShareSuccess(shareID)
+                            }else{
+                                api.toast({
+                                    msg: err&&err.msg ||  fnLanguageSwitch( '发送失败' )
+                                });
+                            }
+                        });
+                    }else{
+                        api.toast({
+                            msg: fnLanguageSwitch( '请先安装微信客户端' )
+                        });
+                    }
+                });
+
+                break;
+            case 'h':
+                var wx = api.require('wx');
+                var wxText = $api.dom('#textarea').value + vGlobalParam.url+USER.userId;
+                wx.isInstalled(function(ret, err){
+                    if(ret.installed){
+                        wx.shareText({
+                            apiKey: '',
+                            scene: 'timeline',
+                            text: wxText
+                        }, function(ret, err){
+                            if(ret.status){
+                                SubmitShareSuccess(shareID)
+                            }else{
+                                api.toast({
+                                    msg: err&&err.msg || fnLanguageSwitch( '失败' )
+                                });
+                            }
+                        });
+                    }else{
+                        api.toast({
+                            msg: fnLanguageSwitch( '请先安装微信客户端' )
+                        });
+                    }
+                });
+
+                break;
+            case 'd':
+                var weibo = api.require('weibo');
+                var weiboText = $api.dom('#textarea').value + vGlobalParam.url+USER.userId;
+                weibo.shareText({
+                    text: weiboText
+                },function(ret,err){
+                    if (ret.status) {
+                        SubmitShareSuccess(shareID)
+                    }else{
+                        api.toast({
+                            msg: err&&err.msg || fnLanguageSwitch( '失败' )
+                        });
+                    }
+                });
+                break;
+            case 'e':
+                var qq = api.require('qq');
+                qq.installed(function(ret,err){
+                    if(ret.status){
+                        var qqText =  $api.dom('#textarea').value + vGlobalParam.url+USER.userId;
+                        qq.shareText({
+                            text:qqText
+                        },function(ret,err){
+                            if(ret.status){
+                                SubmitShareSuccess(shareID)
+                            }else{
+                                api.toast({
+                                    msg: err&&err.msg || fnLanguageSwitch( '失败' )
+                                });
+                            }
+                        });
+                    }else{
+                        api.toast({
+                            msg: fnLanguageSwitch( '请先安装QQ客户端' )
+                        });
+                    }
+                });
+                break;
+            case 'g':
+                break;
+        }
+    }
+    //todo  分享成功后调用
+    function SubmitShareSuccess(shareID) {
+        fnAjax({
+            url: 'logshares/SubmitShareSuccess?shareId='+shareID
+        }, function( ret, err ){
+        	if( ret ){
+        		if( ret.success ){
+                    api.toast({
+                        msg: fnLanguageSwitch( '分享成功' )
+                    });
+        		}else{
+                    api.toast({
+                        msg: fnLanguageSwitch( '分享失败' )
+                    });
+        		}
+            }else{
+                api.toast({
+                    msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                });
+            }
+        });
+    }
+
+
+</script>
+</html>

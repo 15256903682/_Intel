@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>home</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/common.css"/>
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+
+        #wrap {
+            height: auto;
+        }
+
+        #main {
+            margin-bottom: 20px;
+        }
+
+        .top_information {
+            margin-top: 1rem;
+            /*background-color: #DDDDDD;*/
+        }
+
+        .home_news {
+
+            padding: 1rem;
+            background-color: #ffffff;
+        }
+
+        .home_news_titleWrap {
+            background-color: #ffffff;
+            display: -webkit-box;
+            height: 6rem;
+            -webkit-box-align: center;
+            -webkit-box-pack: center;
+        }
+
+        .home_news_titleWrap .title {
+            margin: 0 10px;
+            font-size: 2rem;
+        }
+
+        .home_news_title_line {
+            height: 0.1rem;
+            width: 3rem;
+            background-color: #C3C3C3;
+        }
+
+        .home_news_picture, .product_focus_picture {
+            height: 18.3rem;
+            position: relative;
+        }
+
+        .home_news_picturelable {
+            background-color: RGBA(0, 60, 114, 0.37);
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 30px;
+            line-height: 30px;
+            padding-left: 20px;
+            display: block;
+            color: #fff;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            font-size: 1.5rem;
+        }
+
+        .product_focus .home_news_picturelable {
+            background-color: RGBA(0, 60, 114, 0.37);
+        }
+
+        .home_news_picture img, .product_focus_picture img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .home_news_brief {
+            margin-top: 10px;
+            font-size: 1.2rem;
+            line-height: 1.8rem;
+            color: #7B7B7B;
+        }
+
+    </style>
+</head>
+<body>
+<div id="wrap">
+    <div id="main">
+        <div class="top_information">
+            <div id="information">
+                <div class="home_news" tapmode="">
+                    <div class="home_news_picture">
+                        <img src="../../image/common/placeholderimg.png">
+                    </div>
+                </div>
+                <div class="home_news" tapmode="">
+                    <div class="home_news_picture">
+                        <img src="../../image/common/placeholderimg.png">
+                    </div>
+                </div>
+                <div class="home_news" tapmode="">
+                    <div class="home_news_picture">
+                        <img src="../../image/common/placeholderimg.png">
+                    </div>
+                </div>
+                <div class="home_news" tapmode="">
+                    <div class="home_news_picture">
+                        <img src="../../image/common/placeholderimg.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/echo.min.js"></script>
+<script type="text/javascript" src="../../script/sha1.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript">
+    var zhuge;
+    apiready = function () {
+        api.setRefreshHeaderInfo({
+            loadingImg: 'widget://image/common/blueArrow@2x.png',
+            textDown: fnLanguageSwitch( '下拉刷新' ),
+            textUp: fnLanguageSwitch( '松手加载' ),
+            textLoading: fnLanguageSwitch( '刷新中' ),
+            showTime: false,
+            bgColor: '#FFF',
+            textColor: '#000'
+        }, function(ret, err){
+            SKIP = 0;
+            fnGetProjectList();
+        });
+        api.refreshHeaderLoading();
+
+        api.addEventListener({
+            name:'scrolltobottom',
+            extra:{
+                threshold: 50
+            }
+        }, function(ret, err){
+            fnGetProjectList();
+        });
+
+        zhuge = api.require('zhuge');
+        if (zhuge) {
+            zhuge.initZhuge();
+        }
+    };
+
+        //      智能硬件大赛列表
+    function fnGetProjectList( ){
+        fnAjax({
+            url: 'videos/getAppVideo',
+            data: {
+                values: {
+                    limit: LIMIT,
+                    skip: SKIP
+                }
+            }
+        }, function( ret, err ){
+            debugAlert( arguments )
+            api.refreshHeaderLoadDone();
+            if( ret ){
+                if( ret.length ){
+                    // if( ! SKIP )$api.dom( '#main' ).innerHTML = '';
+                    SKIP += LIMIT;
+
+                }
+            }else{
+                api.toast({
+                    msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                });
+            }
+        })
+
+        // 这里开始重构
+        return;
+        var now = Date.now();
+        var appKey = SHA1(appId + "UZ" + key + "UZ" + now) + "." + now;
+        api.ajax({
+            url: 'https://d.apicloud.com/mcm/api/product?filter={"limit":100,"order":"sequence ASC"}',
+            method: 'get',
+            timeout: 30,
+            dataType: 'json',
+            headers: {
+                "Content-type": "application/json;charset=UTF-8",
+                "X-APICloud-AppId": appId,
+                "X-APICloud-AppKey": appKey
+            }
+        }, function (ret, err) {
+            if (ret) {
+                var productHtml = '';
+                for (var i = 0; i < ret.length; i++) {
+                    var product = ret[i];
+                    productHtml += '<div class="home_news" tapmode="" onclick="openVideo(\''+product.title.split(' ')[0]+'\',\''+product.video+'\')"><div class="home_news_picture"><img data-echo="' + product.pic.url + '" src="../../image/common/placeholderimg.png"><div class="home_news_picturelable">'+product.title+'</div></div><div class="home_news_brief">'+product.detail+'</div></div>';
+                }
+                $("#information").html(productHtml);
+                echo.init({
+                    offset: 100,
+                    throttle: 250
+                });
+            } else {
+                api.toast({
+	global: true,
+                    msg: 'Server request error'
+                });
+            }
+
+        });
+    }
+
+
+    function openVideo(title,url) {
+
+        if (zhuge) {
+            zhuge.track({
+                eventName: '智能硬件大赛详情',
+                eventPro: {
+                    '图片名称': title
+                }
+            });
+        }
+        var move = isHuawei();
+        var animation = {};
+        if (move) {
+            animation = {
+                type: 'movein',
+                subType: 'from_right'
+            }
+        }
+        api.openWin({
+            name: 'web_win',
+            url: 'widget://' + DIR + '/web_page/web_win.html',
+            bounces: false,
+            pageParam: {
+                title: 'Video',
+                text: title,
+                url: url
+            },
+            animation: animation
+        });
+    }
+</script>
+</html>

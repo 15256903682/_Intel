@@ -1,0 +1,283 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>查看开发板借测及评估</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/fonts_awesome/font-awesome.min.css">
+    <style type="text/css">
+    body{
+        height: auto;
+        min-height: 100%;
+        background-color: #FFFFFF;
+    }
+    .placeholder{
+        height: 2.5rem;
+    }
+    .container{
+        padding: 0 1rem;
+    }
+    .container label.text{
+        font-size: 1.7rem;
+        line-height: 4.7rem;
+        color: #000000;
+    }
+    .table{
+        margin: 0 auto;
+        margin-bottom: 1.5rem;
+        border-bottom: 1px solid #AEBECB;
+        width: 100%;
+    }
+    .table td{
+        font-size: 1.6rem;
+        line-height: 2rem;
+        padding: 0.9rem 0;
+        color: #101010;
+        /*border: 1px solid #AEAEAE;*/
+    }
+    .table tr td:nth-child(odd){
+        width: 37%;
+        font-size: 1.3rem;
+        color: #5A5A5A;
+    }
+    .table tr td:nth-child(even){
+        width: 63%;
+        font-size: 1.9rem;
+        color: #0070C5;
+    }
+    p.notice{
+        font-size: 1.9rem;
+        line-height: 2.2rem;
+        color: #0070C5;
+    }
+
+    span.normal-text{
+        color: #5A5A5A;
+        font-size: 1.3rem;
+    }
+
+    p.content{
+        color: #5A5A5A;
+        font-size: 1.3rem;
+        line-height: 1.6rem;
+    }
+    
+    label[for="checkbox"]{
+        color: #5A5A5A;
+        font-size: 1.3rem;
+        line-height: 1.6rem;
+    }
+
+    .fake-link{
+        color: #0071C5 !important;
+    }
+
+    </style>
+</head>
+<body>
+<!--     <div class="placeholder"></div>
+    <div class="container">
+        <p class="content" style="margin-bottom: 1rem">已申请的开发板样品</p>
+        <p class="notice" style="margin-bottom:1rem">test开发板</p>
+        <p class="content" style="margin-bottom: 1rem">入本项目研发成功，是否考虑基于当前平台再研发其他产品？</p>
+        <p class="notice" style="margin-bottom:1rem">是</p>
+        <label for="checkbox">
+            <input type="checkbox" id="checkbox" disabled="" checked="" style="margin-bottom: 2rem">
+            我已经阅读并同意开发板借用须知
+        </label>
+        <p class="notice" style="padding-top: 0.3rem;margin-bottom:1rem;border-top:1px solid #AEBECB;">收件地址</p>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>
+                    </th>
+                </tr>
+                <tr>
+                    <td>公司名称（中文）</td>
+                    <td>柚子科技</td>
+                </tr>
+                <tr>
+                    <td>公司名称（英文）</td>
+                    <td>柚子科技</td>
+                </tr>
+                <tr>
+                    <td>公司地址（中文）</td>
+                    <td>是的放假哦碍事的地方jap圣诞节哦啊怕实际得分</td>
+                </tr>
+                <tr>
+                    <td>邮政编码：</td>
+                    <td>132411</td>
+                </tr>
+                <tr>
+                    <td>公司地址（英文）</td>
+                    <td>是的放假哦碍事的地方jap圣诞节哦啊怕实际得分</td>
+                </tr>
+                <tr>
+                    <td>固定电话</td>
+                    <td>13110101010</td>
+                </tr>
+                <tr>
+                    <td>公司域名的Emai地址</td>
+                    <td>https://www.apicloud.com</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="notice" style="margin-bottom: 1.8rem">
+            开发套件购买指南
+        </p>
+        <p class="content">
+            申请购买来自英特尔的评估平台计划提供客户参考版、开发套件和评估主板，在解决方案的原型设计、性能评估以及迁移应用程序软件方面给予开发人员帮助。您可以点击下方链接参看目前所有可以申请购买的开放套件：
+        </p>
+        <p class="content fake-link" tapmode onclick="openWebPage(this)" style="margin-bottom: 1rem;">
+            http://www.intel.cn/content/www/cn/zh/intelligent-systems/evalution-platforms/evalution-platforms.html
+        </p>
+        <p class="content">
+            详细的
+            <span class="fake-link" tapmode onclick="goGuideFullVersion()">
+                开发套件购买指南>>
+            </span>
+        </p>
+        <div class="placeholder"></div>
+    </div> -->
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript">
+
+    apiready = function(){
+        fnAjax({
+            url: 'developBords/findDevelopBordName'
+        }, function( findDevelopBordName, err ){
+            if( findDevelopBordName ){
+                fnAjax({
+                    url: 'supports/DevelopBordDetails?supportId='+api.pageParam.id
+                }, function( ret, err ){
+                    if( ret ){
+                        var _html = 
+                        '<div class="placeholder"></div>'+
+                        '<div class="container">'+
+                        '    <p class="content" style="margin-bottom: 1rem">'+fnLanguageSwitch('已申请的开发板样品')+'</p>'+
+                        '    <p class="notice" style="margin-bottom:1rem">'+fnStringEmpty( fnFilter(findDevelopBordName, ret.DevelopBord.deveBordId ).name )+'</p>'+
+                        '    <p class="content" style="margin-bottom: 1rem">'+fnLanguageSwitch('入本项目研发成功，是否考虑基于当前平台再研发其他产品？')+'</p>'+
+                        '    <p class="notice" style="margin-bottom:1rem">'+fnLanguageSwitch('是')+'</p>'+
+                        '    <label for="checkbox">'+
+                        '        <input type="checkbox" id="checkbox" disabled '+( ret.DevelopBord.read == 1 ? 'checked' : '' )+' style="margin-bottom: 2rem">'+fnLanguageSwitch('我已经阅读并同意开发板借用须知')+
+                        '    </label>'+
+                        '    <p class="notice" style="padding-top: 0.3rem;margin-bottom:1rem;border-top:1px solid #AEBECB;">'+fnLanguageSwitch('收件地址')+'</p>'+
+                        '    <table class="table">'+
+                        '        <tbody>'+
+                        '            <tr>'+
+                        '                <th>'+
+                        '                </th>'+
+                        '            </tr>'+
+                        '            <tr>'+
+                        '                <td>'+fnLanguageSwitch('公司名称（中文）')+'</td>'+
+                        '                <td>'+fnStringEmpty( ret.DevelopBord.address.fullNameChinese )+'</td>'+
+                        '            </tr>'+
+                        '            <tr>'+
+                        '                <td>'+fnLanguageSwitch('公司名称（英文）')+'</td>'+
+                        '                <td>'+fnStringEmpty( ret.DevelopBord.address.fullNameEnglish )+'</td>'+
+                        '            </tr>'+
+                        '            <tr>'+
+                        '                <td>'+fnLanguageSwitch('公司地址（中文）')+'</td>'+
+                        '                <td>'+fnStringEmpty( ret.DevelopBord.address.addressChinese )+'</td>'+
+                        '            </tr>'+
+                        '            <tr>'+
+                        '                <td>'+fnLanguageSwitch('邮政编码')+'</td>'+
+                        '                <td>'+fnStringEmpty( ret.DevelopBord.address.postcode )+'</td>'+
+                        '            </tr>'+
+                        '            <tr>'+
+                        '                <td>'+fnLanguageSwitch('公司地址（英文）')+'</td>'+
+                        '                <td>'+fnStringEmpty( ret.DevelopBord.address.addressEnglish )+'</td>'+
+                        '            </tr>'+
+                        '            <tr>'+
+                        '                <td>'+fnLanguageSwitch('固定电话')+'</td>'+
+                        '                <td>'+fnStringEmpty( ret.DevelopBord.address.telephone )+'</td>'+
+                        '            </tr>'+
+                        '            <tr>'+
+                        '                <td>'+fnLanguageSwitch('公司域名的Emai地址')+'</td>'+
+                        '                <td>'+fnStringEmpty( ret.DevelopBord.address.webSite )+'</td>'+
+                        '            </tr>'+
+                        '        </tbody>'+
+                        '    </table>'+
+                        '    <p class="notice" style="margin-bottom: 1.8rem">'+fnLanguageSwitch('收件地址开发套件购买指南')+'</p>'+
+                        '    <p class="content">'+fnLanguageSwitch('申请购买来自英特尔的评估平台计划提供客户参考版、开发套件和评估主板，在解决方案的原型设计、性能评估以及迁移应用程序软件方面给予开发人员帮助。您可以点击下方链接参看目前所有可以申请购买的开放套件')+'：</p>'+
+                        '    <p class="content fake-link" tapmode onclick="openWebPage(this)" style="margin-bottom: 1rem;">http://www.intel.cn/content/www/cn/zh/intelligent-systems/evalution-platforms/evalution-platforms.html</p>'+
+                        '    <p class="content">'+fnLanguageSwitch('详细的')+
+                        '        <span class="fake-link" tapmode onclick="goGuideFullVersion()">'+
+                        '            '+fnLanguageSwitch('开发套件购买指南')+'>>'+
+                        '        </span>'+
+                        '    </p>'+
+                        '    <div class="placeholder"></div>'+
+                        '</div>';
+                        $api.dom( 'body' ).innerHTML = _html;
+                    }else{
+                        api.toast({
+                            msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                        });
+                    }
+                });      
+            }
+        })
+    };
+
+    // 打开网页
+    function openWebPage(el){
+        fnOpen({
+            name: 'web_win',
+            url: 'widget://' + DIR + '/web_page/web_win.html',
+            bounces: false,
+            pageParam: {
+                title: fnLanguageSwitch( '开放套件' ),
+                url: $api.html(el)
+            },
+        });
+    };
+
+    // 开发套件购买指南
+    function goGuideFullVersion(){
+        var url = 'https://ccechina.intel.com/SupportObtain/FAQ.pdf';
+        api.download({
+            url: url,
+            report: true,
+            cache: true,
+            allowResume: true
+        },function( ret, err ){
+            if(ret){
+                if (ret.state == 1) {
+                    api.hideProgress();
+                    // ret.savePath
+                    var obj = api.require('pdfReader');
+                    obj.open({
+                        path: ret.savePath
+                    });
+                } else if(ret.state == 2){
+                    api.toast({
+                        msg: JSON.stringify(ret),
+                        duration: 2000,
+                        location: 'middle'
+                    });
+                } else{
+                    api.showProgress({
+                        title: '正在下载该文件,请稍候',
+                        text: ret.percent +'%',
+                        modal: true
+                    });
+                }
+            }
+            if (err) {
+                api.toast({
+                    msg: err.msg,
+                    duration: 2000,
+                    location: 'msg'
+                });
+            }
+        });
+
+    };
+</script>
+</html>

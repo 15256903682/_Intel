@@ -1,0 +1,263 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>Update request</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" href="../../css/common.css">
+    <style type="text/css">
+        body {
+            height: auto;
+            min-height: 100%;
+            background-color: RGBA(238, 238, 238, 1);
+        }
+
+        .place-holder {
+            background-color: #F5F5F5;
+            height: 1.2rem;
+        }
+
+        .border-1px-bottom:after {
+            color: #B3B7BA;
+        }
+
+        .form {
+            padding: 0 1.2rem;
+            background-color: #ffffff;
+        }
+
+        .form .form-row {
+            height: 5.5rem;
+        }
+
+        .form .form-row label {
+            font-size: 1.5rem;
+            line-height: 5.5rem;
+        }
+
+        .form .form-row .btn-type {
+            font-size: 1.2rem;
+            color: #C8C8C8;
+            line-height: 5.5rem;
+        }
+
+        /*.form .form-row .comand-title {
+            float: right;
+            font-size: 1.4rem;
+            line-height: normal;
+            position: relative;
+            top: 2rem;
+            text-align: right;
+        }*/
+
+        #comand-description {
+            display: block;
+            height: 12.5rem;
+            border: 1px solid #CCCCCC;
+            resize: none;
+            width: 100%;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            padding: 1.6rem 1.2rem;
+            font-size: 1.4rem;
+            line-height: 1.6rem;
+            color: #999999;
+        }
+
+        .form .form-row.form-row-lg {
+            height: auto;
+            padding-bottom: 2rem;
+        }
+
+        .btn-submit {
+            height: 4rem;
+            text-align: center;
+            font-size: 1.5rem;
+            line-height: 3.8rem;
+            color: #FFFFFF;
+            background-color: RGBA(0, 174, 239, 1);
+            border-radius: 0.4rem;
+            margin: 4rem 1.2rem 2rem;
+        }
+
+        p.description {
+            font-size: 1.4rem;
+            line-height: 2.2rem;
+            color: RGBA(177, 177, 177, 1);
+            padding: 0 2rem;
+        }
+
+        :input::-webkit-input-placeholder {
+            text-align: right;
+        }
+        .nochange{
+            color: RGBA(185, 185, 185, 1);
+        }
+        .form .form-row.form-row-md{
+            height: auto;
+        }
+        .form .form-row .comand-title {
+            height: 7.5rem;
+            border: 1px solid #CCCCCC;
+            resize: none;
+            width: 100%;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            padding: 1.6rem 1.2rem;
+            font-size: 1.4rem;
+            line-height: 1.6rem;
+            color: #999999;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+<div class="place-holder"></div>
+<div class="form">
+    <div class="form-row">
+        <span class="btn-type pull-right" tapmode onclick="">Required&gt;</span>
+        <label class="nochange">Request Type</label>
+    </div>
+    <div class="form-row border-1px-top form-row-md">
+        <!-- <input type="text" id="title" class="comand-title input" placeholder="At least 8 words"> -->
+        <label>Request Title</label>
+        <textarea name="" id="title" class="comand-title input" placeholder="At least 2 characters"></textarea>
+    </div>
+    <div class="form-row form-row-lg border-1px-top">
+        <label>Details of Request</label>
+        <textarea name="comand-description" id="comand-description"
+                  placeholder="Example: I am looking for XXX kind of partner for XXX product/XXX project ( at least 10 words)"></textarea>
+    </div>
+</div>
+<div class="form-row form-row-lg">
+    <div class="btn-submit" tapmode onclick="toSubmit()">Submit</div>
+    <p class="description">
+        Request will be sent by the system to the appropriate partners.  You can check the detail information once you accept response from partner.
+    </p>
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript" src="../../script/translation.js"></script>
+<script type="text/javascript">
+    var btnType = $api.dom('.btn-type');
+    var comandTitle = $api.dom('.comand-title');
+    var comandDescription = $api.dom('#comand-description');
+    var loginInfo = $api.getStorage('loginInfo');
+    var DemandTypeID = 0;
+    var ProjectID;
+    var DemandID;
+    apiready = function () {
+        DemandID = api.pageParam.DemandID;
+        getDemand(DemandID);
+    };
+
+    function getDemand(DemandID) {
+        var valueParam = {
+            UserID: loginInfo.userid,
+            BatchNo: loginInfo.batchno,
+            DemandID: DemandID
+        };
+        var url = 'APPMatchmaking/getDemand.aspx';
+        api.showProgress({
+            title: 'loading...',
+            text: '',
+            modal: false
+        });
+        ajaxRequest(url, 'post', valueParam, function (ret, err) {
+            api.hideProgress();
+            if (ret) {
+                var Title = ret.Title;
+                DemandTypeID = ret.DemandTypeID;
+                var Content = ret.Content;
+                $api.text(btnType, fnTranslation( ret.DemandTypeName, true ) + '>');
+                $api.val(comandTitle, Title);
+                $api.val(comandDescription, Content);
+            } else {
+                api.toast({
+	           global: true,
+                    msg: err.msg
+                });
+            }
+        })
+    }
+
+    function toSubmit() {
+        var title = $("#title").val();
+        var description = $("#comand-description").val();
+        if (DemandTypeID == 0) {
+            api.alert({
+                title: 'Tips',
+                msg: 'Please select the type of demand',
+                buttons: ['I got it']
+            }, function (ret, err) {
+
+            });
+            return;
+        }
+        if ($.trim(title).length < 2) {
+            api.alert({
+                title: 'Tips',
+                msg: 'Request Title at least 2 characters',
+                buttons: ['I got it']
+            }, function (ret, err) {
+
+            });
+            return;
+        }
+        if ($.trim(description).length < 3) {
+            api.alert({
+                title: 'Tips',
+                msg: 'Details of Request at least 3 characters',
+                buttons: ['I got it']
+            }, function (ret, err) {
+
+            });
+            return;
+        }
+        var valueParam = {
+            UserID: loginInfo.userid,
+            BatchNo: loginInfo.batchno,
+            DemandID: DemandID,
+            DemandType: DemandTypeID,
+            Title: title,
+            Content: description,
+            UpOrAdd: 2
+        };
+        api.showProgress({
+            title: 'Editing…...',
+            text: '',
+            modal: false
+        });
+        var url = 'APPMatchmaking/AddDemand.aspx';
+        ajaxRequest(url, 'post', valueParam, function (ret, err) {
+            api.hideProgress();
+            if (ret) {
+                api.toast({
+	global: true,
+                    msg: ret.des
+                });
+                if (ret.res == 1) {
+                    api.execScript({
+                        name: 'index',
+                        frameName: 'frm_chain',
+                        script: 'loadDataFromComandForMaker()'
+                    });
+                    api.closeWin();
+                }
+            } else {
+                api.toast({
+	global: true,
+                    msg: err.msg
+                });
+            }
+        })
+    }
+    ;
+
+</script>
+</html>

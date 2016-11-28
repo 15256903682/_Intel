@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>my</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <style>
+        html {
+            height: 100%;
+        }
+
+        body {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-flex-flow: column;
+            flex-flow: column;
+            height: 100%;
+        }
+
+        .header {
+            position: relative;
+            widht: 100%;
+            height: 44px;
+            background-color: #0171c5;
+        }
+
+        .header .back {
+            position: absolute;
+            box-sizing: border-box;
+            bottom: 0;
+            padding-left: 16px;
+            width: 44px;
+            height: 44px;
+            background-image: url(../../image/arrow-left-white.png);
+            background-repeat: no-repeat;
+            background-size: 16px 16px;
+            background-position: center center;
+            z-index: 2;
+        }
+
+        .header .title {
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            height: 44px;
+            font-size: 16px;
+            line-height: 44px;
+            color: #fff;
+            text-align: center;
+        }
+
+        .notice {
+            box-sizing: border-box;
+            padding-top: 8px;
+            padding-bottom: 8px;
+            padding-left: 16px;
+            padding-right: 16px;
+            /*height: 30px;*/
+            /*line-height: 14px;*/
+            text-align: left;
+            color: #fff;
+            font-size: 12px;
+            background-color: #bbb;
+        }
+
+        .notice .float {
+            /*position: absolute;*/
+            display: inline-block;
+            width: auto;
+            /*animation: float 2s linear infinite running alternate-reverse;
+            -webkit-animation: float 2s linear infinite running alternate-reverse;*/
+        }
+
+        /*@keyframes float {
+            from {
+                transform: translateX(0);
+                -webkit-transform: translateX(0);
+            }
+            to {
+                transform: translateX(50%);
+                -webkit-transform: translateX(50%);
+            }
+        }
+
+        @-webkit-keyframes float {
+            from {
+                transform: translateX(0);
+                -webkit-transform: translateX(0);
+            }
+            to {
+                transform: translateX(50%);
+                -webkit-transform: translateX(50%);
+            }
+        }*/
+
+        .holder {
+            -webkit-box-flex: 1;
+            -webkit-flex: 1;
+            flex: 1;
+            width: 100%;
+        }
+
+        .footer {
+            width: 100%;
+            height: 44px;
+        }
+
+        .highlight {
+            opacity: 0.7;
+            background-color: #0060A8 !important;
+        }
+    </style>
+</head>
+
+<body>
+<header id="header" class="header">
+    <div class="back" tapmode="highlight" onclick="api.closeWin()"></div>
+    <div id="title" class="title"></div>
+</header>
+<section id="notice" class="notice">
+    <div class="float"> Please confirm whether you are matched after contact to get the points. </div>
+</section>
+<section class="holder"></section>
+<footer id="footer" class="footer"></footer>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript">
+    var loginInfo = $api.getStorage('loginInfo');
+    var SendUserID = 0;
+    apiready = function () {
+        fnInit();
+        fnInitChatBox();
+        // SendUserID = api.pageParam.SendUserID;
+    };
+
+    function fnInit() {
+        $api.dom('#notice').innerHTML=
+    '<div class="float">'+fnLanguageSwitch('联系后请不要忘记确认是否合作哦，还有积分呢！')+'</div>';
+
+        var header = $api.byId('header'),
+                footer = $api.byId('footer'),
+                notice = $api.byId('notice'),
+                title = $api.byId('title');
+
+        title.innerHTML = api.pageParam.data.username || api.pageParam.data.user.username;
+
+        $api.fixStatusBar(header);
+
+        var headerHeight = $api.offset(header).h,
+                footerHeight = $api.offset(footer).h,
+                noticeHeight = $api.offset(notice).h;
+
+        api.openFrame({
+            name: 'whisper_frame',
+            url: './whisper_frame.html',
+            bounces: false,
+            rect: {
+                x: 0,
+                y: headerHeight + noticeHeight,
+                // w: 'auto',
+                // h: api.frameHeight - headerHeight - footerHeight - noticeHeight-8
+            },
+            pageParam: api.pageParam
+        });
+    }
+    ;
+    var uichatbox;
+
+    function fnInitChatBox() {
+        uichatbox = api.require('UIChatBox');
+        uichatbox.open({
+            placeholder: fnLanguageSwitch( '请输入内容' ),
+            maxRows: 1,
+            emotionPath: 'widget://image/emotion',
+            texts: {
+                sendBtn: {
+                    title: fnLanguageSwitch('发送')
+                }
+            },
+        }, function (ret) {
+            //debugAlert(JSON.stringify(ret))
+            //点击发送按钮
+            if (ret.eventType == 'send') {
+                if( ret.msg.trim() ){
+                    submitMessageInfo(ret.msg);   
+                }else{
+                    api.toast({
+                        global: true,
+                        msg: fnLanguageSwitch( '发送的信息不能为空' )
+                    });
+                      
+                }
+           }
+        });
+    }
+    //提交私信
+    function submitMessageInfo( messageCon ) {
+        // 系统私信
+        if( api.pageParam.has === 'sys' ){
+            var receiveUserId = api.pageParam.data.sendUserId;
+        }else{
+            var receiveUserId = api.pageParam.data.userId || api.pageParam.data.user.userId;
+        }
+        uichatbox.closeKeyboard();
+        fnAjax({
+            url: 'messages/privateMessage',
+            data: {
+                values: {
+                    receiveUserId: receiveUserId,
+                    content: messageCon
+                }
+            }
+        }, function( ret, err ){
+            // debugAlert(JSON.stringify(ret));
+            if( ret ){ 
+                    api.execScript({
+                        frameName:'whisper_frame',
+                        script: 'fnGetMessage(\''+new Date()+'\');'
+                    })
+            }else{
+                api.toast({
+	               global: true,
+                    msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                });
+            }
+        }); 
+    }
+
+ //        return;
+ //        api.showProgress({
+ //            title: 'Sending…',
+ //            text: '',
+ //            modal: true
+ //        });
+ //        var bodyParam = {
+ //            UserID: loginInfo.userid,
+ //            BatchNo: loginInfo.batchno,
+ //            ReceiveUserID: SendUserID,
+ //            MessageCon: messageCon
+ //        };
+ //        var url = 'APPMessage/APPSubmitMessageInfo.aspx';
+ //        ajaxRequest(url, 'get', bodyParam, function (ret, err) {
+ //            api.hideProgress();
+ //            if (ret) {
+ //                if (ret.res == 1) {
+ //                    api.execScript({
+ //                        frameName:'whisper_frame',
+ //                        script:"currentIndex=1;getMessageInfo("+SendUserID+")"
+ //                    })
+ //                } else {
+ //                    api.toast({
+	// global: true,
+ //                        msg: ret.des
+ //                    });
+ //                }
+ //            } else {
+ //                api.toast({
+	// global: true,
+ //                    msg: err.msg
+ //                });
+ //            }
+ //        })
+   
+</script>
+
+</html>

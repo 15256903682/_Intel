@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>chain_fix</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/common.css"/>
+    <style>
+        #wrap.maker {
+            background-color: #FFFFFF;
+        }
+
+        #main {
+            overflow: hidden;
+        }
+
+        /*模块描述*/
+        .description-box {
+            height: 4.5rem;
+            padding: 0.3rem 1.1rem;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            /*background-color: #F5F5F5;*/
+        }
+
+        /*#wrap.maker .description-box{
+            background-color: #FFFFFF;
+        }*/
+        .description-btn {
+            background-color: rgba(0, 113, 197, 1);
+            height: 4rem;
+            border-radius: 0.6rem;
+        }
+
+        .description-box .fa {
+            width: 3rem;
+            height: 4rem;
+            text-align: center;
+            vertical-align: middle;
+            line-height: 4rem;
+            color: #FFFFFF;
+            font-size: 2.8rem;
+        }
+
+        .description-text {
+            text-align: center;
+            line-height: 4rem;
+            color: #FFFFFF;
+            font-size: 1.5rem;
+        }
+
+        /*需求数*/
+        .counting-box {
+            height: 3.6rem;
+            line-height: 3.6rem;
+           /* text-align: center;*/
+            padding: 0 1rem;
+            background-color: #FFFFFF;
+        }
+
+        /*#wrap.maker .counting-box{
+            background-color: #FFFFFF;
+        }*/
+        .counting-box .fa {
+            color: #D6D6D6;
+            font-size: 2rem;
+            line-height: 3.4rem;
+            position: relative;
+            top: 0.1rem;
+        }
+
+        .counting-text {
+            color: #C1C1C1;
+            font-size: 1.4rem;
+        }
+
+        .counting-box .count {
+            color: #FEA900;
+        }
+
+        /*折叠*/
+        /*.toggle-container{
+            background-color: #F5F5F5;
+        }
+        #wrap.maker .toggle-container{
+            background-color: #FFFFFF;
+        }*/
+        .toggle-container{
+            background-color: #F9FCFF;
+        }
+        .toggle-box {
+            text-align: center;
+            height: 3.9rem;
+            line-height: 3.9rem;
+        }
+
+        .toggle-box .text {
+            font-size: 1.2rem;
+            color: #000000;
+        }
+
+        .toggle-box .count {
+            font-size: 1.2rem;
+            color: #0071C5;
+        }
+
+        .toggle-container .icon{;
+            position: relative;
+            top: -0.2rem;
+            vertical-align: middle;
+            margin: 0 1rem;
+            width: 1.25rem;
+            height: 0.45rem;
+            background-size: 1.25rem .45rem;
+            background-image: url("../../image/down.png");
+        }
+        .toggle-container.active .icon{
+            background-image: url("../../image/up.png");
+        }
+        .icon.up{
+
+        }
+
+
+        .collapse {
+            padding-bottom: 0.8rem;
+            display: none;
+        }
+
+        .toggle-container.active .collapse {
+            display: block;
+        }
+
+        .collapse-row {
+            height: 3.15rem;
+            /*line-height: 2.4rem;*/
+            font-size: 1.1rem;
+            padding: 0 1rem;
+            text-align: center;
+        }
+
+        .collapse-row:first-child {
+        }
+
+        .collapse .msg-group {
+            color: #4E4E4E;
+            margin: 0 1rem;
+        }
+
+        .collapse .count {
+            text-align: center;
+            display: inline-block;
+            min-width: 3.5rem;
+            height: 1.4rem;
+            border-radius: 999px;
+            -webkit-background-clip: padding-box;
+            background-clip: padding-box;
+            font-style: normal;
+            color: #FFFFFF;
+            margin-top: 10px;
+        }
+
+        .new .count {
+            background-color: #31C37B;
+        }
+
+        .communication .count {
+            background-color: #00AEEE;
+        }
+
+        .success .count {
+            background-color: #F7AA00;
+        }
+
+        .confirming .count {
+            background-color: #F05E4A;
+        }
+
+        .close .count {
+            background-color: #575757;
+        }
+
+        .icon-volume-up {
+            background: url(../../image/MC_information_icon.png) center center no-repeat;
+            width: 3.4rem;
+            height: 3.4rem;
+            vertical-align: middle;
+            background-size: 2rem;
+        }
+    </style>
+</head>
+<body>
+<div id="wrap">
+    <div id="main">
+        <div class="counting-box border-1px-bottom">
+            <!-- <span class="icon-volume-up"></span>
+            <span class="counting-text text-1">方的</span>
+            <span class="counting-text count">飞</span>
+            <span class="counting-text text-2"> 成分v</span>
+        --> </div>
+        <div class="toggle-container">
+          <!--   <div class="toggle-box" tapmode="tap-active" onclick="toggleCollapse();">
+                <span class="text">--</span>
+                <span class="count" id="speedCont"></span>
+                <span class="icon down"></span>
+            </div>
+            <div class="collapse border-1px-top">
+                <p class="collapse-row">
+                    <span tapmode onclick="fnGetProjectList( this )" data-id="1" class="msg-group communication">
+                        --
+                        <i class="count" id="communication"></i>
+                    </span>
+                    <span tapmode onclick="fnGetProjectList( this )" data-id="2" class="msg-group success">
+                        --
+                        <i class="count" id="success"></i>
+                    </span>
+                    <span tapmode onclick="fnGetProjectList( this )" data-id="3" class="msg-group close">
+                       --
+                        <i class="count" id="close"></i>
+                    </span>
+                </p>
+
+               
+            </div> -->
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript">
+    var pageParam, rect = {};
+    var zhuge;
+    apiready = function () {
+         $api.dom('.toggle-container').innerHTML=
+         
+                '            <div class="toggle-box" tapmode="tap-active" onclick="toggleCollapse();">'+
+                '                <span class="text">'+fnLanguageSwitch('需求情况概括')+'</span>'+
+                '                <span class="count" id="speedCont"></span>'+
+                '                <span class="icon down"></span>'+
+                '            </div>'+
+                '            <div class="collapse border-1px-top">'+
+                '                <p class="collapse-row">'+
+                '                    <span tapmode onclick="fnGetProjectList( this )" data-id="1" class="msg-group communication"> '+fnLanguageSwitch('可接单')+' '+
+                '                        <i class="count" id="communication"></i>'+
+                '                    </span>'+
+                '                    <span tapmode onclick="fnGetProjectList( this )" data-id="2" class="msg-group success">   '+fnLanguageSwitch('对接成功')+''+
+                '                        <i class="count" id="success"></i>'+
+                '                    </span>'+
+                '                    <span tapmode onclick="fnGetProjectList( this )" data-id="3" class="msg-group close">  '+fnLanguageSwitch('已关闭')+' '+
+                '                        <i class="count" id="close"></i>'+
+                '                    </span>'+
+                '                </p>'+
+                '        </div>';
+
+
+        pageParam = api.pageParam;
+        zhuge = api.require('zhuge');
+        if (zhuge) {
+            zhuge.initZhuge();
+        }
+        if ( USER.roleId == CONST_SI ) {
+            rect.x = 0,
+            rect.y = pageParam.rect.y,
+            rect.w = 'auto',
+            rect.h = api.winWidth * 0.394;
+        } else {
+            $api.addCls($api.dom('#wrap'), 'maker');
+            rect = pageParam.rect;
+        }
+        getDemandStatusCount();
+        fnGetCount();
+    };
+    
+    function fnGetCount(){
+       fnAjax({
+            url: 'projectDemands/countSIProjectNeed',
+            progress: false
+        }, function( ret, err ){
+            if( ret ){
+                $api.dom('#communication').innerHTML = ret.canDoProject;
+                $api.dom('#success').innerHTML = ret.endDoProject;
+                $api.dom('#close').innerHTML = ret.closeDoProject;
+            }else{
+                api.toast({
+                    msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                });
+            }
+        });
+    }
+
+    function fnGetProjectList( el ){
+        api.execScript({
+            frameName: 'frm_chain',
+            script: 'fnGetProjectList('+( +$api.attr(el, 'data-id' ) )+');'
+        });
+        toggleCollapse();
+    }
+
+    function getDemandStatusCount() {
+        fnAjax({
+            url: 'projectDemands/getSiCount'
+        }, function( ret, err ){
+          // debugAlert(JSON.stringify(ret))
+            if( ret ){
+                $api.dom( '.counting-box' ).innerHTML = 
+               
+                '<span class="icon-volume-up"></span>'+
+                '<span class="counting-text text-1">'+fnLanguageSwitch( '已有' )+'</span>'+
+                '<span class="counting-text count">'+ret.count+'</span>'+
+                '<span class="counting-text text-2">'+fnLanguageSwitch( '个合作伙伴，为您的产品加速' )+'</span>';
+               
+               
+            }else{
+                api.toast({
+	              global: true,
+                    msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                });
+            }
+        });
+        return;
+        var demandStatusCount = $api.getStorage('demandStatusCount');
+        if (api.connectionType == 'none') {
+            if (demandStatusCount) {
+                renderDemandStatusCount(demandStatusCount);
+            }
+        } else {
+            var valueParam = {
+                UserID: loginInfo.userid,
+                BatchNo: loginInfo.batchno
+            }
+            var url = 'APPMatchmaking/getDemandStatusCount.aspx';
+            ajaxRequest(url, 'post', valueParam, function (ret, err) {
+                if (ret) {
+                    $api.setStorage('demandStatusCount', ret);
+                    renderDemandStatusCount(ret);
+                } else {
+                    api.toast({
+	                  global: true,
+                        msg: err.msg
+                    });
+                }
+            })
+        }
+
+    }
+    function renderDemandStatusCount(ret) {
+        var ZongCount = ret.ZongCount||0;
+        var PreliminaryCount = ret.PreliminaryCount||0;
+        var WaitingProcessCount = ret.WaitingProcessCount||0;
+        var CooperationCount = ret.CooperationCount||0;
+        var AccomplishCount = ret.AccomplishCount||0;
+        var FailCount = ret.FailCount||0;
+        $("#speedCont").html('（'+ZongCount+'）');
+        $("#new").html(PreliminaryCount);
+
+        $("#communication").html(parseInt(PreliminaryCount)+parseInt(CooperationCount)+parseInt(WaitingProcessCount));
+        $("#success").html(AccomplishCount);
+        $("#confirming").html(WaitingProcessCount);
+        $("#close").html(FailCount);
+        if (zhuge && ZongCount !== undefined) {
+            if (zhuge) {
+                zhuge.track({
+                    eventName: 'SI产业链对接_总消息',
+                    eventPro: {
+                        '数量': ZongCount,
+                    }
+                });
+            }
+        }
+    }
+
+    var $toggleContainer = $api.dom('.toggle-container');
+    function getSpeedCount() {
+        var speedCount = $api.getStorage(loginInfo.usertype + '_getSpeedCount');
+        if (api.connectionType == 'none') {
+            if (speedCount) {
+                renderSpeedCount(speedCount);
+            }
+        } else {
+            var valueParam = {
+                UserID: loginInfo.userid,
+                BatchNo: loginInfo.batchno,
+                RequestType: loginInfo.usertype == CONST_SI ? 2 : 1
+            };
+            var url = 'APPMatchmaking/getSpeedCount.aspx';
+            ajaxRequest(url, 'post', valueParam, function (ret, err) {
+                if (ret) {
+                    var SpeedCount = ret.SpeedCount || 0;
+                    $api.setStorage(loginInfo.usertype + '_getSpeedCount', SpeedCount);
+                    renderSpeedCount(SpeedCount);
+                } else {
+                    api.toast({
+	                  global: true,
+                        msg: err.msg
+                    });
+                    if (speedCount) {
+                        renderSpeedCount(speedCount);
+                    }
+                }
+            })
+        }
+    }
+
+    function renderSpeedCount(SpeedCount) {
+        if (userType == CONST_SI) {
+            $api.html($api.dom('.counting-text.count'), SpeedCount);
+            $api.html($api.dom('.counting-text.text-2'), 'customers may have requests!');
+            $api.css($toggleContainer, 'display: block;');
+        } else {
+            $api.addCls($api.dom('#wrap'), 'maker');
+            $api.html($api.dom('.counting-text.count'), SpeedCount);
+            $api.html($api.dom('.counting-text.text-2'), 'partners are available to support you now');
+            $api.css($toggleContainer, 'display: none;');
+        }
+    }
+
+    function toggleCollapse() {
+        $api.toggleCls($toggleContainer, 'active');
+        if ($api.hasCls($toggleContainer, 'active')) {
+            api.setFrameAttr({
+                name: api.frameName,
+                rect: rect
+            });
+        } else {
+            api.setFrameAttr({
+                name: api.frameName,
+                rect: pageParam.rect
+            });
+        }
+        api.bringFrameToFront({
+            from: api.frameName
+        });
+    }
+</script>
+</html>

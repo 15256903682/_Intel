@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <style>
+        html {
+            height: 100%;
+        }
+
+        body {
+            width: 100%;
+            height: 100%;
+            min-height: 100%;
+            background-color: #f0eff7;
+        }
+
+        .header {
+            position: relative;
+            widht: 100%;
+            height: 44px;
+            background-color: #0171c5;
+        }
+
+        .header .back {
+            position: absolute;
+            box-sizing: border-box;
+            bottom: 0;
+            padding-left: 16px;
+            width: 44px;
+            height: 44px;
+            background-image: url(../../image/arrow-left-white.png);
+            background-repeat: no-repeat;
+            background-size: 16px 16px;
+            background-position: center center;
+            z-index: 2;
+        }
+
+        .header .title {
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            height: 44px;
+            font-size: 16px;
+            line-height: 44px;
+            color: #fff;
+            text-align: center;
+        }
+
+        .group {
+            position: relative;
+            margin-top: 16px;
+            margin-bottom: 16px;
+            width: 100%;
+            height: auto;
+        }
+
+        .group .row {
+            position: relative;
+            box-sizing: border-box;
+            padding-left: 16px;
+            padding-right: 16px;
+            margin-bottom: 4px;
+            width: 100%;
+            height: 44px;
+            color: #444;
+            background-color: #fff;
+        }
+
+        .group .row .name {
+            position: relative;
+            box-sizing: border-box;
+            padding-right: 16px;
+            width: 100%;
+            height: 44px;
+            font-size: 15px;
+            text-align: left;
+            line-height: 44px;
+        }
+
+        .arrow-right-gray {
+            position: absolute;
+            top: 0;
+            right: 16px;
+            width: 16px;
+            height: 100%;
+            background-image: url(../../image/arrow-right-gray.png);
+            background-repeat: no-repeat;
+            background-size: 8px 16px;
+            background-position: center center;
+        }
+      .active{
+         opacity: 0.7;
+         background-color: #0060A8 !important;
+      }
+        .highlight {
+            opacity: 0.7;
+           
+        }
+    </style>
+</head>
+
+<body>
+<!-- <header id="header" class="header">
+    <div class="back" tapmode="highlight" onclick="api.closeWin()"></div>
+    <div class="title">Setting</div>
+</header>
+<section class="group">
+    <div class="row repassword" tapmode="highlight" onclick="fnOpenWin('repassword')">
+        <div class="name">Change Password</div>
+        <div class="arrow-right-gray"></div>
+    </div>
+    <div class="row language" tapmode="highlight" onclick="fnOpenWin('language')">
+        <div class="name">Multi-language</div>
+        <div class="arrow-right-gray"></div>
+    </div>
+</section>
+<section class="group">
+    <div class="row logout" tapmode="highlight" onclick="fnLogoutNet()">
+        <div class="name">Logout</div>
+    </div>
+    <div class="row unregister" tapmode="highlight" onclick="fnDeleteUser()">
+        <div class="name">Cancel Accoount</div>
+    </div>
+</section> -->
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript">
+	var loginInfo = $api.getStorage('loginInfo');
+    var account = $api.getStorage('loginInfo');
+    var zhuge;
+    apiready = function () {
+       $api.dom( 'body' ).innerHTML = 
+        '    <header id="header" class="header">'+
+        '        <div class="back" tapmode="active" onclick="api.closeWin()"></div>'+
+        '        <div class="title">'+fnLanguageSwitch('设置')+'</div>'+
+        '    </header>'+
+        '    <section class="group">'+
+        '        <div class="row repassword" tapmode="highlight" onclick="fnOpenWin(\'repassword\')">'+
+        '            <div class="name">'+fnLanguageSwitch('修改密码')+'</div>'+
+        '            <div class="arrow-right-gray"></div>'+
+        '        </div>'+
+        '        <div class="row language" tapmode="highlight" onclick="fnOpenWin(\'language\')">'+
+        '            <div class="name">'+fnLanguageSwitch('多语言')+'</div>'+
+        '            <div class="arrow-right-gray"></div>'+
+        '        </div>'+
+        '    </section>'+
+        '    <section class="group">'+
+        '        <div class="row logout" tapmode="highlight" onclick="fnLogoutNet()">'+
+        '            <div class="name">'+fnLanguageSwitch('退出登录')+'</div>'+
+        '        </div>'+
+        '        <div class="row unregister" tapmode="highlight" onclick="fnDeleteUser()">'+
+        '            <div class="name">'+fnLanguageSwitch('注销账户')+'</div>'+
+        '        </div>'+
+        '    </section>';              
+    
+
+
+        zhuge = api.require('zhuge');
+        if (zhuge) {
+            zhuge.initZhuge();
+        }
+        fnInit();
+    };
+
+    function fnInit() {
+        var header = $api.byId('header');
+        $api.fixStatusBar(header);
+    }
+    ;
+
+    function fnOpenWin(winName) {
+        fnOpen({
+            name: winName,
+            url: 'widget://' + DIR + '/member_center/' + winName + '.html',
+        });
+    };
+
+
+    function fnLogoutNet() {
+        //  	退出登录
+        fnAjax({
+            url: 'users/logoutIOS',
+            method: 'post',
+            cache: false
+        }, function( ret, err){
+            if( ret ){
+                zhuge.track({
+                    eventName: '退出账户',
+                    eventPro: {}
+                });
+                api.toast({
+	                global: true,
+                    msg: fnLanguageSwitch( '成功退出' )
+                });
+    			$api.rmStorage('autoLogin');
+                api.execScript({
+                    name: 'root',
+                    script: 'fnOpenLogin()'
+                });
+            }else{
+                api.toast({
+                   global: true,
+                    msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                });
+            }
+        })
+    };
+
+    // 注销功能，慎用
+    function fnDeleteUser() {
+        api.confirm({
+            title: fnLanguageSwitch( '确定要注销' ),
+            msg: ( USER.realname || USER.username ) + ' ?',
+            buttons: [fnLanguageSwitch( '取消' ), fnLanguageSwitch( '确定' )]
+        }, function(ret, err){
+            if(ret.buttonIndex == 2){
+                // 注销用户
+                fnAjax({
+                    url: 'users/userDestory',
+                    headers: {
+                        authorization: loginInfo.token
+                    },
+                    method: 'post',
+                    progress: false
+                }, function( ret, err ){
+                    if( ret ){
+                        zhuge.track({
+                            eventName: '注销用户',
+                            eventPro: {}
+                        });
+
+                        api.toast({
+	global: true,
+                            msg: fnLanguageSwitch( '账号注销成功' )
+                        });
+
+
+                        api.execScript({
+                            name: 'login',
+                            frameName: 'login_frame',
+                            script: 'fnReLogin()'
+                        });
+                    }else{
+                        api.toast({
+	global: true,
+                            msg: fnErrorJson( err.body.error.message )
+                        });
+                    }
+                });
+            }
+        });
+    };
+    
+</script>
+
+</html>

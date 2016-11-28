@@ -1,0 +1,908 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/fonts_awesome/font-awesome.min.css"/>
+    <style>
+        html, body {
+            background-color: RGBA(237, 238, 239, 1);
+            height: auto;
+        }
+
+        .communicate-box {
+            text-align: center;
+        }
+
+        .communicate-btn {
+            color: #00AEEF;
+            width: 15rem;
+            height: 2.8rem;
+            border: 0.1rem solid #00AEEF;
+            line-height: 2.9rem;
+            text-align: center;
+            font-size: 1.4rem;
+            margin-bottom: 2rem;
+            position: relative;
+            border-radius: 4px;
+           
+        }
+        .personInfo{
+            margin-top: 1rem;
+        }
+        .person {
+            padding: 2rem;
+            height: 5.5rem;
+            display: -webkit-box;
+        }
+
+        .person .left {
+            width: 5.5rem;
+            height: 5.5rem;
+        }
+
+        .person .left img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .person .right {
+            -webkit-box-flex: 1;
+            padding-left:1.5rem;
+        }
+        .company-name {
+            background-image: url("../../image/Macthmaking/company-name-icon.png");
+            background-repeat: no-repeat no-repeat;
+            background-position: 1rem center;
+            background-size: 2.2rem 2rem;
+        }
+
+        .personInfo, .companyInfo {
+            background-color: #ffffff;
+        }
+
+        .personInfo {
+
+        }
+
+        .companyInfo {
+            margin: 1.5rem 1rem 2rem 1rem;
+        }
+
+        .company-name {
+            height: 5.1rem;
+            line-height: 5.1rem;
+            display: -webkit-box;
+        }
+
+        .company-name .company-name-text {
+            margin-left: 4.7rem;
+            -webkit-box-flex: 1;
+            font-size: 1.5rem;
+            color: #333333;
+        }
+
+        .company-name .company-address-text {
+            -webkit-box-flex: 1;
+            text-align: end;
+            padding-right: 1rem;
+            font-size: 1.2rem;
+            color: #999999;
+        }
+
+        .company-desc {
+            padding: 2rem 0;
+            margin: 0 1rem;
+        }
+
+        .company-desc-item {
+            display: -webkit-box;
+            font-size: 1.4rem;
+        }
+
+        .company-desc-item:not(:first-child) {
+            margin-top: 1.2rem;
+        }
+
+        .company-desc-item-name {
+            color: #999999;
+            text-align: end;
+            width: 30%;
+            padding-right: 1.5rem;
+        }
+
+        .company-desc-item-value {
+            width: 60%;
+            color: #333333;
+        }
+
+        .company-order-title {
+            font-size: 1.5rem;
+            color: #333333;
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .company-order-content {
+            min-height: 5.3rem;
+            background-color: #ffffff;
+            margin: 1.5rem 1rem;
+            padding: 1rem;
+        }
+
+        .confirm-state {
+            color: #0070c5;
+            font-size: 1.2rem;
+            padding: 1rem;
+            line-height:2rem;
+        }
+
+        .confirm-state.success {
+            color: #FFa300;
+            text-align: center;
+            height: 5.5rem;
+            line-height: 5.5rem;
+        }
+
+        .confirm-group {
+            text-align: center;
+        }
+
+        .confirm-btn {
+            width: 12rem;
+            height: 3rem;
+            border: 0.1rem solid;
+            border-radius: 4px;
+            font-size: 1.5rem;
+            line-height: 3rem;
+            margin: 2rem 1rem;
+            border-color: #999999;
+        }
+
+        .btn-accept {
+            background-color: #FFa300;
+            color: #FFFFFF;
+            border-color: #FFa300;
+        }
+
+        .btn-refuse, .btn-start {
+            background-color: #FFFFFF;
+            color: #00AEEF;
+            border-color: #00AEEF;
+        }
+
+        .btn-accept[disabled], .btn-refuse[disabled], .btn-start[disabled] {
+            background-color: #FFFFFF;
+            color: #BABABA;
+            border-color: #999999;
+        }
+        .right .top,.right .bottom{
+            display: -webkit-box;
+            height: 2.75rem;
+            line-height: 2.75rem;
+            -webkit-box-align: center;
+        }
+        .top{
+            font-size: 1.5rem;
+            color: #2c2c2c;
+        }
+        .bottom{
+            font-size: 1.2rem;
+            color: #999999;
+        }
+        .top .name,.bottom #city{
+            width: 65%;
+        }
+        .top .position,.bottom #company{
+            -webkit-box-flex: 1;
+            padding-left:1rem ;
+        }
+        .divider{
+            height: 0.9rem;
+            width: 1px;
+            background-color: #DEDEDE;
+        }
+        .phone,.sms{
+            width: 1.6rem;
+            background-position: center center;
+            position: absolute;
+            top: 0.6rem;
+            left: 3rem;
+            background-repeat: no-repeat no-repeat;
+        }
+        .phone{
+
+            background-size: 1.6rem;
+            height: 1.6rem;
+            background-image: url("../../image/partner_call.png");
+        }
+        .sms{
+            background-size: 1.6rem 1.2rem;
+            height: 1.2rem;
+            top: 0.8rem;
+            background-image: url("../../image/partner_sms.png");
+        }
+        #demand-control{
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+<!-- <div class="personInfo border-1px-bottom">
+    <div class="person">
+        <div class="left">
+            <img src="../../image/Macthmaking/MacthmakingNewneed/default.png" id="photo">
+        </div>
+        <div class="right">
+            <div class="top ">
+                <div class="name " id="RealName">
+
+                </div>
+                <div class="divider"></div>
+                <div class="position" id="Profession">
+
+                </div>
+            </div>
+            <div class="bottom">
+                <div id="city" class="">
+
+                </div>
+                <div class="divider"></div>
+                <div id="company">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="communicate-box">
+        <span class="communicate-btn" tapmode onclick="fnCall(this)">
+            <span class="phone"></span>
+            打电话
+        </span>
+        <span class="communicate-btn" tapmode onclick="fnMessage(this)">
+            <span class="sms"></span>
+            发私信
+        </span>
+    </div>
+</div>
+
+<div class="companyInfo">
+    <div class="company-name border-1px-bottom">
+        <div class="company-name-text ellipsis-1" id="CompanyName">
+
+        </div>
+        <div class="company-address-text" id="address">
+
+        </div>
+    </div>
+    <div class="company-desc">
+        <div class="company-desc-item">
+            <div class="company-desc-item-name">
+                类别
+            </div>
+            <div class="company-desc-item-value" id="DemandTypeName">
+
+            </div>
+        </div>
+        <div class="company-desc-item">
+            <div class="company-desc-item-name">
+                研发人数
+            </div>
+            <div class="company-desc-item-value" id="ResearchPersonnel">
+
+            </div>
+        </div>
+        <div class="company-desc-item">
+            <div class="company-desc-item-name">
+                生产人数
+            </div>
+            <div class="company-desc-item-value" id="Production">
+
+            </div>
+        </div>
+        <div class="company-desc-item">
+            <div class="company-desc-item-name">
+                销售人数
+            </div>
+            <div class="company-desc-item-value" id="Salesman">
+
+            </div>
+        </div>
+        <div class="company-desc-item">
+            <div class="company-desc-item-name">
+                年营业额
+            </div>
+            <div class="company-desc-item-value" id="BusinessVolume">
+
+            </div>
+        </div>
+        <div class="company-desc-item">
+            <div class="company-desc-item-name">
+                公司网址
+            </div>
+            <div class="company-desc-item-value" data-website="" tapmode="" onclick="openWebsite(this)" id="CompanyWeb">
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<div class="company-order">
+    <div class="company-order-title">
+        接单描述
+    </div>
+    <div class="company-order-content" id="Description">
+
+    </div>
+</div>
+<div id="demand-control" class="demand-handle-box">
+    <div class="confirm-state " id="comand-tip">
+
+    </div>
+    <div class="confirm-group " id="handle-box">
+    </div>
+</div>
+ -->
+     
+ </body>
+<script src="../../script/api.js"></script>
+<script src="../../script/languge.js"></script>
+<script src="../../script/ajaxRequest.js"></script>
+
+<script>
+    var loginInfo = $api.getStorage('loginInfo');
+    var SendUserID;
+    var CellPhone;
+    var username;
+    var zhuge;
+
+    apiready = function () {
+        with( api.pageParam ){
+            debugAlert( data )
+            var _html = 
+            '<div class="personInfo border-1px-bottom" onclick="debugAlert(api.pageParam.data.user, api.pageParam.data)">'+
+            '    <div class="person">'+
+            '        <div class="left">'+
+            '            <img  src="../../image/Macthmaking/MacthmakingNewneed/default.png" onload="getImageCache( this )" data-selectorid="'+data.user.photo+'" id="photo">'+
+            '        </div>'+
+            '        <div class="right">'+
+            '            <div class="top ">'+
+            '                <div class="name " id="RealName">'+fnStringEmpty( data.user.username )+'</div>'+
+            '                <div class="divider"></div>'+
+            '                <div class="position" id="Profession">'+fnStringEmpty( fnJobJson()[ data.user.profession ] )+'</div>'+
+            '            </div>'+
+            '            <div class="bottom">'+
+            '                <div id="city" class="">'+fnStringEmpty( data.companyCapacity.city )+'</div>'+
+            '                <div class="divider"></div>'+
+            '                <div id="company">'+fnStringEmpty( data.companyCapacity.companyName )+'</div>'+
+            '            </div>'+
+            '        </div>'+
+            '    </div>'+
+            '    <div class="communicate-box">'+
+            '        <span class="communicate-btn" tapmode onclick="fnCall(this)" >'+
+            '            <span class="phone"></span>'+fnLanguageSwitch('打电话')+'</span>'+
+            '        <span class="communicate-btn" tapmode onclick="fnMessage(this)">'+
+            '            <span class="sms"></span>'+fnLanguageSwitch('发私信')+'</span>'+
+            '    </div>'+
+            '</div>'+
+            '<div class="companyInfo">'+
+            '    <div class="company-name border-1px-bottom">'+
+            '        <div class="company-name-text ellipsis-1" id="CompanyName">'+fnStringEmpty( data.companyCapacity.companyName )+'</div>'+
+            '        <div class="company-address-text" id="address">'+fnStringEmpty( data.user.address )+'</div>';
+
+
+            var _SingleType = [];
+            for( var x in data.companyCapacity.demandType ){
+                _SingleType.push( fnSingleTypeJson()[ data.companyCapacity.demandType[x] ] );
+            }
+
+            _html +=
+            '    </div>'+
+            '    <div class="company-desc">'+
+            '        <div class="company-desc-item">'+
+            '            <div class="company-desc-item-name">'+fnLanguageSwitch('类别')+'</div>'+
+            '            <div class="company-desc-item-value" id="DemandTypeName">'+_SingleType.join( '；<br />' )+'。</div>'+
+            '        </div>'+
+            '        <div class="company-desc-item">'+
+            '            <div class="company-desc-item-name">'+fnLanguageSwitch('研发人数')+'</div>'+
+            '            <div class="company-desc-item-value" id="ResearchPersonnel">'+fnStringEmpty( fnCompanyRDJson()[ data.companyCapacity.researchPersonnel ] )+'</div>'+
+            '        </div>'+
+            '        <div class="company-desc-item">'+
+            '            <div class="company-desc-item-name">'+fnLanguageSwitch('生产人数')+'</div>'+
+            '            <div class="company-desc-item-value" id="Production">'+fnStringEmpty( fnCompanySizeJson()[ data.companyCapacity.production ] )+'</div>'+
+            '        </div>'+
+            '        <div class="company-desc-item">'+
+            '            <div class="company-desc-item-name">'+fnLanguageSwitch('销售人数')+'</div>'+
+            '            <div class="company-desc-item-value" id="Salesman">'+fnStringEmpty( fnCompanyRDJson()[ data.companyCapacity.salesman ] )+'</div>'+
+            '        </div>'+
+            '        <div class="company-desc-item">'+
+            '            <div class="company-desc-item-name">'+fnLanguageSwitch('年营业额')+'</div>'+
+            '            <div class="company-desc-item-value" id="BusinessVolume">'+fnStringEmpty( fnTurnoverJson()[ data.companyCapacity.businessVolume ] )+'</div>'+
+            '        </div>'+
+            '        <div class="company-desc-item">'+
+            '            <div class="company-desc-item-name">'+fnLanguageSwitch('公司网址')+'</div>'+
+            '            <div class="company-desc-item-value" data-website="" tapmode="" onclick="openWebsite(this)" id="CompanyWeb">'+fnStringEmpty( data.companyCapacity.companyWeb )+'</div>'+
+            '        </div>'+
+            '    </div>'+
+            '</div>'+
+            '<div class="company-order">'+
+            '    <div class="company-order-title">'+fnLanguageSwitch('接单描述')+'</div>'+
+            '    <div class="company-order-content" id="Description">'+fnStringEmpty( data.companyCapacity.description )+'</div>'+
+            '</div>'+
+            '<div id="demand-control" class="demand-handle-box">'+
+            '    <div class="confirm-state " id="comand-tip"></div>'+
+            '    <div class="confirm-group " id="handle-box"></div>'+
+            '</div>';   
+
+            $api.dom( 'body' ).innerHTML = _html;
+        }
+        zhuge = api.require('zhuge');
+        if (zhuge) {
+            zhuge.initZhuge();
+        }
+        // SendUserID = api.pageParam.SendUserID;
+        // var demandstatusid = api.pageParam.demandstatusid;
+        // CellPhone = api.pageParam.CellPhone;
+        // username = api.pageParam.username;
+        // getPartnerInfo(demandstatusid);
+    };
+    function getPartnerInfo(demandstatusid) {
+        var url = 'APPMatchmaking/getDemandXQPage.aspx';
+        var valueParam = {
+            UserID: loginInfo.userid,
+            BatchNo: loginInfo.batchno,
+            DemandStatusId: demandstatusid
+        };
+        api.showProgress({
+            title: '加载中...',
+            text: '',
+            modal: false
+        });
+        ajaxRequest(url, 'post', valueParam, function (ret, err) {
+            api.hideProgress();
+            if (ret) {
+                if (ret.res == 0) {
+                    api.toast({
+	global: true,
+                        msg: ret.des
+                    });
+                } else {
+                    var DemandXQPage = ret.DemandXQPage[0];
+                    var PhotoURL = '../../image/Macthmaking/MacthmakingNewneed/default.png';
+                    if (DemandXQPage.PhotoURL) {
+                        PhotoURL = host + DemandXQPage.PhotoURL.split('~')[1];
+                    }
+                    var CellPhone = DemandXQPage.CellPhone;
+                    $("#photo").attr('src', PhotoURL);
+                    $("#RealName").html(DemandXQPage.RealName);
+                    $("#Profession").html(DemandXQPage.Profession);
+                    if (DemandXQPage.Description) {
+                        $("#Description").html(DemandXQPage.Description).css({
+                            'height': 'auto',
+                            'padding': '1rem'
+                        });
+                    }
+                    $("#DemandTypeName").html(DemandXQPage.DemandTypeName);
+                    $("#CompanyName").html(DemandXQPage.CompanyName);
+                    
+                    if (DemandXQPage.CompanyWeb) {
+                        $("#CompanyWeb").html(DemandXQPage.CompanyWeb).attr('data-website', DemandXQPage.CompanyWeb);
+                    } else {
+                        $("#CompanyWeb").html('').attr('data-website', '');
+                    }
+                    $("#address").html(DemandXQPage.City + '  ' + DemandXQPage.CompanyScale);
+                    $("#city").html(DemandXQPage.City);
+                    $("#company").html(DemandXQPage.CompanyScale);
+                    $("#BusinessVolume").html(DemandXQPage.BusinessVolume);
+                    $("#ResearchPersonnel").html(DemandXQPage.ResearchPersonnel);
+                    $("#Production").html(DemandXQPage.Production);
+                    $("#Salesman").html(DemandXQPage.Salesman);
+                    var $comand_tip = $("#comand-tip");
+                    $comand_tip.html(api.pageParam.comandtip);
+                    if(api.pageParam.confirmStateClass){
+                        $comand_tip.addClass('success');
+                    }
+                    $("#handle-box").html(api.pageParam.handlebox);
+                    $("body").removeClass('hidden');
+                    $('.communicate-box').attr({
+                        'data-job': DemandXQPage.Profession,
+                        'data-city': DemandXQPage.City,
+                        'data-type': DemandXQPage.DemandTypeName,
+                        'data-researchcount': DemandXQPage.ResearchPersonnel,
+                        'data-productioncount': DemandXQPage.Production,
+                        'data-salesmancount': DemandXQPage.Salesman,
+                        'data-businessvolume': DemandXQPage.BusinessVolume,
+                        'data-website': DemandXQPage.CompanyWeb,
+                        'data-description': DemandXQPage.Description
+                    });
+                }
+            } else {
+                api.toast({
+	global: true,
+                    msg: '请求服务器失败！'
+                });
+            }
+        });
+    }
+    function fnCall(el) { 
+        fnAjax({
+            url: 'logCalls/call',
+            headers: {
+                authorization: USER.token
+            },
+            data: {
+                values: {
+                    beCalledUserId: api.pageParam.data.companyCapacity.userId,
+                    beCalledCellPhone: api.pageParam.data.user.cellPhone,
+                    subDemandId: api.pageParam.data.id
+                }
+            },
+            progress: false
+        }, function(){
+        });
+
+        api.call({
+            type: 'call_type',
+            number: api.pageParam.data.user.cellPhone 
+        });
+        if (zhuge) {
+            zhuge.track({
+                eventName: 'Maker产业链对接_联系对方',
+                eventPro: {
+                    '方式名称': '打电话',
+                    '对方职位': Profession,
+                    '对方城市': City,
+                    '需求种类': DemandTypeName,
+                    '对方研发人数': ResearchPersonnel,
+                    '对方生产人数': Production,
+                    '对方销售人数': Salesman,
+                    '对方年营业额': BusinessVolume,
+                    '公司网址': CompanyWeb,
+                    '接单描述': Description
+                }
+            });
+        }
+        return; 
+        var $apiThis = $api.closest(el, '.communicate-box');
+        var Profession = $.trim($api.attr($apiThis, 'data-job'));
+        var City = $.trim($api.attr($apiThis, 'data-city'));
+        var DemandTypeName = $.trim($api.attr($apiThis, 'data-type'));
+        var ResearchPersonnel = $.trim($api.attr($apiThis, 'data-researchcount'));
+        var Production = $.trim($api.attr($apiThis, 'data-productioncount'));
+        var Salesman = $.trim($api.attr($apiThis, 'data-salesmancount'));
+        var BusinessVolume = $.trim($api.attr($apiThis, 'data-businessvolume'));
+        var CompanyWeb = $.trim($api.attr($apiThis, 'data-website'));
+        if (CompanyWeb == undefined || CompanyWeb == '') {
+            CompanyWeb = '没有';
+        } else {
+            CompanyWeb = '有';
+        }
+        var Description = $.trim($api.attr($apiThis, 'data-description'));
+        if (zhuge) {
+            zhuge.track({
+                eventName: 'Maker产业链对接_联系对方',
+                eventPro: {
+                    '方式名称': '打电话',
+                    '对方职位': Profession,
+                    '对方城市': City,
+                    '需求种类': DemandTypeName,
+                    '对方研发人数': ResearchPersonnel,
+                    '对方生产人数': Production,
+                    '对方销售人数': Salesman,
+                    '对方年营业额': BusinessVolume,
+                    '公司网址': CompanyWeb,
+                    '接单描述': Description
+                }
+            });
+        }
+        api.call({
+            type: 'call_type',
+            number: CellPhone
+        });
+    }
+    function fnMessage(el) {
+        fnOpen({
+            name: 'whisper',
+            url: 'widget://' + DIR + '/member_center/whisper.html',
+            pageParam: {
+                data: api.pageParam.data
+            }
+        });   
+        return;
+        var move = isHuawei();
+        var animation = {};
+        if (move) {
+            animation = {
+                type: 'movein',
+                subType: 'from_right'
+            }
+        }
+        api.openWin({
+            name: 'whisper',
+            url: 'widget://' + DIR + '/member_center/whisper.html',
+            bounces: false,
+            pageParam: {
+                SendUserID: loginInfo.userid,
+                ReceiveUserID: SendUserID,
+                username: username
+            },
+            animation: animation
+        });
+        var $apiThis = $api.closest(el, '.communicate-box');
+        var Profession = $.trim($api.attr($apiThis, 'data-job'));
+        var City = $.trim($api.attr($apiThis, 'data-city'));
+        var DemandTypeName = $.trim($api.attr($apiThis, 'data-type'));
+        var ResearchPersonnel = $.trim($api.attr($apiThis, 'data-researchcount'));
+        var Production = $.trim($api.attr($apiThis, 'data-productioncount'));
+        var Salesman = $.trim($api.attr($apiThis, 'data-salesmancount'));
+        var BusinessVolume = $.trim($api.attr($apiThis, 'data-businessvolume'));
+        var CompanyWeb = $.trim($api.attr($apiThis, 'data-website'));
+        if (CompanyWeb == undefined || CompanyWeb == '') {
+            CompanyWeb = '没有';
+        } else {
+            CompanyWeb = '有';
+        }
+        var Description = $.trim($api.attr($apiThis, 'data-description'));
+        if (zhuge) {
+            zhuge.track({
+                eventName: 'Maker产业链对接_联系对方',
+                eventPro: {
+                    '方式名称': '打电话',
+                    '对方职位': Profession,
+                    '对方城市': City,
+                    '需求种类': DemandTypeName,
+                    '对方研发人数': ResearchPersonnel,
+                    '对方生产人数': Production,
+                    '对方销售人数': Salesman,
+                    '对方年营业额': BusinessVolume,
+                    '公司网址': CompanyWeb,
+                    '接单描述': Description
+                }
+            });
+        }
+    }
+
+    function updateStatus(status) {
+        api.showProgress({
+            title: '加载中...',
+            text: '',
+            modal: false
+        });
+        var valueParam = {
+            UserID: loginInfo.userid,
+            BatchNo: loginInfo.batchno,
+            DemandID: demandID,
+            DemandStatusId: DemandStatusId,
+            Identity: loginInfo.usertype == CONST_SI ? 2 : 1,
+            Status: status
+        };
+        var url = 'APPMatchmaking/UpdateStatus.aspx';
+        ajaxRequest(url, 'post', valueParam, function (ret, err) {
+            api.hideProgress();
+            if (ret) {
+                api.toast({
+	global: true,
+                    msg: ret.des
+                });
+                if (ret.res == 1) {
+                    api.execScript({
+                        name: 'simple_win',
+                        frameName: 'comand_detail',
+                        script: 'getDemandXQlist('+demandID+');'
+                    });
+                    api.closeWin();
+                }
+            } else {
+                api.toast({
+	global: true,
+                    msg: err.msg
+                });
+            }
+        });
+    }
+
+    // 不合作
+    function refuseCooperation(id, el, coor) {
+        api.confirm({
+            title: '提示',
+            msg: '您是否已经与对方进行电话或私信联系，并且确定放弃此次合作机会？',
+            buttons: ['确定', '取消']
+        }, function (ret, err) {
+            if (ret.buttonIndex == 1) {
+                updateStatus(6);
+                var $apiThis = $api.closest(el, '.confirm-group');
+                var Profession = $.trim($api.attr($apiThis, 'data-job'));
+                var City = $.trim($api.attr($apiThis, 'data-city'));
+                var DemandTypeName = $.trim($api.attr($apiThis, 'data-type'));
+                var ResearchPersonnel = $.trim($api.attr($apiThis, 'data-researchcount'));
+                var Production = $.trim($api.attr($apiThis, 'data-productioncount'));
+                var Salesman = $.trim($api.attr($apiThis, 'data-salesmancount'));
+                var BusinessVolume = $.trim($api.attr($apiThis, 'data-businessvolume'));
+                var CompanyWeb = $.trim($api.attr($apiThis, 'data-website'));
+                if (CompanyWeb == undefined || CompanyWeb == '') {
+                    CompanyWeb = '没有';
+                } else {
+                    CompanyWeb = '有';
+                }
+                var Description = $.trim($api.attr($apiThis, 'data-description'));
+                if (zhuge) {
+                    if (coor == 2) {
+                        zhuge.track({
+                            eventName: 'Maker产业链对接_合作状态确认',
+                            eventPro: {
+                                '合作结果': '不合作',
+                                '点击页面来源': '合作伙伴信息',
+                                '对方职位': Profession,
+                                '对方城市': City,
+                                '需求种类': DemandTypeName,
+                                '对方研发人数': ResearchPersonnel,
+                                '对方生产人数': Production,
+                                '对方销售人数': Salesman,
+                                '对方年营业额': BusinessVolume,
+                                '公司网址': CompanyWeb,
+                                '接单描述': Description
+                            }
+                        });
+                    } else {
+                        zhuge.track({
+                            eventName: 'Maker产业链对接_合作状态最终回复',
+                            eventPro: {
+                                '合作结果': '不合作',
+                                '点击页面来源': '合作伙伴信息',
+                                '对方职位': Profession,
+                                '对方城市': City,
+                                '需求种类': DemandTypeName,
+                                '对方研发人数': ResearchPersonnel,
+                                '对方生产人数': Production,
+                                '对方销售人数': Salesman,
+                                '对方年营业额': BusinessVolume,
+                                '公司网址': CompanyWeb,
+                                '接单描述': Description
+                            }
+                        });
+                    }
+
+                }
+            }
+        });
+        if( event ){event.cancelBubble = true;}
+        return false;
+    }
+
+    // 展开合作意向
+
+    function expandingCooperation(id, el) {
+        api.confirm({
+            title: '提示',
+            msg: '您是否已经与对方进行电话或私信联系，并且双方决定要展开合作了呢？您点击确认后，系统会发送消息给对方确认。如果对方同意，则该需求对接成功；如果对方拒绝，您将不能再和对方联系。 ',
+            buttons: ['确定', '取消']
+        }, function (ret, err) {
+            if (ret.buttonIndex == 1) {
+                updateStatus(5);
+                var $apiThis = $api.closest(el, '.confirm-group');
+                var Profession = $.trim($api.attr($apiThis, 'data-job'));
+                var City = $.trim($api.attr($apiThis, 'data-city'));
+                var DemandTypeName = $.trim($api.attr($apiThis, 'data-type'));
+                var ResearchPersonnel = $.trim($api.attr($apiThis, 'data-researchcount'));
+                var Production = $.trim($api.attr($apiThis, 'data-productioncount'));
+                var Salesman = $.trim($api.attr($apiThis, 'data-salesmancount'));
+                var BusinessVolume = $.trim($api.attr($apiThis, 'data-businessvolume'));
+                var CompanyWeb = $.trim($api.attr($apiThis, 'data-website'));
+                if (CompanyWeb == undefined || CompanyWeb == '') {
+                    CompanyWeb = '没有';
+                } else {
+                    CompanyWeb = '有';
+                }
+                var Description = $.trim($api.attr($apiThis, 'data-description'));
+                if (zhuge) {
+                    zhuge.track({
+                        eventName: 'Maker产业链对接_合作状态确认',
+                        eventPro: {
+                            '合作结果': '展开合作',
+                            '点击页面来源': '合作伙伴信息',
+                            '对方职位': Profession,
+                            '对方城市': City,
+                            '需求种类': DemandTypeName,
+                            '对方研发人数': ResearchPersonnel,
+                            '对方生产人数': Production,
+                            '对方销售人数': Salesman,
+                            '对方年营业额': BusinessVolume,
+                            '公司网址': CompanyWeb,
+                            '接单描述': Description
+                        }
+                    });
+                }
+            }
+        });
+
+        if( event ){event.cancelBubble = true;}
+        return false;
+    }
+
+    //同意合作
+    function agreeCooperation(id, el) {
+        api.confirm({
+            title: '提示',
+            msg: '您同意和对方展开合作了？点击确认后，此需求将变为对接成功，随后其他合作伙伴将不能再和您联系。',
+            buttons: ['确定', '取消']
+        }, function (ret, err) {
+            if (ret.buttonIndex == 1) {
+                updateStatus(5);
+                var $apiThis = $api.closest(el, '.confirm-group');
+                var Profession = $.trim($api.attr($apiThis, 'data-job'));
+                var City = $.trim($api.attr($apiThis, 'data-city'));
+                var DemandTypeName = $.trim($api.attr($apiThis, 'data-type'));
+                var ResearchPersonnel = $.trim($api.attr($apiThis, 'data-researchcount'));
+                var Production = $.trim($api.attr($apiThis, 'data-productioncount'));
+                var Salesman = $.trim($api.attr($apiThis, 'data-salesmancount'));
+                var BusinessVolume = $.trim($api.attr($apiThis, 'data-businessvolume'));
+                var CompanyWeb = $.trim($api.attr($apiThis, 'data-website'));
+                if (CompanyWeb == undefined || CompanyWeb == '') {
+                    CompanyWeb = '没有';
+                } else {
+                    CompanyWeb = '有';
+                }
+                var Description = $.trim($api.attr($apiThis, 'data-description'));
+                if (zhuge) {
+                    zhuge.track({
+                        eventName: 'Maker产业链对接_合作状态最终回复',
+                        eventPro: {
+                            '回复结果': '同意',
+                            '点击页面来源': '合作伙伴信息',
+                            '对方职位': Profession,
+                            '对方城市': City,
+                            '需求种类': DemandTypeName,
+                            '对方研发人数': ResearchPersonnel,
+                            '对方生产人数': Production,
+                            '对方销售人数': Salesman,
+                            '对方年营业额': BusinessVolume,
+                            '公司网址': CompanyWeb,
+                            '接单描述': Description
+                        }
+                    });
+                }
+            }
+        });
+        if( event ){event.cancelBubble = true;}
+        return false;
+    }
+    // Maker产业链对接_合作伙伴URL点击    公司主页 
+    function openWebsite(el){
+        var url = $(el).attr('data-website');
+        if (url) {
+            var systemType = api.systemType;
+            if (zhuge) {
+                zhuge.track({
+                    eventName: 'Maker产业链对接_合作伙伴URL点击',
+                    eventPro: {
+                        '公司主页': url,
+                    }
+                });
+            }
+            if (systemType.indexOf('ios') != -1) {
+                api.openApp({
+                    iosUrl: url
+                },function(ret,err){
+                    // var msg = JSON.stringify(ret);
+                });
+            } else{
+                api.openApp({
+                    androidPkg: 'android.intent.action.VIEW',
+                    mimeType: 'text/html',
+                    uri: url
+                },function(ret,err){
+                    // var msg = JSON.stringify(ret);
+                });         
+            };
+        } else {
+
+        }
+    };
+</script>
+</html>

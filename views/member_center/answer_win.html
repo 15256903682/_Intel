@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>hader</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <style>
+    header{ line-height: 48px; background:#0071c5; font-size: 20px; color:#fff; position: relative; }
+        header .title{ color: white; text-align: center; }
+        header span[class^=ic_]{  width: 60px; height: 52.8px; position: absolute; bottom: 0; background-size: 50% auto; }
+        header span.ic_btn_back{ left: 0;}
+        .active{background-color: #0060A8;}
+
+    
+    </style>
+</head>
+
+<body>
+    <!--这是个公用头部-->
+    <!-- <header>
+        <span tapmode="active" onclick="api.closeWin();" class="ic_btn_back"></span>
+        <p class="title">技术学院</p>
+    </header>  -->
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript" src="../../script/echo.min.js"></script>
+<script type="text/javascript" src="../../script/sha1.js"></script>
+<script>
+    apiready = function(){
+        $api.dom('body').innerHTML=
+    '    <header>'+
+    '            <span tapmode="active" onclick="api.closeWin();" class="ic_btn_back"></span>'+
+    '            <p class="title">'+fnLanguageSwitch('回答')+'</p>'+
+    '    </header>';
+        $api.fixStatusBar($api.dom( 'header'));
+        api.openFrame({
+            name: api.winName.replace( /_win$/, '_frm'),
+            url: './'+api.winName.replace( /_win$/, '_frm')+'.html',
+            rect: {
+                y: $api.dom( 'header').offsetHeight,
+                h: api.winHeight - $api.dom( 'header').offsetHeight
+            },
+            pageParam: api.pageParam
+        });
+    }
+        
+</script>
+</html>

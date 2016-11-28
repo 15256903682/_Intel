@@ -1,0 +1,372 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>新增需求</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/fonts_awesome/font-awesome.min.css">
+    <style type="text/css">
+        body {
+            height: auto;
+            min-height: 100%;
+            background-color: RGBA(238, 238, 238, 1);
+        }
+
+        .place-holder {
+            background-color: #F5F5F5;
+            height: 1.2rem;
+        }
+
+        .border-1px-bottom:after {
+            color: #B3B7BA;
+        }
+
+        .form {
+            padding: 0 1.2rem;
+            background-color: #ffffff;
+        }
+
+        .form .form-row {
+            height: 5.5rem;
+        }
+
+        .form .form-row label {
+            font-size: 1.5rem;
+            line-height: 5.5rem;
+            color: #333333;
+        }
+
+        .form .form-row .btn-type {
+            font-size: 1.4rem;
+            color: #C8C8C8;
+            line-height: 5.5rem;
+        }
+
+        #comand-description {
+            display: block;
+            height: 12.5rem;
+            border: 1px solid #CCCCCC;
+            resize: none;
+            width: 100%;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            padding: 1.6rem 1.2rem;
+            font-size: 1.4rem;
+            line-height: 1.6rem;
+            color: #999999;
+        }
+
+        .form .form-row.form-row-lg {
+            height: auto;
+            padding-bottom: 2rem;
+        }
+
+        .btn-submit {
+            width: 32rem;
+            height: 4rem;
+            text-align: center;
+            font-size: 1.5rem;
+            line-height: 3.8rem;
+            color: #FFFFFF;
+            background-color: RGBA(0, 174, 239, 1);
+            border-radius: 0.4rem;
+            margin: 2rem auto;
+        }
+
+        p.description {
+            font-size: 1.4rem;
+            line-height: 2.2rem;
+            color: RGBA(177, 177, 177, 1);
+            padding: 0 2rem;
+        }
+
+        :input::-webkit-input-placeholder {
+            text-align: right;
+            color: #C8C8C8;
+        }
+
+        .cover {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #f5f4f9;
+            background: rgba(50, 51, 49, 0.6);
+            display: -webkit-box;
+        }
+
+        .select {
+            width: 100%;
+            height: 30rem;
+            background-color: #f5f4f9;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+
+        .select-control {
+            height: 3.5rem;
+            line-height: 3.5rem;
+            display: -webkit-box;
+        }
+
+        .select-control-placeHolder {
+            -webkit-box-flex: 1;
+        }
+
+        .select-control-cancel, .select-control-ok {
+            width: 3.5rem;
+            font-size: 1.5rem;
+            color: #00437F;
+            padding: 0 10px;
+        }
+
+        .select-content {
+            height: 26.5rem;
+        }
+
+        .form .form-row.form-row-md{
+            height: auto;
+        }
+        .form .form-row .comand-title {
+            height: 7.5rem;
+            border: 1px solid #CCCCCC;
+            resize: none;
+            width: 100%;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            padding: 1.6rem 1.2rem;
+            font-size: 1.5rem;
+            line-height: 1.6rem;
+            color: #999999;
+            margin-bottom: 2rem;
+        }
+        .form-row-active{
+            background-color: RGBA(217, 217, 217, 1);
+        }
+        #DemandTypeName{
+            width: 65%;
+            text-align: end;
+        }
+    </style>
+</head>
+<body>
+<!-- <div class="place-holder"></div>
+<div class="form">
+    <div class="form-row">
+        <span class="btn-type pull-right ellipsis-1"  id="DemandTypeName"  tapmode="form-row-active" onclick="getDemandType( this )">必选</span>
+        <label >需求类别</label>
+    </div>
+    <div class="form-row border-1px-top form-row-md">
+        <label>需求标题</label>
+        <textarea id="title" class="comand-title input" placeholder="至少8个字"></textarea>
+    </div>
+    <div class="form-row form-row-lg border-1px-top">
+        <label>详情描述</label>
+        <textarea class="input" name="comand-description" id="comand-description" placeholder="基于xxx产品或项目，寻找xxx类的合作伙伴，有xxx的要求（最少10个字）"></textarea>
+    </div>
+</div>
+<div class="form-row form-row-lg">
+    <div class="btn-submit" tapmode onclick="AddDemand()">提交</div>
+    <p class="description">需求提交后，系统会推送给合适的合作伙伴。如果对方有响应，您即可看到他的具体信息。</p>
+</div>
+<div class="cover hidden">
+    <div class="select">
+        <div class="select-control">
+            <div class="select-control-cancel" onclick="selectCancel(this)">取消</div>
+            <div class="select-control-placeHolder"></div>
+            <div class="select-control-ok"  onclick="selectOK(this)">完成</div>
+        </div>
+        <div class="select-content">
+
+        </div>
+    </div>
+</div> -->
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript" src="../../script/translation.js"></script>
+<script type="text/javascript">
+    $(".input").on('focus',function(){
+        selectCancel();
+    });
+    var btnType = $api.dom('.btn-type');
+    var comandTitle = $api.dom('.comand-title');
+    var comandDescription = $api.dom('#comand-description');
+    var loginInfo = $api.getStorage('loginInfo');
+    var UICustomPicker;
+    var ProjectID;
+    var DemandTypeID = 0;
+    var DemandTypeName = '';
+    var zhuge;
+    apiready = function () {
+        $api.dom( 'body' ).innerHTML = 
+        '<div class="place-holder"></div>'+
+        '    <div class="form">'+
+        '        <div class="form-row">'+
+        '            <span class="btn-type pull-right ellipsis-1"  id="DemandTypeName"  tapmode="form-row-active" onclick="getDemandType( this )">'+( fnIsEmp( api.pageParam.data.demandTypeId ) ?  fnSingleTypeJson()[ api.pageParam.data.demandTypeId ] : fnLanguageSwitch( '必选' ))+'</span>'+
+        '            <label >'+fnLanguageSwitch( '需求类别' )+'</label>'+
+        '        </div>'+
+        '        <div class="form-row border-1px-top form-row-md">'+
+        '            <label>'+fnLanguageSwitch( '需求标题' )+'</label>'+
+        '            <textarea id="title" class="comand-title input"  placeholder="'+fnLanguageSwitch( '至少8个字' )+'">'+( fnIsEmp( api.pageParam.data.title ) ? api.pageParam.data.title : '')+'</textarea>'+
+        '        </div>'+
+        '        <div class="form-row form-row-lg border-1px-top">'+
+        '            <label>'+fnLanguageSwitch( '详情描述' )+'</label>'+
+        '            <textarea class="input" name="comand-description"  id="comand-description" placeholder="'+fnLanguageSwitch( '基于xxx产品或项目，寻找xxx类的合作伙伴，有xxx的要求（最少10个字）' )+'">'+( fnIsEmp( api.pageParam.data.content ) ? api.pageParam.data.content : '')+'</textarea>'+
+        '        </div>'+
+        '    </div>'+
+        '    <div class="form-row form-row-lg">'+
+        '        <div class="btn-submit" tapmode onclick="AddDemand()">'+fnLanguageSwitch( '提交' )+'</div>'+
+        '        <p class="description">'+fnLanguageSwitch( '需求提交后，系统会推送给合适的合作伙伴。如果对方有响应，您即可看到他的具体信息。' )+'</p>'+
+        '    </div>';
+        zhuge = api.require('zhuge');
+        if (zhuge) {
+            zhuge.initZhuge();
+        }
+    };
+
+    function getDemandType( el ) {
+        openSelector(el, fnSingleTypeJson())
+    }
+
+
+    function AddDemand() {
+        fnAjax({
+            url: 'projectDemands/addProjectNeed',
+            headers: {
+                authorization: USER.token
+            },
+            debug: true,
+            data: {
+                values: {
+                    projectId: api.pageParam.data.id,
+                    title: $api.dom( '#title' ).value,
+                    demandTypeId: +$api.attr($api.dom( '#DemandTypeName' ), 'data-selectorid' ),
+                    content: $api.dom( '#comand-description' ).value
+                }
+            }
+        }, function( ret, err ){
+            if( ret ){
+                api.toast({
+	                global: true,
+                    msg: fnLanguageSwitch( '您的需求正在审核中,需求状态为“审核中”或“未通过”时，您可以修改需求并重新提交' )
+                });
+                api.execScript({
+                    name: 'index',
+                    frameName: 'frm_chain',
+                    script: 'api.refreshHeaderLoading();'
+                });
+                setTimeout(function(){
+                    api.closeWin();
+                }, 1000);
+            }else{
+                api.toast({
+	global: true,
+                    msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                });
+            }
+        });
+
+        return;
+        var title = $("#title").val();
+        var description = $("#comand-description").val();
+        if (DemandTypeID == 0) {
+            api.alert({
+                title: 'Tips',
+                msg: 'Please select the type of demand',
+                buttons: ['I got it']
+            }, function (ret, err) {
+
+            });
+            return;
+        }
+        if ($.trim(title).length < 2) {
+            api.alert({
+                title: 'Tips',
+                msg: 'Request Title at least 2 characters',
+                buttons: ['I got it']
+            }, function (ret, err) {
+
+            });
+            return;
+        }
+        if ($.trim(description).length < 3) {
+            api.alert({
+                title: 'Tips',
+                msg: 'Details of Request at least 3 characters',
+                buttons: ['I got it']
+            }, function (ret, err) {
+
+            });
+            return;
+        }
+        var valueParam = {
+            UserID: loginInfo.userid,
+            BatchNo: loginInfo.batchno,
+            ProjectID: ProjectID,
+            DemandType: DemandTypeID,
+            Title: title,
+            Content: description,
+            UpOrAdd: 1
+        };
+        var url = 'APPMatchmaking/AddDemand.aspx';
+        api.showProgress({
+            title: 'Submitting...',
+            text: '',
+            modal: false
+        });
+        if (zhuge) {
+            zhuge.track({
+                eventName: '项目支持_技术支持提交按钮',
+                eventPro: {
+                    '模块来源': '产业链对接'
+                }
+            });
+        }
+        ajaxRequest(url, 'post', valueParam, function (ret, err) {
+            api.hideProgress();
+            if (ret) {
+                if (ret.res == 1) {
+                    api.alert({
+                        title: '',
+                        msg: 'Your request is now reviewing. If the request status is "In Review" or "Reject". You can mofidy the request and submit it again.',
+                        buttons: ['I got it']
+                    }, function (ret, err) {
+                        api.execScript({
+                            name: 'index',
+                            frameName: 'frm_chain',
+                            script: 'loadDataFromComandForMaker()'
+                        });
+                        var from = api.pageParam.from;
+                        if (from && from == 'newProject') {
+                            api.closeToWin({
+                                name: 'index'
+                            });
+                        } else {
+                            api.closeWin();
+                        }
+                    });
+                }else{
+                    api.toast({
+	global: true,
+                        msg: ret.des
+                    });
+                }
+            } else {
+                api.toast({
+	global: true,
+                    msg: err.msg
+                });
+            }
+        })
+    }
+
+</script>
+</html>

@@ -1,0 +1,882 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>schematic-frm</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" href="../../css/common.css">
+    <!-- <link rel="stylesheet" href="../../css/fonts_awesome/font-awesome.min.css"> -->
+    <style type="text/css">
+        body {
+            height: auto;
+            min-height: 100%;
+        }
+        /*大体上通用的部分 start*/
+        .common-part-service {
+
+        }
+
+        .whats-this {
+            background-color: #F0F0F0;
+            padding-top: 1.5rem;
+        }
+
+        .whats-this .this-name {
+            font-size: 1.5rem;
+            line-height: 2.5rem;
+            color: #000000;
+            background: url(../../image/project/icon_schematic.png) 1rem 50% no-repeat;
+            background-size: 2.5rem 2.5rem;
+            text-indent: 4rem;
+        }
+
+        .whats-this .this-description {
+            padding: 0.8rem 2.2rem 1rem 4rem;
+            font-size: 1.3rem;
+            line-height: 1.6rem;
+            color: #515458;
+            border-bottom: 0.2rem solid #C8C8C8;
+        }
+
+        .whats-this .design {
+            padding-left: 4rem;
+        }
+
+        .whats-this .text, .whats-this .designer {
+            font-size: 1.2rem;
+            line-height: 2.6rem;
+            color: #000000;
+        }
+
+        .whats-this .rank {
+
+        }
+
+        .whats-this .stars {
+            color: #999999;
+            font-size: 1.8rem;
+            vertical-align: bottom;
+            line-height: 2.6rem;
+        }
+
+        .whats-this .stars .fa-star {
+            color: #FFDA00;
+        }
+
+        /*已选择的项目*/
+        .project-header {
+            padding: 0 1rem;
+            background-color: #FFFFFF;
+        }
+
+        .project-header label {
+            font-size: 1.6rem;
+            line-height: 5.5rem;
+        }
+
+        .header-inner {
+            width: 33.9rem;
+            height: 8.4rem;
+            border: 0.1rem solid #005BBC;
+            border-radius: 0.6rem;
+            position: relative;
+        }
+
+        .header-inner-img {
+            position: absolute;
+            left: 50%;
+            margin-left: -1.6rem;
+            top: -1.6rem;
+            width: 3.2rem;
+            height: 3.2rem;
+            background: #FFFFFF url(../../image/project/project_list_icon.png) center center no-repeat;
+            background-size: 1.9rem 2.2rem;
+        }
+
+        .header-inner .name {
+            font-size: 1.5rem;
+            color: #005BBC;
+            text-align: center;
+            line-height: 3rem;
+            padding-top: 1.3rem;
+            font-weight: bold;
+        }
+
+        .header-inner .date-group {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+
+        .header-inner .date-group .text, .header-inner .date-group .date {
+            font-size: 1.2rem;
+            line-height: 2.1rem;
+            color: #000000;
+            padding-left: 1rem;
+        }
+
+        .header-inner .date-counting {
+            width: 11.7rem;
+            margin: 0 auto;
+            text-align: center;
+            color: #F7AA00;
+            font-size: 1.2rem;
+        }
+
+        .header-inner .date-counting .count {
+            font-size: 2.8rem;
+            line-height: 4rem;
+        }
+
+        .header-inner .project-state {
+            position: absolute;
+            right: 0;
+            bottom: 0.6rem;
+            font-size: 1.2rem;
+            line-height: 2rem;
+            padding-right: 0.5rem;
+        }
+
+        .project-header .create-group {
+            font-size: 1.3rem;
+            line-height: 4.5rem;
+            text-align: right;
+            color: #595C60;
+        }
+
+        .project-header .create-group .btn-create {
+            background-color: #00AEEF;
+            border-radius: 0.3rem;
+            width: 7.9rem;
+            height: 2.8rem;
+            color: #FFFFFF;
+            text-align: center;
+            line-height: 2.8rem;
+        }
+
+        /*大体上通用的部分 end*/
+        .propose-title {
+            height: 3.7rem;
+            line-height: 3.7rem;
+            font-size: 1.5rem;
+            background-color: #DBF0FF;
+            color: #0271C5;
+            background-image: url("../../image/project/icon_quote_right.png");
+            background-position-x: 1.5rem;
+            background-position-y: center;
+            background-repeat: no-repeat;
+            background-size: 2rem;
+            padding-left: 3.8rem;
+            font-weight: bold;
+        }
+        .form{
+            padding-left: 1rem;
+            background-color: #FFFFFF;
+        }
+        .form.no-padded{
+            padding-left: 0;
+            background-color: transparent;
+        }
+        .form .form-title{
+            height: 2.8rem;
+            line-height: 2.8rem;
+            color: #0271C5;
+            background-color: #F0F0F0;
+            font-size: 1.3rem;
+            text-indent: 1rem;
+        }
+        .form .form-group{
+            background-color: #FFFFFF;
+        }
+        .form.no-padded .form-group{
+            padding-left: 1rem;
+        }
+        .form .form-group label{
+            height: 3.8rem;
+            line-height: 3.8rem;
+            width: 11.5rem;
+            font-size: 1.4rem;
+            color: #000000;
+        }
+        .form .form-group .form-text-right{
+            text-align: right;
+            float: right;
+            margin-right: 2rem;
+            height: 3.8rem;
+            line-height: 3.8rem;
+            font-size: 1.4rem;
+            color: #C9C9CF;
+            width: 20rem;
+        }
+        /*.form .form-group input.form-text-right{
+            color: #333333;
+        }
+        .form .form-group input.form-text-right[disabled]{
+            color: #666666;
+        }*/
+        .form .current-board{
+            height: 3rem;
+            line-height: 3rem;
+            padding: 0 1rem;
+            font-size: 1.1rem;
+            color: #5B5E61;
+        }
+        .fake-link{
+            color: #0071C5;
+            text-decoration: underline;
+        }
+        .form .current-board .fake-link{
+            font-size: 1.1rem;
+            line-height: 3rem;
+            margin-left: 2.3rem;
+        }
+        .form .radio-group{
+            padding-top: 1.4rem;
+        }
+        .form .radio-group .radio-title{
+            height: 3rem;
+            line-height: 3rem;
+            padding: 0 1rem;
+            font-size: 1.1rem;
+            color: #5B5E61;
+        }
+
+        /*radio*/
+        .propose-select, .fileuploadLabel {
+            padding-left: 10px;
+            font-size: 1.6rem;
+            position: relative;
+        }
+        .propose-select.active .radioSwitch{background-image: url('../../image/project/promotion_circle_highlight.png');
+            color: #0071C5;
+        }
+
+        .propose-select .selectSwitch.show{background-image: url('../../image/project/MCSI_Selected3.png');
+        }
+
+        .propose-select.active .selectSwitch.show{background-image: url('../../image/project/MCSI_Selected2.png');
+        }
+
+
+        .radioSwitch.show {
+            background-image: url('../../image/project/promotion_circle_highlight.png');
+            color: #0071C5;
+        }
+        .radioSwitch {
+            background-image: url('../../image/project/promotion_circle_normal.png');
+            background-size: 1.5rem;
+            background-repeat: no-repeat;
+            background-position: left center;
+            line-height: 4.5rem;
+            font-size: 1rem;
+            text-indent: 2rem;
+        }
+        .show.selectSwitch {
+            background-image: url('../../image/project/MCSI_Selected2.png');
+            background-size: 2rem 1.8rem;
+            background-position: 0 44%;
+        }
+        .selectSwitch {
+            background-image: url('../../image/project/MCSI_Selected1.png');
+            background-size: 1.5rem;
+            background-repeat: no-repeat;
+            background-position: 0 50%;
+            line-height: 4.5rem;
+            font-size: 1.1rem;
+            color: #5B5E61;
+            text-indent: 2rem;
+            display: block;
+        }
+        .propose-select .fake-link{
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+        /*radio*/
+        .form .more-wanted{
+            width: 34rem;
+            height: 9.4rem;
+            border: 1px solid #A2ADB3;
+            margin: 0 auto;
+            display: block;
+            resize: none;
+            font-size: 1.3rem;
+            line-height: 1.6rem;
+            padding: 1rem 0.6rem;
+            overflow-x: hidden;
+            -webkit-box-sizing: border-box;
+                    box-sizing: border-box;
+            background-color: #FFFFFF;
+            margin-bottom: 2.5rem;
+        }
+        /*upload start*/
+        .form .upload-group{
+            position: relative;
+            margin-bottom: 3rem;
+            padding-left: 1rem;
+        }
+        .form .upload-label{
+            color: #000000;
+            font-size: 1.1rem;
+            padding: 1rem;
+            padding-left: 0;
+            line-height: 1.4rem;
+        }
+        .form .upload-group img{
+            width: 7.7rem;
+            height: 7.7rem;
+        }
+        .form .upload-group .image-name{
+            position: absolute;
+            left: 9.2rem;
+            bottom: 3.5rem;
+            font-size: 0.9rem;
+            color: #999999;
+            line-height: 1.9rem;
+        }
+        .form .upload-group .notice{
+            position: absolute;
+            left: 9.2rem;
+            bottom: 0;
+            font-size: 0.9rem;
+            color: #999999;
+            line-height: 1.9rem;
+        }
+        /*upload end*/
+        .form-tips{
+            font-size: 0.9rem;
+            padding: 0 1rem;
+            line-height: 2.8rem;
+            color: #888888;
+        }
+
+        .btn-submit{
+            width: 18rem;
+            height: 3.8rem;
+            margin: 3rem auto;
+            text-align: center;
+            color: #FFFFFF;
+            background-color: #00AEEF;
+            border-radius: 0.4rem;
+            line-height: 3.8rem;
+            font-size: 1.6rem;
+        }
+
+    </style>
+</head>
+<body>
+<!-- <div class="common-part-service">
+    <div class="whats-this">
+        <p class="this-name">
+            原理图审阅
+        </p>
+
+        <p class="this-description">
+            提交您的设计原理图，我们将对其进行符合标准分析，主要帮助检查处理器，芯片组，内存三大核心部件及其配合电路的电气连接是否符合英特尔平台设计规范，及时提供修改意见。
+        </p>
+
+        <div class="design">
+            <span class="text">设计：</span>
+                <span class="designer">
+                    
+                </span>
+
+            <div class="rank">
+                <span class="text">客户满意度：</span> -->
+                   <!-- <span class="stars">
+                        <i class="fa-star fa"></i>
+                        <i class="fa-star fa"></i>
+                        <i class="fa-star fa"></i>
+                        <i class="fa-star fa"></i>
+                        <i class="fa-star fa"></i>  
+                 </span>-->
+<!--                 <span class="text"></span>
+            </div>
+        </div>
+    </div> --> 
+    <!-- 已选择的项目
+<div class="project-header">
+        <label>您已选择的项目为：</label>
+
+        <div class="header-inner">
+            <div class="header-inner-img"></div>
+            <p class="name"></p>
+
+            <div class="header-bottom">
+                <div class="date-group">
+                    <p class="text">项目启动时间</p>
+
+                    <p class="date"></p>
+                </div>
+                <div class="date-counting">
+                    <span class="count"></span>
+                    天
+                </div>
+                <div class="project-state">已处于项目预研阶段</div>
+            </div>
+        </div>
+        <p class="create-group">
+            如果您不是为这个项目申请支持，请先
+            <span class="btn-create" tapmode onclick="createNewProject()">添加项目</span>
+        </p>
+    </div>
+</div>
+
+<div class="propose">
+    <div class="propose-title border-1px-top border-1px-bottom">
+        请填写以下表格
+    </div>
+    <div class="form no-padded">
+        
+        <div class="propose-select">
+            <span class="radioSwitch" tapmode="" onclick="toggleSwitch2( this )">
+                原理图审阅：
+            </span>
+            <div class="propose-select" id="type">
+                <div class="selectSwitch" tapmode="" onclick="toggleSwitch(this,'selectSwitch')" style="margin-left: 3rem;">
+                    CPU
+                </div>
+                <div class="selectSwitch" tapmode="" onclick="toggleSwitch(this,'selectSwitch')" style="margin-left: 3rem;">
+                    Chipset周边
+                </div>
+                <div class="selectSwitch" tapmode="" onclick="toggleSwitch(this,'selectSwitch')" style="margin-left: 3rem;">
+                    DRAM
+                </div>
+            </div>
+        </div>
+        <div class="propose-select">
+            <span class="radioSwitch" tapmode="" onclick="toggleSwitch2(this)">
+                部分电路图分析：
+            </span>
+            <textarea class="more-wanted" placeholder="注释需要核对的疑问以及希望得到哪方面的解答"></textarea>
+        </div>
+        
+
+        
+        <div class="upload-group">
+            <p class="upload-label">原理图或疑问部分截图上传：</p>
+            <img id="upload_img" src="../../image/project/add_pic.png" tapmode onclick="fnGetPicture( this )" >
+            <p class="image-name ellipsis-1">未上传图片</p>
+            <p class="notice ellepsis-1">原理图审核需要上传图片，图片最大为10M</p>
+        </div>
+        <div class="form-group border-1px-top clearfix">
+            <label class="pull-left">您的联系号码</label>
+            <input type="tel" class="schematic-phone form-text-right">
+        </div>
+        <p class="form-tips">我们会把您的号码保存到您的个人信息中，下次就不用再填写。</p>
+    </div>
+    <div class="btn-submit btn" tapmode onclick="fnSubmit(this)">提交</div>
+    <div style="height: 1px"></div>
+</div> -->
+ 
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript">
+
+    // 以下通用
+    var account = $api.getStorage('loginInfo');
+    var pageParam = {};
+    var projectID = '';
+    var typeid = 1;
+    var zhuge;
+    apiready = function () {
+        UICustomPicker = api.require('UICustomPicker');
+        fnAjax({
+            url: 'supports/findSupportScore?typeId=1'
+           // debug: true
+        }, function( ret, err ){
+            if( ret ){
+                var _average = '';
+                for( var i = 0; i < 5; i++ ){
+                    _average += '<i class="'+( i < ret.average ? 'fa-star' : 'fa-star-o' )+' fa"></i>'
+                }
+                // $api.dom( '.stars' ).innerHTML = _average;
+                with( api.pageParam.data.data ){
+                     $api.dom( 'body' ).innerHTML = 
+                    '   <div class="common-part-service">'+ 
+                    '        <div class="whats-this">'+ 
+                    '            <p class="this-name">'+fnLanguageSwitch('原理图审阅')+'</p>'+ 
+                    '            <p class="this-description">'+fnLanguageSwitch('提交您的设计原理图，我们将对其进行符合标准分析，主要 帮助检查处理器，芯片组，内存三大核心 部件及其配合电路的电气连接是否符合英特尔平台设计规范，及时提供修改意见。')+'</p>'+ 
+
+                    '            <div class="design">'+ 
+                    '                <span class="text">'+fnLanguageSwitch('设计')+'：</span>'+ 
+                    '                    <span class="designer"> '+                       
+                    '                    </span>'+ 
+                    '                <div class="rank">'+ 
+                    '                    <span class="text">'+fnLanguageSwitch('客户满意度')+'：</span>'+ 
+                     '                <span class="stars">'+_average+'</span>'+
+                    '                    <span class="text"></span>'+ 
+                    '                </div> '+ 
+                    '            </div>'+ 
+                    '        </div>   '+ 
+                    '        <div class="project-header">' +                
+                    '        <label>'+fnLanguageSwitch( '您已选择的项目为' )+'：</label>'+
+                    '        <div class="header-inner">'+
+                    '            <div class="header-inner-img"></div>'+
+                    '            <p class="name">'+projectName+'</p>'+
+                    '            <div class="header-bottom">'+
+                    '                <div class="date-group">'+
+                    '                    <p class="text">'+fnLanguageSwitch( '项目启动时间' )+'</p>'+
+                    '                    <p class="date">'+created+'</p>'+
+                    '                </div>'+
+                    '                <div class="date-counting">'+
+                    '                   <span class="count">342</span>'+fnLanguageSwitch('天')+'</div>'+
+                    '                <div class="project-state">'+fnLanguageSwitch( '已处于') +' '+fnProjectApprovalStatusJson()[ projectStatus ]+' '+fnLanguageSwitch( '阶段' )+'</div>'+
+                    '            </div>'+
+                    '        </div>'+
+                    '        <p class="create-group">'+fnLanguageSwitch( '如果您不是为这个项目申请支持，请先' )+
+                    '            <span class="btn-create" tapmode onclick="createNewProject()">'+fnLanguageSwitch('添加项目')+'</span>'+
+                    '        </p>'+
+                    '        </div>'+
+                    '    </div>'+
+                    '    <div class="propose">'+
+                    '        <div class="propose-title border-1px-top border-1px-bottom">'+fnLanguageSwitch('请填写以下表格')+'</div>'+
+                    '        <div class="form no-padded">   '+
+                    '            <div class="propose-select select1 active">'+
+                    '                <span class="radioSwitch" tapmode="" onclick="toggleSwitch2(this)">'+fnLanguageSwitch('原理图审阅')+':</span>'+
+                        '            <div class="propose-select" id="type">'+
+                        '                <div class="selectSwitch" tapmode="" onclick="toggleSwitch(this,\'selectSwitch\')" style="margin-left: 3rem;">CPU</div>'+
+                        '                <div class="selectSwitch" tapmode="" onclick="toggleSwitch(this,\'selectSwitch\')" style="margin-left: 3rem;">'+fnLanguageSwitch('Chipset周边')+'</div>'+
+                        '                <div class="selectSwitch" tapmode="" onclick="toggleSwitch(this,\'selectSwitch\')" style="margin-left: 3rem;">DRAM</div>'+
+                        '            </div>'+
+                    '            </div>'+
+                    '           <div class="propose-select select2">'+
+                    '                <span class="radioSwitch" tapmode="" onclick="toggleSwitch2(this)">'+fnLanguageSwitch('部分电路图分析')+':</span>'+
+                        '            <textarea id="" class="more-wanted" placeholder="'+fnLanguageSwitch('注释需要核对的疑问以及希望得到哪方面的解答')+'"></textarea>'+
+                    '            </div>'+
+                    '            <div class="upload-group">'+
+                    '                <p class="upload-label">'+fnLanguageSwitch('原理图或疑问部分截图上传')+':</p>'+
+                    '                <img id="upload_img" src="../../image/project/add_pic.png" tapmode onclick="fnGetPicture( this )" >'+
+                    '                <p class="image-name ellipsis-1">'+fnLanguageSwitch('未上传图片')+'</p>'+
+                    '                <p class="notice ellepsis-1">'+fnLanguageSwitch('原理图审核需要上传图片，图片最大为10M')+'</p>'+
+                    '            </div>'+
+                    '            <div class="form-group border-1px-top clearfix">'+
+                    '                <label class="pull-left">'+fnLanguageSwitch('您的联系号码')+'</label>'+
+                    '                <input type="tel" class="schematic-phone form-text-right">'+
+                    '            </div>'+
+                    '            <p class="form-tips">'+fnLanguageSwitch('我们会把您的号码保存到您的个人信息中，下次就不用再填写。')+'</p>'+
+                    '        </div>'+
+                    '        <div class="btn-submit btn" tapmode onclick="fnSubmit(this)">'+fnLanguageSwitch('提交')+'</div>'+
+                    '        <div style="height: 1px"></div>'+
+                    '    </div>';
+
+                }
+            }else{
+                api.toast({
+                   global: true,
+                    msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                });
+            }
+        });
+        return;
+        pageParam = api.pageParam;
+        projectID = pageParam.id;
+        zhuge = api.require('zhuge');
+        if (zhuge) {
+            zhuge.initZhuge();
+        }
+        getProjectDetail();
+        getProjectDesigner();
+    };
+
+    function getProjectDesigner(){
+        ajaxRequest('/APPSupportManage/GetSupportAppraise.aspx', 'get', {
+            UserID: account.userid,
+            BatchNo: account.batchno, 
+            SupportTypeID: typeid
+        }, function(ret, err){
+            if(ret && ret.res == undefined){
+                // console.log('ret:normal===='+ JSON.stringify(ret));
+                var data = ret.appdatalist[0];
+                $api.html($api.dom('.designer'), data.UserName);
+                
+                var len = parseInt(data.EvaluateNumber);
+                var str = '';
+                for (var i = 0; i < len; i++) {
+                    str+= '<i class="fa-star fa"></i>';
+                }
+                $api.html($api.dom('.stars'), str);
+                $api.html($api.domAll('.rank .text')[1], '('+ data.UserNum +'人)');
+            } else{
+                console.log('ret:err===='+ JSON.stringify(ret));
+            }
+            if (err) {
+                console.log('err===='+ JSON.stringify(err));
+            }
+
+        });
+        
+    };
+
+    function getProjectDetail(){
+        ajaxRequest('/APPProjectManage/APPGetProjectDetail.aspx', 'get', {
+            UserID: account.userid,
+            BatchNo: account.batchno,
+            ProjectID: projectID
+        }, function(ret, err){
+            if(ret && ret.res == undefined){
+                var data = ret.appdatalist[0];
+                $api.html($api.dom('.project-header .header-inner .name'), data.ProjectName);
+                $api.html($api.dom('.project-header .header-inner .date'), data.CreateDate);
+                $api.html($api.dom('.project-header .header-inner .count'), data.ProjectStartDay);
+                $api.html($api.dom('.project-header .header-inner .project-state'), '已处于'+ data.ProjectStatus +'阶段');
+                
+                // 已处于项目预研阶段
+                
+                
+            } else{
+                console.log('ret:err===='+ JSON.stringify(ret));
+            }
+            if (err) {
+                console.log('err===='+ JSON.stringify(err));
+            }
+        });
+    };
+    // 以上通用
+
+    function toggleSwitch(obj,clz){
+        var $selectSwitch = $api.domAll('.'+clz);
+        var reg = /radio/g;
+        if (reg.test(clz)) {
+            for(var i=0;i<$selectSwitch.length;i++){
+                $api.removeCls($selectSwitch[i],'show');
+            }
+        } else {
+
+        }
+        if($api.hasCls(obj,'show')){
+            $api.removeCls(obj,'show');
+        }else{
+            $api.addCls(obj,'show');
+        }
+    };
+
+    function toggleSwitch2( el ){
+        $api.removeCls( $api.dom( '.propose-select.active' ),'active')
+        $api.addCls($api.closest(el, '.propose-select'),'active')
+    };
+
+    // 获取表单信息
+    function getFormInfo(){
+        ajaxRequest('/APPSupportManage/APPGetSupportUserInfo.aspx', 'get', {
+            UserID: account.userid,
+            BatchNo: account.batchno
+        }, function(ret, err){
+            if (ret && ret.res == undefined) {
+                // console.log('ret:normal===='+ JSON.stringify(ret));
+                var data = ret.appdatalist[0];
+                data.CellPhone && $api.val($api.dom('.schematic-phone'), data.CellPhone);
+
+            } else {
+                api.toast({
+	               global: true,
+                    msg: JSON.stringify(ret),
+                    duration: 2000,
+                    location: 'middle'
+                });
+            }
+            if (err) {
+                api.toast({
+	               global: true,
+                    msg: JSON.stringify(err),
+                    duration: 2000,
+                    location: 'bottom'
+                });
+            }
+        });
+    };
+    // 获取原理图
+    function getSchematic(){
+        var schematicBtns = $api.domAll('.selectSwitch.show');
+        var str = '';
+        if (schematicBtns.length) {
+            for (var i = 0; i < schematicBtns.length; i++) {
+                if (i == schematicBtns.length - 1) {
+                    str += $api.trim($api.text(schematicBtns[i]));
+                } else{
+                    str += $api.trim($api.text(schematicBtns[i])) + ',';
+                }
+            }
+        }
+        return str;
+    };
+
+
+    // 提交schematic
+    var submitLock = false;
+    function isEmepty(str){
+        if (str == undefined || str == null) {
+            console.error(str);
+            return true;
+        } else {}
+        if ($api.trim(str) == '' || $api.trim(str) == '---请选择---') {
+            return true;
+        } else {
+            return false;
+        }
+    };
+    function fnSubmit(el){
+        var elSelectSwitch = $api.domAll( '#type .selectSwitch.show' ),
+            _type = [],
+            content = $api.dom( '.more-wanted' ).value.trim(),
+            files = $api.attr( $api.dom( '#upload_img' ), 'data-selectorid' ),
+            phone = $api.dom( '.schematic-phone' ).value.trim();
+        if( $api.dom( '.select1.active' ) ){
+            if( elSelectSwitch.length ){
+                for( var i = 0; i < elSelectSwitch.length; i++ ){
+                    _type.push( elSelectSwitch[i].innerText );
+                }
+            }else{
+                api.toast({
+                    msg: fnLanguageSwitch( '请先选择原理图' )
+                });
+                return;
+            }   
+        }
+
+        if( $api.dom( '.select2.active' ) && ! content ){
+            api.toast({
+                msg: fnLanguageSwitch( '请填写部分电路图分析' )
+            });
+        }else if( files === null ){
+            api.toast({
+                msg: fnLanguageSwitch( '请上传图片' )
+            });
+        }else if( ! phone ){
+            api.toast({
+                msg: fnLanguageSwitch( '请填写联系号码' )
+            });
+        }else{
+            fnAjax({
+                url: 'supports/SchematicDiagram',
+                data: {
+                    values: {
+                        projectId: api.pageParam.data.id,
+                        "SchematicDiagram": {
+                            files: files,
+                            type: _type.join( ',' ),
+                            content: content,
+                            phone: phone
+                        }
+                    }
+                }
+            }, function( ret, err ){
+                if( ret ){
+                    api.toast({
+                        msg: fnLanguageSwitch( '原理图审阅提交成功' )
+                    });
+                    setTimeout(function(){
+                        api.closeWin();
+                    },1000);
+                }else{
+                    api.toast({
+                         global: true,
+                        msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                    });
+                }
+            });    
+        }  
+        return;
+
+        var SchematicReview = getSchematic();
+        if (isEmepty(SchematicReview)) {
+            api.alert({
+                title: fnLanguageSwitch('提醒'), 
+                msg: fnLanguageSwitch('请先选择原理图')
+            });
+            return false;
+        }
+        var QuestionsOrAnswers = $api.trim($api.val($api.dom('.more-wanted')));
+        if (isEmepty(QuestionsOrAnswers)) {
+            api.alert({
+                title: fnLanguageSwitch('提醒'), 
+                msg: fnLanguageSwitch('请填写部分电路图分析')
+            });
+            return false;
+        }
+        var Photo = $api.attr(uploadImg, 'data-url');
+        if (isEmepty(Photo)) {
+            api.alert({
+                title: fnLanguageSwitch('提醒'), 
+                msg: fnLanguageSwitch('请上传图片')
+            });
+            return false;
+        }
+        var CellPhone = $api.val($api.dom('.schematic-phone'));
+        if (isEmepty(CellPhone)) {
+            api.alert({
+                title: fnLanguageSwitch('提醒'), 
+                msg: fnLanguageSwitch('请填写联系号码')
+            });
+            return false;
+        }
+        if ( ! /1[0-9]{10}/ig.test(CellPhone)) {
+            api.alert({
+                title: fnLanguageSwitch('提醒'), 
+                msg: fnLanguageSwitch('手机号格式有误')
+
+            });
+            return false;
+        }
+        if (submitLock) {
+            return false;
+        } else {
+            submitLock = true;
+            $api.attr(el, 'disabled', 'disabled');
+        }
+        if (zhuge) {
+            zhuge.track({
+                eventName: '项目支持_技术支持提交按钮',
+                eventPro: {
+                    '模块来源': '原理图审阅'
+                }
+            });
+        }
+        ajaxRequest('/APPSupportManage/APPSupportSchematicDiagram.aspx', 'post', {
+            UserID: account.userid,
+            BatchNo: account.batchno,
+            ItemNameID: projectID,
+            SchematicReview: SchematicReview,
+            QuestionsOrAnswers: QuestionsOrAnswers,
+            CellPhone: CellPhone
+        }, {
+            Photo: Photo,
+        }, function(ret, err){
+            submitLock = false;
+            $api.removeAttr(el, 'disabled');
+            if(ret && ret.res){
+                // console.log('ret:normal===='+ JSON.stringify(ret));
+                api.toast({
+                    msg: fnLanguageSwitch('开发板借测提交成功'),
+                    duration: 2000,
+                    location: 'middle'
+                });
+                setTimeout(function(){
+                    api.closeWin();
+                },2000);
+            } else{
+                api.toast({
+	             global: true,
+                    msg: JSON.stringify(ret),
+                    duration: 2000,
+                    location: 'middle'
+                });
+            }
+            if (err) {
+                api.toast({
+	                   global: true,
+                    msg: JSON.stringify(err),
+                    duration: 2000,
+                    location: 'middle'
+                });
+            }
+        });
+    }
+
+
+</script>
+</html>

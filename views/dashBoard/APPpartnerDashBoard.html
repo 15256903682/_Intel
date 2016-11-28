@@ -1,0 +1,308 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>Dashboard</title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="APPDashBoardreset.css"/>
+    <link rel="stylesheet" href="APPDashBoardmain.css"/>
+    <link rel="stylesheet" href="../../css/api.css"/>
+    <link rel="stylesheet" href="../../css/common.css"/>
+    <script type="text/javascript" src="../../script/api.js"></script>
+    <script type="text/javascript" src="ichart.latest.min.js"></script>
+    <script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+    <script type="text/javascript" src="../../script/languge.js"></script>
+    <script type="text/javascript" src="../../script/translation.js"></script>
+    <script type='text/javascript' src="APPStatisic.js"></script>
+    <style>
+        html,body{
+            background-color: #ffffff;
+        }
+        .list{
+            display: -webkit-box;
+        }
+        .list li {
+            -webkit-box-flex: 1;
+        }
+		#SupportType_ul li{ padding: 4px 10px; font-size: 14px; }
+    </style>
+</head>
+<body>
+<!-- <div id="main">
+    <div class="dynamic">
+        <h3>成员数量</h3>
+        <ul class="list clearfix">
+            <li class="blue">
+                <h1 id="ALLMember">0</h1>
+                <h4>用户总数量</h4>
+            </li>
+            <li class="gray">
+                <h1 id="PersonalMember">0</h1>
+                <h4>个人用户数量</h4>
+            </li>
+            <li>
+                <h1 id="EnterpriseMember">0</h1>
+                <h4>公司用户数量</h4>
+            </li>
+        </ul>
+    </div>
+        <div class="divinterval"></div>
+        <div class="cumulative">
+            <h3>成员地区分布表</h3>
+            <div class="box" id="MemberRegion"></div>
+            <div class="more_btn" id="more_btn" style="display:none;">
+                <a href="javascript:;" class="blue">点击查看更多</a>
+            </div>
+        </div>
+        <div class="divinterval"></div>
+        <div class="cumulative">
+            <h3>成员数量增长曲线</h3>
+
+            <div class="time_tab clearfix" id="time_tab">
+                <a class="active" href="javascript:;">日</a>
+                <a href="javascript:;">周</a>
+                <a href="javascript:;">月</a>
+            </div>
+            <div class="time_show" id="time_show">
+                <div class="time_show1" style="display: block;" id="registerData1">
+                </div>
+                <div class="time_show2" id="registerData2">
+                </div>
+                <div class="time_show3" id="registerData3">
+
+                </div>
+
+            </div>
+        </div>
+        <div class="divinterval"></div>
+        <div class="cumulative">
+            <h3>成员DAU统计图</h3>
+
+            <p class="gray p">成员DAU统计数/天(两周)</p>
+
+            <div  id="DayLoginData"></div>
+        </div>
+        <div class="divinterval"></div>
+        <div class="cumulative">
+            <h3>成员在APP中的活动轨迹</h3>
+
+            <p class="gray p">产品培训参与情况（点击数/周）</p>
+
+            <div  id="MemberTraining"></div>
+        </div>
+        <div class="divinterval"></div>
+        <div class="cumulative">
+            <h3>成员在APP中的活动轨迹</h3>
+
+            <p class="gray p">活动报名参与情况</p>
+
+            <div  id="Activejoin"></div>
+        </div>
+        <div class="divinterval"></div>
+        <div class="cumulative">
+            <h3>项目管理</h3>
+
+            <div class="clearfix user">
+                <p class="fl gray p">查看成员项目数（个人/企业项目数）</p>
+
+                <p class="fr blue p">点击图片查看详情</p>
+            </div>
+            <div  id="MemberProject"></div>
+        </div>
+        <div class="divinterval"></div>
+        <div class="cumulative">
+            <h3>项目管理</h3>
+
+            <p class="gray p">Mathmaking发布需求数量和类别统计</p>
+
+            <div  id="DemandCategory"></div>
+        </div>
+        <div class="divinterval"></div>
+        <div class="cumulative">
+            <h3>项目管理</h3>
+            <p class="gray p">技术支持提出的需求总数和类别统计</p>
+            <div  id="SupportType"></div>
+            <ul id="SupportType_ul"></ul>
+        </div>
+    </div> -->
+</body>
+</html>
+<script type="text/javascript">
+apiready = function () {
+    $api.dom('body').innerHTML=
+            '    <div id="main">'+
+            '        <div class="dynamic">'+
+            '            <h3>'+fnLanguageSwitch( '成员数量')+'</h3>'+
+            '            <ul class="list clearfix">'+
+            '                <li class="blue">'+
+            '                    <h1 id="ALLMember">0</h1>'+
+            '                    <h4>'+fnLanguageSwitch( '用户总数量')+'</h4>'+
+            '                </li>'+
+            '                <li class="gray">'+
+            '                    <h1 id="PersonalMember">0</h1>'+
+            '                    <h4>'+fnLanguageSwitch( '个人用户数量')+'</h4>'+
+            '                </li>'+
+            '                <li>'+
+            '                    <h1 id="EnterpriseMember">0</h1>'+
+            '                    <h4>'+fnLanguageSwitch( '公司用户数量')+'</h4>'+
+            '                </li>'+
+            '            </ul>'+
+            '        </div>'+
+            '            <div class="divinterval"></div>'+
+            '            <div class="cumulative">'+
+            '                <h3>'+fnLanguageSwitch( '成员地区分布表')+'</h3>'+
+            '                <div class="box" id="MemberRegion"></div>'+
+            '                <div class="more_btn" id="more_btn" style="display:none;">'+
+            '                    <a href="javascript:;" class="blue">'+fnLanguageSwitch('点击查看更多')+'</a>'+
+            '                </div>'+
+            '            </div>'+
+            '            <div class="divinterval"></div>'+
+            '            <div class="cumulative">'+
+            '                <h3>'+fnLanguageSwitch('成员数量增长曲线')+'</h3>'+
+
+            '                <div class="time_tab clearfix" id="time_tab">'+
+            '                    <a class="active" href="javascript:;">'+fnLanguageSwitch('日')+'</a>'+
+            '                    <a href="javascript:;">'+fnLanguageSwitch('周')+'</a>'+
+            '                    <a href="javascript:;">'+fnLanguageSwitch('月')+'</a>'+
+            '                </div>'+
+            '                <div class="time_show" id="time_show">'+
+            '                    <div class="time_show1" style="display: block;" id="registerData1">'+
+            '                    </div>'+
+            '                    <div class="time_show2" id="registerData2">'+
+            '                    </div>'+
+            '                    <div class="time_show3" id="registerData3">'+
+      
+            '                    </div>'+
+
+            '                </div>'+
+            '            </div>'+
+            '            <div class="divinterval"></div>'+
+            '            <div class="cumulative">'+
+            '                <h3>'+fnLanguageSwitch('成员DAU统计图')+'</h3>'+
+
+            '                <p class="gray p">'+fnLanguageSwitch('成员DAU统计数/天(两周)')+'</p>'+
+
+            '                <div  id="DayLoginData"></div>'+
+            '            </div>'+
+            '            <div class="divinterval"></div>'+
+            '            <div class="cumulative">'+
+            '                <h3>'+fnLanguageSwitch('成员在APP中的活动轨迹')+'</h3>'+
+
+            '                <p class="gray p">'+fnLanguageSwitch('产品培训参与情况（点击数/周）')+'</p>'+
+
+            '                <div  id="MemberTraining"></div>'+
+            '            </div>'+
+            '            <div class="divinterval"></div>'+
+            '            <div class="cumulative">'+
+            '                <h3>'+fnLanguageSwitch('成员在APP中的活动轨迹')+'</h3>'+
+
+            '                <p class="gray p">'+fnLanguageSwitch('活动报名参与情况')+'</p>'+
+
+            '                <div  id="Activejoin"></div>'+
+            '            </div>'+
+            '            <div class="divinterval"></div>'+
+            '            <div class="cumulative">'+
+            '                <h3>'+fnLanguageSwitch('项目管理')+'</h3>'+
+
+            '                <div class="clearfix user">'+
+            '                    <p class="fl gray p">'+fnLanguageSwitch('查看成员项目数（个人/企业项目数）')+'</p>'+
+
+            '                    <p class="fr blue p">'+fnLanguageSwitch('点击图片查看详情')+'</p>'+
+            '                </div>'+
+            '                <div  id="MemberProject"></div>'+
+            '            </div>'+
+            '            <div class="divinterval"></div>'+
+            '            <div class="cumulative">'+
+            '                <h3>'+fnLanguageSwitch('项目管理')+'</h3>'+
+
+            '                <p class="gray p">'+fnLanguageSwitch('Mathmaking发布需求数量和类别统计')+'</p>'+
+
+            '                <div  id="DemandCategory"></div>'+
+            '            </div>'+
+            '            <div class="divinterval"></div>'+
+            '            <div class="cumulative">'+
+            '                <h3>'+fnLanguageSwitch('项目管理')+'</h3>'+
+            '                <p class="gray p">'+fnLanguageSwitch('技术支持提出的需求总数和类别统计')+'</p>'+
+            '               <div  id="SupportType"></div>'+
+            '                <ul id="SupportType_ul"></ul>'+
+            '            </div>'+
+            '        </div>';
+
+
+
+    var timeTab = document.getElementById('time_tab');
+    var oAs = timeTab.getElementsByTagName('a');
+    var timeShow = document.getElementById('time_show');
+    var oDivs = timeShow.getElementsByTagName('div');
+    var timeShow1 = document.getElementById('registerData1');
+    var timeShow2 = document.getElementById('registerData2');
+    var timeShow3 = document.getElementById('registerData3');
+    for (var i = 0; i < oAs.length; i++) {
+        oAs[i].index = i;
+        oAs[i].onclick = function () {
+            if (this.index == 0) {
+                oAs[0].className = 'active';
+                oAs[1].className = '';
+                oAs[2].className = '';
+                timeShow1.style.display = 'block';
+                timeShow2.style.display = 'none';
+                timeShow3.style.display = 'none';
+            }
+            if (this.index == 1) {
+                oAs[0].className = '';
+                oAs[1].className = 'active';
+                oAs[2].className = '';
+                timeShow1.style.display = 'none';
+                timeShow2.style.display = 'block';
+                timeShow3.style.display = 'none';
+            }
+            if (this.index == 2) {
+                oAs[0].className = '';
+                oAs[1].className = '';
+                oAs[2].className = 'active';
+                timeShow1.style.display = 'none';
+                timeShow2.style.display = 'none';
+                timeShow3.style.display = 'block';
+            }
+        }
+    }
+    APPGetPartnerData();
+};
+    // apiready = function(){
+    //     fnAjax({
+    //         url: 'users/dashboard',
+    //         method: 'post',
+    //         debug: true
+    //     }, function( ret, err ){
+    //         debugAlert( arguments )
+    //         if( ret ){
+    //             $api.dom( '.dynamic' ).innerHTML =
+    //             '<h3>'+fnLanguageSwitch( '成员数量' )+'</h3>'+
+    //             '<ul class="list clearfix">'+
+    //             '    <li class="blue">'+
+    //             '        <h1 id="ALLMember">'+fnStringEmpty( ret.data0.PeopleNum )+'</h1>'+
+    //             '        <h4>'+fnLanguageSwitch( '用户总数量' )+'</h4>'+
+    //             '    </li>'+
+    //             '    <li class="gray">'+
+    //             '        <h1 id="PersonalMember">'+fnStringEmpty( ret.data0.PersonalNum )+'</h1>'+
+    //             '        <h4>'+fnLanguageSwitch( '个人用户数量' )+'</h4>'+
+    //             '    </li>'+
+    //             '    <li>'+
+    //             '        <h1 id="EnterpriseMember">'+fnStringEmpty( ret.data0.EnterpriseNum )+'</h1>'+
+    //             '        <h4>'+fnLanguageSwitch( '公司用户数量' )+'</h4>'+
+    //             '    </li>'+
+    //             '</ul>';
+    //         }else{
+    //             api.toast({
+    //                 global: true,
+    //                 msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+    //             });
+    //         }
+    //     });
+    // }
+        
+</script>

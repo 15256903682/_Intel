@@ -1,0 +1,293 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>edc-frm</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/fonts_awesome/font-awesome.min.css">
+    <style type="text/css">
+        body {
+            height: auto;
+            min-height: 100%;
+        }
+        .propose-title {
+            height: 3.7rem;
+            line-height: 3.7rem;
+            font-size: 1.5rem;
+            background-color: #DBF0FF;
+            color: #0271C5;
+            background-image: url("../../image/project/icon_quote_right.png");
+            background-position-x: 1rem;
+            background-position-y: center;
+            background-repeat: no-repeat;
+            background-size: 2rem;
+            padding-left: 3.8rem;
+            font-weight: bold;
+        }
+        .form{
+			background-color: #FFFFFF;
+        }
+		.form .form-group{
+			background-color: #FFFFFF;
+		}
+		/*radio*/
+		.propose-select, .fileuploadLabel {
+		    padding-left: 10px;
+		    font-size: 1.6rem;
+		    position: relative;
+		}
+		.show.selectSwitch {
+		    background-image: url('../../image/project/MCSI_Selected2.png');
+		    background-size: 2rem 1.8rem;
+    		background-position: 0 44%;
+		}
+		.selectSwitch {
+		    background-image: url('../../image/project/MCSI_Selected1.png');
+		    background-size: 1.5rem;
+		    background-repeat: no-repeat;
+		    background-position: 0 50%;
+			font-size: 1.3rem;
+			color: #333333;
+			padding: 1.4rem 2rem;
+		    display: inline-block;
+		}
+
+		.btn-submit{
+			width: 18rem;
+			height: 3.8rem;
+			margin: 3rem auto;
+			text-align: center;
+			color: #FFFFFF;
+			background-color: #0071C5;
+			border-radius: 0.4rem;
+			line-height: 3.8rem;
+			font-size: 1.6rem;
+		}
+
+
+    </style>
+</head>
+<body>
+<div class="propose">
+    <div class="propose-title border-1px-top border-1px-bottom">
+        Please select your industry
+    </div>
+    <div class="form">
+		<div class="form-group border-1px-top clearfix">
+    		<div class="propose-select">
+	    		<div class="selectSwitch" tapmode="" onclick="toggleSwitch(this,'selectSwitch')">
+		            Communication Infrastructure
+		        </div>
+	    	</div>
+    	</div>
+    	<div class="form-group border-1px-top clearfix">
+    		<div class="propose-select">
+	    		<div class="selectSwitch" tapmode="" onclick="toggleSwitch(this,'selectSwitch')">
+		            Link Service Gateway
+		        </div>
+	    	</div>
+    	</div>
+    	<div class="form-group border-1px-top clearfix">
+    		<div class="propose-select">
+	    		<div class="selectSwitch" tapmode="" onclick="toggleSwitch(this,'selectSwitch')">
+		            Digital Signage Solution
+		        </div>
+	    	</div>
+    	</div>
+    	<div class="form-group border-1px-top clearfix">
+    		<div class="propose-select">
+	    		<div class="selectSwitch" tapmode="" onclick="toggleSwitch(this,'selectSwitch')">
+		            Digital Security Surveillance
+		        </div>
+	    	</div>
+    	</div>
+    	<div class="form-group border-1px-top clearfix">
+    		<div class="propose-select">
+	    		<div class="selectSwitch" tapmode="" onclick="toggleSwitch(this,'selectSwitch')">
+		            Embedded Game
+		        </div>
+	    	</div>
+    	</div>
+    	<div class="form-group border-1px-top clearfix">
+    		<div class="propose-select">
+	    		<div class="selectSwitch" tapmode="" onclick="toggleSwitch(this,'selectSwitch')">
+		            Energy solutions
+		        </div>
+	    	</div>
+    	</div>
+    	<div class="form-group border-1px-top clearfix">
+    		<div class="propose-select">
+	    		<div class="selectSwitch" tapmode="" onclick="toggleSwitch(this,'selectSwitch')">
+		            Enhanced-Client
+		        </div>
+	    	</div>
+    	</div>
+    	<div class="form-group border-1px-top clearfix">
+    		<div class="propose-select">
+	    		<div class="selectSwitch" tapmode="" onclick="toggleSwitch(this,'selectSwitch')">
+		            Vehicle Entertainment
+		        </div>
+	    	</div>
+    	</div>
+    	<div class="form-group border-1px-top clearfix">
+    		<div class="propose-select">
+	    		<div class="selectSwitch" tapmode="" onclick="toggleSwitch(this,'selectSwitch')">
+		           Industry
+		        </div>
+	    	</div>
+    	</div>
+    	<div class="form-group border-1px-top clearfix">
+    		<div class="propose-select">
+	    		<div class="selectSwitch" tapmode="" onclick="toggleSwitch(this,'selectSwitch')">
+		            Machine to Machine
+		        </div>
+	    	</div>
+    	</div>
+    	<div class="form-group border-1px-top clearfix">
+    		<div class="propose-select">
+	    		<div class="selectSwitch" tapmode="" onclick="toggleSwitch(this,'selectSwitch')">
+		            Media Service
+		        </div>
+	    	</div>
+    	</div>
+    	<div class="form-group border-1px-top clearfix">
+    		<div class="propose-select">
+	    		<div class="selectSwitch" tapmode="" onclick="toggleSwitch(this,'selectSwitch')">
+		            Media Phone
+		        </div>
+	    	</div>
+    	</div>
+    	<div class="form-group border-1px-top clearfix">
+    		<div class="propose-select">
+	    		<div class="selectSwitch" tapmode="" onclick="toggleSwitch(this,'selectSwitch')">
+		            Medical
+		        </div>
+	    	</div>
+    	</div>
+    	<div class="form-group border-1px-top clearfix">
+    		<div class="propose-select">
+	    		<div class="selectSwitch" tapmode="" onclick="toggleSwitch(this,'selectSwitch')">
+		            Military, Aviation and Government
+		        </div>
+	    	</div>
+    	</div>
+    	<div class="form-group border-1px-top clearfix">
+    		<div class="propose-select">
+	    		<div class="selectSwitch" tapmode="" onclick="toggleSwitch(this,'selectSwitch')">
+		            Network Security and Application
+		        </div>
+	    	</div>
+    	</div>
+    	<div class="form-group border-1px-top clearfix">
+    		<div class="propose-select">
+	    		<div class="selectSwitch" tapmode="" onclick="toggleSwitch(this,'selectSwitch')">
+		            3D Printing
+		        </div>
+	    	</div>
+    	</div>
+    	<div class="form-group border-1px-top clearfix">
+    		<div class="propose-select">
+	    		<div class="selectSwitch" tapmode="" onclick="toggleSwitch(this,'selectSwitch')">
+		             retail
+		        </div>
+	    	</div>
+    	</div>
+    	<div class="form-group border-1px-top clearfix">
+    		<div class="propose-select">
+	    		<div class="selectSwitch" tapmode="" onclick="toggleSwitch(this,'selectSwitch')">
+		            Router and Converter
+		        </div>
+	    	</div>
+    	</div>
+    	<div class="form-group border-1px-top clearfix">
+    		<div class="propose-select">
+	    		<div class="selectSwitch" tapmode="" onclick="toggleSwitch(this,'selectSwitch')">
+		           Traffic
+		        </div>
+	    	</div>
+    	</div>
+    	<div class="form-group border-1px-top clearfix">
+    		<div class="propose-select">
+	    		<div class="selectSwitch" tapmode="" onclick="toggleSwitch(this,'selectSwitch')">
+		            Wireless Infrastructure
+		        </div>
+	    	</div>
+    	</div>
+    	<div class="form-group border-1px-top clearfix">
+    		<div class="propose-select">
+	    		<div class="selectSwitch" tapmode="" onclick="toggleSwitch(this,'selectSwitch')">
+		            Othen
+		        </div>
+	    	</div>
+    	</div>
+    </div>
+
+    <div class="btn-submit btn" tapmode onclick="submitEDC()">Submit</div>
+    <div style="height: 1px"></div>
+</div>
+
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript">
+
+    var account = $api.getStorage('loginInfo');
+    var pageParam = {};
+    apiready = function () {
+        pageParam = api.pageParam;
+        projectID = pageParam.id;
+    };
+
+
+    function toggleSwitch(obj,clz){
+        var $selectSwitch = $api.domAll('.'+clz);
+        var reg = /radio/g;
+        if (reg.test(clz)) {
+        	for(var i=0;i<$selectSwitch.length;i++){
+	            $api.removeCls($selectSwitch[i],'show');
+	        }
+        } else {
+
+        }
+        if($api.hasCls(obj,'show')){
+            $api.removeCls(obj,'show');
+        }else{
+            $api.addCls(obj,'show');
+        }
+    };
+
+    // 提交回EDC
+    function submitEDC(){
+    	var industryBtns = $api.domAll('.selectSwitch.show');
+    	var str = '';
+    	if (industryBtns.length) {
+    		for (var i = 0; i < industryBtns.length; i++) {
+    			if (i == industryBtns.length - 1) {
+    				str += $api.trim($api.text(industryBtns[i]));
+    			} else {
+    				str += $api.trim($api.text(industryBtns[i])) + ',';
+    			}
+    		}
+    	} else {
+    		api.alert({
+    		    title: 'Please select your industry', 
+    		    msg: ''
+    		});
+    		return false;
+    	}
+    	api.sendEvent({
+    	    name: 'getIndustrys',
+    	    extra: {
+    	    	industry: str
+    	    }
+    	});
+        // codes there
+        api.closeWin();
+    };
+</script>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/common.css"/>
+    <style>
+        header{ line-height: 48px; background:#0071c5; font-size: 20px; color:#fff; }
+        header .header{  position: relative; }
+        header .title{ color: white; text-align: center; }
+        header span[class^=ic_]{  width: 60px; height: 48px; position: absolute; bottom: 0; background-size: 50% auto; }
+        header span.ic_btn_back{ left: 0;}
+        header span.ic_add{ height: 50px; right: 0; font-size: 12px; }
+        nav{ text-align: center; background-color: #fff; color: #858585; font-size: 15px; }
+         nav .flex-con{ line-height: 22px; padding: 12px 0; background-size: 60px auto; background-position: center bottom; border-bottom: 2px solid #E0E0E0; }
+         nav .flex-con.ic_nav_hover{ color: #42C2FF;  border-color: #42C2FF; font-size:15px;font-weight: bold;}
+         nav .flex-con span{  display: block;  }
+         nav .flex-con:not(:first-child) span{ border-left: 1px solid white; font-size: 15px; font-weight: bold;}
+         nav .flex-con:not(:last-child) span{ border-right: 1px solid #ccc; font-size: 15px;font-weight: bold;}
+         nav .active{background-color: #0060A8;}
+        .middle{
+            height: 52px;
+            background-color: #EEEEEE;
+            overflow: hidden;
+            line-height: 32px;
+            border-bottom:1px solid #ddd;
+        }
+        .middle_text{
+            height:32px;
+            margin-top: 10px;
+            margin-left: 15px;
+            margin-right:15px;
+            
+           
+        }
+
+        .search{
+            background-color: #fff;
+            border-radius: 4px;
+            padding: 8px 10px;
+            text-align: center;
+        }
+
+
+        .middle_text .submit{ background: #0071c5; padding: 0 40px; margin-left: 20px; font-size: 14px; display: none; border-radius: 4px;}
+
+        .middle_text.active .search{
+            text-align: left;
+        }
+        .middle_text.active .search input{ text-align: left; background-position: left center; }
+        .middle_text.active .submit{ display: block;  }
+
+        .search input{
+            display: block;
+            text-align: center;
+            width: 100%;
+            color:#AAAAAA;
+            font-size: 15px;    
+            padding-left: 17px;
+            background: url(../../image/home/discover_normal.png) no-repeat 40% center;
+            background-size: 13px auto;
+        }
+     .hover{
+        background-color: #0060A8 !important;
+      }
+    </style>
+</head>
+<body>
+    <!-- <header>
+        <div class="header">
+            <span tapmode="hover" onclick="api.closeWin();" class="ic_btn_back"></span>
+            <p class="title">技术学院</p>
+        </div>
+        <div class="middle">
+            <div class="middle_text flex-wrap" onclick="fnStartSearch()">
+                <div class="search flex-con" ><input id="search" type="search" oninput="fnSearchTitle( this )" onclick="fnStartSearch()" placeholder="搜索"></div>
+                <div class="submit" onclick="fnSearch( this )">搜索</div>
+            </div>
+        </div>
+        <nav class="flex-wrap">
+            <div onclick="fnGroupSwitch( this );" tapmode="ic_nav_hover" class="flex-con ic_nav_hover">
+                <span>图文</span>
+            </div>
+            <div onclick="fnGroupSwitch( this );" tapmode="ic_nav_hover" class="flex-con">
+                <span>视频</span>
+            </div>
+        </nav>
+    </header> -->
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript">
+    var vGlobalIndex = 0;
+    apiready = function(){
+        $api.dom('body' ).innerHTML = 
+        '<header>'+
+        '    <div class="header">'+
+        '        <span tapmode="active" onclick="api.closeWin();" class="ic_btn_back"></span>'+
+        '        <p class="title">'+fnLanguageSwitch( '技术学院' )+'</p>'+
+        '    </div>'+
+        '    <div class="middle">'+
+        '        <div class="middle_text flex-wrap">'+
+        '            <div class="search flex-con" tapmode onclick="fnStartSearch()" ><input tapmode id="search" type="search" oninput="fnSearchTitle( this )" onclick="fnStartSearch()" placeholder="'+fnLanguageSwitch( '搜索' )+'"></div>'+
+        '            <div tapmode  class="submit" onclick="fnSubmit( this )">'+fnLanguageSwitch( '搜索' )+'</div>'+
+        '        </div>'+
+        '    </div>'+
+        '    <nav class="flex-wrap">'+
+        '        <div onclick="fnGroupSwitch( this );" tapmode="ic_nav_hover" class="flex-con ic_nav_hover">'+
+        '            <span>'+fnLanguageSwitch( '图文' )+'</span>'+
+        '        </div>'+
+        '        <div onclick="fnGroupSwitch( this );" tapmode="ic_nav_hover" class="flex-con">'+
+        '            <span>'+fnLanguageSwitch( '视频' )+'</span>'+
+        '        </div>'+
+        '    </nav>'+
+        '</header>';
+        api.parseTapmode();
+        $api.fixStatusBar($api.dom( 'header'));
+        var vFrame = [],//数组用来保存group组的frmmname和url
+            elNavs = $api.domAll( 'nav .flex-con');
+        for( var i = 0; i < elNavs.length; i++ ){
+            vFrame.push({
+                name: api.winName.replace( /_win$/, '_frm_'+i),
+                url: api.winName.replace( /_win$/, '_frm')+'.html'
+            })
+        }
+        api.openFrameGroup ({
+            name: api.winName+'_group',//打开名叫cechnical_college_win.html的页面
+            scrollEnabled: true,//是否左右滑动页面
+            rect: {//frameGroup 的位置和大小 
+                y: $api.dom( 'header').offsetHeight,
+                h: api.winHeight - $api.dom( 'header').offsetHeight
+            },
+            frames: vFrame
+        }, function(ret, err){
+          vGlobalIndex = ret.index;
+            fnSwitch({el:$api.dom( 'nav .flex-con:nth-child('+( ret.index + 1 )+')')});
+        });
+    }
+
+    function fnSearchTitle(el){
+        event.stopPropagation(); 
+        var _txt = el.value.trim();
+        if( _txt.length && vGlobalSubmit ){
+            fnAjax({
+                url: 'news/appGetTitle?title='+_txt,
+                progress: false
+            }, function( ret, err ){
+                if( ret ){
+                    if( $api.hasCls( $api.dom('.middle_text'), 'openFrame') ){
+                        api.execScript({
+                            frameName: 'cechnical_college_select',
+                            script: 'apiready('+JSON.stringify( ret )+');'
+                        });
+                    }else{
+                        api.openFrame({
+                            name: 'cechnical_college_select',
+                            url: './cechnical_college_select.html',
+                            rect: {
+                                y: $api.dom('header').offsetHeight - $api.dom( 'nav' ).offsetHeight
+                            },
+                            pageParam: {
+                                data: ret
+                            },
+                            bounces: true,
+                            bgColor: 'rgba(0,0,0,.6)'
+                        });
+                        $api.addCls( $api.dom('.middle_text'), 'openFrame');   
+                    }
+                }else{
+                    api.toast({
+                        global: true,
+                        msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                    });
+                }
+            });   
+        }
+    }
+
+    function fnStartSearch(){
+        event.stopPropagation(); 
+        $api.addCls( $api.dom('.middle_text'), 'active');
+        // fnSearchTitle( $api.dom( '#search' ) );
+        vGlobalSubmit = true;
+    }
+
+    var vGlobalSubmit = true;
+    function fnSubmit( el ){
+        vGlobalSubmit = false;
+        // $api.dom( '#search' ).blur();
+       //debugAlert( $api.dom( '#search' ).tagName )
+        typeof el !== 'string' && event.stopPropagation(); 
+        var _txt = typeof el === 'string' ? el : $api.dom( '#search' ).value.trim();
+        if( ! _txt ){
+            api.toast({
+                global: true,
+                msg: fnLanguageSwitch( '搜索字段不能为空' )
+            });
+        }else{
+            api.execScript({
+                frameName: api.winName.replace( /_win$/, '_frm_'+vGlobalIndex),
+                script: 'getProjectList(\''+_txt+'\');'
+            });
+            fnCloseFrame();
+        }
+    }
+    
+    function fnCloseFrame(){
+        api.closeFrame({
+            name: 'cechnical_college_select'
+        });  
+        setTimeout(function(){
+	        $api.removeCls( $api.dom('.middle_text'), 'openFrame');  
+	        $api.dom( '#search' ).value = ''; 
+            $api.dom( '#search' ).blur();
+	        $api.removeCls( $api.dom('.middle_text'), 'active');
+        },600);
+    }
+    
+    function fnGroupSwitch( el ){
+        api.setFrameGroupIndex({
+            name: api.winName+'_group',
+            index: fnSwitch({el:el}),
+            scroll: true//否平滑滚动至目标窗口，即是否带有动画
+        });
+    }
+   
+</script> 
+</html> 

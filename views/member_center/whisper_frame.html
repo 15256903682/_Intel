@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1.0, user-scalable=0" />
+    <title>my</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <style>
+        html {
+            height: 100%;
+        }
+
+        body {
+            width: 100%;
+            padding-bottom: 40px;
+            background-color: #f0eff7;
+        }
+
+        .list {
+            position: relative;
+            box-sizing: border-box;
+            padding: 16px;
+            padding-bottom: 25px;
+            height: auto;
+
+        }
+
+        .list .notice {
+            position: relative;
+            margin-top: 16px;
+            margin-bottom: 16px;
+            width: 100%;
+            height: auto;
+            text-align: center;
+        }
+
+        .list .notice .time {
+            display: inline-block;
+            box-sizing: border-box;
+            padding: 8px 16px;
+            width: auto;
+            height: 30px;
+            color: #888;
+            font-size: 14px;
+            text-align: center;
+            background-clip: border-box;
+            border-radius: 8px;
+        }
+
+        .list .message {
+            position: relative;
+            margin-top: 30px;
+            width: 100%;
+            height: auto;
+        }
+        .list .message .user{ line-height: 22px;  }
+
+        .list .message .icon {
+            position: absolute;
+            box-sizing: border-box;
+            top: 0;
+            width: 54px;
+            height: 54px;
+            border-radius: 3px;
+            background-color: #fff;
+            background-image: url(../../image/Macthmaking/MacthmakingNewneed/default.png);
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: 50px 50px;
+            border: 1px solid #bbb;
+            z-index: 2;
+        }
+
+        .list .message .name {
+            font-size: 0.6rem;
+        }
+
+        .list .message-me .name {
+
+        }
+
+        .list .message-other .name {
+
+        }
+
+        .list img{
+            width: 54px;
+            height: 54px;
+            border: 1px solid #bbb;
+            border-radius: 3px;
+        }
+
+        .list .message-other .icon {
+            left: 0;
+        }
+
+        .list .message-me .icon {
+            right: 0;
+        }
+
+        .list .message .info {
+            position: relative;
+            box-sizing: border-box;
+            padding-left: 20px;
+            padding-right: 70px;
+            width: 100%;
+            height: auto;
+            min-height: 54px;
+        }
+
+        .list .message-other .info {
+            text-align: left;
+        }
+
+        .list .message-me .info {
+            text-align: right;
+            padding-left: 70px;
+            padding-right: 20px;
+        }
+
+        .list .message .info .content {
+            position: relative;
+            display: inline-block;
+            box-sizing: border-box;
+            padding: 12px;
+            width: auto;
+            height: auto;
+            min-height: 40px;
+            color: #fff;
+            font-size: 16px;
+            text-align: left;
+            line-height: 20px;
+            overflow-wrap: break-word;
+            background-color: #0070c4;
+            border-radius: 8px;
+            box-shadow: 0 0 1px 1px #eee;
+        }
+        .list .message .info .content:before{
+            content: '';
+            display: block;
+            position: absolute;
+            left: -17px;
+            top: 10px;
+            width: 0;
+            height: 0;
+            border: 5px solid #0070c4;
+            border-color: transparent;
+            border-right: 12px  solid #0070c4;
+
+        }        
+        .list .message .info .content img{ width: 25px; height: auto; border: 0; padding: 0; margin: 0 4px; }
+
+        .list .message-other .info .content {
+            color: #fff;
+            background-color: #0070c4;
+        }
+
+        .list .message-me .info .content {
+            color: #444;
+            background-color: #fff;
+        }
+        .list .message.message-me .info .content:before{ border-color: transparent; border-left: 12px  solid white; left: auto; right: -24px;}
+
+/*        .list .message .info .arrow {
+            position: absolute;
+            top: 15px;
+        }*/
+
+        .list .message-other .info .arrow {
+            left: 59px;
+            border-left: 0;
+            border-right: 12px solid #0070c4;
+        }
+
+        .list .message-me .info .arrow {
+            right: 59px;
+            border-left: 12px solid #fff;
+        }
+
+        .highlight {
+            opacity: 0.7;
+        }
+    </style>
+</head>
+
+<body>
+    <section id="list" class="list">
+      <!--   <div class="notice">
+            <div class="time">-&nbsp;2015-12-01 10:29&nbsp;-</div>
+        </div>
+        <div class="message message-other flex-wrap">
+            <div class="user">
+                <img src="../../image/Macthmaking/MacthmakingNewneed/default.png" >
+                <div class="name">这是名称</div>
+            </div>
+            <div class="info flex-con">
+                <div class="content">你好</div>
+            </div>
+        </div>
+
+        <div class="notice">
+            <div class="time">-&nbsp;18:41&nbsp;-</div>
+        </div>
+
+        <div class="message message-me flex-wrap">
+            <div class="info flex-con">
+                <div class="content">你好</div>
+            </div>
+            <div class="user">
+                <img src="../../image/Macthmaking/MacthmakingNewneed/default.png" >
+                <div class="name">这是名称</div>
+            </div>
+        </div> -->
+         <!-- <div class="message message-me flex-wrap">
+            <div class="info flex-con">
+                <div class="content">sdasdasdass<img  src="../../image/emotion/Expression_2.png">ad</div>
+            </div>
+            <div class="user">
+                <img src="../../image/Macthmaking/MacthmakingNewneed/default.png" >
+                <div class="name">这是名称</div>
+            </div>
+        </div> -->
+    </section>
+    <div id="url"></div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript">
+    var loginInfo = $api.getStorage('loginInfo');
+    var currentIndex = 1;
+    var perNum = 5;
+    var loadEnd = false;
+    apiready = function () {
+        fnGetMessage();
+    };
+
+    function fnGetMessage( _startDate ){
+        // 系统私信
+        if( api.pageParam.has === 'sys' ){
+            var receiveUserId = api.pageParam.data.sendUserId;
+        }else{
+            var receiveUserId = api.pageParam.data.userId || api.pageParam.data.user.userId;
+        }
+        fnAjax({
+            url: 'messages/privateMessageing',
+                data: {
+                values: {
+                    // startDate: _startDate || '',
+                    sendUserId: receiveUserId
+                }
+            }
+        }, function( ret, err ){
+            //debugAlert(JSON.stringify(ret))
+            api.refreshHeaderLoadDone();
+            if( ret ){
+                if( ret.length ){
+                    $api.dom( 'section' ).innerHTML = '';
+                    api.readFile({
+                        path: 'widget://image/emotion/emotion.json'
+                    }, function(ret2, err) {
+                        ret2 = JSON.parse(ret2.data);
+                        for( var x in ret ){
+                            ret[x].content = ret[x].content.replace( /\[[^\]]+]/g,  function(){
+                                for( var j in ret2 ){
+                                    if( ret2[j].text === arguments[0] ){
+                                        return '<img src="../../image/emotion/'+ret2[j].name+'.png" />'
+                                    }
+                                };
+                            });
+                            if( ret[x].sendUser && ret[x].sendUser.id === USER.userId ){
+                                var _html =
+                                '<div class="message flex-wrap message-me">'+
+                                '    <div class="info flex-con">'+
+                                '        <div class="content">'+ret[x].content+'</div>'+
+                                '    </div>'+
+                                '    <div class="user">'+
+                                '        <img src="../../image/Macthmaking/MacthmakingNewneed/default.png" onload="getImageCache( this )" data-selectorid="'+ret[x].sendUser.photo+'" >'+
+                                '        <div class="name">'+fnStringEmpty( ret[x].sendUser.username )+'</div>'+
+                                '    </div>'+
+                                '</div>';
+                            }else {
+                                var _html =
+                                '<div class="message flex-wrap message-other">'+
+                                '    <div class="user">'+
+                                '        <img src="../../image/Macthmaking/MacthmakingNewneed/default.png" onload="getImageCache( this )" data-selectorid="'+( ret[x].sendUser && ret[x].sendUser.photo )+'" >'+
+                                '        <div class="name">'+fnStringEmpty( ret[x].sendUser && ret[x].sendUser.username )+'</div>'+
+                                '    </div>'+
+                                '    <div class="info flex-con">'+
+                                '        <div class="content">'+ret[x].content+'</div>'+
+                                '    </div>'+
+                                '</div>';}
+                         
+                            $api.prepend($api.dom( 'section' ), 
+                            '<div class="notice">'+
+                            '    <div class="time">- '+new Date( ret[x].created ).Format( 'yyyy-MM-dd hh:mm' )+' -</div>'+
+                            '</div>'+_html);   
+                        }
+                        location.href = '#url';
+                    });
+                }
+            }else{
+                api.toast({
+                   global: true,
+                    msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                });
+            }
+        });
+    }
+
+    function updateMessage(SendUserID) {
+        api.showProgress({
+            title: 'loading...',
+            text: '',
+            modal: false
+        });
+        var bodyParam = {
+            UserID: loginInfo.userid,
+            BatchNo: loginInfo.batchno,
+            SendUserID: SendUserID,
+            OpenAddress: '',
+            MachineNo: ''
+        };
+        var url = 'APPMessage/APPUpdateMessage.aspx';
+        ajaxRequest(url, 'get', bodyParam, function (ret, err) {
+            api.hideProgress();
+            api.refreshHeaderLoadDone();
+            if (ret) {
+                if (ret.res == 1) {
+                    api.execScript({
+                        name: 'message',
+                        frameName: 'message_whisper_frame',
+                        script: 'getMessages()'
+                    });
+                } else {
+                    api.toast({
+	global: true,
+                        msg: ret.des
+                    });
+                }
+            } else {
+                api.toast({
+	global: true,
+                    msg: err.msg
+                });
+            }
+        })
+    }
+
+    function getMessageInfo(SendUserID, action) {
+        var getMessagesData = $api.getStorage(SendUserID+'_whisperMessageInfo_' + currentIndex);
+        if (api.connectionType == 'none') {
+            if (getMessagesData) {
+                renderWhisperMessageInfo(getMessagesData,SendUserID,action);
+            } else {
+                loadEnd = true;
+                loading = false;
+                $(".ui-loading-wrap").remove();
+            }
+            api.refreshHeaderLoadDone();
+        } else {
+            api.showProgress({
+                title: 'loading...',
+                text: '',
+                modal: false
+            });
+            var bodyParam = {
+                UserID: loginInfo.userid,
+                BatchNo: loginInfo.batchno,
+                CurrentPage: currentIndex,
+                LineQTY: perNum,
+                SendUserID: SendUserID
+            };
+            var url = 'APPMessage/APPGetMessageBySendUser.aspx';
+            ajaxRequest(url, 'get', bodyParam, function (ret, err) {
+                api.hideProgress();
+                api.refreshHeaderLoadDone();
+                if (ret) {
+                    $api.setStorage(SendUserID+'_whisperMessageInfo_'+currentIndex,ret);
+                    renderWhisperMessageInfo(ret,SendUserID,action);
+                } else {
+                    var getMessagesData = $api.getStorage(SendUserID+'_whisperMessageInfo_' + currentIndex);
+                    if (getMessagesData) {
+                        renderWhisperMessageInfo(getMessagesData,SendUserID,action);
+                    } else {
+                        loadEnd = true;
+                        loading = false;
+                        $(".ui-loading-wrap").remove();
+                    }
+                    api.toast({
+	global: true,
+                        msg: err.msg
+                    });
+                }
+            })
+        }
+    }
+
+    function renderWhisperMessageInfo(ret,SendUserID, action) {
+        var appdatalist = ret.appdatalist;
+        loadEnd = appdatalist.length == 0;
+        var msgHtml = '';
+        for (var i = 0; i < appdatalist.length; i++) {
+            var appdata = appdatalist[i];
+            var MessageID = appdata.MessageID;
+            var MessageCon = appdata.MessageCon;
+            var ReceiveUserID = appdata.ReceiveUserID;
+            var Active = appdata.Active;
+            var MessageTypeID = appdata.MessageTypeID;
+            var Title = appdata.Title;
+            var Tips = appdata.Tips;
+            var SendRealName = appdata.SendRealName;
+            var ReceRealName = appdata.ReceRealName;
+            var SendPhotoURL = host + appdata.SendPhotoURL.split('~')[1];
+            var RecePhotoURL = host + appdata.RecePhotoURL.split('~')[1];
+            var MessageNumber = appdata.MessageNumber;
+            var CreateDate = appdata.CreateDate;
+            var messageOtherClass = ReceiveUserID == SendUserID ? 'message-me' : 'message-other';
+            var iconUrl = SendUserID == loginInfo.userid ? RecePhotoURL:SendPhotoURL ;
+            if (iconUrl.indexOf('undefined') > -1) {
+                iconUrl = '../../image/Macthmaking/MacthmakingNewneed/default.png';
+            }
+            var name = SendUserID == loginInfo.userid ?  ReceRealName :SendRealName;
+            var timeHtml = '';
+            if (!action && i == appdatalist.length - 1) {
+                var time = (i == appdatalist.length - 1) ? CreateDate : '';
+                timeHtml = '<div class="notice"><div class="time">-&nbsp;' + time + '&nbsp;-</div></div>';
+            }
+            msgHtml += (timeHtml + '<div class="message ' + messageOtherClass + '"><div class="icon" style="background-image: url(' + iconUrl + ');"></div><div class="name">' + name + '</div><div class="info"><div class="arrow"></div><div class="content">' + MessageCon + '</div></div></div>');
+        }
+        if (action) {
+            $("#list").prepend(msgHtml);
+        } else {
+            $("#list").html(msgHtml);
+            pageDown(300);
+        }
+    }
+</script>
+
+</html>

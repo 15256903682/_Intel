@@ -1,0 +1,1248 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>需求详情</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/fonts_awesome/font-awesome.min.css">
+    <style type="text/css">
+        html, body {
+            height: auto;
+            min-height: 100%;
+            padding-bottom: 30px;
+            background-color: RGBA(238, 238, 238, 1);
+        }
+
+        .border-1px-top:before {
+            color: #BABABA;
+        }
+
+        .comand-detail-header {
+            margin-top: 1rem;
+            background-color: #FFFFFF;
+        }
+
+        .header-top {
+            padding: 2rem;
+            padding-bottom: 1.5rem;
+        }
+
+        .inf-chainleft {
+            width: 2.4rem;
+            height: 2.4rem;
+            float: left;
+        }
+
+        .header-main {
+            position: relative;
+            margin-left: 3.7rem;
+        }
+
+        .corner {
+            position: absolute;
+            right: 0;
+            top: 0;
+            font-size: 1.2rem;
+            color: #00AEEF;
+        }
+
+        .corner.success {
+            width: 4.6rem;
+            height: 4.6rem;
+            position: absolute;
+            top: -1.3rem;
+            right: -0.6rem;
+            background-image: url("../../image/Macthmaking/MacthmakingNewneed/MC_zhankaihezuo1.png");
+            background-size: 100%;
+            background-repeat: no-repeat no-repeat;
+            font-size: 0;
+        }
+
+        .header-title {
+            font-size: 1.5rem;
+            line-height: 2rem;
+            color: #000000;
+            padding-right: 7rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill {
+            background: url(../../image/Macthmaking/project_skill.png) left center no-repeat;
+            background-size: 1.2rem 0.9rem;
+            padding-left: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.5rem;
+            margin-bottom: 1rem;
+            color: #999999;
+        }
+
+        .statistics {
+            display: -webkit-box;
+            height: 3rem;
+            line-height: 3rem;
+        }
+
+        .statistics1, .statistics2 {
+            font-size: 1.2rem;
+            color: #C4C4C4;
+            width: 50%;
+            text-align: center;
+        }
+
+        .date-icon {
+            width: 1rem;
+            height: 1rem;
+            vertical-align: middle;
+        }
+
+        .seen-icon {
+            width: 1.2rem;
+            height: 0.8rem;
+            vertical-align: middle;
+        }
+
+        .header-tip {
+            margin-top: 3rem;
+            font-size: 1.4rem;
+            color: #333;
+            line-height: 3.2rem;
+            margin-left: 2rem;
+            margin-right: 2rem;
+        }
+
+        /*确认 卡片*/
+        .confirm-card.error:after{
+            content: ' ';
+            display: block;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.6);
+        }
+        .confirm-card {
+            position: relative;
+            margin: 1rem;
+            margin-bottom: 1.5rem;
+            background-color: #FFFFFF;
+        }
+
+        .confirm-card .label-container {
+            text-align: right;
+        }
+
+        .confirm-card .card-label {
+            width: 7rem;
+            height: 1.8rem;
+            text-align: center;
+            font-size: 1.1rem;
+            line-height: 1.8rem;
+            color: #FFFFFF;
+            background-color: RGBA(4, 174, 240, 1);
+            border-radius: 999px;
+            -webkit-background-clip: padding-box;
+            background-clip: padding-box;
+            margin-right: 1rem;
+            margin-top: 1rem;
+        }
+
+        .confirm-card .card-label.error {
+            background-color: #999999;
+        }
+
+        .confirm-card .card-label.success {
+            background-color: #FFa300;
+        }
+
+        .confirm-card .info-box {
+            position: relative;
+            padding: 0 1rem;
+            margin-top:1.6rem;
+        }
+
+        .confirm-card .info-box img {
+            border-radius: 0.4rem;
+            float: left;
+            width: 5.5rem;
+            height: 5.5rem;
+        }
+
+        .confirm-card .info-box .info-box-main {
+            margin-left: 8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-box-main .info-box-main-top {
+            height: 2.2rem;
+            line-height: 2.2rem;
+            color: #000000;
+            font-size: 1.5rem;
+        }
+
+        .info-box-main .info-box-main-bottom, .confirm-card .info-box-main .info-company {
+            height: 1.8rem;
+            line-height: 1.8rem;
+            font-size: 1.2rem;
+            color: RGBA(157, 157, 157, 1);
+        }
+
+        .confirm-card .info-box-main span {
+            display: inline-block;
+            overflow: hidden;
+        }
+
+        .confirm-card .info-box-main .divide-line {
+            color: #BABABA;
+        }
+
+        .confirm-card .info-location, .confirm-card .info-name {
+            margin-right: 0.75rem;
+        }
+
+        .confirm-card .info-job, .confirm-card .info-scale {
+            margin-left: 0.75rem;
+        }
+
+        .confirm-state {
+            color: #0070c5;
+            font-size: 1.2rem;
+            padding: 1rem;
+            line-height:2rem;
+        }
+
+        .confirm-state.success {
+            color: #FFa300;
+            text-align: center;
+            height: 5.5rem;
+            line-height: 5.5rem;
+        }
+
+        .confirm-group {
+            text-align: center;
+        }
+
+        .confirm-btn {
+            width: 12rem;
+            height: 3rem;
+            border: 0.1rem solid;
+            border-radius: 4px;
+            font-size: 1.5rem;
+            line-height: 3rem;
+            margin: 2rem 1rem;
+            border-color: #999999;
+        }
+
+        .btn-accept {
+            background-color: #FFa300;
+            color: #FFFFFF;
+            border-color: #FFa300;
+        }
+
+        .btn-refuse, .btn-start {
+            background-color: #FFFFFF;
+            color: #00AEEF;
+            border-color: #00AEEF;
+        }
+
+        .btn-accept[disabled], .btn-refuse[disabled], .btn-start[disabled] {
+            background-color: #FFFFFF;
+            color: #BABABA;
+            border-color: #999999;
+        }
+
+        .noAppData {
+            display: -webkit-box;
+            -webkit-box-align: center;
+            -webkit-box-pack: center;
+            height: 13.9rem;
+            margin: 1rem;
+            font-size: 1.5rem;
+            line-height: 2.5rem;
+            background-color: #FFFFFF;
+            color: #A0A0A0;
+            padding: 0 1rem;
+        }
+
+        .repush {
+            margin-top: 3rem;
+        }
+
+        .repush-title {
+            font-size: 1.4rem;
+            padding: 1rem;
+            line-height:2.4rem;
+            color: #999;
+        }
+
+        .repush-btn {
+            margin-top: 2.5rem;
+            text-align: center;
+        }
+
+        .repush-btn span {
+            height: 4rem;
+            line-height: 4rem;
+            font-size: 1.5rem;
+            width: 18rem;
+            border: 1px solid #00AEEf;
+            border-radius: 4px;
+            color: #00AEEf;
+        }
+
+        .repush-btn span.disabled {
+            color: #BABABA;
+            border: 1px solid #BABABA;
+        }
+
+    </style>
+</head>
+<body>
+<div class="comand-detail-header ">
+   <!--  <div class="header-top border-1px-bottom">
+        <img class="inf-chainleft" src="../../image/comand_detail_titleIcon.png">
+        <div class="header-main">
+            <label id="checkStatus" class="corner">name</label>
+            <p class="header-title ellipsis-2" id="title">sfs</p>
+            <p class="skill ellipsis-1" id="demandTypeName">sdfsd</p>
+        </div>
+    </div>
+    <div class="statistics">
+        <div class="statistics1">
+            <img src="../../image/comand_detail_timeIcon.png" alt="" class="date-icon">
+            <span class="date" id="date">2022/34/34</span>
+        </div>
+        <div class="statistics2">
+            <img src="../../image/comand_detail_previewIcon.png" alt="" class="seen-icon">
+            <span class="seen" id="lookCount">34</span>
+        </div>
+    </div> -->
+</div>
+<div class="header-tip">
+    <!-- <span>针对此需求，有初步意向的合作伙伴都在这里</span> -->
+</div>
+<div id="list">
+    <!-- 合作确认卡片 -->
+    <!--<div class="confirm-card">
+        <div class="label-container">
+            <label class="card-label">合作确认中</label>
+        </div>
+        <div class="info-box clearfix">
+            <img src="../../image/superman.png" alt="">
+
+            <div class="info-box-main">
+                <div class="info-box-main-top">
+                    <span class="info-name ellipsis-1">嘻嘻嘻</span>
+                    <span class="divide-line">|</span>
+                    <span class="info-job ellipsis-1">销售</span>
+                </div>
+
+                <div class="info-company ellipsis-1">北京奥普科技股份有限公司</div>
+
+                <div class="info-box-main-bottom">
+                    <span class="info-location ellipsis-1">深圳</span>
+                    <span class="divide-line">|</span>
+                    <span class="info-scale ellipsis-1">100-500人</span>
+                </div>
+            </div>
+        </div>
+        <div class="confirm-state border-1px-top">
+            对方已经确认和您展开合作，您是否同意？
+        </div>
+        <div class="confirm-group border-1px-top">
+            <span class="confirm-btn btn-accept" tapmode onclick="fnAccept(this)">同意</span>
+            <span class="confirm-btn btn-refuse" tapmode onclick="fnRefuse(this)">不合作</span>
+        </div>
+    </div>
+
+    <div class="confirm-card">
+        <div class="label-container">
+            <label class="card-label success">对接成功</label>
+        </div>
+        <div class="info-box clearfix">
+            <img src="../image/superman.png" alt="">
+
+            <div class="info-box-main">
+                <div class="info-box-main-top">
+                    <span class="info-name ellipsis-1">嘻嘻嘻</span>
+                    <span class="divide-line">|</span>
+                    <span class="info-job ellipsis-1">销售</span>
+                </div>
+
+                <div class="info-company ellipsis-1">北京奥普科技股份有限公司</div>
+
+                <div class="info-box-main-bottom">
+                    <span class="info-location ellipsis-1">深圳</span>
+                    <span class="divide-line">|</span>
+                    <span class="info-scale ellipsis-1">100-500人</span>
+                </div>
+            </div>
+        </div>
+        <div class="confirm-state success border-1px-top">
+            恭喜您对接成功！
+        </div>
+    </div>
+
+    <div class="confirm-card error">
+        <div class="label-container">
+            <label class="card-label error">失败</label>
+        </div>
+        <div class="info-box clearfix">
+            <img src="../image/superman.png" alt="">
+
+            <div class="info-box-main">
+                <div class="info-box-main-top">
+                    <span class="info-name ellipsis-1">嘻嘻嘻</span>
+                    <span class="divide-line">|</span>
+                    <span class="info-job ellipsis-1">销售</span>
+                </div>
+
+                <div class="info-company ellipsis-1">北京奥普科技股份有限公司</div>
+
+                <div class="info-box-main-bottom">
+                    <span class="info-location ellipsis-1">深圳</span>
+                    <span class="divide-line">|</span>
+                    <span class="info-scale ellipsis-1">100-500人</span>
+                </div>
+            </div>
+        </div>
+        <div class="confirm-state error border-1px-top">
+            等待对方确认中！
+        </div>
+        <div class="confirm-group border-1px-top">
+            <span class="confirm-btn btn-start" disabled tapmode onclick="fnAccept(this)">展开合作</span>
+            <span class="confirm-btn btn-refuse" disabled tapmode onclick="fnRefuse(this)">不合作</span>
+        </div>
+    </div>-->
+
+</div>
+<footer>
+<!--     <div class="noAppData hidden" id="noAppData">
+        暂时没有合作伙伴相应您的需求.如有响应,您即可在此处看到对方的详细信息.
+    </div>
+    <div class="repush">
+        <div class="repush-title">
+            上面的合作伙伴都联系完了,不合适?没关系,请点击这里,我们把您的需求重新推送一遍
+        </div>
+        <div class="repush-btn">
+            <span id="repush" tapmode="" onclick="repush(this)">重新推送</span>
+        </div>
+    </div> -->
+</footer>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript">
+    var loginInfo = $api.getStorage('loginInfo');
+    var currentIndex = 1;
+    var perNum = 3;
+    var DemandID;
+    var zhuge;
+    var zhuge_usertype;
+    var vGlobalParam = {};
+    if (loginInfo.usertype == 4) {
+        zhuge_usertype = 'si';
+    } else {
+        zhuge_usertype = 'maker'
+    }
+    apiready = function(){
+        vGlobalParam = api.pageParam.data;
+        $api.dom( '.comand-detail-header' ).innerHTML =
+        '<div class="header-top border-1px-bottom">'+
+        '    <img class="inf-chainleft" src="../../image/comand_detail_titleIcon.png">'+
+        '    <div class="header-main">'+
+        '        <label id="checkStatus" class="corner '+( vGlobalParam.checkStatus == 5 && 'success' )+'">'+fnDemandDockingStatusJson()[ vGlobalParam.checkStatus ]+'</label>'+
+        '        <p class="header-title ellipsis-2" id="title">'+fnStringEmpty( vGlobalParam.title )+'</p>'+
+        '        <p class="skill ellipsis-1" id="demandTypeName">'+fnStringEmpty( fnSingleTypeJson()[ vGlobalParam.demandTypeId ] )+'</p>'+
+        '    </div>'+
+        '</div>'+
+        '<div class="statistics">'+
+        '    <div class="statistics1">'+
+        '        <img src="../../image/comand_detail_timeIcon.png" alt="" class="date-icon">'+
+        '        <span class="date" id="date">'+new Date( vGlobalParam.created ).Format( 'yyyy/MM/dd' )+'</span>'+
+        '    </div>'+
+        '    <div class="statistics2">'+
+        '        <img src="../../image/comand_detail_previewIcon.png" alt="" class="seen-icon">'+
+        '        <span class="seen" id="lookCount">'+( fnIsEmp( vGlobalParam.lookCount ) ? vGlobalParam.lookCount : 0 )+'</span>'+
+        '    </div>'+
+        '</div>';
+        $api.dom('.header-tip').innerHTML=
+        ' <span>'+fnLanguageSwitch('针对此需求，有初步意向的合作伙伴都在这里')+'</span>';
+        $api.dom( 'footer' ).innerHTML = 
+        '<div class="noAppData hidden" id="noAppData">'+fnLanguageSwitch( '暂时没有合作伙伴相应您的需求.如有响应,您即可在此处看到对方的详细信息' )+'</div>'+
+        '<div class="repush">'+
+        '    <div class="repush-title">'+fnLanguageSwitch( '上面的合作伙伴都联系完了,不合适?没关系,请点击这里,我们把您的需求重新推送一遍' )+'</div>'+
+        '    <div class="repush-btn">'+
+        '        <span id="repush" tapmode class="'+( vGlobalParam.push == 0 ? 'disabled' :'' )+'" onclick="repush(this)">'+fnLanguageSwitch( '重新推送' )+'</span>'+
+        '    </div>'+
+        '</div>';
+        
+        
+        
+//                      api.confirm({
+//                          title: fnLanguageSwitch('提示'),
+//                          msg: fnLanguageSwitch('您的需求目前没有合适的合作伙伴了，您可以重新推送给其他尚未响应的合作伙伴，寻找新机会！'),
+//                          buttons: [fnLanguageSwitch('重新发送'), fnLanguageSwitch('不用了')]
+//                      }, function (ret, err) {
+//                          if (ret.buttonIndex == 1) {
+//                              repush();
+//                          }
+//                      });
+        getDemandXQlist();
+
+        return;
+        // console.log( "DemandID" + JSON.stringify( api.pageParam ) )
+        // console.log('UseInfo' + JSON.stringify( loginInfo ) );
+        
+        DemandID = api.pageParam.DemandID;
+        var from = api.pageParam.from;
+        //从message页面进来的 更新下消息列表
+        if(from == 'message'){
+            api.execScript({
+                name: 'message',
+                frameName: 'message_sys_frame',
+                script: 'getMessages()'
+            });
+        }
+        zhuge = api.require('zhuge');
+        if (zhuge) {
+            zhuge.initZhuge();
+        }
+        api.setRefreshHeaderInfo({
+            visible: true,
+            loadingImg: 'widget://image/common/blueArrow@2x.png',
+            bgColor: '#FFF',
+            textColor: '#000000',
+            textDown: fnLanguageSwitch('下拉刷新'),
+            textUp: fnLanguageSwitch('松手加载'),
+            showTime: true
+        }, function (ret, err) {
+            getDemandXQlist(DemandID);
+        });
+        //进入页面就开始下啦刷新
+        api.refreshHeaderLoading();
+    };
+    function getDemandXQlist(DemandID) {
+        fnAjax({
+            url: 'projectSubDemands/findSIMessage',
+            data: {
+                values: {
+                    demandId: api.pageParam.data.id
+                }
+            }
+        }, function( ret, err ){
+            api.refreshHeaderLoadDone();
+            if( ret ){
+                $api.dom( '#list' ).innerHTML = '';
+                for ( var x in ret ) {
+                    vGlobalParam[ ret[x].id ] = ret[x];
+                    var DemandStatus = ret[x].demandStatus;
+                    var CheckStatus = vGlobalParam.checkStatus;
+                    var ReceiveStatus = ret[x].receiveStatus;
+                    var SendStatus = ret[x].sendStatus;
+                    var DemandStatusClass = '';
+                    var DemandCardStatusClass = '';
+                    var iconCornerMark = '';
+                    var card_labelCheckStatusClass = '';
+                    var confirmTitle = fnLanguageSwitch('您已经决定和对方合作，正在等待对方确认中！');
+                    var confirmControl = '<div class="confirm-group border-1px-top"><span class="confirm-btn btn-start" disabled>'+fnLanguageSwitch('展开合作')+'</span><span class="confirm-btn btn-refuse" disabled>'+fnLanguageSwitch('不合作')+'</span></div>';
+                    switch (DemandStatus) {
+                        case 0://审核中
+                            break;
+                        case 1://不通过
+                            break;
+                        case 2://已发布
+                            break;
+                        case 3://沟通中
+                            confirmTitle = fnLanguageSwitch('联系后感觉如何，是否愿意合作？');
+                            if (CheckStatus == 3 || CheckStatus == 4) {
+                                confirmControl = '<div class="confirm-group border-1px-top" >';
+                                confirmControl += '<span class="confirm-btn btn-start" tapmode onclick="expandingCooperation(this)">'+fnLanguageSwitch('展开合作')+'</span><span class="confirm-btn btn-refuse" tapmode onclick="refuseCooperation(this)">'+fnLanguageSwitch('不合作')+'</span></div>';
+                            } else {
+                                confirmControl = '<div class="confirm-group border-1px-top" >';
+                                confirmControl += '<span class="confirm-btn btn-accept" tapmode onclick="agreeCooperation(this)">'+fnLanguageSwitch('同意')+'</span><span class="confirm-btn btn-refuse" tapmode onclick="refuseCooperation(this)" data-researchcount="1">'+fnLanguageSwitch('不合作')+'</span></div>';
+                            }
+                            break;
+                        case 4://合作确认中
+                            if (CheckStatus == 4) {
+                                if (ReceiveStatus == 5 && SendStatus == 0) {
+                                    confirmTitle = fnLanguageSwitch('对方已经确认和您展开合作,您是否同意?');
+                                    confirmControl = '<div class="confirm-group border-1px-top" ><span class="confirm-btn btn-accept" tapmode onclick="agreeCooperation(this)">'+fnLanguageSwitch('同意')+'</span><span class="confirm-btn btn-refuse" tapmode onclick="refuseCooperation(this)">'+fnLanguageSwitch('不合作')+'</span></div>';
+                                } else if (ReceiveStatus == 3 && SendStatus == 5) {
+
+                                }
+                            } else {
+
+                            }
+                            card_labelCheckStatusClass  = 'success';
+                            break;
+                        case 5://对接成功
+                            confirmControl = '';
+                            confirmTitle = fnLanguageSwitch('恭喜对接成功');
+                            DemandStatusClass = iconCornerMark = 'success';
+                            break;
+                        case 6://失败
+                            if (CheckStatus == 4 || CheckStatus == 3 || CheckStatus == 6) {
+                                confirmTitle = fnLanguageSwitch('联系后感觉如何，是否愿意合作?');
+                            }
+                            DemandStatusClass = 'error';
+                            DemandCardStatusClass = 'error';
+                            break;
+                        case 7://关闭
+                            DemandStatusClass = 'error';
+                            DemandCardStatusClass = 'error';
+                            break;
+                    }
+
+                    debugAlert( ret[x] )
+
+                    $api.append($api.dom( '#list' ),
+                    '<div class="confirm-card" tapmode onclick="goPartner( this );" data-id="'+ret[x].id+'" >'+
+                    '    <div class="label-container">'+
+                    '        <label class="card-label">'+fnSubDemandDockingStatusJson()[ret[x].demandStatus]+'</label>'+
+                    '    </div>'+
+                    '    <div class="info-box clearfix">'+
+                    '        <img src="../../image/Macthmaking/MacthmakingNewneed/default.png" onload="getImageCache( this )" data-selectorid="'+ret[x].user.photo+'"  >'+
+                    '        <div class="info-box-main">'+
+                    '            <div class="info-box-main-top">'+
+                    '                <span class="info-name ellipsis-1">'+fnStringEmpty( ret[x].user.realname && ret[x].user.username )+'</span>'+
+                    '                <span class="divide-line">|</span>'+
+                    '                <span class="info-job ellipsis-1">'+fnStringEmpty( fnJobJson()[ret[x].user.profession] )+'</span>'+
+                    '            </div>'+
+                    '            <div class="info-company ellipsis-1">'+fnStringEmpty( ret[x].companyCapacity.companyName )+'</div>'+
+                    '            <div class="info-box-main-bottom">'+
+                    '                <span class="info-location ellipsis-1">'+fnStringEmpty( ret[x].companyCapacity.city )+'</span>'+
+                    '                <span class="divide-line">|</span>'+
+                    '                <span class="info-scale ellipsis-1">'+fnCompanySizeJson()[ ret[x].companyCapacity.companyScale ]+'</span>'+
+                    '            </div>'+
+                    '        </div>'+
+                    '    </div>'+
+                    '<div class="confirm-state '+DemandStatusClass+' border-1px-top">' + confirmTitle + '</div>' + confirmControl + '</div>');
+                }
+            }else{
+                api.toast({
+	           global: true,
+                    msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                });
+            }
+        });
+
+        return;
+        var valueParam = {
+            UserID: loginInfo.userid,
+            BatchNo: loginInfo.batchno,
+            DemandID: DemandID,
+            PageSize: perNum,
+            CurrentPage: currentIndex
+        };
+        api.showProgress({
+            title: '加载中...',
+            text: '',
+            modal: false
+        });
+        var url = 'APPMatchmaking/getDemandXQlist.aspx';
+        ajaxRequest(url, 'post', valueParam, function (ret, err) {
+            api.hideProgress();
+            api.refreshHeaderLoadDone();
+            // console.log( JSON.stringify( valueParam ))
+            if (ret) {
+                var LookCount = ret.LookCount;
+                var CreateDate = ret.CreateDate.split(' ')[0];
+                var DemandTypeName = ret.DemandTypeName;
+                var Title = ret.Title;
+                var gycount = ret.gycount;
+                var Push = ret.Push;
+                var DemandXQlist = ret.DemandXQlist;
+                var CheckStatusMap = {
+                    '0': '审核中',
+                    '1': '不通过',
+                    '2': '已发布',
+                    '3': '沟通中',
+                    '4': '合作确认中',
+                    '5': '对接成功',
+                    '6': '失败',
+                    '7': '关闭'
+                };
+                var _CheckStatus = ret.CheckStatus;
+                if (_CheckStatus == 5) {
+                    $("#checkStatus").addClass('success');
+                } else if (_CheckStatus == 4) {
+                    $("#checkStatus").html(CheckStatusMap[_CheckStatus]).css('color','#FFa300');
+                }else{
+                    $("#checkStatus").html(CheckStatusMap[_CheckStatus]);
+                }
+                var $repush = $("#repush");
+                /*if(_CheckStatus==4||_CheckStatus==5||_CheckStatus == 1||_CheckStatus == 2){
+                 $repush.addClass('disabled');
+                 }*/
+                if (Push == 0) {
+                    $repush.addClass('disabled');
+                }
+                $("#title").html(Title);
+                $("#demandTypeName").html(DemandTypeName);
+                $("#lookCount").html(LookCount);
+                $("#date").html(CreateDate);
+                var errorLength = 0;
+                if (DemandXQlist.length > 0) {
+                    var demandHtml = '';
+                    for (var i = 0; i < DemandXQlist.length; i++) {
+                        var demand = DemandXQlist[i];
+                        var RealName = demand.RealName;
+                        var CompanyName = demand.CompanyName;
+                        var City = demand.City;
+                        var UserId = demand.UserId;
+                        var StatusIDName = demand.StatusIDName;
+                        var DemandStatusId = demand.id;
+                        var CheckStatus = demand.CheckStatus;
+                        var card_labelCheckStatusClass = '';
+                        var DemandStatus = demand.demandStatus;
+                        var CompanyScale = demand.dompanyScale;
+                        var Profession = demand.profession;
+                        var CellPhone = demand.cellPhone;
+                        var ReceiveStatus = demand.receiveStatus;
+                        var SendStatus = demand.sendStatus;
+                        var PhotoURL = '../../image/Macthmaking/MacthmakingNewneed/default.png';
+                        if (demand.PhotoURL) {
+                            PhotoURL = host + demand.PhotoURL.split('~')[1];
+                        }
+                        var DemandStatusClass = '';
+                        var DemandCardStatusClass = '';
+                        var iconCornerMark = '';
+                        var confirmTitle = fnLanguageSwitch( '您已经决定和对方合作，正在等待对方确认中！');
+                        var confirmControl = '<div class="confirm-group border-1px-top"><span class="confirm-btn btn-start" disabled>'+fnLanguageSwitch( '展开合作')+'</span><span class="confirm-btn btn-refuse" disabled>'+fnLanguageSwitch( '不合作')+'</span></div>';
+                        switch (DemandStatus) {
+                            case '0'://审核中
+                                break;
+                            case '1'://不通过
+                                break;
+                            case '2'://已发布
+                                break;
+                            case '3'://沟通中
+                                confirmTitle = fnLanguageSwitch('联系后感觉如何，是否愿意合作？');
+                                if (CheckStatus == 3 || CheckStatus == 4) {
+                                    confirmControl = '<div class="confirm-group border-1px-top" data-job="' + Profession + '" data-city="' + City + '" data-type="' + DemandTypeName + '" data-researchcount="'+ demand.researchPersonnel +'" data-productioncount="'+ demand.production +'" data-salesmancount="'+ demand.salesman +'" data-businessvolume="'+ demand.businessVolume +'" data-website="'+ demand.companyWeb +'" data-description="'+ demand.Description +'">';
+                                    confirmControl += '<span class="confirm-btn btn-start" tapmode onclick="expandingCooperation(' + DemandStatusId + ', this)">'+fnLanguageSwitch('展开合作')+'</span><span class="confirm-btn btn-refuse" tapmode onclick="refuseCooperation(' + DemandStatusId + ', 2, this)">'+fnLanguageSwitch('不合作')+'</span></div>';
+                                } else {
+                                    confirmControl = '<div class="confirm-group border-1px-top" data-job="' + Profession + '" data-city="' + City + '" data-type="' + DemandTypeName + '" data-researchcount="'+ demand.researchPersonnel +'" data-productioncount="'+ demand.production +'" data-salesmancount="'+ demand.salesman +'" data-businessvolume="'+ demand.BusinessVolume +'" data-website="'+ demand.companyWeb +'" data-description="'+ demand.description +'">';
+                                    confirmControl += '<span class="confirm-btn btn-accept" tapmode onclick="agreeCooperation(' + DemandStatusId + ', this)">'+fnLanguageSwitch('同意')+'</span><span class="confirm-btn btn-refuse" tapmode onclick="refuseCooperation(' + DemandStatusId + ', 3, this)" data-job="' + Profession + '" data-city="' + City + '" data-type="' + DemandTypeName + '" data-researchcount="1">'+fnLanguageSwitch('不合作')+'</span></div>';
+                                }
+                                break;
+                            case '4'://合作确认中
+                                if (CheckStatus == 4) {
+                                    if (ReceiveStatus == 5 && SendStatus == 0) {
+                                        confirmTitle = fnLanguageSwitch('对方已经确认和您展开合作,您是否同意?');
+                                        confirmControl = '<div class="confirm-group border-1px-top" data-job="' + Profession + '" data-city="' + City + '" data-type="' + DemandTypeName + '" data-researchcount="'+ demand.researchPersonnel +'" data-productioncount="'+ demand.production +'" data-salesmancount="'+ demand.salesman +'" data-businessvolume="'+ demand.businessVolume +'" data-website="'+ demand.companyWeb +'" data-description="'+ demand.description +'"><span class="confirm-btn btn-accept" tapmode onclick="agreeCooperation(' + DemandStatusId + ', this)">'+fnLanguageSwitch('同意')+'</span><span class="confirm-btn btn-refuse" tapmode onclick="refuseCooperation(' + DemandStatusId + ', 3, this)">'+fnLanguageSwitch('不合作')+'</span></div>';
+                                    } else if (ReceiveStatus == 3 && SendStatus == 5) {
+
+                                    }
+                                } else {
+
+                                }
+                                card_labelCheckStatusClass  = 'success';
+                                break;
+                            case '5'://对接成功
+                                confirmControl = '';
+                                confirmTitle = fnLanguageSwitch('恭喜对接成功');
+                                DemandStatusClass = iconCornerMark = 'success';
+                                break;
+                            case '6'://失败
+                                errorLength++;
+                                if (CheckStatus == 4 || CheckStatus == 3 || CheckStatus == 6) {
+                                    confirmTitle = fnLanguageSwitch('联系后感觉如何，是否愿意合作?');
+                                }
+                                DemandStatusClass = 'error';
+                                DemandCardStatusClass = 'error';
+                                break;
+                            case '7'://关闭
+                                DemandStatusClass = 'error';
+                                DemandCardStatusClass = 'error';
+                                break;
+                        }
+                        /*demandHtml += '<div class="confirm-card"><div class="label-container"><label class="card-label ' + DemandStatusClass + '">' + StatusIDName + '</label></div><div class="info-box clearfix" data-phone="' + CellPhone + '" data-photourl="' + PhotoURL + '" data-senduserid="' + UserId + '" data-username="' + RealName + '" data-profession="' + Profession + '" data-DemandStatusId="' + DemandStatusId + '" tapmode="" onclick="goPartner(this)"> <span class="corner-mark ' + iconCornerMark + '"></span><img src="' + PhotoURL + '" >' +
+                                '<div class="info-box-main"><p><span class="info-name">' + RealName + '</span><span class="divide-line">|</span><span class="info-job">' + Profession + '</span></p><p class="info-company">' + CompanyName + '</p><p>' +
+                                '<span class="info-location">' + City + '</span><span class="divide-line">|</span><span class="info-scale">' + CompanyScale + '</span></p></div></div>';*/
+
+                        demandHtml +='<div class="confirm-card '+DemandCardStatusClass+'"><div class="label-container"><label class="card-label ' + DemandStatusClass + ' '+card_labelCheckStatusClass+'">' + StatusIDName + '</label></div><div class="info-box clearfix" data-phone="' + CellPhone + '" data-photourl="' + PhotoURL + '" data-senduserid="' + UserId + '" data-username="' + RealName + '" data-profession="' + Profession + '" data-DemandStatusId="' + DemandStatusId + '" tapmode="" onclick="goPartner(this)">' +
+                                '<img src="' + PhotoURL + '"><div class="info-box-main"><div class="info-box-main-top"><span class="info-name ellipsis-1">' + RealName + '</span><span class="divide-line">|</span><span class="info-job ellipsis-1">' + Profession + '</span></div><div class="info-company ellipsis-1">' + CompanyName + '</div>'+
+                                     '<div class="info-box-main-bottom"><span class="info-location ellipsis-1">' + City + '</span><span class="divide-line">|</span><span class="info-scale ellipsis-1">' + CompanyScale + '</span></div></div></div>';
+
+                        demandHtml += ('<div class="confirm-state '+DemandStatusClass+' border-1px-top">' + confirmTitle + '</div>' + confirmControl + '</div>');
+                    }
+                    $("#list").html(demandHtml);
+                    if(errorLength == DemandXQlist.length&&Push==1){
+                        api.confirm({
+                            title: fnLanguageSwitch('提示'),
+                            msg: fnLanguageSwitch('您的需求目前没有合适的合作伙伴了，您可以重新推送给其他尚未响应的合作伙伴，寻找新机会！'),
+                            buttons: [fnLanguageSwitch('重新发送'), fnLanguageSwitch('不用了')]
+                        }, function (ret, err) {
+                            if (ret.buttonIndex == 1) {
+                                repush();
+                            }
+                        });
+                    }
+                } else {
+                    $("#noAppData").removeClass('hidden');
+                }
+                $("body").removeClass('hidden');
+            } else {
+                api.toast({
+	                global: true,
+                    msg: fnLanguageSwitch('请求服务器失败！')
+                });
+            }
+        });
+
+    }
+    function updateStatus(DemandStatusId, status) {
+        api.showProgress({
+            title: fnLanguageSwitch('加载中...'),
+            text: '',
+            modal: false
+        });
+        var valueParam = {
+            UserID: loginInfo.userid,
+            BatchNo: loginInfo.batchno,
+            DemandID: DemandID,
+            DemandStatusId: DemandStatusId,
+            Identity: loginInfo.usertype == CONST_SI ? 2 : 1,
+            Status: status
+        };
+        var url = 'APPMatchmaking/UpdateStatus.aspx';
+        ajaxRequest(url, 'post', valueParam, function (ret, err) {
+            api.hideProgress();
+            if (ret) {
+                api.toast({
+	               global: true,
+                    msg: ret.des
+                });
+                if (ret.res == 1) {
+                    getDemandXQlist(DemandID);
+                }
+            } else {
+                api.toast({
+	                global: true,
+                    msg: err.msg
+                });
+            }
+        });
+    }
+
+    // 不合作
+    function refuseCooperation( el) {
+        event.stopPropagation();    
+        var _data = vGlobalParam[ $api.attr($api.closest(el, '.confirm-card'), 'data-id' ) ];
+        api.confirm({
+            title: fnLanguageSwitch( '提示' ),
+            msg: fnLanguageSwitch( '您是否已经与对方进行电话或私信联系，并且确定放弃此次合作机会？' ),
+            buttons: [fnLanguageSwitch( '确定' ), fnLanguageSwitch( '取消' )]
+        }, function (ret, err) {
+            
+            if (ret.buttonIndex == 1) {
+                // mark 不合作
+                fnAjax({
+                    url: 'projectSubDemands/makerNoWantWorkToSI',
+                    data: {
+                        values: {
+                            subDemandId: _data.id
+                        }
+                    }
+                }, function( ret, err ){
+                    if( ret ){
+                        api.execScript({
+                            name: 'index',
+                            frameName: 'frm_chain',
+                            script: 'api.refreshHeaderLoading();'
+                        });
+                        setTimeout(function(){
+                            api.closeWin();
+                        }, 1000);
+                    }else{
+                        api.toast({
+	                          global: true,
+                            msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                        });
+                    }
+                });
+                     if (zhuge) {
+                    if (coor == 2) {
+                        zhuge.track({
+                            eventName: 'Maker产业链对接_合作状态确认',
+                            eventPro: {
+                                '合作结果': '不合作',
+                                '点击页面来源': '需求详情',
+                                '对方职位': Profession,
+                                '对方城市': City,
+                                '需求种类': DemandTypeName,
+                                '对方研发人数': ResearchPersonnel,
+                                '对方生产人数': Production,
+                                '对方销售人数': Salesman,
+                                '对方年营业额': BusinessVolume,
+                                '公司网址': CompanyWeb,
+                                '接单描述': Description
+                            }
+                        });
+                    } else {
+                        zhuge.track({
+                            eventName: 'Maker产业链对接_合作状态最终回复',
+                            eventPro: {
+                                '合作结果': '不合作',
+                                '点击页面来源': '需求详情',
+                                '对方职位': Profession,
+                                '对方城市': City,
+                                '需求种类': DemandTypeName,
+                                '对方研发人数': ResearchPersonnel,
+                                '对方生产人数': Production,
+                                '对方销售人数': Salesman,
+                                '对方年营业额': BusinessVolume,
+                                '公司网址': CompanyWeb,
+                                '接单描述': Description
+                            }
+                        });
+                    }
+                } 
+            }
+        })
+                return;
+        api.confirm({
+            title: fnLanguageSwitch('提示'),
+            msg: '',
+            buttons: [fnLanguageSwitch('确定'), fnLanguageSwitch('取消')]
+        }, function (ret, err) {
+            if (ret.buttonIndex == 1) {
+                updateStatus(DemandStatusId, 6);
+                var $apiThis = $api.closest(el, '.confirm-group');
+                var Profession = $.trim($api.attr($apiThis, 'data-job'));
+                var City = $.trim($api.attr($apiThis, 'data-city'));
+                var DemandTypeName = $.trim($api.attr($apiThis, 'data-type'));
+                var ResearchPersonnel = $.trim($api.attr($apiThis, 'data-researchcount'));
+                var Production = $.trim($api.attr($apiThis, 'data-productioncount'));
+                var Salesman = $.trim($api.attr($apiThis, 'data-salesmancount'));
+                var BusinessVolume = $.trim($api.attr($apiThis, 'data-businessvolume'));
+                var CompanyWeb = $.trim($api.attr($apiThis, 'data-website'));
+                if (CompanyWeb == undefined || CompanyWeb == '') {
+                    CompanyWeb = fnLanguageSwitch('没有');
+                } else {
+                    CompanyWeb = fnLanguageSwitch('有');
+                }
+                var Description = $.trim($api.attr($apiThis, 'data-description'));
+                if (zhuge) {
+                    if (coor == 2) {
+                        zhuge.track({
+                            eventName: 'Maker产业链对接_合作状态确认',
+                            eventPro: {
+                                '合作结果': '不合作',
+                                '点击页面来源': '需求详情',
+                                '对方职位': Profession,
+                                '对方城市': City,
+                                '需求种类': DemandTypeName,
+                                '对方研发人数': ResearchPersonnel,
+                                '对方生产人数': Production,
+                                '对方销售人数': Salesman,
+                                '对方年营业额': BusinessVolume,
+                                '公司网址': CompanyWeb,
+                                '接单描述': Description
+                            }
+                        });
+                    } else {
+                        zhuge.track({
+                            eventName: 'Maker产业链对接_合作状态最终回复',
+                            eventPro: {
+                                '合作结果': '不合作',
+                                '点击页面来源': '需求详情',
+                                '对方职位': Profession,
+                                '对方城市': City,
+                                '需求种类': DemandTypeName,
+                                '对方研发人数': ResearchPersonnel,
+                                '对方生产人数': Production,
+                                '对方销售人数': Salesman,
+                                '对方年营业额': BusinessVolume,
+                                '公司网址': CompanyWeb,
+                                '接单描述': Description
+                            }
+                        });
+                    }
+                } else {
+                }
+            }
+        });
+        if( event ){event.cancelBubble = true;}
+        return false;
+    }
+
+    // 展开合作意向
+    function expandingCooperation( el ) {
+        event.stopPropagation();
+        var _data = vGlobalParam[ $api.attr($api.closest(el, '.confirm-card'), 'data-id' ) ];
+        api.confirm({
+            title: fnLanguageSwitch( '提示' ),
+            msg: fnLanguageSwitch( '您是否已经与对方进行电话或私信联系，并且双方决定要展开合作了呢？您点击确认后，系统会发送消息给对方确认。如果对方同意，则该需求对接成功；如果对方拒绝，您将不能再和对方联系。' ),
+            buttons: [fnLanguageSwitch( '确定' ), fnLanguageSwitch( '取消' )]
+        }, function (ret, err) {
+            if (ret.buttonIndex == 1) {
+                fnAjax({
+                    url: 'projectSubDemands/makerWantWorkToSI',
+                    data: {
+                        values: {
+                            subDemandId: _data.id
+                        }
+                    }
+                }, function( ret, err ){
+                    debugAlert( arguments )
+                    if( ret ){
+                        api.toast({
+                           global: true,
+                            msg: fnLanguageSwitch( '系统已经将您的合作确认发送给对方，您和对方的合作状态已变为“合作确认中”。48H内您可以得到合作成功或失败的反馈信息。' )
+                        });
+                            api.execScript({
+                                name: 'index',
+                                frameName: 'frm_chain',
+                                script: 'api.refreshHeaderLoading();'
+                            });
+                            setTimeout(function(){
+                                api.closeWin();
+                            }, 1000);
+                    }else{
+                        api.toast({
+	                       global: true,
+                            msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                        });
+                    }
+                });
+            }
+        })
+        return;
+        api.confirm({
+            title: '提示',
+            msg: '您是否已经与对方进行电话或私信联系，并且双方决定要展开合作了呢？您点击确认后，系统会发送消息给对方确认。如果对方同意，则该需求对接成功；如果对方拒绝，您将不能再和对方联系。 ',
+            buttons: ['确定', '取消']
+        }, function (ret, err) {
+            if (ret.buttonIndex == 1) {
+                api.alert({
+                    title: '提示',
+                    msg: '',
+                    buttons: ['我知道了']
+                }, function (ret, err) {
+
+                });
+                updateStatus(DemandStatusId, 5);
+                var $apiThis = $api.closest(el, '.confirm-group');
+                var Profession = $.trim($api.attr($apiThis, 'data-job'));
+                var City = $.trim($api.attr($apiThis, 'data-city'));
+                var DemandTypeName = $.trim($api.attr($apiThis, 'data-type'));
+                var ResearchPersonnel = $.trim($api.attr($apiThis, 'data-researchcount'));
+                var Production = $.trim($api.attr($apiThis, 'data-productioncount'));
+                var Salesman = $.trim($api.attr($apiThis, 'data-salesmancount'));
+                var BusinessVolume = $.trim($api.attr($apiThis, 'data-businessvolume'));
+                var CompanyWeb = $.trim($api.attr($apiThis, 'data-website'));
+                if (CompanyWeb == undefined || CompanyWeb == '') {
+                    CompanyWeb = '没有';
+                } else {
+                    CompanyWeb = '有';
+                }
+                var Description = $.trim($api.attr($apiThis, 'data-description'));
+                if (zhuge) {
+                    zhuge.track({
+                        eventName: 'Maker产业链对接_合作状态确认',
+                        eventPro: {
+                            '合作结果': '展开合作',
+                            '点击页面来源': '需求详情',
+                            '对方职位': Profession,
+                            '对方城市': City,
+                            '需求种类': DemandTypeName,
+                            '对方研发人数': ResearchPersonnel,
+                            '对方生产人数': Production,
+                            '对方销售人数': Salesman,
+                            '对方年营业额': BusinessVolume,
+                            '公司网址': CompanyWeb,
+                            '接单描述': Description
+                        }
+                    });
+                }
+            }
+        });
+
+        if( event ){event.cancelBubble = true;}
+        return false;
+    }
+    //同意合作
+    function agreeCooperation( el ) {
+        event.stopPropagation();    
+        var _data = vGlobalParam[ $api.attr($api.closest(el, '.confirm-card'), 'data-id' ) ];
+        api.confirm({
+            title: fnLanguageSwitch('提示'),
+            msg: fnLanguageSwitch('您同意和对方展开合作了？点击确认后，此需求将变为对接成功，随后其他合作伙伴将不能再和您联系。'),
+            buttons: [fnLanguageSwitch('确定'), fnLanguageSwitch('取消')]
+        }, function (ret, err) {
+            if (ret.buttonIndex == 1) {
+                fnAjax({
+                    url: 'projectSubDemands/makerWantWorkToSI',
+                    data: {
+                        values: {
+                            subDemandId: _data.id
+                        }
+                    }
+                }, function( ret, err ){
+                    if( ret ){
+                        api.toast({
+                         global: true,
+                            msg: fnLanguageSwitch( '对接成功' )
+                        });
+                        api.execScript({
+                            name: 'index',
+                            frameName: 'frm_chain',
+                            script: 'api.refreshHeaderLoading();'
+                        });
+                        setTimeout(function(){
+                            api.closeWin();
+                        }, 1000);
+                    }else{
+                        api.toast({
+                            global: true,
+                            msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                        });
+                    }
+                });
+                // if (zhuge) {
+                //     zhuge.track({
+                //         eventName: 'Maker产业链对接_合作状态最终回复',
+                //         eventPro: {
+                //             '回复结果': '同意',
+                //             '点击页面来源': '需求详情',
+                //             '对方职位': Profession,
+                //             '对方城市': City,
+                //             '需求种类': DemandTypeName,
+                //             '对方研发人数': ResearchPersonnel,
+                //             '对方生产人数': Production,
+                //             '对方销售人数': Salesman,
+                //             '对方年营业额': BusinessVolume,
+                //             '公司网址': CompanyWeb,
+                //             '接单描述': Description
+                //         }
+                //     });
+                // }
+            }
+        });
+    }
+
+
+    function repush(el) {
+        if( ! $api.hasCls(el, 'disabled') ){
+            api.confirm({
+                title: fnLanguageSwitch( '提示' ),
+                msg: fnLanguageSwitch( '重新推送后，当前的合作意向都会变为关闭，您确定重新推送吗？' ),
+                buttons: [fnLanguageSwitch( '确定' ), fnLanguageSwitch( '取消' )]
+            }, function (ret, err) {
+                if (ret.buttonIndex == 1) {
+                    fnAjax({
+                        url: 'projectDemands/againPush',
+                        data: {
+                            values: {
+                                demandId: vGlobalParam.id
+                            }
+                        }
+                    }, function( ret, err ){
+                        debugAlert( arguments )
+                        if( ret ){
+                            api.toast({
+                             global: true,
+                                msg: fnLanguageSwitch( '系统已经将您的需求重新推送给了合作伙伴，需求状态已变为“已发布”，请及时登录查看此需求的新动态。' )
+                            });
+                            api.execScript({
+                                name: 'index',
+                                frameName: 'frm_chain',
+                                script: 'api.refreshHeaderLoading();'
+                            });
+                            setTimeout(function(){
+                                api.closeWin();
+                            }, 1000);
+                        }else{
+                            api.toast({
+	                            global: true,
+                                msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                            });
+                        }
+                    });
+                    return;
+                    var valueParam = {
+                        UserID: loginInfo.userid,
+                        BatchNo: loginInfo.batchno,
+                        DemandID: DemandID,
+                        IsNot: 1
+                    };
+                    var url = 'APPMatchmaking/RepeatDemand.aspx';
+                    api.showProgress({
+                        title: '正在重新推送...',
+                        text: '',
+                        modal: false
+                    });
+                    ajaxRequest(url, 'post', valueParam, function (ret, err) {
+                        api.hideProgress();
+                        if (ret) {
+                            api.alert({
+                                title: '',
+                                msg: '系统已经将您的需求重新推送给了合作伙伴，需求状态已变为“已发布”，请及时登录查看此需求的新动态。',
+                                buttons: ['我知道了']
+                            }, function (ret, err) {
+                                if (ret.res == 1) {
+                                    getDemandXQlist(DemandID);
+                                }
+                            });
+
+                        } else {
+                            api.toast({
+	                             global: true,
+                                msg: err.msg
+                            });
+                        }
+                    })
+                }
+            });
+        };
+    }
+
+    function goPartner(el) {
+        fnOpen({
+            name: 'partner_win',
+            url: 'widget://' + DIR + '/simple_page/partner_win.html',
+            pageParam: {
+                data: vGlobalParam[ $api.attr(el, 'data-id' ) ]
+            }
+        });
+        return;
+        var self = $(el);
+        var partnerParam = {};
+        partnerParam.demandstatusid = self.data('demandstatusid');
+        partnerParam.PhotoURL = self.data('photourl');
+        partnerParam.SendUserID = self.data('senduserid');
+        partnerParam.username = self.data('username');
+        partnerParam.Profession = self.data('profession');
+        partnerParam.CellPhone = self.data('phone');
+        var $confirm_state = self.siblings('.confirm-state');
+        if($confirm_state.hasClass('success')){
+            partnerParam.confirmStateClass = 'success';
+        }
+        partnerParam.comandtip = $confirm_state.html();
+        partnerParam.handlebox = self.siblings('.confirm-group').html();
+        var move = isHuawei();
+        var animation = {};
+        if (move) {
+            animation = {
+                type: 'movein',
+                subType: 'from_right'
+            }
+        }
+        api.openWin({
+            name: 'partner_win',
+            url: 'widget://' + DIR + '/simple_page/partner_win.html',
+            pageParam: partnerParam,
+            animation: animation
+        });
+    }
+
+</script>
+</html>

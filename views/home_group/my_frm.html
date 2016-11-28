@@ -1,0 +1,742 @@
+		<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+        <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+        <title>my</title>
+        <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+        <style>
+            html {
+                height: 100%;
+            }
+            
+            body {
+                width: 100%;
+                height: 100%;
+                min-height: 100%;
+                background-color: #f0eff7;
+            }
+            
+            .profile {
+                position: relative;
+                box-sizing: border-box;
+                padding-top: 60px;
+                padding-right: 16px;
+                padding-bottom: 16px;
+                padding-left: 16px;
+                width: 100%;
+                height: 130px;
+                background-color: #0171c5;
+            }
+            
+            .profile .icon {
+                position: absolute;
+                width: 54px;
+                height: 54px;
+                border-radius: 3px;
+                background-color: #fff;
+                background-image: url(../../image/Macthmaking/MacthmakingNewneed/default.png);
+                background-repeat: no-repeat;
+                background-position: center center;
+                background-size: 50px 50px;
+            }
+            
+            .profile .info {
+                position: relative;
+                box-sizing: border-box;
+                padding-left: 70px;
+                padding-right: 34px;
+                width: 100%;
+                height: 54px;
+                padding-top: 16px;
+            }
+            
+            .profile .info .nick {
+                position: relative;
+                box-sizing: border-box;
+                padding-top: 4px;
+                padding-bottom: 2px;
+                width: 100%;
+                /*height: 30px;*/
+                color: #fff;
+                font-size: 24px;
+                font-weight: bold;
+                text-align: left;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+            
+            .profile .info .account {
+                position: relative;
+                box-sizing: border-box;
+                padding-top: 2px;
+                padding-bottom: 4px;
+                width: 100%;
+                height: 24px;
+                color: #fff;
+                font-size: 14px;
+                text-align: left;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+            
+            .bar {
+                position: relative;
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: flex;
+                -webkit-box-orient: horizontal;
+                -webkit-flex-flow: row;
+                flex-flow: row;
+                box-sizing: border-box;
+                padding: 8px;
+                width: 100%;
+                height: 70px;
+                background-color: #fff;
+            }
+            
+            .bar .menu {
+                position: relative;
+                -webkit-box-flex: 1;
+                -webkit-flex: 1;
+                flex: 1;
+                height: 54px;
+            }
+            
+            .bar .v-line {
+                width: 1px;
+                height: 54px;
+                background-color: #e5e5e5;
+            }
+            
+            .bar .menu .icon {
+                position: relative;
+                width: 100%;
+                height: 36px;
+                background-repeat: no-repeat;
+                background-size: auto 30px;
+                background-position: center center;
+            }
+            
+            .bar .menu .icon.message {
+                background-image: url(../../image/membercenter/message.png);
+            }
+            
+            .bar .menu .icon.event {
+                background-image: url(../../image/membercenter/event.png);
+            }
+            
+            .bar .menu .icon.point {
+                background-image: url(../../image/membercenter/point.png);
+            }
+            
+            .bar .menu .icon .badge {
+                position: absolute;
+                top: -2px;
+                right: 50%;
+                margin-right: -28px;
+                display: inline-block;
+                box-sizing: border-box;
+                width: 20px;
+                height: 20px;
+                line-height:23px;
+                font-size: 10px;
+                color: #fff;
+                background-color: RGBA(255, 0, 0, 1);
+                border-radius: 100%;
+                text-align: center;
+            }
+            
+            .bar .menu .text {
+                position: relative;
+                box-sizing: border-box;
+                padding-top: 4px;
+                width: 100%;
+                height: 18px;
+                font-size: 14px;
+                color: #444;
+                text-align: center;
+            }
+            
+            .group {
+                position: relative;
+                margin-top: 16px;
+                margin-bottom: 16px;
+                width: 100%;
+                height: auto;
+            }
+            
+            .group .row {
+                position: relative;
+                box-sizing: border-box;
+                padding-left: 16px;
+                padding-right: 16px;
+                margin-bottom: 4px;
+                width: 100%;
+                height: 44px;
+                background-color: #fff;
+                background-repeat: no-repeat;
+                background-size: 20px auto;
+                background-position: 16px center;
+            }
+            
+            .group .row .name {
+                position: relative;
+                box-sizing: border-box;
+                padding-left: 36px;
+                padding-right: 16px;
+                width: 100%;
+                height: 44px;
+                font-size: 15px;
+                color: #444;
+                text-align: left;
+                line-height: 44px;
+            }
+            
+            .group .row.question {
+                background-image: url(../../image/membercenter/tu_03.jpg);
+            }
+            
+            .group .row.take {
+                background-image: url(../../image/membercenter/take.png);
+            }
+            
+            .group .row.publish {
+                background-image: url(../../image/membercenter/publish.png);
+            }
+            
+            .group .row.dashboard {
+                background-image: url(../../image/membercenter/dashboard.png);
+            }
+            
+            .group .row.setting {
+                background-image: url(../../image/membercenter/tu_06.jpg);
+            }
+            
+            .group .row.about {
+                background-image: url(../../image/membercenter/tu_08.jpg);
+            }
+            
+            .group .row.service {
+                background-image: url(../../image/membercenter/tu_13.jpg);
+            }
+			.group .row.upgrade{ background-image: url(../../image/membercenter/tu_11.jpg); }
+			
+            .si .take {
+                display: block;
+            }
+            
+            .si .publish {
+                display: none;
+            }
+            
+            .si .dashboard {
+                display: none;
+            }
+            
+            .maker-partner .take {
+                display: none;
+            }
+            
+            .maker-partner .publish {
+                display: block;
+            }
+            
+            .maker-partner .dashboard {
+                /*display: block;*/
+            }
+            
+            .maker-enterprise .take {
+                display: none;
+            }
+            
+            .maker-enterprise .publish {
+                display: block;
+            }
+            
+            .maker-enterprise .dashboard {
+                display: none;
+            }
+            
+            .maker-disti-FAE .take {
+                display: none;
+            }
+            
+            .maker-disti-FAE .publish {
+                display: block;
+            }
+            
+            .maker-disti-FAE .dashboard {
+                display: block;
+            }
+            
+            .disti-FAE .take {
+                display: none;
+            }
+            .disti-FAE .publish {
+                display: block;
+            }
+            .disti-FAE .dashboard{
+                /*display: block;*/
+            }
+            
+            .arrow-right-white {
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 20px;
+                height: 100%;
+                background-image: url(../../image/arrow-left-white.png);
+                background-repeat: no-repeat;
+                background-size: 16px 16px;
+                background-position: center center;
+                transform: rotate(180deg);
+                -webkit-transform: rotate(180deg);
+            }
+            
+            .arrow-right-gray {
+                position: absolute;
+                top: 0;
+                right: 16px;
+                width: 16px;
+                height: 100%;
+                background-image: url(../../image/arrow-right-gray.png);
+                background-repeat: no-repeat;
+                background-size: 9px 16px;
+                background-position: center center;
+            }
+            
+            .highlight {
+                opacity: 0.7;
+            }
+            .guide{
+                position: absolute;
+                z-index: 100;
+                padding-left:0!important;;
+                padding-right:0!important;
+                display: block;
+                border: 2px solid #11f8ea;
+
+            }
+            .guide .name{
+                padding-left: 40px!important;
+            }
+            .guide-cover{
+                position: absolute;
+                background-color: RGBA(0,0,0,0.8);
+                top:0;
+                left:0;
+                width: 100%;
+                height: 100%;
+                z-index: 99;
+            }
+            .dashboard-guide-text{
+                position: absolute;
+                top: -7rem;
+                font-size: 1rem;
+                /*line-height:2.4rem;*/
+                color: #FFFFFF;
+                z-index: 101;
+                text-align: center;
+                width: 100%;
+                left: 0;
+            }
+            .dashboard-guide-text > p:last-child{
+                margin-top: 0.5rem;
+            }
+            .hover{
+                 background-color: #0060A8 !important;
+            }
+        </style>
+    </head>
+
+    <body>
+<!--   <div class="guide-cover hidden">
+
+    </div>
+        <section class="profile" tapmode onclick="fnOpenWin('profile')">
+            <div id="userPhoto" class="icon"></div>
+            <div class="info">
+                <div id="account" class="account">--</div>
+                <div class="arrow-right-white"></div>
+            </div>
+        </section>
+        <section class="bar">
+            <div class="menu" tapmode="highlight" onclick="openMessage('message')">
+                <div class="icon message">
+                    <div class="badge hidden" id="messageBadge"></div>
+                </div>
+                <div class="text">--</div>
+            </div>
+            <div class="v-line"></div>
+            <div class="menu" tapmode="highlight" onclick="fnOpenWin('event')">
+                <div class="icon event"></div>
+                <div class="text">--</div>
+            </div>
+            <div class="v-line"></div>
+            <div class="menu" tapmode="highlight" onclick="fnOpenWin('point')">
+                <div class="icon point"></div>
+                <div class="text">--</div>
+            </div>
+        </section>
+        <section id="group" class="group">
+            <div class="row question" tapmode="highlight" onclick="openQuestion()">
+                <div class="name">--</div>
+                <div class="arrow-right-gray"></div>
+            </div>
+            <div class="row take Capability hidden" tapmode="highlight" onclick="openMatchMaking()">
+                <div class="name">我的接单能力</div>
+                <div class="arrow-right-gray"></div>
+            </div>
+            <div class="row publish" tapmode="highlight" onclick="fnOpenWin('publish')">
+                <div class="name">--</div>
+                <div class="arrow-right-gray"></div>
+            </div>
+            <div  id="dashboard" class="row dashboard hidden" tapmode="" onclick="fnOpenWin('dashboard')">
+                <div class="dashboard-guide-text hidden">
+                    <p>点击"Dashboard",即可查看您名下</p>
+                    <p>成员的分布和项目情况,快来查看吧!</p>
+                </div>
+                <div class="row dashboard guide hidden" tapmode="" onclick="closeDashboradGuide()">
+                    <div class="name">Dashboard</div>
+                    <div class="arrow-right-gray"></div>
+                </div>
+                <div class="name">Dashboard</div>
+                <div class="arrow-right-gray"></div>
+            </div>
+        </section>
+        <section class="group">
+            <div class="row setting" tapmode="highlight" onclick="fnOpenWin('setting')">
+                <div class="name">--</div>
+                <div class="arrow-right-gray"></div>
+            </div>
+            <div class="row about" tapmode="highlight" onclick="fnOpenWin('about')">
+                <div class="name">--</div>
+                <div class="arrow-right-gray"></div>
+            </div>
+            <div class="row upgrade hidden" tapmode="highlight" onclick="fnUpgrade()">
+                <div class="name">升级成为企业用户</div>
+                <div class="arrow-right-gray"></div>
+            </div>
+        </section>
+        <section class="group">
+            <div class="row service" tapmode="highlight" onclick="openService()">
+                <div class="name">--</div>
+                <div class="arrow-right-gray"></div>
+            </div>
+        </section>  -->
+    </body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript">
+    	var loginInfo = $api.getStorage('loginInfo'),
+    		vGlobalParam = {};
+        function openDashboradGuide() {
+            $(".guide-cover").removeClass('hidden');
+            $(".dashboard-guide-text").removeClass('hidden');
+            $(".guide").removeClass('hidden');
+            api.execScript({
+                name: 'index',
+                script: 'dashboradGuide(true)'
+            });
+        }
+
+        function closeDashboradGuide() {
+            $(".guide-cover").addClass('hidden');
+            $(".dashboard-guide-text").addClass('hidden');
+            $(".guide").addClass('hidden');
+            api.execScript({
+                name: 'index',
+                script: 'dashboradGuide(false)'
+            });
+            if( event ){event.cancelBubble = true;}
+            event.defaultPrevented = true;
+            return false;
+        }
+        apiready = function() {
+            $api.dom('body').innerHTML =
+            '<section class="profile" tapmode onclick="fnOpenWin( this )" data-name="profile">'+
+            '    <div id="userPhoto" class="icon"></div>'+
+            '    <div class="info">'+
+            '        <div id="account" class="account">--</div>'+
+            '        <div tapmode="hover"  class="arrow-right-white"></div>'+
+            '    </div>'+
+            '</section>'+
+            '<section class="bar">'+
+            '    <div class="menu" tapmode="highlight" onclick="openMessage( this )" data-name="profile">'+
+            '        <div class="icon message">'+
+            '            <div class="badge hidden" id="messageBadge"></div>'+
+            '        </div>'+
+            '        <div class="text">'+fnLanguageSwitch( '我的消息' )+'</div>'+
+            '    </div>'+
+            '    <div class="v-line"></div>'+
+            '    <div class="menu" tapmode="highlight" onclick="fnOpenWin( this )" data-name="event">'+
+            '        <div class="icon event"></div>'+
+            '        <div class="text">'+fnLanguageSwitch( '我的活动' )+'</div>'+
+            '    </div>'+
+            '    <div class="v-line"></div>'+
+            '    <div class="menu" tapmode="highlight" onclick="fnOpenWin( this )" data-name="point">'+
+            '        <div class="icon point"></div>'+
+            '        <div class="text">'+fnLanguageSwitch( '我的积分' )+'</div>'+
+            '    </div>'+
+            '</section>'+
+            '<section id="group" class="group">'+
+            '    <div class="row question" tapmode="highlight" onclick="openQuestion()">'+
+            '        <div class="name">'+fnLanguageSwitch( '我的提问' )+'</div>'+
+            '        <div class="arrow-right-gray"></div>'+
+            '    </div>'+( USER.roleId === CONST_SI ?
+            '    <div class="row take Capability" tapmode="highlight" onclick="openMatchMaking()">'+
+            '        <div class="name">'+fnLanguageSwitch( '我的接单能力' )+'</div>'+
+            '        <div class="arrow-right-gray"></div>'+
+            '    </div>': '' )+
+            '    <div id="dashboard" class="row dashboard hidden" tapmode="" onclick="fnOpenWin( this )" data-name="dashboard">'+
+            '        <div class="dashboard-guide-text hidden">'+
+            '            <p>'+fnLanguageSwitch( '点击"Dashboard",即可查看您名下' )+'</p>'+
+            '            <p>'+fnLanguageSwitch( '成员的分布和项目情况,快来查看吧!' )+'</p>'+
+            '        </div>'+
+            '        <div class="row dashboard guide hidden" tapmode="" onclick="closeDashboradGuide()">'+
+            '            <div class="name">Dashboard</div>'+
+            '            <div class="arrow-right-gray"></div>'+
+            '        </div>'+
+            '        <div class="name">Dashboard</div>'+
+            '        <div class="arrow-right-gray"></div>'+
+            '    </div>'+
+            '</section>'+
+            '<section class="group">'+
+            '    <div class="row setting" tapmode="highlight" onclick="fnOpenWin( this )" data-name="setting">'+
+            '        <div class="name">'+fnLanguageSwitch( '设置' )+'</div>'+
+            '        <div class="arrow-right-gray"></div>'+
+            '    </div>'+
+            '    <div class="row about" tapmode="highlight" onclick="fnOpenWin( this )" data-name="about">'+
+            '        <div class="name">'+fnLanguageSwitch( '关于' )+'</div>'+
+            '        <div class="arrow-right-gray"></div>'+
+            '    </div>'+( USER.roleId === CONST_MAKER_PARTNER ? 
+            '    <div class="row upgrade" tapmode="highlight" onclick="fnUpgrade()">'+
+            '        <div class="name">'+fnLanguageSwitch( '升级成为企业用户' )+'</div>'+
+            '        <div class="arrow-right-gray"></div>'+
+            '    </div>' : '')+
+            '</section>'+
+            '<section class="group">'+
+            '    <div class="row service" tapmode="highlight" onclick="openService()">'+
+            '        <div class="name">'+fnLanguageSwitch( '在线客服' )+'</div>'+
+            '        <div class="arrow-right-gray"></div>'+
+            '    </div>'+
+            '</section>';
+            fnInit();
+            return;
+            if( USER.roleId === CONST_SI ){
+                $api.removeCls( $api.dom( '.Capability' ), 'hidden');
+            }
+            fnInit();//页面初始化获取当前用户信息
+            api.addEventListener({
+                name: 'refreshMyFrame'
+            }, function(ret, err){
+                location.reload();
+            });
+        };
+        var userPhoto = $api.dom('#userPhoto');
+        var loginInfo = $api.getStorage('loginInfo');
+        if( loginInfo.roleId == CONST_MAKER_PARTNER ){
+        	$api.removeCls( $api.dom('.upgrade'), 'hidden' );
+        }
+      function fnInit() {
+            fnAjax({
+                url: 'users/getFullInfo'
+            }, function( ret, err){
+                if( ret ){
+                    USER.info = ret;
+                    $api.setStorage('loginInfo', USER);
+                    $api.dom('#account').innerHTML = ret.realname ? ret.realname + '('+ret.username+')' : ret.username;
+                    $api.attr($api.dom( '#userPhoto' ), 'data-selectorid', ret.photo);
+                    getImageCache( $api.dom( '#userPhoto' ) );
+                    if( fnIsEmp( USER.dashboard ) ){
+                        $api.removeCls( $api.dom( '#dashboard' ), 'hidden'); 
+                    }
+                }else{
+                    api.toast({
+                       global: true,
+                        msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                    });
+                }
+            });
+
+            
+
+        // 这里开始重构
+        return;
+            var $messageBadge = $("#messageBadge");
+            var group = $api.byId('group'),
+                // nick = $api.byId('nick'),
+                account = $api.byId('account');
+            var usertype_map = {
+                '4': 'si',
+                '1': 'maker-partner',
+                '2': 'maker-enterprise',
+                '5': 'disti-FAE'
+            }
+            $api.addCls(group, usertype_map[loginInfo.usertype]);
+
+            // var bodyParam = {
+            //     UserID: loginInfo.userid,
+            //     BatchNo: loginInfo.batchno
+            // };
+            // var userSimpleInfo = $api.getStorage('APPGetUserSimpleInfo');
+            // if (api.connectionType == 'none') {
+            //     if (userSimpleInfo) {
+
+            //         var MessageNumber = appdatalist[0].MessageNumber;
+            //         if(MessageNumber == 0){
+            //             $messageBadge.addClass('hidden');
+            //         }else{
+            //             MessageNumber = MessageNumber > 99 ? '99+':MessageNumber;
+            //             $messageBadge.html(MessageNumber).removeClass('hidden');
+            //         }
+            //         var DashBoard = appdatalist[0].DashBoard;
+                    
+            //         if(DashBoard!=0){
+            //             $(".dashboard").css('display', 'block');
+            //         }
+            //         if (userSimpleInfo.PhotoURL) {
+
+            //             api.imageCache({
+            //                 url: host + userSimpleInfo.PhotoURL.replace('~/', ''),
+            //                 thumbnail: false
+            //             }, function(ret, err){
+            //                 // 
+            //                 if (ret && ret.status) {
+            //                     $api.css(userPhoto, 'background-image:url('+ ret.url +')');
+            //                 }
+            //                 if (err) {}
+            //             }); 
+            //         }
+            //         userSimpleInfo.RealName && $api.html(account, userSimpleInfo.RealName);
+            //         // appdatalist[0].RealName && $api.html(account, appdatalist[0].RealName);
+            //     } else {
+            //         api.toast({
+            //             msg: 'Your profile hasn\'t been obtained.',
+            //             duration: 2000,
+            //             location: 'middle'
+            //         });
+            //     }
+                
+            // } else{
+                var url = 'APPUserInfo/APPGetUserSimpleInfo.aspx';
+                ajaxRequest(url, 'get', bodyParam, function(ret, err){
+                    if(ret){
+                        var appdatalist = ret.appdatalist;
+                        if(appdatalist && appdatalist[0]){
+
+                            var MessageNumber = appdatalist[0].MessageNumber;
+                            if(MessageNumber == 0){
+                                $messageBadge.addClass('hidden');
+                            }else{
+                                MessageNumber = MessageNumber > 99 ? '99+':MessageNumber;
+                                $messageBadge.html(MessageNumber).removeClass('hidden');
+                            }
+
+                            var DashBoard = appdatalist[0].DashBoard;
+                            if(DashBoard!=0){
+                                $(".dashboard").css('display', 'block');
+                                var dashboardGuide = localStorage.getItem('dashboardGuide');
+                                if(!dashboardGuide){
+                                    openDashboradGuide();
+                                    localStorage.setItem('dashboardGuide',1);
+                                }
+                            }
+                            if (appdatalist[0].PhotoURL) {
+
+                                api.imageCache({
+                                    url: host + appdatalist[0].PhotoURL.replace('~/', ''),
+                                    thumbnail: false
+                                }, function(ret, err){
+                                    // 
+                                    if (ret && ret.status) {
+                                        $api.css(userPhoto, 'background-image:url('+ ret.url +')');
+                                    }
+                                    if (err) {}
+                                }); 
+                            }
+                    debugAlert( appdatalist )
+                            appdatalist[0].RealName && $api.html(account, appdatalist[0].RealName);
+                            // appdatalist[0].RealName && $api.html(account, appdatalist[0].RealName);
+                        }
+                        $api.setStorage('APPGetUserSimpleInfo', appdatalist[0]);
+                    }else{
+                        api.toast({
+	                       global: true,
+                            msg: err.msg
+                        });
+                    }
+                });
+            // }
+        };
+
+
+        function openMessage(){
+            var move = isHuawei();
+            var animation = {};
+            if (move) {
+                animation = {
+                    type: 'movein',
+                    subType: 'from_right'
+                }
+            }
+            api.openWin({
+                name: 'message',
+                url: 'widget://' + DIR + '/member_center/message.html',
+                bounces: false,
+                vScrollBarEnabled: false,
+                hScrollBarEnabled: false,
+                animation: animation,
+                pageParam:{
+                    from:'my'
+                }
+            });
+        }
+
+        // fnOpenWin( $api.dom( '#dashboard' ) );
+        function fnOpenWin( el ) {
+            var _name = $api.attr(el, 'data-name' );
+            fnOpen({
+                name: _name,
+                url: 'widget://' + DIR + '/member_center/' + _name + '.html'
+            });
+        };
+
+        function openMatchMaking() {
+            fnOpen({
+                name: 'matchMaking_profile_win',
+                url: 'widget://' + DIR + '/member_center/matchMaking_profile_win.html',
+            });
+        }
+
+        function openQuestion(){
+            var move = isHuawei();
+            var animation = {};
+            if (move) {
+                animation = {
+                    type: 'movein',
+                    subType: 'from_right'
+                }           
+            }
+            api.openWin({
+                name: 'questions_win',
+                url: 'widget://' + DIR + '/member_center/questions_win.html',
+                animation: animation
+            });
+        }
+
+        function openService(){
+            api.execScript({
+                name: 'index',
+                script: 'openService();'
+            });
+        }
+
+    </script>
+</html>

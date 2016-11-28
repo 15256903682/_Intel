@@ -1,0 +1,1193 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>crb-frm</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" href="../../css/common.css">
+    <style type="text/css">
+        body {
+            height: auto;
+            min-height: 100%;
+        }
+        .common-part-service {
+
+        }
+
+        .whats-this {
+            background-color: #F0F0F0;
+            padding-top: 1.5rem;
+        }
+
+        .whats-this .this-name {
+            font-size: 1.5rem;
+            line-height: 2.5rem;
+            color: #000000;
+            background: url(../../image/project/icon_crb.png) 1rem 50% no-repeat;
+            background-size: 2.5rem 2.5rem;
+            text-indent: 4rem;
+        }
+
+        .whats-this .this-description {
+            padding: 0.8rem 2.2rem 1rem 4rem;
+            font-size: 1.3rem;
+            line-height: 1.6rem;
+            color: #515458;
+            border-bottom: 0.2rem solid #C8C8C8;
+        }
+
+        .whats-this .design {
+            padding-left: 4rem;
+        }
+
+        .whats-this .text, .whats-this .designer {
+            font-size: 1.2rem;
+            line-height: 2.6rem;
+            color: #000000;
+        }
+
+        .whats-this .rank {
+
+        }
+
+        .whats-this .stars {
+            color: #999999;
+            font-size: 1.8rem;
+            vertical-align: bottom;
+            line-height: 2.6rem;
+        }
+
+        .whats-this .stars .fa-star {
+            color: #FFDA00;
+        }
+
+        .project-header {
+            padding: 0 1rem;
+            background-color: #FFFFFF;
+        }
+
+        .project-header label {
+            font-size: 1.6rem;
+            line-height: 5.5rem;
+        }
+
+        .header-inner {
+            width: 33.9rem;
+            height: 8.4rem;
+            border: 0.1rem solid #005BBC;
+            border-radius: 0.6rem;
+            position: relative;
+        }
+
+        .header-inner-img {
+            position: absolute;
+            left: 50%;
+            margin-left: -1.6rem;
+            top: -1.6rem;
+            width: 3.2rem;
+            height: 3.2rem;
+            background: #FFFFFF url(../../image/project/project_list_icon.png) center center no-repeat;
+            background-size: 1.9rem 2.2rem;
+        }
+
+        .header-inner .name {
+            font-size: 1.5rem;
+            color: #005BBC;
+            text-align: center;
+            line-height: 3rem;
+            padding-top: 1.3rem;
+            font-weight: bold;
+        }
+
+        .header-inner .date-group {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+
+        .header-inner .date-group .text, .header-inner .date-group .date {
+            font-size: 1.2rem;
+            line-height: 2.1rem;
+            color: #000000;
+            padding-left: 1rem;
+        }
+
+        .header-inner .date-counting {
+            width: 11.7rem;
+            margin: 0 auto;
+            text-align: center;
+            color: #F7AA00;
+            font-size: 1.2rem;
+        }
+
+        .header-inner .date-counting .count {
+            font-size: 2.8rem;
+            line-height: 4rem;
+        }
+
+        .header-inner .project-state {
+            position: absolute;
+            right: 0;
+            bottom: 0.6rem;
+            font-size: 1.2rem;
+            line-height: 2rem;
+            padding-right: 0.5rem;
+        }
+
+        .project-header .create-group {
+            font-size: 1.3rem;
+            line-height: 4.5rem;
+            text-align: right;
+            color: #595C60;
+        }
+
+        .project-header .create-group .btn-create {
+            background-color: #0071C5;
+            border-radius: 0.3rem;
+            width: 10.9rem;
+            height: 2.8rem;
+            color: #FFFFFF;
+            text-align: center;
+            line-height: 2.8rem;
+        }
+
+        /*大体上通用的部分 end*/
+        .propose-title {
+            height: 3.7rem;
+            line-height: 3.7rem;
+            font-size: 1.5rem;
+            background-color: #DBF0FF;
+            color: #0271C5;
+            background-image: url("../../image/project/icon_quote_right.png");
+            background-position-x: 1rem;
+            background-position-y: center;
+            background-repeat: no-repeat;
+            background-size: 2rem;
+            padding-left: 3.8rem;
+            font-weight: bold;
+        }
+        .form{
+			padding-left: 1rem;
+			background-color: #FFFFFF;
+        }
+        .form.no-padded{
+        	padding-left: 0;
+        	background-color: transparent;
+        }
+        .form .form-title{
+			height: 2.8rem;
+			line-height: 2.8rem;
+			color: #0271C5;
+			background-color: #F0F0F0;
+			font-size: 1.3rem;
+			text-indent: 1rem;
+        }
+		.form .form-group{
+			background-color: #FFFFFF;
+            border-top: 0.1rem solid #DEDEDE;
+            overflow: hidden;
+		}
+		.form.no-padded .form-group{
+			padding-left: 1rem;
+		}
+		.form .form-group label{
+			height: 3.8rem;
+			line-height: 3.8rem;
+			width: 11.5rem;
+			font-size: 1.4rem;
+			color: #000000;
+		}
+		.form .form-group .form-text-right{
+			text-align: right;
+			float: right;
+			margin-right: 2rem;
+			height: 3.8rem;
+			line-height: 3.8rem;
+			font-size: 1.4rem;
+			color: #C9C9CF;
+			width: 20rem;
+		}
+        /*.form .form-group input.form-text-right{
+            color: #333333;
+        }
+        .form .form-group input.form-text-right[disabled]{
+            color: #666666;
+        }*/
+		.form .current-board{
+			height: 3rem;
+			line-height: 3rem;
+			padding: 0 1rem;
+			font-size: 1.1rem;
+			color: #5B5E61;
+		}
+		.fake-link{
+			color: #0071C5;
+			text-decoration: underline;
+		}
+		.form .current-board .fake-link{
+			font-size: 1.1rem;
+			line-height: 3rem;
+			/*margin-left: 2.3rem;*/
+		}
+		.form .radio-group{
+			/*padding-top: 1.4rem;*/
+		}
+		.form .radio-group .radio-title{
+			/*height: 3rem;*/
+			line-height: 3rem;
+			padding: 0 1rem;
+			font-size: 1.1rem;
+			color: #5B5E61;
+		}
+
+		/*radio*/
+		.propose-select, .fileuploadLabel {
+		    padding-left: 10px;
+		    font-size: 1.6rem;
+		    position: relative;
+		}
+
+		.radioSwitch.show {
+		    background-image: url('../../image/project/promotion_circle_highlight.png');
+		}
+        .radioSwitch.yes{
+            width : 5rem;
+        }
+        .radioSwitch.no{
+            width : 5rem;
+        }
+        .radioSwitch.notYet{
+            width : 11rem;
+        }
+		.radioSwitch {
+		    width: 7.7rem;
+		    background-image: url('../../image/project/promotion_circle_normal.png');
+		    background-size: 1.5rem;
+		    background-repeat: no-repeat;
+		    background-position: left center;
+		    line-height: 4.5rem;
+		    font-size: 1rem;
+		    text-indent: 2rem;
+		}
+
+		.show.selectSwitch {
+		    background-image: url('../../image/project/MCSI_Selected2.png');
+		    background-size: 2rem 1.8rem;
+    		background-position: 0 44%;
+		}
+		.selectSwitch {
+		    background-image: url('../../image/project/MCSI_Selected1.png');
+		    background-size: 1.5rem;
+		    background-repeat: no-repeat;
+		    background-position: 0 50%;
+		    line-height: 4.5rem;
+		    font-size: 1.1rem;
+		    color: #5B5E61;
+		    text-indent: 2rem;
+		    display: inline-block;
+		}
+		.propose-select .fake-link{
+			text-decoration: none;
+			font-size: 1.1rem;
+		}
+
+		label.fake-link{
+			text-decoration: none;
+			font-size: 1.4rem;
+			line-height: 2.5rem;
+			height: 2.5rem;
+			text-indent: 1rem;
+		}
+		/*radio*/
+
+		.btn-submit{
+			width: 18rem;
+			height: 3.8rem;
+			margin: 3rem auto;
+			text-align: center;
+			color: #FFFFFF;
+			background-color: #0071C5;
+			border-radius: 0.4rem;
+			line-height: 3.8rem;
+			font-size: 1.6rem;
+		}
+		.shoping-guide{
+			color: #000000;
+			font-size: 1.1rem;
+			padding: 1rem;
+			line-height: 1.4rem;
+		}
+		p.fake-link{
+			font-size: 1.1rem;
+			padding: 0 1rem;
+			text-decoration: none;
+			line-height: 1.4rem;
+		}
+		.shoping-guide-full{
+			color: #43454A;
+			font-size: 1.1rem;
+			padding: 0 1rem;
+			line-height: 5.2rem;
+		}
+		.shoping-guide-full .fake-link{
+			font-size: 1.1rem;
+		}
+
+    </style>
+</head>
+<body>
+<div class="common-part-service">
+    <div class="whats-this">
+        <p class="this-name">
+            CRB Loan
+        </p>
+
+        <p class="this-description">
+            Intel Online Sales Group(OSG)provide the CRB sample for clients, to help client complete platform function verification and performance evaluation.
+            Because the sample is limited, so after submitting application, we will put your company into the waiting list of CRB loan.
+
+        </p>
+
+        <div class="design">
+            <span class="text">Designer：</span>
+				<span class="designer">
+					
+				</span>
+
+            <div class="rank">
+                <span class="text">Satisfaction：</span>
+					<span class="stars">
+	                    <!-- <i class="fa-star fa"></i>
+	                    <i class="fa-star fa"></i>
+	                    <i class="fa-star fa"></i>
+	                    <i class="fa-star fa"></i>
+	                    <i class="fa-star fa"></i> -->
+	                </span>
+                <span class="text"></span>
+            </div>
+        </div>
+    </div>
+    <div class="project-header">
+        <label>The project you have selected：</label>
+
+        <div class="header-inner">
+            <div class="header-inner-img"></div>
+            <p class="name"></p>
+
+            <div class="header-bottom">
+                <div class="date-group">
+                    <p class="text">Project starts at</p>
+
+                    <p class="date"></p>
+                </div>
+                <div class="date-counting">
+                    <span class="count"></span>
+                    day
+                </div>
+                <div class="project-state"></div>
+            </div>
+        </div>
+        <p class="create-group">
+            If you are not applying support for this project, please first
+            <span class="btn-create" tapmode onclick="createNewProject()">add new project</span>
+        </p>
+    </div>
+</div>
+
+<div class="propose">
+    <div class="propose-title border-1px-top border-1px-bottom">
+        Please fill in the table below
+    </div>
+    <div class="form no-padded">
+    	<p class="form-title">
+    		CRB Loan
+    	</p>
+    	<div class="form-group border-1px-top clearfix">
+    		<label class="pull-left">CRB Loan Name</label>
+    		<span class="crb-name form-text-right" tapmode onclick="getCRB(this)">---Select---</span>
+    	</div>
+    	<p class="current-board">
+    		Available CRB Loan number
+    		<span class="count">0</span>
+            <!-- <a href="" target="_blank" class="fake-link">下载说明文档>></a> -->
+    	</p>
+        <p class="current-board">
+            <span class="fake-link" tapmode onclick="downLoadDoc(this)">Download the instruction documents>></span>
+        </p>
+    	<div class="radio-group">
+    		<p class="radio-title">
+    			If this project approved, do you want to develop other products based on this platform?
+    		</p>
+    		<div class="propose-select" style="margin-left: 30px">
+		        <span class="radioSwitch show yes" tapmode="" onclick="toggleSwitch(this,'radioSwitch')">
+		            Yes
+		        </span>
+		        <span class="radioSwitch no" tapmode="" onclick="toggleSwitch(this,'radioSwitch')">
+		             NO
+		        </span>
+		        <span class="radioSwitch notYet" tapmode="" onclick="toggleSwitch(this,'radioSwitch')">
+		            Not decided yet
+		        </span>
+		    </div>
+    	</div>
+    	<div class="propose-select">
+    		<div class="selectSwitch" tapmode="" onclick="toggleSwitch(this,'selectSwitch')">
+	            I have read it and agree
+	        </div>
+	        <span class="fake-link" tapmode onclick="goBoardNotice()">
+    			CRB Loan Instructions
+    		</span>
+    	</div>
+    </div>
+	<label class="fake-link">Address Information</label>
+    <div class="form">
+		<div class="form-group clearfix">
+    		<label class="pull-left">Company Name</label>
+    		<input class="crb-company-name-zh form-text-right" type="text" placeholder="Company Name(Chinese)">
+    	</div>
+    	<div class="form-group clearfix">
+    		<label class="pull-left">Company Name</label>
+    		<input class="crb-company-name-en form-text-right" type="text" placeholder="Company Name(English)">
+    	</div>
+    	<div class="form-group clearfix">
+    		<label class="pull-left">Company Address</label>
+    		<input class="crb-company-address-zh form-text-right" type="text" placeholder="Company Address(Chinese)">
+    	</div>
+    	<div class="form-group clearfix">
+    		<label class="pull-left">Postcode</label>
+    		<input class="crb-postcode form-text-right" type="tel" placeholder="Required">
+    	</div>
+    	<div class="form-group clearfix">
+    		<label class="pull-left">Company Address</label>
+    		<input class="crb-company-address-en form-text-right" type="text" placeholder="Company Address(English)">
+    	</div>
+    	<div class="form-group clearfix">
+    		<label class="pull-left">Telephone</label>
+    		<input class="crb-company-tel form-text-right" type="tel" placeholder="Required">
+    	</div>
+    	<div class="form-group clearfix">
+    		<label class="pull-left">Company Website</label>
+    		<input class="crb-company-website form-text-right" type="text" placeholder="Required">
+    	</div>
+    </div>
+    <div class="btn-submit btn" tapmode onclick="submitCRB(this)">Submit</div>
+	<label class="fake-link">CRB Buying Guide for details</label>
+	<p class="shoping-guide">
+		Apply to purchase client reference edition, CRB and evaluation motherboard from Intel evaluation platform plan, which will provide tech support for developers in terms of the prototype design, performance evaluation and the migration application software.
+You can click the link below to view the available CRB.
+	</p>
+	<p class="fake-link" tapmode onclick="openWebPage(this)">http://www.intel.cn/content/www/cn/zh/intelligent-systems/evalution-platforms/evalution-platforms.html</p>
+	<p class="shoping-guide-full">
+		<span class="fake-link" tapmode onclick="goGuideFullVersion()">
+			CRB Buying Guide for details
+		</span>
+	</p>
+</div>
+<div id="modal_selector" tapmode="" onclick="selectCancel()">
+    <div class="select">
+        <div class="select-control">
+            <div class="select-control-cancel" tapmode="" onclick="selectCancel()">Cancel</div>
+            <div class="select-control-placeHolder"></div>
+            <div class="select-control-ok" tapmode="" onclick="selectCancel()">Done</div>
+        </div>
+        <div class="select-content">
+
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript" src="../../script/translation.js"></script>
+<script type="text/javascript">
+
+    // 以下通用
+    var account = $api.getStorage('loginInfo');
+    var pageParam = {};
+    var projectID = '';
+    var typeid = 9;
+    var UICustomPicker;
+    var zhuge;
+    apiready = function () {
+        pageParam = api.pageParam;
+        projectID = pageParam.id;
+        zhuge = api.require('zhuge');
+        if (zhuge) {
+            zhuge.initZhuge();
+        }
+        getProjectDetail();
+        getProjectDesigner();
+        getFormInfo();
+        UICustomPicker = api.require('UICustomPicker');
+    };
+
+    function getProjectDesigner(){
+        ajaxRequest('/APPSupportManage/GetSupportAppraise.aspx', 'get', {
+            UserID: account.userid,
+            BatchNo: account.batchno, 
+            SupportTypeID: typeid
+        }, function(ret, err){
+            if(ret && ret.res == undefined){
+                // console.log('ret:normal===='+ JSON.stringify(ret));
+                var data = ret.appdatalist[0];
+                $api.html($api.dom('.designer'), data.UserName);
+                
+                var len = parseInt(data.EvaluateNumber);
+                var str = '';
+                for (var i = 0; i < len; i++) {
+                    str+= '<i class="fa-star fa"></i>';
+                }
+                $api.html($api.dom('.stars'), str);
+                $api.html($api.domAll('.rank .text')[1], '('+ data.UserNum +'Person)');
+            } else{
+                console.log('ret:err===='+ JSON.stringify(ret));
+            }
+            if (err) {
+                console.log('err===='+ JSON.stringify(err));
+            }
+
+        });
+        
+    };
+
+    function getProjectDetail(){
+        ajaxRequest('/APPProjectManage/APPGetProjectDetail.aspx', 'get', {
+            UserID: account.userid,
+            BatchNo: account.batchno,
+            ProjectID: projectID
+        }, function(ret, err){
+            if(ret && ret.res == undefined){
+                var data = ret.appdatalist[0];
+                $api.html($api.dom('.project-header .header-inner .name'), data.ProjectName);
+                $api.html($api.dom('.project-header .header-inner .date'), data.CreateDate);
+                $api.html($api.dom('.project-header .header-inner .count'), data.ProjectStartDay);
+                $api.html($api.dom('.project-header .header-inner .project-state'), 'In '+ ( fnTranslation( data.ProjectStatus, true) ) +' stage');
+            } else{
+                console.log('ret:err===='+ JSON.stringify(ret));
+            }
+            if (err) {
+                console.log('err===='+ JSON.stringify(err));
+            }
+        });
+    };
+
+    function toggleSwitch(obj,clz){
+        var $selectSwitch = $api.domAll('.'+clz);
+        var reg = /radio/g;
+        if (reg.test(clz)) {
+        	for(var i=0;i<$selectSwitch.length;i++){
+	            $api.removeCls($selectSwitch[i],'show');
+	        }
+        } else {
+
+        }
+        if($api.hasCls(obj,'show')){
+            $api.removeCls(obj,'show');
+        }else{
+            $api.addCls(obj,'show');
+        }
+    };
+
+    // 下载
+    function downLoadDoc(el){
+        var url = $api.attr(el, 'data-url');
+        if (url) {
+            if (api.systemType == 'ios') {
+                var move = isHuawei();
+                var animation = {};
+                if (move) {
+                    animation = {
+                        type: 'movein',
+                        subType: 'from_right'
+                    }           
+                }
+                api.openWin({
+                    name: 'web_clause_win',
+                    url: 'widget://' + DIR + '/web_page/web_win.html',
+                    bounces: false,
+                    vScrollBarEnabled: false,
+                    hScrollBarEnabled: false,
+                    pageParam: {
+                        title: '下载说明文档',
+                        url: url
+                    },
+                    animation: animation
+                });
+            } else {
+                api.download({
+                    url: url,
+                    report: true,
+                    cache: true,
+                    allowResume: true
+                },function( ret, err ){
+                    if(ret){
+                        if (ret.state == 1) {
+                            api.hideProgress();
+                            // ret.savePath
+                            var obj = api.require('pdfReader');
+                            obj.open({
+                                path: ret.savePath
+                            });
+                        } else if(ret.state == 2){
+                            api.toast({
+	global: true,
+                                msg: JSON.stringify(ret),
+                                duration: 2000,
+                                location: 'middle'
+                            });
+                        } else{
+                            api.showProgress({
+                                title: 'Downloading…',
+                                text: ret.percent +'%',
+                                modal: true
+                            });
+                        }
+                    }
+                    if (err) {
+                        api.toast({
+	global: true,
+                            msg: err.msg,
+                            duration: 2000,
+                            location: 'msg'
+                        });
+                    }
+                });
+            }
+        } 
+    };
+    // goBoardNotice 查看CRB Loan Instructions
+    function goBoardNotice(){
+        var url = 'https://ccechina.intel.com/SupportObtainNew/%E5%BC%80%E5%8F%91%E6%9D%BF%E5%80%9F%E7%94%A8%E9%A1%BB%E7%9F%A5.pdf';
+        if (url) {
+            if (api.systemType == 'ios') {
+                var move = isHuawei();
+                var animation = {};
+                if (move) {
+                    animation = {
+                        type: 'movein',
+                        subType: 'from_right'
+                    }           
+                }
+                api.openWin({
+                    name: 'web_clause_win',
+                    url: 'widget://' + DIR + '/web_page/web_win.html',
+                    bounces: false,
+                    vScrollBarEnabled: false,
+                    hScrollBarEnabled: false,
+                    pageParam: {
+                        title: 'CRB Loan Instructions',
+                        url: url
+                    },
+                    animation: animation
+                });
+            } else {
+                api.download({
+                    url: url,
+                    report: true,
+                    cache: true,
+                    allowResume: true
+                },function( ret, err ){
+                    if(ret){
+                        if (ret.state == 1) {
+                            api.hideProgress();
+                            // ret.savePath
+                            var obj = api.require('pdfReader');
+                            obj.open({
+                                path: ret.savePath
+                            });
+                        } else if(ret.state == 2){
+                            api.toast({
+	global: true,
+                                msg: JSON.stringify(ret),
+                                duration: 2000,
+                                location: 'middle'
+                            });
+                        } else{
+                            api.showProgress({
+                                title: 'Downloading…',
+                                text: ret.percent +'%',
+                                modal: true
+                            });
+                        }
+                    }
+                    if (err) {
+                        api.toast({
+	global: true,
+                            msg: err.msg,
+                            duration: 2000,
+                            location: 'msg'
+                        });
+                    }
+                });
+            }
+        }
+
+    };
+
+    // 获取开发板借测名称
+    
+    /*开发板借测ID DeveBordID
+    开发板借测名称 DevelopBordName
+    Residual quantity    StockQty
+    Download address  DeveBordUpload
+    */
+    function getCRB(el){
+        var data = $api.getStorage('APPGetDeveBordList');
+        if (api.connectionType == 'none') {
+            if (data) {
+                openSelector(el, data);
+            } else {
+                api.toast({
+	global: true,
+                    msg: 'The information hasn\'t been obtained.',
+                    duration: 2000,
+                    location: 'middle'
+                });
+            }
+            
+        } else{
+            ajaxRequest('/APPGetDataType/APPGetDeveBordList.aspx', 'get', {
+                UserID: account.userid,
+                BatchNo: account.batchno
+            }, function(ret, err){
+                if (ret && ret.res == undefined) {
+                // console.log('ret:normal===='+ JSON.stringify(ret));
+                    var data = ret.appdatalist;
+                    
+                    var scope = [];
+                    var dataJson = {};
+                    for (var i = 0; i < data.length; i++) {
+                        scope.push({
+                            value: fnTranslation( data[i].DevelopBordName, true ),
+                            id: data[i].DeveBordID,
+                            url: data[i].DeveBordUpload,
+                            stock: data[i].StockQty
+                        });
+                    }
+                    $api.setStorage('APPGetDeveBordList', scope);
+                    openSelector(el, scope);
+                } else {
+                    api.toast({
+	global: true,
+                        msg: JSON.stringify(ret),
+                        duration: 2000,
+                        location: 'middle'
+                    });
+                }
+                if (err) {
+                    api.toast({
+	global: true,
+                        msg: JSON.stringify(err),
+                        duration: 2000,
+                        location: 'bottom'
+                    });
+                }
+            });
+        }
+
+            
+    };
+
+    function getFormInfo(){
+        ajaxRequest('/APPSupportManage/APPGetSupportUserInfo.aspx', 'get', {
+            UserID: account.userid,
+            BatchNo: account.batchno
+        }, function(ret, err){
+            if (ret && ret.res == undefined) {
+                // console.log('ret:normal===='+ JSON.stringify(ret));
+                var data = ret.appdatalist[0];
+                data.CompanyFullName && $api.val($api.dom('.crb-company-name-zh'), data.CompanyFullName);
+                data.CompanyEnglish && $api.val($api.dom('.crb-company-name-en'), data.CompanyEnglish);
+                data.CompanyAddressChinese && $api.val($api.dom('.crb-company-address-zh'), data.CompanyAddressChinese);
+                data.CompanyAddressEnglish && $api.val($api.dom('.crb-company-address-en'), data.CompanyAddressEnglish);
+                data.OfficePhone && $api.val($api.dom('.crb-company-tel'), data.OfficePhone);
+                data.PostalCode && $api.val($api.dom('.crb-postcode'), data.PostalCode);
+                data.CompanyWebSite && $api.val($api.dom('.crb-company-website'), data.CompanyWebSite);
+                // data.CompanyFullName;
+                // data.CompanyEnglish;
+                // data.CompanyFullNameNew;
+                // data.CompanyAddressChinese;
+                // data.CompanyAddressEnglish;
+                // data.CNDA;
+                // data.CompanyFullNameNew;
+                // data.CompanyWebSite;
+                // data.OfficePhone;
+                // data.PostalCode;
+                // data.UserId;
+            } else {
+                api.toast({
+	global: true,
+                    msg: JSON.stringify(ret),
+                    duration: 2000,
+                    location: 'middle'
+                });
+            }
+            if (err) {
+                api.toast({
+	global: true,
+                    msg: JSON.stringify(err),
+                    duration: 2000,
+                    location: 'bottom'
+                });
+            }
+        });
+    };
+
+
+
+    // 提交CRB
+    var submitLock = false;
+    function isEmepty(str){
+        if (str == undefined || str == null) {
+            return true;
+        } else {}
+        if ($api.trim(str) == '' || $api.trim(str) == '---Select---') {
+            return true;
+        } else {
+            return false;
+        }
+    };
+    function submitCRB(el){
+        // codes there
+        
+        var DeveBordID = $api.attr($api.dom('.crb-name'), 'data-selectorid');
+        if(isEmepty(DeveBordID)){
+            api.alert({
+                title: 'Notice', 
+                msg: 'Please select the name of CRB',
+                buttons: ['OK']
+                
+            });
+            return false;
+        }
+        var IfConsider = $api.trim($api.text($api.dom('.radioSwitch.show')));
+        if($api.domAll('.selectSwitch.show').length){
+
+        } else{
+            api.alert({
+                title: 'Notice', 
+                msg: 'You need to agree to the CRB Loan Instructions before submission',
+                buttons: ['OK']
+
+            });
+            return false;
+        }
+
+        var CompanyName = $api.val($api.dom('.crb-company-name-zh'));
+        if(isEmepty(CompanyName)){
+            api.alert({
+                title: 'Notice', 
+                msg: 'Please fill in the company name in Chinese',
+                buttons: ['OK']
+
+            });
+            return false;
+        }
+        var CompanyEnglishName = $api.val($api.dom('.crb-company-name-en'));
+        if(isEmepty(CompanyEnglishName)){
+            api.alert({
+                title: 'Notice', 
+                msg: 'Please fill in the company name in English',
+                buttons: ['OK']
+
+            });
+            return false;
+        }
+        var CompanyAddress = $api.val($api.dom('.crb-company-address-zh'));
+        if(isEmepty(CompanyAddress)){
+            api.alert({
+                title: 'Notice', 
+                msg: 'Please fill in the company address in Chinese',
+                buttons: ['OK']
+
+            });
+            return false;
+        }
+        var CompanyEnglishAddress = $api.val($api.dom('.crb-company-address-en'));
+        if(isEmepty(CompanyEnglishAddress)){
+            api.alert({
+                title: 'Notice', 
+                msg: 'Please fill in the company address in English',
+                buttons: ['OK']
+
+            });
+            return false;
+        }
+        var PostCode = $api.val($api.dom('.crb-postcode'));
+        if(isEmepty(PostCode)){
+            api.alert({
+                title: 'Notice', 
+                msg: 'Please fill in the postcode',
+                buttons: ['OK']
+
+            });
+            return false;
+        }
+        var OfficePhone = $api.val($api.dom('.crb-company-tel'));
+        if(isEmepty(OfficePhone)){
+            api.alert({
+                title: 'Notice', 
+                msg: 'Please fill in the fixed phone',
+                buttons: ['OK']
+
+            });
+            return false;
+        }
+        var CompanyWeb = $api.val($api.dom('.crb-company-website'));
+        if(isEmepty(CompanyWeb)){
+            api.alert({
+                title: 'Notice', 
+                msg: 'Please fill in the company website',
+                buttons: ['OK']
+                
+            });
+            return false;
+        }
+
+        if (submitLock) {
+            return false;
+        } else {
+            submitLock = true;
+            $api.attr(el, 'disabled', 'disabled');
+        }
+        if (zhuge) {
+            zhuge.track({
+                eventName: '项目支持_技术支持提交按钮',
+                eventPro: {
+                    '模块来源': '开发板借测'
+                }
+            });
+        }
+        ajaxRequest('/APPSupportManage/APPSupportPlatformBuy.aspx', 'post', {
+            UserID: account.userid,
+            BatchNo: account.batchno,
+            ItemNameID: projectID,
+            DeveBordID: DeveBordID,
+            IfConsider: IfConsider,
+            CompanyName: CompanyName,
+            CompanyEnglishName: CompanyEnglishName,
+            CompanyAddress: CompanyAddress,
+            CompanyEnglishAddress: CompanyEnglishAddress,
+            PostCode: PostCode,
+            OfficePhone: OfficePhone,
+            CompanyWeb: CompanyWeb,
+        }, function(ret, err){
+            submitLock = false;
+            $api.removeAttr(el, 'disabled');
+            if(ret && ret.res){
+                // console.log('ret:normal===='+ JSON.stringify(ret));
+                api.toast({
+	global: true,
+                    msg: 'CRB Loan has been submitted successfully.',
+                    duration: 2000,
+                    location: 'middle'
+                });
+                setTimeout(function(){
+                    api.closeWin();
+                },2000);
+            } else{
+                api.toast({
+	global: true,
+                    msg: JSON.stringify(ret),
+                    duration: 2000,
+                    location: 'middle'
+                });
+            }
+            if (err) {
+                api.toast({
+	global: true,
+                    msg: JSON.stringify(err),
+                    duration: 2000,
+                    location: 'middle'
+                });
+            }
+        });
+    };
+
+    // CRB Buying Guide for details
+    function goGuideFullVersion(){
+        var url = 'https://ccechina.intel.com/SupportObtain/FAQ.pdf';
+        if (url) {
+            if (api.systemType == 'ios') {
+                var move = isHuawei();
+                var animation = {};
+                if (move) {
+                    animation = {
+                        type: 'movein',
+                        subType: 'from_right'
+                    }           
+                }
+                api.openWin({
+                    name: 'web_clause_win',
+                    url: 'widget://' + DIR + '/web_page/web_win.html',
+                    bounces: false,
+                    vScrollBarEnabled: false,
+                    hScrollBarEnabled: false,
+                    pageParam: {
+                        title: 'CRB Buying Guide for details',
+                        url: url
+                    },
+                    animation: animation
+                });
+            } else {
+                api.download({
+                    url: url,
+                    report: true,
+                    cache: true,
+                    allowResume: true
+                },function( ret, err ){
+                    if(ret){
+                        if (ret.state == 1) {
+                            api.hideProgress();
+                            // ret.savePath
+                            var obj = api.require('pdfReader');
+                            obj.open({
+                                path: ret.savePath
+                            });
+                        } else if(ret.state == 2){
+                            api.toast({
+	global: true,
+                                msg: JSON.stringify(ret),
+                                duration: 2000,
+                                location: 'middle'
+                            });
+                        } else{
+                            api.showProgress({
+                                title: 'Downloading…',
+                                text: ret.percent +'%',
+                                modal: true
+                            });
+                        }
+                    }
+                    if (err) {
+                        api.toast({
+	global: true,
+                            msg: err.msg,
+                            duration: 2000,
+                            location: 'msg'
+                        });
+                    }
+                });
+            }
+        }
+    };
+
+    // 打开网页
+    function openWebPage(el){
+        var move = isHuawei();
+        var animation = {};
+        if (move) {
+            animation = {
+                type: 'movein',
+                subType: 'from_right'
+            }            
+        }
+        var url = $api.trim($api.html(el));
+        api.openWin({
+            name: 'web_win',
+            url: 'widget://' + DIR + '/web_page/web_win.html',
+            bounces: false,
+            pageParam: {
+                title: 'CRB',
+                url: url
+            },
+            animation: animation
+        });
+    };
+
+    // 调用selector
+    var UICustomPickerElement,
+        UICustomPickerId,
+        selectorValue,
+        selectorId,
+        selectorUrl,
+        selectorQty,
+        blurInput = $api.domAll('input'),
+        blurText = $api.domAll('textarea');
+
+    function openSelector(el, data){
+        for (var i = 0; i < blurInput.length; i++) {
+            blurInput[i].blur();
+        }
+        for (var j = 0; j < blurText.length; j++) {
+            blurText[j].blur();
+        }
+        var scope = data;
+        UICustomPickerElement = el;
+        $api.addCls($api.dom('body'), 'selector-modal-show');
+        var UICustomPickerContentOffset = $api.offset($api.dom('.select-content'));
+
+        UICustomPicker.open({
+            rect: {
+                x: 0,
+                y: api.frameHeight - UICustomPickerContentOffset.h,
+                h: UICustomPickerContentOffset.h
+            },
+            styles: {
+                bg: 'rgba(0,0,0,0)',
+                normalColor: '#959595',
+                selectedColor: '#3685dd',
+                selectedSize: 30,
+                tagColor: '#3685dd',
+                tagSize: 10
+            },
+            data: [{
+                scope: scope
+            }],
+            autoHide: false,
+            rows: 5,
+            fixedOn: api.frameName,
+            fixed: true
+        }, function( ret, err ){
+            UICustomPickerId = ret.id;
+            if(ret){
+                // console.log( JSON.stringify( ret ) );
+                if(ret.eventType=='show'){
+                    selectorValue = scope[0].value;
+                    selectorId = scope[0].id;
+                    selectorUrl = scope[0].url;
+                    selectorQty = scope[0].stock;
+                }else{
+                    selectorValue = ret.data[0].value;
+                    selectorId = ret.data[0].id;
+                    selectorUrl = ret.data[0].url;
+                    selectorQty = ret.data[0].stock;
+                }
+                //     $api.html(el, ret.data[0]);
+                //     $api.attr(el, 'data-id', dataJson[ret.data[0]].id);
+                //     $api.text($api.dom('.current-board .count'), dataJson[ret.data[0]].stock);
+                //     $api.attr($api.dom('.current-board .fake-link'), 'data-url', dataJson[ret.data[0]].url);
+                selectOK();
+            }
+        });
+    };
+    function selectCancel() {
+        UICustomPicker.close({
+            id: UICustomPickerId
+        });
+        $api.removeCls($api.dom('body'), 'selector-modal-show');
+        if( event ){event.cancelBubble = true;}
+        return false;
+    };
+
+    function selectOK() {
+        if (UICustomPickerElement.tagName.toLowerCase() == 'input') {
+            $api.val(UICustomPickerElement, selectorValue);
+            $api.attr(UICustomPickerElement, 'data-selectorid', selectorId);
+        } else {
+            $api.html(UICustomPickerElement, selectorValue);
+            $api.attr(UICustomPickerElement, 'data-selectorid', selectorId);
+        }
+        $api.text($api.dom('.current-board .count'), selectorQty);
+        $api.attr($api.dom('.current-board .fake-link'), 'data-url', host +selectorUrl.replace('~/', ''));
+        $api.attr($api.dom('.current-board .fake-link'), 'href', host +selectorUrl.replace('~/', ''));
+        // if( event ){event.cancelBubble = true;}
+        return false;
+        
+    };
+</script>
+</html>

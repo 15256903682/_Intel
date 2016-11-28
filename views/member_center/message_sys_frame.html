@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>my</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/common.css"/>
+    <style>
+        html {
+            height: 100%;
+        }
+
+        body {
+            width: 100%;
+            height: auto;
+            min-height: 100%;
+            background-color: #f0eff7;
+        }
+
+        .list {
+            position: relative;
+            width: 100%;
+            height: auto;
+            overflow: hidden;
+        }
+
+        .si .message-maker {
+            display: none;
+        }
+
+        .maker .message-si {
+            display: none;
+        }
+
+        .list .message {
+            position: relative;
+            box-sizing: border-box;
+            padding-left: 16px;
+            padding-right: 16px;
+            margin-top: 8px;
+            margin-bottom: 8px;
+            width: 100%;
+            height: auto;
+            background-color: #fff;
+        }
+
+        .list .message .icon {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            width: 35px;
+            height: 35px;
+            background-image: url(../../image/membercenter/message-normal.png);
+            background-repeat: no-repeat;
+            background-size: 35px 35px;
+            background-position: center center;
+        }
+
+        .list .message .icon-unread {
+            background-image: url(../../image/membercenter/message-unread.png);
+        }
+
+        .list .message .info {
+            position: relative;
+            box-sizing: border-box;
+            padding-left: 43px;
+            height: auto;
+        }
+
+        .list .message .info .title {
+            position: relative;
+            box-sizing: border-box;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            width: 100%;
+            height: auto;
+            font-size: 16px;
+            color: #000;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        .list .message .info .sub-title {
+            position: relative;
+            width: 100%;
+            height: auto;
+            min-height: 16px;
+            font-size: 14px;
+            line-height: 16px;
+            color: #888;
+            text-align: left;
+        }
+        .list .message .info .sub-title.info-read{
+            color: #B5B8BB;
+        }
+
+        .list .message .time {
+            position: relative;
+            width: 100%;
+            height: 20px;
+            color: #888;
+            font-size: 12px;
+            text-align: right;
+            line-height: 20px;
+        }
+
+        .highlight {
+            opacity: 0.7;
+        }
+    </style>
+</head>
+
+<body>
+<section id="list" class="list">
+    <!-- <div class="message">
+         <div class="icon icon-unread"></div>
+         <div class="info">
+             <div class="title">硬享公社APP活动</div>
+             <div class="sub-title">亲，感您参与英特尔硬享公社APP，新年送大礼活动！10元手机充值卷已送入您的注册手机，感谢您对我们的支持！【英特尔硬享公社】</div>
+         </div>
+         <div class="time">13:42</div>
+     </div> -->
+</section>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript">
+    var loginInfo = $api.getStorage('loginInfo');
+    var loading = false;
+    var loadEnd = false;
+    var zhuge;
+    var vGlobalParam = {};
+    var from;
+    apiready = function () {
+        api.setRefreshHeaderInfo({
+            loadingImg: 'widget://image/common/blueArrow@2x.png',
+            textDown: fnLanguageSwitch( '下拉刷新' ),
+            textUp: fnLanguageSwitch( '松手加载' ),
+            textLoading: fnLanguageSwitch( '刷新中' ),
+            showTime: false,
+            bgColor: '#FFF',
+            textColor: '#000'
+        }, function(ret, err){
+            SKIP = 0;
+            getMessages();
+        });
+        api.refreshHeaderLoading();
+
+        api.addEventListener({
+            name:'scrolltobottom',
+            extra:{
+                threshold: 50
+            }
+        }, function(ret, err){
+            getMessages();
+        });
+        return;
+        from = api.pageParam.from;
+        zhuge = api.require('zhuge');
+        if (zhuge) {
+            zhuge.initZhuge();
+        }
+        api.setRefreshHeaderInfo({
+            visible: true,
+            loadingImg: 'widget://image/common/blueArrow@2x.png',
+            bgColor: '#FFF',
+            textColor: '#000000',
+            textDown: 'Pull-down for refresh',
+            textUp: 'Release for loading',
+            textLoading : 'Refresh',
+            showTime: false
+        }, function (ret, err) {
+            //Pull-down for refresh的时候 把当前页码重置成1
+            loadEnd = false;
+            loading = false;
+            currentIndex = 1;
+            getMessages();
+        });
+        //进入页面就开始下啦刷新
+        api.refreshHeaderLoading();
+        //监听到底部加载
+        api.addEventListener({
+            name: 'scrolltobottom',
+            extra: {
+                threshold: 0
+            }
+        }, function (ret, err) {
+            var $listView = $("#list");
+            if (!loadEnd && !loading) {
+                currentIndex++;
+                loading = true;
+                var loadingHtml = '<div class="ui-loading-wrap"><p>Loading</p><i class="ui-loading"></i></div>';
+                $listView.append(loadingHtml);
+                //传入'scrolltobottom' 这个动作 是要和Pull-down for refresh的操作区别开
+                getMessages('scrolltobottom');
+            }
+        });
+    };
+    var currentIndex = 1;
+    var perNum = 10;
+    function getMessages(action) {
+//  	获取系统消息
+        fnAjax({
+            url: 'messages/getList',
+            data: {
+                values: {
+                    isSystem: true,
+                    limit: LIMIT,
+                    skip: SKIP
+                }
+            }
+        }, function( ret, err){
+            api.refreshHeaderLoadDone();
+            if( ret ){
+                if( ret.data.length ){
+                    if( ! SKIP )$api.dom( 'section' ).innerHTML = '';
+                    SKIP += LIMIT;
+                    for( var x in ret.data ){
+                        vGlobalParam[ ret.data[x].id ] = ret.data[x];
+                        $api.append($api.dom( 'section' ), 
+                        '<div class="message" onclick="fnOpenMessage( this )" data-id="'+ret.data[x].id+'">'+
+                        '   <div class="icon '+( ret.data[x].isRead ? '' : 'icon-unread')+'"></div>'+
+                        '     <div class="info">'+
+                        '         <div class="title">'+ret.data[x].messageTypeId+ret.data[x].title+'</div>'+
+                        '         <div class="sub-title">'+ret.data[x].content+'</div>'+
+                        '     </div>'+
+                        '     <div class="time">'+new Date( ret.data[x].created ).Format( 'yyyy/MM/dd hh:mm' )+'</div>'+
+                        ' </div>'); 
+                    }
+                }else{
+                    if( ! SKIP ){
+                        $api.dom( 'section' ).innerHTML = '<div class="empty">'+fnLanguageSwitch( '暂无消息' )+'</div>'   
+                    }
+                }
+            }else{
+                api.toast({
+	                global: true,
+                    msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                });
+            }
+        })
+
+        // 这里开始重构
+        return;
+        var getMessagesData = $api.getStorage('messageList_'+currentIndex);
+        if(api.connectionType=='none'){
+            if(getMessagesData){
+                renderMessageList(getMessagesData,action);
+            }else{
+                loadEnd = true;
+                loading = false;
+                $(".ui-loading-wrap").remove();
+            }
+            api.refreshHeaderLoadDone();
+        }else{
+            var bodyParam = {
+                UserID: loginInfo.userid,
+                BatchNo: loginInfo.batchno,
+                CurrentPage: currentIndex,
+                LineQTY: perNum,
+                MessageType: 1
+            };
+            //todo 安卓有点问题 暂时去掉
+           /* api.showProgress({
+                title: 'loading...',
+                text: '',
+                modal: false
+            });*/
+            var url = 'APPMessage/APPGetMessageInfo.aspx';
+            ajaxRequest(url, 'get', bodyParam, function (ret, err) {
+                //todo 安卓有点问题 暂时去掉
+               // api.hideProgress();
+                api.refreshHeaderLoadDone();
+                if (ret) {
+                    if (ret.res == 0) {
+                        api.toast({
+	                     global: true,
+                            msg: ret.des
+                        });
+                    } else {
+                        $api.setStorage('messageList_'+currentIndex,ret);
+                        renderMessageList(ret,action);
+                    }
+                } else {
+                    if (action) {
+                        loading = false;
+                        $(".ui-loading-wrap").remove();
+                    }
+                    api.toast({
+	              global: true,
+                        msg: err.msg
+                    });
+                }
+            });
+        }
+    }
+
+
+    function fnOpenMessage( el ){
+        var _data = vGlobalParam[ $api.attr(el, 'data-id' ) ];
+        debugAlert(_data)
+        fnAjax({
+            url: 'messages/setRead',
+            data: {
+                values: {
+                    ids: [_data.id]
+                }
+            }
+        }, function( ret, err ){
+            if( ret ){
+                api.execScript({
+                    name: 'root',
+                    script: 'fnJumpNote('+JSON.stringify( _data )+');'
+                });
+                api.refreshHeaderLoading();
+            }else{
+                api.toast({
+                    msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                });
+            }
+        });
+    }
+
+    function renderMessageList(ret,action){
+        var SysMessageCount = ret.SysMessageCount;
+        var PerSonalMessageCoun = ret.PerSonalMessageCoun;
+        api.execScript({
+            name: 'message',
+            script: 'setMessageBadge(' + SysMessageCount + ',' + PerSonalMessageCoun + ')'
+        });
+        var appdatalist = ret.appdatalist;
+        if(appdatalist.length>0){
+            var msgHtml = '';
+            for (var i = 0; i < appdatalist.length; i++) {
+                var appdata = appdatalist[i];
+                var MessageID = appdata.MessageID;
+                var MessageCon = appdata.MessageCon;
+                var SendUserID = appdata.SendUserID;
+                var SendRealName = appdata.SendRealName;
+                var SendPhotoURL = host + appdata.SendPhotoURL.split('~')[1];
+                var ReceiveUserID = appdata.ReceiveUserID;
+                var ReceRealName = appdata.ReceRealName;
+                var RecePhotoURL = host + appdata.RecePhotoURL.split('~')[1];
+                var Active = appdata.Active;
+                var iconClass = Active == 0 ? 'icon-unread' : '';
+                var infoClass = Active == 1 ? 'info-read' : '';
+                var MessageTypeID = appdata.MessageTypeID;
+                var Title = appdata.Title;
+                var Tips = appdata.Tips;
+                var CreateDate = appdata.CreateDate;
+                var MessageNumber = appdata.MessageNumber;
+                var demandID = appdata.demandID;
+                msgHtml += '<div tapmode="" data-demandid="' + demandID + '" data-msgid="'+MessageID+'" data-msgtypeid="'+MessageTypeID+'" class="message message-maker" data-date="' + CreateDate + '" data-title="' + Title + '"><div class="icon ' + iconClass + '"></div><div class="info"><div class="title">' + Title + '</div><div class="sub-title '+infoClass+'">' + MessageCon + '</div></div><div class="time">' + CreateDate + '</div></div>';
+            }
+            //如果是触底加载
+            if (action) {
+                loading = false;
+                $("#list").append(msgHtml);
+                $(".ui-loading-wrap").remove();
+            } else {
+                var move = isHuawei();
+                var animation = {};
+                if (move) {
+                    animation = {
+                        type: 'movein',
+                        subType: 'from_right'
+                    }          
+                }
+                $("#list").html(msgHtml).off().on('tap', '.message', function () {
+                    var demandID = $(this).data('demandid');
+                    var MessageTypeID = $(this).data('msgtypeid');
+                    var MessageID = $(this).data('msgid');
+                    var date = $(this).data('date');
+                    var title = $(this).data('title');
+                    APPUpdateSysMessage(MessageID);
+
+                    if (loginInfo.usertype == CONST_SI) {
+                        if (MessageTypeID == 4) {
+                            openChainDetailForSI(MessageTypeID, demandID, title, date, animation, action);
+                        } else {
+                            api.execScript({
+                                name: 'index',
+                                script: 'changeChainFromMsg(\''+from+'\')'
+                            });
+                            api.openWin({
+                                name: 'index',
+                                url: 'widget://' + DIR + '/index.html',
+                                bounces: false,
+                                slidBackEnabled: false,
+                                animation: animation
+                            });
+                        }
+                    } else {
+                        if(MessageTypeID==1||MessageTypeID==3||MessageTypeID==4||MessageTypeID==5||MessageTypeID==16||MessageTypeID==17||MessageTypeID==18){
+                            //todo 需求详情页
+                            openChainDetail(demandID,title,date,animation,action);
+                        }else if(MessageTypeID==7||MessageTypeID==8||MessageTypeID==9){
+                            //todo 项目页面
+                            openSupport(animation,0);
+                        }else if(MessageTypeID==10||MessageTypeID==11){
+                            //todo 历史技术支持页面
+                            openSupport(animation,1);
+                        }else if(MessageTypeID==15){
+                            openChain(animation);
+                        }
+                    }
+                });
+            }
+        }else{
+            loadEnd = true;
+            loading = false;
+            $(".ui-loading-wrap").remove();
+        }
+    }
+
+    //项目支持
+    function openSupport(animation,supportId){
+        api.execScript({
+            name: 'index',
+            script: 'changeSupportFromMsg(\''+from+'\','+supportId+')'
+        });
+        api.openWin({
+            name: 'index',
+            url: 'widget://' + DIR + '/index.html',
+            bounces: false,
+            slidBackEnabled: false,
+            animation: animation
+        });
+    }
+
+
+    // 需求详情 - SI
+    function openChainDetailForSI(MessageTypeID, demandID, title, date, animation, action){
+        if( demandID == "0" ){
+
+            api.alert({
+                title: 'Tips', 
+                msg: 'The current message could not be opened',
+                buttons: ['OK']
+
+            });
+
+            
+        }
+
+        if (zhuge && action == undefined) {
+            zhuge.track({
+                eventName: '我的_我的消息-消息详情',
+                eventPro: {
+                    '名称': title,
+                    '时间': date
+                }
+            });
+        }
+return;
+        api.openWin({
+            name: 'simple_win',
+            url: 'widget://' + DIR + '/simple_page/simple_win.html',
+            bounces: false,
+            pageParam: {
+                name: 'comand_detail_si',
+                title: 'Requirements details',
+                bounces: true,
+                DemandStatusId: demandID,
+                DemandStatus: MessageTypeID,
+                CheckStatus: "",
+                ReceiveStatus: "",
+                ProjectApp: "",
+                $demand_handle: "",
+                fromPage : "message_sys_frame"
+            },
+            animation: animation
+        });
+        
+    }
+
+    //产业链页面
+    function openChain(animation){
+        api.execScript({
+            name: 'index',
+            script: 'changeChainFromMsg(\''+from+'\')'
+        });
+        api.openWin({
+            name: 'index',
+            url: 'widget://' + DIR + '/index.html',
+            bounces: false,
+            slidBackEnabled: false,
+            animation: animation
+        });
+    }
+
+    function openChainDetail(demandID,title,date,animation,action){
+        if (demandID == 0) {
+            openSupport(animation);
+        } else {
+            if (zhuge && action == undefined) {
+                zhuge.track({
+                    eventName: '我的_我的消息-消息详情',
+                    eventPro: {
+                        '名称': title,
+                        '时间': date
+                    }
+                });
+            }
+            api.openWin({
+                name: 'message_detail_win',
+                url: 'widget://' + DIR + '/simple_page/simple_win.html',
+                bounces: false,
+                pageParam: {
+                    name: 'comand_detail',
+                    title: '需求详情',
+                    bounces: true,
+                    DemandID: demandID,
+                    from:'message'
+                },
+                animation: animation
+            });
+        }
+    }
+
+    //更新消息状态
+    function APPUpdateSysMessage(MessageID){
+        var url = 'APPMessage/APPUpdateSysMessage.aspx';
+        var bodyParam = {
+            UserID: loginInfo.userid,
+            BatchNo: loginInfo.batchno,
+            MachineNo:'',
+            OpenAddress:'',
+            MessageID:MessageID
+        };
+        ajaxRequest(url,'get',bodyParam,function(ret,err){
+            if(ret){
+                api.execScript({
+                    name:'index',
+                    frameName: 'frm_my',
+                    script: 'fnInit() '
+                });
+            }else{
+                api.toast({
+	          global: true,
+                    msg: err.msg
+                });
+            }
+        })
+    }
+</script>
+
+</html>

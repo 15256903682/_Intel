@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>simple-page</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/fonts_awesome/font-awesome.min.css">
+    <style type="text/css">
+        html, body{
+            background: none;
+        }
+        #main{
+            position: relative;
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+        .outer{
+            width: 26rem;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            -webkit-transform: translate(-50%, -50%);
+                    transform: translate(-50%, -50%);
+            background-color: #DCEBF7;
+            border: 1px solid #929292;
+            border-radius: 0.4rem;
+        }
+        .content{
+            font-size: 1.4rem;
+            line-height: 2.9rem;
+            padding: 0 1.4rem;
+            text-indent: 2.8rem;
+            color: #646464;
+        }
+        .content:first-child{
+            padding-top: 2rem;
+        }
+        .btn{
+            margin-top: 2rem;
+            border-top: 1px solid #929292;
+            font-size: 1.4rem;
+            height: 4.4rem;
+            line-height: 4.4rem;
+            text-align: center;
+            color: #005BBC;
+            border-bottom-left-radius: 0.4rem;
+            border-bottom-right-radius: 0.4rem;
+        }
+        .btn:active{
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <div id="main"><!-- 
+            <div class="outer">
+                <p class="content">
+                    如果有合作伙伴对您的需求有初步合作意向后，您即可以在“我的需求”详细页面看到他们的详细信息。
+                <p class="content">
+                    随后请抓紧联系他们，然后告知我们，是选择合作还是不合作。
+                </p>
+                <p class="content">
+                    如果三周之内您没有和任一合作伙伴展开合作同时没有对所有的合作伙伴信息进行处理，您的需求就会被关闭。
+                </p>
+                <div class="btn" tapmode onclick="closeFrame()">知道了</div>
+            </div>   -->        
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript">
+
+    apiready = function(){
+        var pageParam = api.pageParam;
+        $api.dom( '#main' ).innerHTML =
+        '<div class="outer">'+
+        '    <p class="content">'+fnLanguageSwitch( '如果有合作伙伴对您的需求有初步合作意向后，您即可以在“我的需求”详细页面看到他们的详细信息。' )+'</p>'+
+        '    <p class="content">'+fnLanguageSwitch( '随后请抓紧联系他们，然后告知我们，是选择合作还是不合作。' )+'</p>'+
+        '    <p class="content">'+fnLanguageSwitch( '如果三周之内您没有和任一合作伙伴展开合作同时没有对所有的合作伙伴信息进行处理，您的需求就会被关闭。' )+'</p>'+
+        '    <div class="btn" tapmode onclick="closeFrame()">'+fnLanguageSwitch( '我知道了' )+'</div>'+
+        '</div>';
+    };
+
+    // 关闭页面 || 隐藏页面
+    function closeFrame(){
+        api.setFrameAttr({
+            name: api.frameName,
+            hidden: true
+        });
+    };
+</script>
+</html>

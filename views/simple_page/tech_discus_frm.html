@@ -1,0 +1,615 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>咨询方案讨论</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" href="../../css/common.css">
+    <!-- <link rel="stylesheet" href="../../css/fonts_awesome/font-awesome.min.css"> -->
+    <style type="text/css">
+        body {
+            height: auto;
+            min-height: 100%;
+        }
+        /*大体上通用的部分 start*/
+        .common-part-service {
+
+        }
+
+        .whats-this {
+            background-color: #F0F0F0;
+            padding-top: 1.5rem;
+        }
+
+        .whats-this .this-name {
+            font-size: 1.5rem;
+            line-height: 2.5rem;
+            color: #000000;
+            background: url(../../image/project/icon_discus.png) 1rem 50% no-repeat;
+            background-size: 2.5rem 2.5rem;
+            text-indent: 4rem;
+        }
+
+        .whats-this .this-description {
+            padding: 0.8rem 2.2rem 1rem 4rem;
+            font-size: 1.3rem;
+            line-height: 1.6rem;
+            color: #515458;
+            border-bottom: 0.2rem solid #C8C8C8;
+        }
+
+        .whats-this .design {
+            padding-left: 4rem;
+        }
+
+        .whats-this .text, .whats-this .designer {
+            font-size: 1.2rem;
+            line-height: 2.6rem;
+            color: #000000;
+        }
+
+        .whats-this .rank {
+
+        }
+
+        .whats-this .stars {
+            color: #999999;
+            font-size: 1.8rem;
+            vertical-align: bottom;
+            line-height: 2.6rem;
+        }
+
+        .whats-this .stars .fa-star {
+            color: #FFDA00;
+        }
+
+        /*已选择的项目*/
+        .project-header {
+            padding: 0 1rem;
+            background-color: #FFFFFF;
+        }
+
+        .project-header label {
+            font-size: 1.6rem;
+            line-height: 5.5rem;
+        }
+
+        .header-inner {
+            width: 33.9rem;
+            height: 8.4rem;
+            border: 0.1rem solid #005BBC;
+            border-radius: 0.6rem;
+            position: relative;
+        }
+
+        .header-inner-img {
+            position: absolute;
+            left: 50%;
+            margin-left: -1.6rem;
+            top: -1.6rem;
+            width: 3.2rem;
+            height: 3.2rem;
+            background: #FFFFFF url(../../image/project/project_list_icon.png) center center no-repeat;
+            background-size: 1.9rem 2.2rem;
+        }
+
+        .header-inner .name {
+            font-size: 1.5rem;
+            color: #005BBC;
+            text-align: center;
+            line-height: 3rem;
+            padding-top: 1.3rem;
+            font-weight: bold;
+        }
+
+        .header-inner .date-group {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+
+        .header-inner .date-group .text, .header-inner .date-group .date {
+            font-size: 1.2rem;
+            line-height: 2.1rem;
+            color: #000000;
+            padding-left: 1rem;
+        }
+
+        .header-inner .date-counting {
+            width: 11.7rem;
+            margin: 0 auto;
+            text-align: center;
+            color: #F7AA00;
+            font-size: 1.2rem;
+        }
+
+        .header-inner .date-counting .count {
+            font-size: 2.8rem;
+            line-height: 4rem;
+        }
+
+        .header-inner .project-state {
+            position: absolute;
+            right: 0;
+            bottom: 0.6rem;
+            font-size: 1.2rem;
+            line-height: 2rem;
+            padding-right: 0.5rem;
+        }
+
+        .project-header .create-group {
+            font-size: 1.3rem;
+            line-height: 4.5rem;
+            text-align: right;
+            color: #595C60;
+        }
+
+        .project-header .create-group .btn-create {
+            background-color: #00AEEF;
+            border-radius: 0.3rem;
+            width: 7.9rem;
+            height: 2.8rem;
+            color: #FFFFFF;
+            text-align: center;
+            line-height: 2.8rem;
+        }
+
+        /*大体上通用的部分 end*/
+        .propose-title{
+            height: 3.7rem;
+            line-height: 3.7rem;
+            font-size: 1.5rem;
+            background-color: #DBF0FF;
+            color: #0271C5;
+            background-image: url("../../image/project/icon_quote_right.png");
+            background-position-x: 1.5rem;
+            background-position-y: center;
+            background-repeat: no-repeat;
+            background-size: 2rem;
+            padding-left: 3.8rem;
+            font-weight: bold;
+        }
+        .propose-note{
+            padding: 10px;
+            position: relative;
+            font-size: 1.5rem;
+        }
+        .propose-note-tip{
+            /*position: absolute;*/
+            color: red;
+            bottom: 2px;
+            right: 12px;
+        }
+        .textWrap{
+            height: 10rem;
+            background-color: #ffffff;
+            margin: 10px;
+            border: 1px solid #D6D6D6;
+            display: -webkit-box;
+            margin-bottom: 0;
+        }
+        textarea{
+            display: block;
+            -webkit-box-flex: 1;
+            resize: none;
+            padding: 10px;
+            font-size: 14px;
+        }
+        .inputWrap{
+            height:3rem;
+            background-color: #ffffff;
+            margin: 10px;
+            border: 1px solid #D6D6D6;
+            display: -webkit-box;
+            margin-bottom: 0;
+            line-height:40px;
+        }
+        .inputWrap input{
+            height: 100%;
+            display: block;
+            -webkit-box-flex: 1;
+            padding-left: 10px;
+        }
+        .submitWrap{
+            text-align: center;
+            margin-top: 4rem;
+            height: 4rem;
+            line-height: 4rem;
+        }
+        .submitWrap span{
+            width: 50%;
+            color: #ffffff;
+            background-color: #00AEEF;
+            border-radius: 3px;
+            font-size: 1.8rem;
+            letter-spacing:5px;
+        }
+    </style>
+</head>
+<body>
+<!-- 
+<div class="common-part-service">
+    <div class="whats-this">
+        <p class="this-name">
+            咨询方案讨论
+        </p>
+
+        <p class="this-description">
+            请在此页面中填写入任何您想要咨询的和英特尔 硬件产品/软件产品/解决方案相关的问题,我们会有专人为您提供英特尔
+            产品方案的功能细节和发布时间等信息,并提供针对产品方案的讨论
+        </p>
+
+        <div class="design">
+            <span class="text">设计：</span>
+                <span class="designer">
+                    
+                </span>
+
+            <div class="rank">
+                <span class="text">客户满意度：</span>
+                    <span class="stars">
+                        <!-- <i class="fa-star fa"></i>
+                        <i class="fa-star fa"></i>
+                        <i class="fa-star fa"></i>
+                        <i class="fa-star fa"></i>
+                        <i class="fa-star fa"></i> 
+                    </span>
+                <span class="text"></span>
+            </div>
+        </div>
+    </div>
+    <!-- 已选择的项目 
+    <div class="project-header">
+        <label>您已选择的项目为：</label>
+
+        <div class="header-inner">
+            <div class="header-inner-img"></div>
+            <p class="name"></p>
+
+            <div class="header-bottom">
+                <div class="date-group">
+                    <p class="text">项目启动时间</p>
+
+                    <p class="date"></p>
+                </div>
+                <div class="date-counting">
+                    <span class="count"></span>
+                    天
+                </div>
+                <div class="project-state">已处于项目预研阶段</div>
+            </div>
+        </div>
+        <p class="create-group">
+            如果您不是为这个项目申请支持，请先
+            <span class="btn-create" tapmode onclick="createNewProject()">添加项目</span>
+        </p>
+    </div>
+</div>
+
+<div class="propose">
+    <div class="propose-title border-1px-top border-1px-bottom">
+        请填写一下表格
+    </div>
+    <div class="propose-note">
+        您想要咨询什么有关英特尔产品或技术相关的问题？或者获取有关英特尔什么产品/平台的第三方合作伙伴方案介绍?
+        <span class="propose-note-tip">(必填)</span>
+    </div>
+    <div class="textWrap">
+        <textarea id="textarea"></textarea>
+    </div>
+    <div class="propose-note">
+        请留下详尽电话联系方式，以便我们后续和您沟通!(选填)
+    </div>
+    <div class="inputWrap">
+        <input type="tel" id="tel">
+    </div>
+    <div class="submitWrap">
+        <span tapmode onclick="submitInquiry()">
+            提交
+        </span>
+    </div>
+</div>
+ -->
+</body>
+
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript">
+    // 以下通用
+    var account = $api.getStorage('loginInfo');
+    var pageParam = {};
+    var projectID = '';
+    var typeid = 6;
+    var zhuge;
+    apiready = function () {
+        pageParam = api.pageParam;
+        projectID = pageParam.id;
+        zhuge = api.require('zhuge');
+        if (zhuge) {
+            zhuge.initZhuge();
+        }
+        getProjectDesigner();
+    };
+
+    function getProjectDesigner(){
+        fnAjax({
+            url: 'supports/findSupportScore?typeId=8'
+        }, function( ret, err ){
+            if( ret ){
+                var _average = '';
+                for( var i = 0; i < 5; i++ ){
+                    _average += '<i class="'+( i < ret.average ? 'fa-star' : 'fa-star-o' )+' fa"></i>'
+                }
+                with( api.pageParam.data ){
+                    var _html = 
+                    '<div class="common-part-service">'+
+                    '    <div class="whats-this">'+
+                    '        <p class="this-name">'+fnLanguageSwitch( '咨询方案讨论' )+'</p>'+
+                    '        <p class="this-description">'+fnLanguageSwitch( '请在此页面中填写入任何您想要咨询的和英特尔 硬件产品/软件产品/解决方案相关的问题,我们会有专人为您提供英特尔            产品方案的功能细节和发布时间等信息,并提供针对产品方案的讨论' )+
+                    '        </p>'+
+                    '        <div class="design">'+
+                    '            <div class="rank">'+
+                    '                <span class="text">'+fnLanguageSwitch( '客户满意度' )+'：</span>'+
+                    '                <span class="stars">'+_average+'</span>'+
+                    '            </div>'+
+                    '        </div>'+
+                    '    </div>'+
+                    '    <div class="project-header">'+
+                    '        <label>'+fnLanguageSwitch( '您已选择的项目为' )+'：</label>'+
+                    '        <div class="header-inner">'+
+                    '            <div class="header-inner-img"></div>'+
+                    '            <p class="name">'+fnStringEmpty( data.projectName )+'</p>'+
+                    '            <div class="header-bottom">'+
+                    '                <div class="date-group">'+
+                    '                    <p class="text">'+fnLanguageSwitch( '项目启动时间' )+'</p>'+
+                    '                    <p class="date">'+fnStringEmpty( data.created )+'</p>'+
+                    '                </div>'+
+                    '                <div class="date-counting">'+
+                    '                   <span class="count">'+fnStringEmpty( data.projectStartDay )+'</span>'+fnLanguageSwitch( '天')+
+                    '                </div>'+
+                    '                <div class="project-state">'+fnLanguageSwitch( '已处于') +' '+fnProjectApprovalStatusJson()[ data.projectStatus ]+' '+fnLanguageSwitch( '阶段' )+'</div>'+
+                    '            </div>'+
+                    '        </div>'+
+                    '        <p class="create-group">'+fnLanguageSwitch( '如果您不是为这个项目申请支持，请先' )+
+                    '            <span class="btn-create" tapmode onclick="createNewProject()">'+fnLanguageSwitch( '添加项目' )+'</span>'+
+                    '        </p>'+
+                    '    </div>'+
+                    '</div>'+
+                    '<div class="propose">'+
+                    '    <div class="propose-title border-1px-top border-1px-bottom">'+fnLanguageSwitch( '请填写一下表格' )+'</div>'+
+                    '    <div class="propose-note">'+fnLanguageSwitch( '您想要咨询什么有关英特尔产品或技术相关的问题？或者获取有关英特尔什么产品/平台的第三方合作伙伴方案介绍？' )+'<span class="propose-note-tip">'+fnLanguageSwitch('(必填)')+'</span>'+
+                    '    </div>'+
+                    '    <div class="textWrap">'+
+                    '        <textarea id="textarea"></textarea>'+
+                    '    </div>'+
+                    '    <div class="propose-note">'+fnLanguageSwitch( '请留下详尽电话联系方式，以便我们后续和您沟通!(选填)')+'</div>'+
+                    '    <div class="inputWrap">'+
+                    '        <input type="tel" id="tel" value="'+( USER.info.cellPhone ? USER.info.cellPhone : '' )+'" >'+
+                    '    </div>'+
+                    '    <div class="submitWrap">'+
+                    '        <span tapmode onclick="fnSubmit()">'+fnLanguageSwitch( '提交')+'</span>'+
+                    '    </div>'+
+                    '</div>';
+   
+                }
+                $api.dom('body').innerHTML = _html;
+            }else{
+                api.toast({
+	            global: true,
+                    msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                });
+            }
+        });
+        return;
+        return;
+        ajaxRequest('/APPSupportManage/GetSupportAppraise.aspx', 'get', {
+            UserID: account.userid,
+            BatchNo: account.batchno, 
+            SupportTypeID: typeid
+        }, function(ret, err){
+            if(ret && ret.res == undefined){
+                // console.log('ret:normal===='+ JSON.stringify(ret));
+                var data = ret.appdatalist[0];
+                $api.html($api.dom('.designer'), data.UserName);
+                
+                var len = parseInt(data.EvaluateNumber);
+                var str = '';
+                for (var i = 0; i < len; i++) {
+                    str+= '<i class="fa-star fa"></i>';
+                }
+                $api.html($api.dom('.stars'), str);
+                $api.html($api.domAll('.rank .text')[1], '('+ data.UserNum +'人)');
+            } else{
+                console.log('ret:err===='+ JSON.stringify(ret));
+            }
+            if (err) {
+                console.log('err===='+ JSON.stringify(err));
+            }
+
+        });
+        
+    };
+
+    function getProjectDetail(){
+        ajaxRequest('/APPProjectManage/APPGetProjectDetail.aspx', 'get', {
+            UserID: account.userid,
+            BatchNo: account.batchno,
+            ProjectID: projectID
+        }, function(ret, err){
+            if(ret && ret.res == undefined){
+                var data = ret.appdatalist[0];
+                $api.html($api.dom('.project-header .header-inner .name'), data.ProjectName);
+                $api.html($api.dom('.project-header .header-inner .date'), data.CreateDate);
+                $api.html($api.dom('.project-header .header-inner .count'), data.ProjectStartDay);
+                $api.html($api.dom('.project-header .header-inner .project-state'), '已处于'+ data.ProjectStatus +'阶段');
+                
+                // 已处于项目预研阶段
+                
+                
+            } else{
+                console.log('ret:err===='+ JSON.stringify(ret));
+            }
+            if (err) {
+                console.log('err===='+ JSON.stringify(err));
+            }
+        });
+    };
+    // 以上通用
+    //
+    function getExplain() {
+        var move = isHuawei();
+        var animation = {};
+        if (move) {
+            animation = {
+                type: 'movein',
+                subType: 'from_right'
+            }            
+        }
+        api.openWin({
+            name: 'close_btn_win',
+            url: 'widget://' + DIR + '/simple_page/close_btn_win.html',
+            bounces: false,
+            pageParam: {
+                name: 'get_support_explain',
+                title: fnLanguageSwitch('获取支持'),
+                bounces: false
+            },
+            animation: animation
+        });
+        if( event ){event.cancelBubble = true;}
+        return false;
+    }
+    ;
+    // 新增需求
+    function goNewComand() {
+        var move = isHuawei();
+        var animation = {};
+        if (move) {
+            animation = {
+                type: 'movein',
+                subType: 'from_right'
+            }           
+        }
+        api.openWin({
+            name: 'simple_win_project',
+            url: 'widget://' + DIR + '/simple_page/simple_win.html',
+            bounces: false,
+            pageParam: {
+                name: 'create_new_comand',
+                title: fnLanguageSwitch('新增需求'),
+                bounces: false
+            },
+            animation: animation
+        });
+        if( event ){event.cancelBubble = true;}
+        return false;
+    };
+    
+    // 提交需求
+    var textarea = $api.dom('#textarea');
+    var submitLock = false;
+    function fnSubmit(el){
+        var _textarea = $api.dom( '#textarea' ).value.trim(),
+            _tel = $api.dom( '#tel' ).value.trim();
+        if( ! _textarea ){
+            api.toast({
+                msg: fnLanguageSwitch( '咨询方案讨论，问题描述不能为空' )
+            });
+        }else{
+            fnAjax({
+                url: 'supports/NewsConsult',
+                data: {
+                    values: {
+                        NewsConsult:{
+                            content: _textarea,
+                            contact: _tel ? _tel : USER.info.cellPhone
+                        },
+                        projectId: api.pageParam.data.id
+                    }
+                }
+            }, function( ret, err ){
+                if( ret ){
+                    api.toast({
+                        msg: fnLanguageSwitch( '咨询方案提交成功' )
+                    });
+                    setTimeout(function(){
+                        api.closeWin();
+                    },1000);
+                }else{
+                    api.toast({
+	                     global: true,
+                        msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                    });
+                }
+            });   
+        }
+
+        return;
+        var DocumentDescription = $api.trim($api.val(textarea));
+        if (DocumentDescription == '') {
+            api.alert({
+                title: '提醒', 
+                msg: fnLanguageSwitch('技术文档申请，文档不能为空')
+            });
+            return false;
+        }
+
+        if (submitLock) {
+            return false;
+        } else {
+            submitLock = true;
+            $api.attr(el, 'disabled', 'disabled');
+        }
+        // console.log(DocumentDescription)
+        // code there
+        if (zhuge) {
+            zhuge.track({
+                eventName: '项目支持_技术支持提交按钮',
+                eventPro: {
+                    '模块来源': '技术文档申请'
+                }
+            });
+        }
+        ajaxRequest('/APPSupportManage/APPSupportTechnologyDoc.aspx', 'post',{
+            UserID: parseInt(account.userid),
+            BatchNo: account.batchno,
+            ItemNameID: parseInt(projectID),
+            DocumentDescription: DocumentDescription
+        }, function(ret, err){
+            submitLock = false;
+            $api.removeAttr(el, 'disabled');
+            if(ret && ret.res){
+                api.toast({
+	                global: true,
+                    msg: fnLanguageSwitch('技术文档申请成功'),
+                    duration: 2000,
+                    location: 'middle'
+                });
+                setTimeout(function(){
+                    api.closeWin();
+                },2000);
+            } else{
+                api.toast({
+	                 global: true,
+                    msg: JSON.stringify(ret),
+                    duration: 2000,
+                    location: 'middle'
+                });
+            }
+            if (err) {
+                api.toast({
+	                 global: true,
+                    msg: JSON.stringify(err),
+                    duration: 2000,
+                    location: 'middle'
+                });
+            }
+        });
+        
+    };
+</script>
+</html>

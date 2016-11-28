@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>home</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/common.css"/>
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+
+        #wrap {
+            height: auto;
+        }
+
+        #main {
+            margin-bottom: 20px;
+        }
+
+        .top_information {
+            margin-top: 1rem;
+            /*background-color: #DDDDDD;*/
+        }
+
+        .home_news {
+
+            padding: 1rem;
+            border-bottom: 5px solid #eeeeee; 
+        }
+
+        .home_news_titleWrap {
+            background-color: #ffffff;
+            display: -webkit-box;
+            height: 6rem;
+            -webkit-box-align: center;
+            -webkit-box-pack: center;
+        }
+
+        .home_news_titleWrap .title {
+            margin: 0 10px;
+            font-size: 2rem;
+        }
+
+        .home_news_title_line {
+            height: 0.1rem;
+            width: 3rem;
+            background-color: #C3C3C3;
+        }
+
+        .home_news_picture, .product_focus_picture {
+            position: relative;
+        }
+
+        .home_news_picture.hot:before{ content: ''; display: block; width: 100px; height: 100px; position: absolute; right: 0; top: 0; background: url(../../image/ic_hot.png) no-repeat right top;  background-size: 40px auto; }
+
+
+        .home_news_picture.video:after{ content: ''; display: block; width: 100%; height: 100%; position: absolute; right: 0; top: 0; background: url(../../image/ic_video.png) no-repeat center;  background-size: 40px auto; }
+
+        .home_news_picturelable {
+            background-color: RGBA(0,0,0,.7);
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 30px;
+            line-height: 30px;
+            padding: 0 10px;
+            overflow: hidden;
+            display: block;
+            color: #fff;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            font-size: 1.5rem;
+        }
+
+        .product_focus .home_news_picturelable {
+            background-color: RGBA(0, 60, 114, 0.37);
+        }
+
+        .home_news_picture img, .product_focus_picture img {
+            width: 100%;
+            vertical-align: middle;
+            height: 18.3rem;
+        }
+
+        .home_news_brief {
+            margin-top: 10px;
+            font-size: 1.2rem;
+            line-height: 1.8rem;
+            color: #7B7B7B;
+            overflow: hidden;
+        }
+        .home_news_brief p {
+            word-break:break-all;
+            display:-webkit-box;
+            -webkit-line-clamp:3;
+            -webkit-box-orient:vertical;
+            overflow:hidden;
+        }
+        .home_news_brief:after{ content: attr( data-number ); float: right; background: url(../../image/comand_detail_previewIcon.png) no-repeat left 3px; background-size: auto 12px; padding-left: 20px; }
+
+    </style>
+</head>
+<body>
+<div id="wrap">
+    <div id="main">
+        <div class="top_information">
+            <div id="information"> 
+                <!-- <div class="home_news" tapmode="">
+                    <div onclick="api.openWin({name:'technical_details_win',url:'./technical_details_win.html'});" class="home_news_picture hot video">
+                        <img src="../../image/test/abc_07.jpg">
+                        <div class="home_news_picturelable">平板商齐赴VR，“仿一体机”将开始盛行</div>
+                    </div>
+                     <div class="home_news_brief" data-number="24"><p>@Curie技术，通过模拟受力可以让用户真切感受到游戏、视屏中的特效，已达到全沉浸式的体验感受（云汉心诚）</p></div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript">
+    var vGlobalParam = {},
+        vGlobalReload = true;
+    apiready = function(){
+        api.setRefreshHeaderInfo({
+            loadingImg: 'widget://image/common/blueArrow@2x.png',
+            textDown: fnLanguageSwitch( '下拉刷新' ),
+            textUp: fnLanguageSwitch( '松手加载' ),
+            textLoading: fnLanguageSwitch( '刷新中' ),
+            showTime: false,
+            bgColor: '#FFF',
+            textColor: '#000'
+        }, function(ret, err){
+            SKIP = 0;
+            vGlobalReload = true;
+            getProjectList();
+        });
+        api.refreshHeaderLoading();
+
+        api.addEventListener({
+            name:'scrolltobottom',
+            extra:{
+                threshold: 50
+            }
+        }, function(ret, err){
+            if( vGlobalReload ){
+                getProjectList();   
+            }
+        });
+    }
+
+    function getProjectList( _txt ){
+        if( _txt ){
+            vGlobalReload = false;
+            fnAjax({
+                url: 'news/appGetAll?title='+_txt
+            }, function( ret, err ){
+                fnLayout( ret, err, _txt);
+            });
+        }else{
+            if( api.frameName.match( /\d+$/ )[0] == 1 ){
+                // 技术前沿获取视频列表
+                fnAjax({
+                    url: 'videos/appList',
+                    data: {
+                        values: {
+                            limit: LIMIT,
+                            skip: SKIP
+                        }
+                    }
+                }, function( ret, err ){
+                    fnLayout( ret, err);
+                })
+            }else{
+            // 技术前沿获取图文列表
+                fnAjax({
+                    url: 'news/appList',
+                    data: {
+                        values: {
+                            limit: LIMIT,
+                            skip: SKIP
+                        }
+                    }
+                }, function( ret, err ){
+                    fnLayout( ret, err);
+                })   
+            }   
+        }
+    }
+
+    function fnLayout( ret, err, _txt ){
+        api.refreshHeaderLoadDone();
+        if( ret ){
+            if( _txt ){
+                $api.dom( '#information' ).innerHTML = '';
+                SKIP = 0;
+            }
+            if( ret.length ){
+                if( ! SKIP )$api.dom( '#information' ).innerHTML = '';
+                SKIP += LIMIT;   
+                for( var x in ret ){
+                    vGlobalParam[ ret[x].id ] = ret[x];
+                    $api.append($api.dom( '#information' ),
+                    '<div class="home_news" tapmode="">'+
+                    '    <div onclick="fnOpenDetail( this, '+(+api.frameName.match( /\d+$/ )[0])+' );" data-id="'+ret[x].id+'" class="home_news_picture '+( ret[x].isTop ? 'hot' : '')+'">'+
+                    '        <img data-selectorid="'+( ret[x].file1 || ret[x].file2 )+'"" onload="getImageCache( this );" src="../../image/common/placeholderimg.png" >'+
+                    '        <div class="home_news_picturelable">'+ret[x].title+'</div>'+
+                    '    </div>'+
+                    '     <div class="home_news_brief" data-number="'+ret[x].browses+'" ><p>'+ret[x].profile+'</p></div>'+
+                    '</div>');
+                }
+            }else{
+                if( ! SKIP ){
+                    $api.dom( '#information' ).innerHTML = '<div class="empty" >'+fnLanguageSwitch( '暂无相关内容' )+'</div>';   
+                }
+            }
+        }else{
+            api.toast({
+                global: true,
+                msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+            });
+        }
+    }
+
+    function fnOpenDetail( el, hasVideo ){
+        fnOpen({
+            name:'technical_details_win',
+            url: 'widget://' + DIR + '/home_group/technical_details_win.html',
+            pageParam: {
+                data: vGlobalParam[ $api.attr(el, 'data-id' ) ],
+                hasVideo: hasVideo
+            }
+        });
+    }
+</script>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/common.css"/>
+    <style>
+    body,html{ background-color: transparent; }
+    ul{ position: relative; z-index: 10; }
+    ul li{ line-height: 42px; padding: 0 10px;border-bottom: 1px solid #eee; background-color: white; font-size: 12px; }
+    .hover{ background-color: #eee; }
+    .fixed{ position: fixed; left: 0; top: 0; bottom: 0; right: 0;  }
+    </style>
+</head>
+<body >
+    <div tapmode onclick="fnClose()" class="fixed"></div>
+    <ul>
+        <!-- <li>文身断发</li>
+        <li>文身断发</li>
+        <li>文身断发</li>
+        <li>文身断发</li>
+        <li>文身断发</li>
+        <li>文身断发</li> -->
+    </ul>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript">
+    var vGlobalParam = {};
+    apiready = function( data ){
+        var _ = data || api.pageParam.data;
+        $api.dom( 'ul' ).innerHTML = '';
+        for( var x in _ ){
+            vGlobalParam[ _[x].id ] = _[x];
+            $api.append($api.dom( 'ul' ), '<li tapmode="hover" onclick="fnSearch( this )" data-id="'+_[x].id+'">'+_[x].title+'</li>');
+        }
+        api.parseTapmode();
+    }
+
+    function fnSearch( el ){
+        event.stopPropagation();    
+        api.execScript({
+            name: api.winName,
+            script: 'fnSubmit(\''+el.innerHTML+'\');'
+        });
+    }
+    
+    function fnClose(){
+        api.execScript({
+            name: api.winName,
+            script: 'fnCloseFrame()'
+        });
+		
+    }
+</script> 
+</html> 

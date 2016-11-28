@@ -1,0 +1,1354 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>sample-frm</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" href="../../css/common.css">
+
+    <style type="text/css">
+        body {
+            height: auto;
+            min-height: 100%;
+        }
+        /*大体上通用的部分 start*/
+        .common-part-service {
+
+        }
+
+        .whats-this {
+            background-color: #F0F0F0;
+            padding-top: 1.5rem;
+        }
+
+        .whats-this .this-name {
+            font-size: 1.5rem;
+            line-height: 2.5rem;
+            color: #000000;
+            background: url(../../image/project/icon_sample.png) 1rem 50% no-repeat;
+            background-size: 2.5rem 2.5rem;
+            text-indent: 4rem;
+        }
+
+        .whats-this .this-description {
+            padding: 0.8rem 2.2rem 1rem 4rem;
+            font-size: 1.3rem;
+            line-height: 1.6rem;
+            color: #515458;
+            border-bottom: 0.2rem solid #C8C8C8;
+        }
+
+        .whats-this .design {
+            padding-left: 4rem;
+        }
+
+        .whats-this .text, .whats-this .designer {
+            font-size: 1.2rem;
+            line-height: 2.6rem;
+            color: #000000;
+        }
+
+        .whats-this .rank {
+
+        }
+
+        .whats-this .stars {
+            color: #999999;
+            font-size: 1.8rem;
+            vertical-align: bottom;
+            line-height: 2.6rem;
+        }
+
+        .whats-this .stars .fa-star {
+            color: #FFDA00;
+        }
+
+        /*已选择的项目*/
+        .project-header {
+            padding: 0 1rem;
+            background-color: #FFFFFF;
+        }
+
+        .project-header label {
+            font-size: 1.6rem;
+            line-height: 5.5rem;
+        }
+
+        .header-inner {
+            width: 33.9rem;
+            height: 8.4rem;
+            border: 0.1rem solid #005BBC;
+            border-radius: 0.6rem;
+            position: relative;
+        }
+
+        .header-inner-img {
+            position: absolute;
+            left: 50%;
+            margin-left: -1.6rem;
+            top: -1.6rem;
+            width: 3.2rem;
+            height: 3.2rem;
+            background: #FFFFFF url(../../image/project/project_list_icon.png) center center no-repeat;
+            background-size: 1.9rem 2.2rem;
+        }
+
+        .header-inner .name {
+            font-size: 1.5rem;
+            color: #005BBC;
+            text-align: center;
+            line-height: 3rem;
+            padding-top: 1.3rem;
+            font-weight: bold;
+        }
+
+        .header-inner .date-group {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+
+        .header-inner .date-group .text, .header-inner .date-group .date {
+            font-size: 1.2rem;
+            line-height: 2.1rem;
+            color: #000000;
+            padding-left: 1rem;
+        }
+
+        .header-inner .date-counting {
+            width: 11.7rem;
+            margin: 0 auto;
+            text-align: center;
+            color: #F7AA00;
+            font-size: 1.2rem;
+        }
+
+        .header-inner .date-counting .count {
+            font-size: 2.8rem;
+            line-height: 4rem;
+        }
+
+        .header-inner .project-state {
+            position: absolute;
+            right: 0;
+            bottom: 0.6rem;
+            font-size: 1.2rem;
+            line-height: 2rem;
+            padding-right: 0.5rem;
+        }
+
+        .project-header .create-group {
+            font-size: 1.3rem;
+            line-height: 4.5rem;
+            text-align: right;
+            color: #595C60;
+        }
+
+        .project-header .create-group .btn-create {
+            background-color: #00AEEF;
+            border-radius: 0.3rem;
+            width: 7.9rem;
+            height: 2.8rem;
+            color: #FFFFFF;
+            text-align: center;
+            line-height: 2.8rem;
+        }
+
+        /*大体上通用的部分 end*/
+        .propose-title {
+            height: 3.7rem;
+            line-height: 3.7rem;
+            font-size: 1.5rem;
+            background-color: #DBF0FF;
+            color: #0271C5;
+            background-image: url("../../image/project/icon_quote_right.png");
+            background-position-x: 1.5rem;
+            background-position-y: center;
+            background-repeat: no-repeat;
+            background-size: 2rem;
+            padding-left: 3.8rem;
+            font-weight: bold;
+        }
+        .form{
+            padding-left: 1rem;
+            background-color: #FFFFFF;
+        }
+        .form.no-padded{
+            padding-left: 0;
+            background-color: transparent;
+        }
+        .form .form-title{
+            height: 2.8rem;
+            line-height: 2.8rem;
+            color: #0271C5;
+            background-color: #F0F0F0;
+            font-size: 1.3rem;
+            text-indent: 1rem;
+        }
+        .form .form-group{
+            background-color: #FFFFFF;
+        }
+        .form.no-padded .form-group{
+            padding-left: 1rem;
+        }
+        .form .form-group label{
+            height: 3.8rem;
+            line-height: 3.8rem;
+            width: 14.5rem;
+            font-size: 1.4rem;
+            color: #000000;
+        }
+        .form .form-group .form-text-right{
+            text-align: right;
+            float: right;
+            margin-right: 2rem;
+            height: 3.8rem;
+            line-height: 3.8rem;
+            font-size: 1.4rem;
+            color: #C9C9CF;
+            width: 16rem;
+        }
+        /*.form .form-group input.form-text-right{
+            color: #333333;
+        }
+        .form .form-group input.form-text-right[disabled]{
+            color: #666666;
+        }*/
+        .form .current-board{
+            height: 3rem;
+            line-height: 3rem;
+            padding: 0 1rem;
+            font-size: 1.1rem;
+            color: #5B5E61;
+        }
+        .fake-link{
+            color: #0071C5;
+            text-decoration: underline;
+        }
+        .form .current-board .fake-link{
+            font-size: 1.1rem;
+            line-height: 3rem;
+            margin-left: 2.3rem;
+        }
+        .form .radio-group{
+        }
+        .radio-title{
+            line-height: 3rem;
+            padding: 0 1rem;
+            font-size: 1.1rem;
+            color: #000000;
+        }
+
+        /*radio*/
+        .propose-select, .fileuploadLabel {
+            padding-left: 10px;
+            font-size: 1.6rem;
+            position: relative;
+        }
+        .radioSwitch.show {
+            background-image: url('../../image/project/promotion_circle_highlight.png');
+            color: #0071C5;
+        }
+        .radioSwitch {
+            display: block;
+            background-image: url('../../image/project/promotion_circle_normal.png');
+            background-size: 1.5rem;
+            background-repeat: no-repeat;
+            background-position: left center;
+            line-height: 2rem;
+            font-size: 1rem;
+            text-indent: 2rem;
+        }
+        .show.selectSwitch {
+            background-image: url('../../image/project/MCSI_Selected2.png');
+            background-size: 2rem 1.8rem;
+            background-position: 0 44%;
+        }
+        .selectSwitch {
+            background-image: url('../../image/project/MCSI_Selected1.png');
+            background-size: 1.5rem;
+            background-repeat: no-repeat;
+            background-position: 0 50%;
+            line-height: 2.6rem;
+            font-size: 1.1rem;
+            color: #000000;
+            text-indent: 2rem;
+            display: inline-block;
+            margin-bottom: 1.2rem;
+        }
+        .selectSwitch.text-alot{
+            line-height: 1.4rem;
+            text-indent: 0;
+            padding-left: 2rem;
+            background-position: 0 0;
+        }
+        .show.selectSwitch.text-alot{
+            background-position: 0 -6%;
+        }
+        .propose-select .fake-link{
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+        /*radio*/
+        .form .more-wanted{
+            width: 34rem;
+            height: 9.4rem;
+            border: 1px solid #A2ADB3;
+            margin: 0 auto;
+            display: block;
+            resize: none;
+            font-size: 1.3rem;
+            line-height: 1.6rem;
+            padding: 1rem 0.6rem;
+            overflow-x: hidden;
+            -webkit-box-sizing: border-box;
+                    box-sizing: border-box;
+            background-color: #FFFFFF;
+            margin-bottom: 2.5rem;
+        }
+        /*upload start*/
+        .form .upload-group{
+            position: relative;
+            margin-bottom: 3rem;
+            padding-left: 1rem;
+        }
+        .form .upload-label{
+            color: #000000;
+            font-size: 1.1rem;
+            padding: 1rem;
+            padding-left: 0;
+            line-height: 1.4rem;
+        }
+        .form .upload-group img{
+            width: 7.7rem;
+            height: 7.7rem;
+        }
+        .form .upload-group .image-name{
+            position: absolute;
+            left: 9.2rem;
+            bottom: 3.5rem;
+            font-size: 0.9rem;
+            color: #999999;
+            line-height: 1.9rem;
+        }
+        .form .upload-group .notice{
+            position: absolute;
+            left: 9.2rem;
+            bottom: 0;
+            font-size: 0.9rem;
+            color: #999999;
+            line-height: 1.9rem;
+        }
+        /*upload end*/
+        .form-tips{
+            font-size: 0.9rem;
+            padding: 1rem;
+            line-height: 1.2rem;
+            color: #888888;
+            margin-bottom: 2rem;
+        }
+
+        .btn-submit{
+            width: 18rem;
+            height: 3.8rem;
+            margin: 3rem auto;
+            text-align: center;
+            color: #FFFFFF;
+            background-color: #00AEEF;
+            border-radius: 0.4rem;
+            line-height: 3.8rem;
+            font-size: 1.6rem;
+        }
+        label.fake-link {
+            text-decoration: none;
+            font-size: 1.4rem;
+            line-height: 2.5rem;
+            height: 2.5rem;
+            text-indent: 1rem;
+        }
+    </style>
+</head>
+<body>
+<!--<div class="common-part-service">
+    <div class="whats-this">
+        <p class="this-name">
+            免费样片
+        </p>
+
+        <p class="this-description">
+            请按照项目需要提出样片申请需求，并填写样片/开发板接受人的详细信息。我们会按照您在此页面中填写的信息替贵司申请样片（可提供的样片数量会根据英特尔样片系统的要求做调整），然后按照您在此页面中填写的收件人详细信息寄出样品。
+        </p>
+
+        <div class="design">
+            <span class="text">设计：</span>
+                <span class="designer">
+                    
+                </span>
+
+            <div class="rank">
+                <span class="text">客户满意度：</span>
+                    <span class="stars">-->
+                        <!-- <i class="fa-star fa"></i>
+                        <i class="fa-star fa"></i>
+                        <i class="fa-star fa"></i>
+                        <i class="fa-star fa"></i>
+                        <i class="fa-star fa"></i> -->
+                  <!--  </span>
+                <span class="text"></span>
+            </div>
+        </div>
+    </div>
+    已选择的项目 -->
+    <!--  <div class="project-header">
+        <label>您已选择的项目为：</label>
+
+        <div class="header-inner">
+            <div class="header-inner-img"></div>
+            <p class="name"></p>
+
+            <div class="header-bottom">
+                <div class="date-group">
+                    <p class="text">项目启动时间</p>
+
+                    <p class="date"></p>
+                </div>
+                <div class="date-counting">
+                    <span class="count"></span>
+                    天
+                </div>
+                <div class="project-state">已处于项目预研阶段</div>
+            </div>
+        </div>
+        <p class="create-group">
+            如果您不是为这个项目申请支持，请先
+            <span class="btn-create" tapmode onclick="createNewProject()">添加项目</span>
+        </p>
+    </div>
+</div>
+
+<div class="propose">
+    <div class="propose-title border-1px-top border-1px-bottom">
+        请填写以下表格
+    </div>
+    <div class="form no-padded">
+        <p class="radio-title">
+            您是要申请与此项目相关的什么样片：
+        </p>
+        <div id="what_to_request">
+            <div class="propose-select">
+                <div class="selectSwitch selectSwitch1" tapmode="" onclick="toggleSwitch(this,'selectSwitch')">
+                    125
+                </div>
+            </div>
+            <div class="form-group border-1px-top clearfix">
+                <label class="pull-left">申请数量</label>
+                <span class="form-text-right selectCount1 " data-id="125" tapmode onclick="setSampleCount(this)">---请选择---</span>
+            </div>
+            <div class="propose-select">
+                <div class="selectSwitch selectSwitch2" tapmode="" onclick="toggleSwitch(this,'selectSwitch')">
+                    168
+                </div>
+            </div>
+            <div class="form-group border-1px-top clearfix">
+                <label class="pull-left">申请数量</label>
+                <span class="selectCount2 form-text-right" data-id="168" tapmode onclick="setSampleCount(this)">---请选择---</span>
+            </div> -->
+      <!--   </div>
+        
+        <p class="form-tips">
+            请注意：系统会根据实际情况对样品数量进行调整，具体的样品数量以实际收到的为准。
+        </p>
+        <p class="radio-title">
+            为了更好的评估您所申请的样品，请简单介绍一下本产品：
+        </p>
+        <textarea id="" class="more-wanted" placeholder=""></textarea>
+        <div class="radio-group">
+            <p class="radio-title">
+                如果本项目研究成功，是否考虑基于当前平台再研发其他产品？
+            </p>
+            <div class="propose-select" style="margin-left: 30px">
+                <span class="radioSwitch show" data-selectorid="1" tapmode="" onclick="toggleSwitch(this,'radioSwitch')">
+                    是
+                </span>
+                <span class="radioSwitch" data-selectorid="0" tapmode="" onclick="toggleSwitch(this,'radioSwitch')">
+                    否
+                </span>
+                <span class="radioSwitch" data-selectorid="2" tapmode="" onclick="toggleSwitch(this,'radioSwitch')">
+                    还没决定
+                </span>
+            </div>
+        </div>
+        <div class="propose-select">
+            <div class="selectSwitch sample-agree" tapmode="" onclick="toggleSwitch(this,'selectSwitch')">
+                我同意英特尔嵌入式样品计划的
+            </div>
+            <span class="fake-link" tapmode="" onclick="goBoardNotice()">
+                条款与条件
+            </span>
+        </div>
+        <div class="propose-select">
+            <div class="selectSwitch text-alot" tapmode="" onclick="toggleSwitch(this,'selectSwitch')">
+                我同意英特尔代表或其合作伙伴通过电话或电子邮件与我联系，告知有关英特尔样品的更多信息，英特尔活其合作伙伴还可将我的联系信息用于提供产品或提供支持。
+            </div>
+        </div>
+    </div>
+    <label class="fake-link">地址信息</label>
+    <p class="radio-title" style="height: auto;line-height: 1.3rem;">
+        以下信息为必填，我们会把资料保存到您的个人信息里，下次申请无需再填写。
+    </p>
+    <div class="form">
+        <div class="form-group border-1px-top clearfix">
+            <label class="pull-left">公司名称（中文）</label>
+            <input class="sample-company-name-zh form-text-right" type="text" placeholder="必填">
+        </div>
+        <div class="form-group border-1px-top clearfix">
+            <label class="pull-left">公司名称（英文）</label>
+            <input class="sample-company-name-en form-text-right" type="text" placeholder="必填">
+        </div>
+        <div class="form-group border-1px-top clearfix">
+            <label class="pull-left">公司地址（中文）</label>
+            <input class="sample-company-address-zh form-text-right" type="text" placeholder="必填">
+        </div>
+        <div class="form-group border-1px-top clearfix">
+            <label class="pull-left">邮政编码</label>
+            <input class="sample-postcode form-text-right" type="tel" placeholder="必填">
+        </div>
+        <div class="form-group border-1px-top clearfix">
+            <label class="pull-left">公司地址（英文）</label>
+            <input class="sample-company-address-en form-text-right" type="text" placeholder="必填">
+        </div>
+        <div class="form-group border-1px-top clearfix">
+            <label class="pull-left">固定电话</label>
+            <input class="sample-tel form-text-right" type="tel" placeholder="必填">
+        </div>
+        <div class="form-group border-1px-top clearfix">
+            <label class="pull-left">公司网址</label>
+            <input class="sample-website form-text-right" type="text" placeholder="必填">
+        </div>
+    </div>
+        
+    <div class="btn-submit btn" tapmode onclick="fnSubmit(this)">提交</div>
+    <div style="height: 1px"></div>
+</div> -->
+
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript">
+
+    // 以下通用
+    var account = $api.getStorage('loginInfo');
+    var pageParam = {};
+    var projectID = '';
+    var typeid = 3;
+    var UICustomPicker;
+    var zhuge;
+
+    apiready = function () {
+         zhuge = api.require('zhuge');
+        if (zhuge) {
+            zhuge.initZhuge();
+        }
+        
+
+        $api.dom( 'body' ).innerHTML =
+        '<div class="common-part-service">'+
+        '    <div class="whats-this">'+
+        '        <p class="this-name">'+fnLanguageSwitch('免费样片')+'</p>'+
+        '        <p class="this-description"> '+fnLanguageSwitch('请按照项目需要提出样片申请需求，并填写样片/开发板接受人的详细信息。我们会按照您在此页面中填写的信息替贵司申请样片（可提供的样片数量会根据英特尔样片系统的要求做调整），然后按照您在此页面中填写的收件人详细信息寄出样品。')+'</p>'+
+        '        <div class="design">'+
+        '            <div class="rank">'+
+        '                <span class="text">'+fnLanguageSwitch('客户满意度')+'：</span>'+
+        '                <span class="stars"></span>'+
+        '                <span class="text"></span>'+
+        '            </div>'+
+        '        </div>'+
+        '    </div>'+
+        '    <div class="project-header">'+
+        '        <label>'+fnLanguageSwitch('您已选择的项目为')+'：</label>'+
+        '        <div class="header-inner">'+
+        '            <div class="header-inner-img"></div>'+
+        '            <p class="name"></p>'+
+        '            <div class="header-bottom">'+
+        '                <div class="date-group">'+
+        '                    <p class="text">'+fnLanguageSwitch('项目启动时间')+'</p>'+
+        '                    <p class="date"></p>'+
+        '                </div>'+
+        '                <div class="date-counting">'+
+        '                    <span class="count"></span>'+fnLanguageSwitch('天')+''+
+        '                </div>'+
+        '                <div class="project-state">'+fnLanguageSwitch('已处于项目预研阶段')+'</div>'+
+        '            </div>'+
+        '        </div>'+
+        '        <p class="create-group">'+fnLanguageSwitch('如果您不是为这个项目申请支持，请先')+''+
+        '            <span class="btn-create" tapmode onclick="createNewProject()">'+fnLanguageSwitch('添加项目')+'</span>'+
+        '        </p>'+
+        '    </div>'+
+        '</div>'+
+        '<div class="propose">'+
+        '    <div class="propose-title border-1px-top border-1px-bottom">'+fnLanguageSwitch('请填写以下表格')+'</div>'+
+        '    <div class="form no-padded">'+
+        '        <p class="radio-title">'+fnLanguageSwitch('您是要申请与此项目相关的什么样片')+'： </p>'+
+        '        <div id="what_to_request"></div>'+
+        '        <p class="form-tips">'+fnLanguageSwitch('请注意：系统会根据实际情况对样品数量进行调整，具体的样品数量以实际收到的为准。')+'</p>'+
+        '        <p class="radio-title">'+fnLanguageSwitch('为了更好的评估您所申请的样品，请简单介绍一下本产品')+':</p>'+
+        '        <textarea id="" class="more-wanted" placeholder=""></textarea>'+
+        '        <div class="radio-group">'+
+        '            <p class="radio-title">'+fnLanguageSwitch('如果本项目研究成功，是否考虑基于当前平台再研发其他产品？')+'</p>'+
+        '            <div class="propose-select" style="margin-left: 30px">'+
+        '                <span class="radioSwitch show" data-selectorid="1" tapmode="" onclick="toggleSwitch(this)" data-name="radioSwitch" >'+fnLanguageSwitch('是')+'</span>'+
+        '                <span class="radioSwitch" data-selectorid="0" tapmode="" onclick="toggleSwitch(this)" data-name="radioSwitch" >'+fnLanguageSwitch('否')+'</span>'+
+        '                <span class="radioSwitch" data-selectorid="2" tapmode="" onclick="toggleSwitch(this)" data-name="radioSwitch" >'+fnLanguageSwitch('还没决定')+'</span>'+
+        '            </div>'+
+        '        </div>'+
+        '        <div class="propose-select">'+
+        '            <div class="selectSwitch sample-agree" tapmode="" onclick="toggleSwitch(this)" data-name="selectSwitch" >'+fnLanguageSwitch('我同意英特尔嵌入式样品计划的')+'</div>'+
+        '            <span class="fake-link" tapmode="" onclick="goBoardNotice()">'+fnLanguageSwitch('条款与条件')+'</span>'+
+        '        </div>'+
+        '        <div class="propose-select">'+
+        '            <div class="selectSwitch text-alot" tapmode="" onclick="toggleSwitch(this)" data-name="selectSwitch" >'+fnLanguageSwitch('我同意英特尔代表或其合作伙伴通过电话或电子邮件与我联系，告知有关英特尔样品的更多信息，英特尔活其合作伙伴还可将我的联系信息用于提供产品或提供支持')+'。</div>'+
+        '        </div>'+
+        '    </div>'+
+        '    <label class="fake-link">'+fnLanguageSwitch('地址信息')+'</label>'+
+        '    <p class="radio-title" style="height: auto;line-height: 1.3rem;">'+fnLanguageSwitch('以下信息为必填，我们会把资料保存到您的个人信息里，下次申请无需再填写。')+'</p>'+
+        '    <div class="form">'+
+        '        <div class="form-group border-1px-top clearfix">'+
+        '            <label class="pull-left">'+fnLanguageSwitch('公司名称（中文）')+'</label>'+
+        '            <input class="sample-company-name-zh form-text-right" type="text" placeholder="'+fnLanguageSwitch('必填')+'">'+
+        '        </div>'+
+        '        <div class="form-group border-1px-top clearfix">'+
+        '            <label class="pull-left">'+fnLanguageSwitch('公司名称（英文）')+'</label>'+
+        '            <input class="sample-company-name-en form-text-right" type="text" placeholder="'+fnLanguageSwitch('必填')+'">'+
+        '        </div>'+
+        '        <div class="form-group border-1px-top clearfix">'+
+        '            <label class="pull-left">'+fnLanguageSwitch('公司地址（中文）')+'</label>'+
+        '            <input class="sample-company-address-zh form-text-right" type="text" placeholder="'+fnLanguageSwitch('必填')+'">'+
+        '        </div>'+
+        '        <div class="form-group border-1px-top clearfix">'+
+        '            <label class="pull-left">'+fnLanguageSwitch('邮政编码')+'</label>'+
+        '            <input class="sample-postcode form-text-right" type="tel" placeholder="'+fnLanguageSwitch('必填')+'">'+
+        '        </div>'+
+        '        <div class="form-group border-1px-top clearfix">'+
+        '            <label class="pull-left">'+fnLanguageSwitch('公司地址（英文）')+'</label>'+
+        '            <input class="sample-company-address-en form-text-right" type="text" placeholder="'+fnLanguageSwitch('必填')+'">'+
+        '        </div>'+
+        '        <div class="form-group border-1px-top clearfix">'+
+        '            <label class="pull-left">'+fnLanguageSwitch('固定电话')+'</label>'+
+        '            <input class="sample-tel form-text-right" type="tel" placeholder="'+fnLanguageSwitch('必填')+'">'+
+        '        </div>'+
+        '        <div class="form-group border-1px-top clearfix">'+
+        '            <label class="pull-left">'+fnLanguageSwitch('公司网址')+'</label>'+
+        '            <input class="sample-website form-text-right" type="text" placeholder="'+fnLanguageSwitch('必填')+'">'+
+        '        </div>'+
+        '    </div>'+
+        '    <div class="btn-submit btn" tapmode onclick="fnSubmit(this)">'+fnLanguageSwitch('提交')+'</div>'+
+        '    <div style="height: 1px"></div>'+
+        '</div>';
+
+
+        UICustomPicker = api.require('UICustomPicker');
+        fnAjax({
+            url: 'supports/findSupportScore?typeId=3',
+            headers: {
+                authorization: USER.token
+            }
+        }, function( ret, err ){
+            if( ret ){
+                var _average = '';
+                for( var i = 0; i < 5; i++ ){
+                    _average += '<i class="'+( i < ret.average ? 'fa-star' : 'fa-star-o' )+' fa"></i>'
+                }
+                $api.dom( '.stars' ).innerHTML = _average;
+                with( api.pageParam.data.data ){
+                    for( var x in intelProducts ){
+                        $api.append($api.dom('#what_to_request' ), 
+                        '<div class="propose-select">'+
+                        '    <div class="selectSwitch selectSwitch1" tapmode="" onclick="toggleSwitch(this,\'selectSwitch\')">'+intelProducts[x].num+'</div>'+
+                        '</div>'+
+                        '<div class="form-group border-1px-top clearfix">'+
+                        '    <label class="pull-left">'+fnLanguageSwitch('申请数量')+'</label>'+
+                        '    <span class="form-text-right selectCount1" tapmode onclick="setSampleCount(this)">'+fnLanguageSwitch('---请选择---')+'</span>'+
+                        '</div>');
+                    }
+                    $api.dom( '.project-header' ).innerHTML = 
+                    '        <label>'+fnLanguageSwitch( '您已选择的项目为' )+'：</label>'+
+                    '        <div class="header-inner">'+
+                    '            <div class="header-inner-img"></div>'+
+                    '            <p class="name">'+projectName+'</p>'+
+                    '            <div class="header-bottom">'+
+                    '                <div class="date-group">'+
+                    '                    <p class="text">'+fnLanguageSwitch( '项目启动时间' )+'</p>'+
+                    '                    <p class="date">'+created+'</p>'+
+                    '                </div>'+
+                    '                <div class="date-counting">'+
+                    '                   <span class="count">342</span>'+fnLanguageSwitch('天')+''+
+                    '                </div>'+
+                    '                <div class="project-state">'+fnLanguageSwitch( '已处于') +' '+fnProjectApprovalStatusJson()[ projectStatus ]+' '+fnLanguageSwitch( '阶段' )+'</div>'+
+                    '            </div>'+
+                    '        </div>'+
+                    '        <p class="create-group">'+fnLanguageSwitch( '如果您不是为这个项目申请支持，请先' )+
+                    '            <span class="btn-create" tapmode onclick="createNewProject()">'+fnLanguageSwitch( '添加项目' )+'</span>'+
+                    '        </p>';
+                }
+            }else{
+                api.toast({
+                    msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                });
+            }
+        });
+        
+        fnAjax({
+            url: 'addresses/getAddress'
+        }, function( ret, err ){
+        	if( ret ){
+	            $api.dom( '.sample-company-name-zh' ).value = ret.fullNameChinese || '';
+	            $api.dom( '.sample-company-name-en' ).value = ret.fullNameEnglish || '';
+	            $api.dom( '.sample-company-address-zh' ).value = ret.addressChinese || '';
+	            $api.dom( '.sample-company-address-en' ).value = ret.addressEnglish || '';
+	            $api.dom( '.sample-postcode' ).value = ret.postcode || '';
+	            $api.dom( '.sample-tel' ).value = ret.telephone || '';
+	            $api.dom( '.sample-website' ).value = ret.webSite || '';
+            }else{
+                api.toast({
+                    msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                });
+            }
+        });
+        return;
+        pageParam = api.pageParam;
+        projectID = pageParam.id;
+        zhuge = api.require('zhuge');
+        if (zhuge) {
+            zhuge.initZhuge();
+        }
+        UICustomPicker = api.require('UICustomPicker');
+        getProjectDetail();
+        getProjectDesigner();
+    };
+
+    function getProjectDesigner(){
+        ajaxRequest('/APPSupportManage/GetSupportAppraise.aspx', 'get', {
+            UserID: account.userid,
+            BatchNo: account.batchno, 
+            SupportTypeID: typeid
+        }, function(ret, err){
+            if(ret && ret.res == undefined){
+                // console.log('ret:normal===='+ JSON.stringify(ret));
+                var data = ret.appdatalist[0];
+                $api.html($api.dom('.designer'), data.UserName);
+                
+                var len = parseInt(data.EvaluateNumber);
+                var str = '';
+                for (var i = 0; i < len; i++) {
+                    str+= '<i class="fa-star fa"></i>';
+                }
+                $api.html($api.dom('.stars'), str);
+                $api.html($api.domAll('.rank .text')[1], '('+ data.UserNum +'人)');
+            } else{
+                console.log('ret:err===='+ JSON.stringify(ret));
+            }
+            if (err) {
+                console.log('err===='+ JSON.stringify(err));
+            }
+
+        });
+        
+    };
+
+    var what_to_request = $api.dom('#what_to_request');
+    function getProjectDetail(){
+        ajaxRequest('/APPProjectManage/APPGetProjectDetail.aspx', 'get', {
+            UserID: account.userid,
+            BatchNo: account.batchno,
+            ProjectID: projectID
+        }, function(ret, err){
+            if(ret && ret.res == undefined){
+                var data = ret.appdatalist[0];
+                $api.html($api.dom('.project-header .header-inner .name'), data.ProjectName);
+                $api.html($api.dom('.project-header .header-inner .date'), data.CreateDate);
+                $api.html($api.dom('.project-header .header-inner .count'), data.ProjectStartDay);
+                $api.html($api.dom('.project-header .header-inner .project-state'), '已处于'+ data.ProjectStatus +'阶段');
+                var str = '';
+                if (data.IntelProductNum1) {
+                    str += '<div class="propose-select">';
+                        str += '<div class="selectSwitch selectSwitch1" tapmode="" onclick="toggleSwitch(this,\'selectSwitch\')">';
+                            str += data.IntelProductNum1;
+                        str += '</div>';
+                    str += '</div>';
+                    str += '<div class="form-group border-1px-top clearfix">';
+                        str += '<label class="pull-left">'+fnLanguageSwitch('申请数量')+'</label>';
+                        str += '<span class="form-text-right selectCount1" data-id="'+ data.IntelProductNum1 +'" tapmode onclick="setSampleCount(this)">'+fnLanguageSwitch('---请选择---')+'</span>';
+                    str += '</div>';
+                }
+                if (data.IntelProductNum2) {
+                    str += '<div class="propose-select">';
+                        str += '<div class="selectSwitch selectSwitch2" tapmode="" onclick="toggleSwitch(this,\'selectSwitch\')">';
+                            str += data.IntelProductNum2;
+                        str += '</div>';
+                    str += '</div>';
+                    str += '<div class="form-group border-1px-top clearfix">';
+                        str += '<label class="pull-left">'+fnLanguageSwitch('申请数量')+'</label>';
+                        str += '<span class="form-text-right selectCount2" data-id="'+ data.IntelProductNum2 +'" tapmode onclick="setSampleCount(this)">'+fnLanguageSwitch('---请选择---')+'</span>';
+                    str += '</div>';
+                }
+                if (data.IntelProductNum3) {
+                    str += '<div class="propose-select">';
+                        str += '<div class="selectSwitch selectSwitch3" tapmode="" onclick="toggleSwitch(this,\'selectSwitch\')">';
+                            str += data.IntelProductNum3;
+                        str += '</div>';
+                    str += '</div>';
+                    str += '<div class="form-group border-1px-top clearfix">';
+                        str += '<label class="pull-left">'+fnLanguageSwitch('申请数量')+'</label>';
+                        str += '<span class="form-text-right selectCount3" data-id="'+ data.IntelProductNum3 +'" tapmode onclick="setSampleCount(this)">'+fnLanguageSwitch('---请选择---')+'</span>';
+                    str += '</div>';
+                }
+                if (data.IntelProductNum4) {
+                    str += '<div class="propose-select">';
+                        str += '<div class="selectSwitch selectSwitch4" tapmode="" onclick="toggleSwitch(this,\'selectSwitch\')">';
+                            str += data.IntelProductNum4;
+                        str += '</div>';
+                    str += '</div>';
+                    str += '<div class="form-group border-1px-top clearfix">';
+                        str += '<label class="pull-left">'+fnLanguageSwitch('申请数量')+'</label>';
+                        str += '<span class="form-text-right selectCount4" data-id="'+ data.IntelProductNum4 +'" tapmode onclick="setSampleCount(this)">'+fnLanguageSwitch('---请选择---')+'</span>';
+                    str += '</div>';
+                }
+                if (data.IntelProductNum5) {
+                    str += '<div class="propose-select">';
+                        str += '<div class="selectSwitch selectSwitch5" tapmode="" onclick="toggleSwitch(this,\'selectSwitch\')">';
+                            str += data.IntelProductNum5;
+                        str += '</div>';
+                    str += '</div>';
+                    str += '<div class="form-group border-1px-top clearfix">';
+                        str += '<label class="pull-left">'+fnLanguageSwitch('申请数量')+'</label>';
+                        str += '<span class="form-text-right selectCount5" data-id="'+ data.IntelProductNum5 +'" tapmode onclick="setSampleCount(this)">'+fnLanguageSwitch('---请选择---')+'</span>';
+                    str += '</div>';
+                }
+                $api.html(what_to_request, str);
+            } else{
+                console.log('ret:err===='+ JSON.stringify(ret));
+            }
+            if (err) {
+                console.log('err===='+ JSON.stringify(err));
+            }
+        });
+    };
+    // 以上通用
+    // 设置数量
+    function setSampleCount(el){
+        openSelector(el, [1,2,3,4,5,6,7,8,9,10]);
+    };
+
+    function toggleSwitch(obj){
+        var clz = $api.attr(obj, 'data-name' );
+        var $selectSwitch = $api.domAll('.'+clz);
+        var reg = /radio/g;
+        if (reg.test(clz)) {
+            for(var i=0;i<$selectSwitch.length;i++){
+                $api.removeCls($selectSwitch[i],'show');
+            }
+        } else {
+
+        }
+        if($api.hasCls(obj,'show')){
+            $api.removeCls(obj,'show');
+        }else{
+            $api.addCls(obj,'show');
+        }
+    };
+
+    // 新增项目
+    function createNewProject(name) {
+        api.showProgress({
+            title: '',
+            text: '',
+            modal: false
+        });
+        
+        var move = isHuawei();
+        var animation = {};
+        if (move) {
+            animation = {
+                type: 'movein',
+                subType: 'from_right'
+            }
+        }
+        ajaxRequest('APPGetDataType/APPCheckUserEmail.aspx', 'get', {
+            UserID: account.userid,
+            BatchNo: account.batchno,
+        }, function (ret, err) {
+            api.hideProgress();
+            if (ret && ret.res == 1) {
+                api.openWin({
+                    name: 'create_new_project',
+                    url: 'widget://' + DIR + '/simple_page/create_new_project_win.html',
+                    bounces: false,
+                    pageParam: {
+                        from: 'support'
+                    },
+                    animation: animation
+                });
+            } else {
+                api.alert({
+                    title: fnLanguageSwitch('提醒'),
+                    msg: fnLanguageSwitch('您的个人信息尚未完善，请先完善信息')
+                }, function () {
+                    api.openWin({
+                        name: 'profile_win',
+                        url: 'widget://' + DIR + '/member_center/profile.html',
+                        bounces: false,
+                        animation: animation
+                    });
+                });
+            }
+            if (err) {
+                api.toast({
+    global: true,
+                    msg: JSON.stringify(err),
+                    duration: 2000,
+                    location: 'middle'
+                });
+            }
+        });
+    };
+    
+    // 查看条款
+    function goBoardNotice(){
+        var url = 'https://ccechina.intel.com/SystemManage/ProceduralClause.aspx';
+        var move = isHuawei();
+        var animation = {};
+        if (move) {
+            animation = {
+                type: 'movein',
+                subType: 'from_right'
+            }           
+        }
+        api.openWin({
+            name: 'web_clause_win',
+            url: 'widget://' + DIR + '/web_page/web_win.html',
+            bounces: false,
+            vScrollBarEnabled: false,
+            hScrollBarEnabled: false,
+            pageParam: {
+                title: fnLanguageSwitch('条款与条件'),
+                url: url
+            },
+            animation: animation
+        });
+    };
+    // 获取表单信息
+    function getFormInfo(){
+        ajaxRequest('/APPSupportManage/APPGetSupportUserInfo.aspx', 'get', {
+            UserID: account.userid,
+            BatchNo: account.batchno
+        }, function(ret, err){
+            if (ret && ret.res == undefined) {
+                // console.log('ret:normal===='+ JSON.stringify(ret));
+
+                var data = ret.appdatalist[0];
+                data.CompanyFullName && $api.val($api.dom('.sample-company-name-zh'), data.CompanyFullName);
+                data.CompanyEnglish && $api.val($api.dom('.sample-company-name-en'), data.CompanyEnglish);
+                data.CompanyAddressChinese && $api.val($api.dom('.sample-company-address-zh'), data.CompanyAddressChinese);
+                data.CompanyAddressEnglish && $api.val($api.dom('.sample-company-address-en'), data.CompanyAddressEnglish);
+                data.PostalCode && $api.val($api.dom('.sample-postcode'), data.PostalCode);
+                data.OfficePhone && $api.val($api.dom('.sample-tel'), data.OfficePhone);
+                data.CompanyWebSite && $api.val($api.dom('.sample-website'), data.CompanyWebSite);
+            } else {
+                api.toast({
+    global: true,
+                    msg: JSON.stringify(ret),
+                    duration: 2000,
+                    location: 'middle'
+                });
+            }
+            if (err) {
+                api.toast({
+    global: true,
+                    msg: JSON.stringify(err),
+                    duration: 2000,
+                    location: 'bottom'
+                });
+            }
+        });
+    };
+    // fnSubmit
+    var submitLock = false;
+    function isEmepty(str){
+        if (str == undefined || str == null) {
+            return true;
+        } else {}
+        if ($api.trim(str) == '' || $api.trim(str) == fnLanguageSwitch('---请选择---')) {
+            return true;
+        } else {
+            return false;
+        }
+    };
+    function fnSubmit(el){
+        var vTempEl = $api.domAll('#what_to_request .selectSwitch.show' ),
+            product = [],
+            qty = [],
+            content = $api.dom( '.more-wanted' ).value.trim(),
+            fullNameChinese = $api.dom( '.sample-company-name-zh' ).value.trim(),
+            fullNameEnglish = $api.dom( '.sample-company-name-en' ).value.trim(),
+            addressChinese = $api.dom( '.sample-company-address-zh' ).value.trim(),
+            addressEnglish = $api.dom( '.sample-company-address-en' ).value.trim(),
+            postcode = $api.dom( '.sample-postcode' ).value.trim(),
+            telephone = $api.dom( '.sample-tel' ).value.trim(),
+            webSite = $api.dom( '.sample-website' ).value.trim();
+             if (zhuge) {
+            zhuge.track({
+                eventName: '项目支持_技术支持提交按钮',
+                eventPro: {
+                    '模块来源': '免费样片'
+                }
+            });
+        }
+        if( vTempEl.length ){
+            for( var i = 0; i < vTempEl.length; i++ ){
+                var _qty =  $api.attr(vTempEl[i].parentElement.nextElementSibling.querySelector( 'span' ), 'data-selectorid' );
+                if( _qty === null ){
+                    api.toast({
+                        msg: fnLanguageSwitch( '请选择样片数量' )
+                    });
+                    return;
+                }
+                product.push( vTempEl[i].innerHTML );
+                qty.push( _qty );
+            }
+        }else{
+            api.toast({
+                msg: fnLanguageSwitch( '请选择样片' )
+            });
+            return;
+        }
+        if( ! content ){
+            api.toast({
+                msg: fnLanguageSwitch( '请介绍一下本产品' )
+            });
+        }else if( ! fullNameChinese ){
+            api.toast({
+                msg: fnLanguageSwitch( '请填写公司中文名称' )
+            });
+        }else if( ! fullNameEnglish ){
+            api.toast({
+                msg: fnLanguageSwitch( '请填写公司英文名称' )
+            });
+        }else if( ! addressChinese ){
+            api.toast({
+                msg: fnLanguageSwitch( '请填写公司中文地址' )
+            });
+        }else if( ! addressEnglish ){
+            api.toast({
+                msg: fnLanguageSwitch( '请填写公司英文地址' )
+            });
+        }else if( ! postcode ){
+            api.toast({
+                msg: fnLanguageSwitch( '请填写邮政编码' )
+            });
+        }else if( ! webSite ){
+            api.toast({
+                msg: fnLanguageSwitch( '请填写公司网址' )
+            });
+        }else if( ! $api.hasCls($api.dom( '.sample-agree'), 'show') ){
+            api.toast({
+                msg: fnLanguageSwitch( '请同意条款' )
+            });
+        }else{
+            fnAjax({
+                url: 'supports/FreeModel',
+                data: {
+                    values: {
+                        projectId: api.pageParam.data.id,
+                        "FreeModel": {
+                            "product": product.join( ',' ),
+                            "qty": qty.join( ',' ),
+                            content: content,
+                            "isDeveOther": +$api.attr($api.dom( '.radioSwitch.show' ), 'data-selectorid' ),
+                            "toContact": $api.hasCls( $api.dom( '.text-alot' ), 'show') ? 1 : 0
+                        },
+                        "address": {
+                            "fullNameChinese": fullNameChinese,
+                            "fullNameEnglish": fullNameChinese,
+                            "addressChinese": addressChinese,
+                            "addressEnglish": addressEnglish,
+                            "postcode": postcode,
+                            "telephone": telephone,
+                            "webSite": webSite
+                        }
+                    }
+                }
+            }, function( ret, err ){
+                if( ret ){
+                    api.toast({
+                        msg: fnLanguageSwitch( '免费样片申请提交成功' )
+                    });
+                    setTimeout(function(){
+                        api.closeWin();
+                    },1000);
+                }else{
+                    api.toast({
+                        global: true,
+                        msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                    });
+                }
+            });   
+        }   
+        return;
+
+        if($api.domAll('.sample-agree.show').length){
+
+        } else{
+            api.alert({
+                title: '提醒', 
+                msg: '请同意英特尔嵌入式样品计划的条款与条件'
+            });
+            return false;
+        }
+        if($api.domAll('.text-alot.show').length){
+
+        } else{
+            api.alert({
+                title: '提醒', 
+                msg: '请选择我同意英特尔代表或其合作伙伴通过电话或电子邮件与我联系。'
+            });
+            return false;
+        }
+
+        var selectSwitchBtns = $api.domAll('#what_to_request .selectSwitch.show');
+
+        var ProjectProduct = '', ProjectProductNum = '';
+        if(selectSwitchBtns.length){
+            for (var i = 0; i < selectSwitchBtns.length; i++) {
+                if($api.hasCls(selectSwitchBtns[i], 'selectSwitch1')){
+                    if (isEmepty($api.text($api.dom('.selectCount1')))) {
+                        api.alert({
+                            title: '提醒', 
+                            msg: '请选择样片数'
+                        });
+                        return false;
+                    }
+                    if(i == selectSwitchBtns.length - 1){
+                        ProjectProduct += $api.trim($api.text(selectSwitchBtns[i]));
+                        ProjectProductNum += $api.trim($api.text($api.dom('.selectCount1')));
+                    } else{
+                        ProjectProduct += $api.trim($api.text(selectSwitchBtns[i])) + ',';
+                        ProjectProductNum += $api.trim($api.text($api.dom('.selectCount1'))) + ',';
+                    }
+                    
+                }
+                if($api.hasCls(selectSwitchBtns[i], 'selectSwitch2')){
+                    if (isEmepty($api.text($api.dom('.selectCount2')))) {
+                        api.alert({
+                            title: '提醒', 
+                            msg: '请选择样片数'
+                        });
+                        return false;
+                    }
+                    if(i == selectSwitchBtns.length - 1){
+                        ProjectProduct += $api.trim($api.text(selectSwitchBtns[i]));
+                        ProjectProductNum += $api.trim($api.text($api.dom('.selectCount2')));
+                    } else{
+                        ProjectProduct += $api.trim($api.text(selectSwitchBtns[i])) + ',';
+                        ProjectProductNum += $api.trim($api.text($api.dom('.selectCount2'))) + ',';
+                    }
+                }
+                if($api.hasCls(selectSwitchBtns[i], 'selectSwitch3')){
+                    if (isEmepty($api.text($api.dom('.selectCount3')))) {
+                        api.alert({
+                            title: '提醒', 
+                            msg: '请选择样片数'
+                        });
+                        return false;
+                    }
+                    if(i == selectSwitchBtns.length - 1){
+                        ProjectProduct += $api.trim($api.text(selectSwitchBtns[i]));
+                        ProjectProductNum += $api.trim($api.text($api.dom('.selectCount3')));
+                    } else{
+                        ProjectProduct += $api.trim($api.text(selectSwitchBtns[i])) + ',';
+                        ProjectProductNum += $api.trim($api.text($api.dom('.selectCount3'))) + ',';
+                    }
+                }
+                if($api.hasCls(selectSwitchBtns[i], 'selectSwitch4')){
+                    if (isEmepty($api.text($api.dom('.selectCount4')))) {
+                        api.alert({
+                            title: '提醒', 
+                            msg: '请选择样片数'
+                        });
+                        return false;
+                    }
+                    if(i == selectSwitchBtns.length - 1){
+                        ProjectProduct += $api.trim($api.text(selectSwitchBtns[i]));
+                        ProjectProductNum += $api.trim($api.text($api.dom('.selectCount4')));
+                    } else{
+                        ProjectProduct += $api.trim($api.text(selectSwitchBtns[i])) + ',';
+                        ProjectProductNum += $api.trim($api.text($api.dom('.selectCount4'))) + ',';
+                    }
+                }
+                if($api.hasCls(selectSwitchBtns[i], 'selectSwitch5')){
+                    if (isEmepty($api.text($api.dom('.selectCount5')))) {
+                        api.alert({
+                            title: '提醒', 
+                            msg: '请选择样片数'
+                        });
+                        return false;
+                    }
+                    if(i == selectSwitchBtns.length - 1){
+                        ProjectProduct += $api.trim($api.text(selectSwitchBtns[i]));
+                        ProjectProductNum += $api.trim($api.text($api.dom('.selectCount5')));
+                    } else{
+                        ProjectProduct += $api.trim($api.text(selectSwitchBtns[i])) + ',';
+                        ProjectProductNum += $api.trim($api.text($api.dom('.selectCount5'))) + ',';
+                    }
+                }
+
+            }
+        } else{
+            api.alert({
+                title: '提醒', 
+                msg: '请选择样片'
+            });
+            return false;
+        }
+        var ProductIntroduction = $api.trim($api.val($api.dom('.more-wanted')));
+        if (isEmepty(ProductIntroduction)) {
+            api.alert({
+                title: '提醒', 
+                msg: '请介绍一下本产品'
+            });
+            return false;
+        }
+        var IfConsider = $api.trim($api.text($api.dom('.radioSwitch.show')));
+        var CompanyName = $api.trim($api.val($api.dom('.sample-company-name-zh')));
+        if (isEmepty(CompanyName)) {
+            api.alert({
+                title: '提醒', 
+                msg: '请填写公司中文名称'
+            });
+            return false;
+        }
+        var CompanyEnglishName = $api.trim($api.val($api.dom('.sample-company-name-en')));
+        if (isEmepty(CompanyEnglishName)) {
+            api.alert({
+                title: '提醒', 
+                msg: '请填写公司英文名称'
+            });
+            return false;
+        }
+        var CompanyAddress = $api.trim($api.val($api.dom('.sample-company-address-zh')));
+        if (isEmepty(CompanyAddress)) {
+            api.alert({
+                title: '提醒', 
+                msg: '请填写公司中文地址'
+            });
+            return false;
+        }
+        var CompanyEnglishAddress = $api.trim($api.val($api.dom('.sample-company-address-en')));
+        if (isEmepty(CompanyEnglishAddress)) {
+            api.alert({
+                title: '提醒', 
+                msg: '请填写公司英文地址'
+            });
+            return false;
+        }
+        var PostCode = $api.trim($api.val($api.dom('.sample-postcode')));
+        if (isEmepty(PostCode)) {
+            api.alert({
+                title: '提醒', 
+                msg: '请填写邮政编码'
+            });
+            return false;
+        }
+        var OfficePhone = $api.trim($api.val($api.dom('.sample-tel')));
+        if (isEmepty(OfficePhone)) {
+            api.alert({
+                title: '提醒', 
+                msg: '请填写固定电话'
+            });
+            return false;
+        }
+        var CompanyWeb = $api.trim($api.val($api.dom('.sample-website')));
+        if (isEmepty(CompanyWeb)) {
+            api.alert({
+                title: '提醒', 
+                msg: '请填写公司网址'
+            });
+            return false;
+        }
+        // codes there
+        if (submitLock) {
+            return false;
+        } else {
+            submitLock = true;
+            $api.attr(el, 'disabled', 'disabled');
+        }
+
+        if (zhuge) {
+            zhuge.track({
+                eventName: '项目支持_技术支持提交按钮',
+                eventPro: {
+                    '模块来源': '免费样片'
+                }
+            });
+        }
+        ajaxRequest('/APPSupportManage/APPSupportFreeModel.aspx', 'post', {
+            UserID: account.userid,
+            BatchNo: account.batchno,
+            ItemNameID: projectID,
+            ProjectProduct: ProjectProduct,
+            ProjectProductNum: ProjectProductNum,
+            ProductIntroduction: ProductIntroduction,
+            IfConsider: IfConsider,
+            CompanyName: CompanyName,
+            CompanyEnglishName: CompanyEnglishName,
+            CompanyAddress: CompanyAddress,
+            CompanyEnglishAddress: CompanyEnglishAddress,
+            PostCode: PostCode,
+            OfficePhone: OfficePhone,
+            CompanyWeb: CompanyWeb,
+        }, function(ret, err){
+            submitLock = false;
+            $api.removeAttr(el, 'disabled');
+            if(ret && ret.res){
+                // console.log('ret:normal===='+ JSON.stringify(ret));
+                api.toast({
+                 global: true,
+                    msg: '免费样片申请提交成功',
+                    duration: 2000,
+                    location: 'middle'
+                });
+                setTimeout(function(){
+                    api.closeWin();
+                },2000);
+            } else{
+                api.toast({
+                    global: true,
+                    msg: JSON.stringify(ret),
+                    duration: 2000,
+                    location: 'middle'
+                });
+            }
+            if (err) {
+                api.toast({
+                       global: true,
+                    msg: JSON.stringify(err),
+                    duration: 2000,
+                    location: 'middle'
+                });
+            }
+        })
+        api.closeWin();
+    };
+    // 调用selector
+    var UICustomPickerElement,
+        UICustomPickerId,
+        selectorValue,
+        selectorId,
+        blurInput = $api.domAll('input'),
+        blurText = $api.domAll('textarea');
+
+</script>
+</html>

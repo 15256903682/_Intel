@@ -1,0 +1,306 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"
+    />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>Hello APP</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/fonts_awesome/font-awesome.min.css">
+    <style type="text/css">
+        #header {
+            display: none;
+        }
+        
+        #header.active {
+            display: block;
+        }
+        
+        #header .header-multi.active {
+            display: block;
+        }
+        
+        #header .header-multi .header-normal {
+            position: relative;
+            display: none;
+        }
+        
+        #header .header-multi .header-normal.active {
+            display: block;
+        }
+        
+        #header .icon {
+            width: 4.4rem;
+            height: 4.4rem;
+            background: center center no-repeat;
+            background-size: 2rem;
+            position: relative;
+        }
+        
+        #header .icon-comments {
+            background-image: url(../image/home/icon_message.png);
+        }
+        
+        #header .icon-share {
+            background-image: url(../image/home/icon_share.png);
+        }
+        
+        #header .icon-help {
+            background-image: url(../image/Macthmaking/icon_help.png);
+        }
+        
+        #header .icon-addProject {
+            background-image: url(../image/Macthmaking/icon_addProject.png);
+            background-position: left center;
+            padding-left: 25px;
+            padding-right: 10px;
+            font-size: 1.4rem;
+            width: auto;
+            background-size: 18px;
+        }
+        
+        #footer {
+            height: 4.4rem;
+            background-color: #FFFFFF;
+            width: 100%;
+            text-align: center;
+        }
+        
+        #footer.border-1px-top:before {
+            color: #E3E3E3;
+        }
+        
+        #footer .footer-btn {
+            float: left;
+            width: 25%;
+            height: 4.4rem;
+            text-align: center;
+            color: #919191;
+            font-size: 0;
+            padding-top: 0.5rem;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        
+        #footer .footer-btn:active,
+        #footer .footer-btn.active {
+            color: #00AEEF;
+        }
+        
+        #footer .footer-btn[disabled] {
+            display: none;
+        }
+        
+        #footer .footer-btn .icon {
+            height: 24px;
+            width: 100%;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+        
+        #footer .footer-btn .icon.icon-home {
+            background-image: url(../image/home/abf_06.png);
+        }
+        
+        #footer .footer-btn .icon.icon-cog {
+            background-image: url(../image/home/support_icon_03.png);
+        }
+        
+        #footer .footer-btn .icon.icon-chain {
+            background-image: url(../image/home/sy_03.png);
+        }
+        
+        #footer .footer-btn .icon.icon-comments {
+            background-image: url(../image/home/zxkf.png);
+        }
+        
+        #footer .footer-btn .icon.icon-user {
+            background-image: url(../image/home/p_03.png);
+        }
+        
+        #footer .footer-btn.active .icon.icon-home,
+        #footer .footer-btn:active .icon.icon-home {
+            background-image: url(../image/home/discover_highlight.png);
+        }
+        
+        #footer .footer-btn.active .icon.icon-cog,
+        #footer .footer-btn:active .icon.icon-cog {
+            background-image: url(../image/home/debug_highlight.png);
+        }
+        
+        #footer .footer-btn.active .icon.icon-chain,
+        #footer .footer-btn:active .icon.icon-chain {
+            background-image: url(../image/home/chain_highlight.png);
+        }
+        
+        #footer .footer-btn.active .icon.icon-comments,
+        #footer .footer-btn:active .icon.icon-comments {
+            background-image: url(../image/home/service_highlight.png);
+        }
+        
+        #footer .footer-btn.active .icon.icon-user,
+        #footer .footer-btn:active .icon.icon-user {
+            background-image: url(../image/home/personal_highlight.png);
+        }
+        
+        #footer .footer-btn .footer-btn-name {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        
+        #messageBadge {
+            position: absolute;
+            width: 0.5rem;
+            height: 0.5rem;
+            background-color: red;
+            border-radius: 10px;
+            top: 1rem;
+            right: 1rem;
+        }
+        
+        .guide-cover {
+            position: absolute;
+            background-color: RGBA(0, 0, 0, 0.8);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 99;
+        }
+        
+        .header-btn.pull-right {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+        }
+        
+        .tap-active {
+            background-color: #0060A8 !important;
+        }
+    </style>
+</head>
+
+    <body>
+        <div id="wrap">
+            <div id="header" class="active">
+                <div class="header-multi">
+                    <div class="header-normal header-normal-home active">
+                        <div class="header-btn pull-left">
+                            <span class="icon icon-comments" tapmode="tap-active" onclick="fnOpenMessage()">
+                            <span id="messageBadge" class="hidden"></span>
+                            </span>
+                        </div>
+                        <div class="header-btn pull-right">
+                            <span class="icon icon-share" tapmode="tap-active" onclick="openShare()"></span>
+                        </div>
+                        <div class="header-center">
+                            <span class="title">--</span>
+                        </div>
+                    </div>
+                    <div class="header-normal header-normal-support">
+                        <div class="header-btn pull-right " style="width:auto;">
+                            <span class="icon icon-addProject" tapmode="tap-active" onclick="createNewProject()">-</span>
+                        </div>
+                        <div class="header-btn pull-left hidden" id="supportBackMsg">
+                            <span class="icon fa-angle-left" tapmode="tap-active" onclick="openMessage()"></span>
+                        </div>
+                        <div class="header-center" id="support">
+                            <span class="title">--</span>
+                        </div>
+                    </div>
+                    <div class="header-normal header-normal-chain" id="chain">
+                        <div class="header-btn pull-left" id="help">
+                            <span class="icon icon-help" tapmode="tap-active" onclick="openModDes()"></span>
+                        </div>
+                        <div class="header-btn pull-left hidden" id="backMsg">
+                            <span class="icon fa-angle-left" tapmode="tap-active" onclick="openMessage()"></span>
+                        </div>
+                        <div class="header-btn pull-right hidden" style="width:auto;">
+                            <span class="icon icon-addProject" tapmode="tap-active" onclick="createNewProject()">--</span>
+                        </div>
+                        <div class="header-center" style="margin: 0 4.4rem">
+                            <span class="title"></span>
+                        </div>
+                    </div>
+                    <div class="header-normal header-normal-service">
+                        <div class="header-center">
+                            <span class="title">Service Center</span>
+                        </div>
+                    </div>
+
+                    <div class="header-normal header-normal-my">
+
+                    </div>
+                </div>
+            </div>
+            <div id="main">
+            </div>
+            <div id="footer" class="border-1px-top">
+                <div class="footer-btn footer-btn-home active" tapmode="tap-active" onclick="changePage('home',0);">
+                    <span class="fa fa-home"></span>
+                    <span class="icon icon-home"></span>
+
+                    <p class="footer-btn-name">--</p>
+                </div>
+                <div class="footer-btn footer-btn-support" tapmode="tap-active" onclick="changePage('support',0);">
+                    <span class="fa fa-cog"></span>
+                    <span class="icon icon-cog"></span>
+
+                    <p class="footer-btn-name">--</p>
+                </div>
+                <div class="footer-btn footer-btn-chain" tapmode="tap-active" onclick="changePage('chain',0);">
+                    <span class="fa fa-chain"></span>
+                    <span class="icon icon-chain"></span>
+
+                    <p class="footer-btn-name">-</p>
+                </div>
+                <div class="footer-btn footer-btn-service" tapmode="tap-active" onclick="openService();">
+                    <span class="fa fa-comments-o"></span>
+                    <span class="icon icon-comments"></span>
+
+                    <p class="footer-btn-name">--</p>
+                </div>
+
+                <div class="footer-btn footer-btn-my" tapmode="tap-active" onclick="changePage('my', 1);">
+                    <span class="fa fa-user"></span>
+                    <span class="icon icon-user"></span>
+
+                    <p class="footer-btn-name">--</p>
+                </div>
+            </div>
+        </div>
+
+        <form action="http://127.0.0.1:8081/process_get" method="GET">
+            First Name: <input type="text" name="first_name"> <br> Last Name: <input type="text" name="last_name">
+            <input type="submit" value="Submit">
+        </form>
+
+        <form action="http://127.0.0.1:8081/process_post" method="POST">
+            First Name: <input type="text" name="first_name"> <br> Last Name: <input type="text" name="last_name">
+            <input type="submit" value="Submit">
+        </form>
+
+
+        <h3>文件上传：</h3>
+        选择一个文件上传: <br />
+        <form action="/file_upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="image" size="50" />
+            <br />
+            <input type="submit" value="上传文件" />
+        </form>
+
+
+
+    </body>
+    <script type="text/javascript" src="../script/api.js"></script>
+    <script type="text/javascript" src="../script/ajaxRequest.js"></script>
+    <script type="text/javascript" src="../script/languge.js"></script>
+    <script type="text/javascript">
+
+    </script>
+
+    </html>

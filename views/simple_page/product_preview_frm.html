@@ -1,0 +1,164 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>Product preview-frm</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" href="../../css/common.css">
+    <style type="text/css">
+    body{
+    	height: auto;
+    	min-height: 100%;
+    }
+    .image-box{
+    	position: relative;
+	    box-sizing: border-box;
+	    padding: 0.8rem;
+	    width: 100%;
+	    height: 18rem;
+	    background-image: url(../../image/Macthmaking/MacthmakingMain/MC_morentu.png);
+	    background-repeat: no-repeat;
+	    background-position: center center;
+	    background-size: auto 14rem;
+    }
+    .split{
+    	border-radius: 999px;
+	    -webkit-background-clip:padding-box;
+	    background-clip:padding-box;
+	    -webkit-box-sizing: border-box;
+	            box-sizing: border-box;
+	    margin: 0 1rem;
+	    background-color: rgba(0, 113, 197, 1);
+	    height: 0.2rem;
+    }
+    .content-box{
+    	padding: 4rem 2rem;
+    	border-bottom: 1px solid #cccccc;
+    }
+    .product-name{
+    	font-size: 1.4rem;
+    	color: #000000;
+    	margin-bottom: 2rem;
+    }
+    .product-des{
+    	color: #666666;
+    	font-size: 1.2rem;
+    	margin-bottom: 2rem;
+    }
+    .btn-submit{
+    	width: 26rem;
+    	height: 3.4rem;
+    	background-color: rgba(0, 113, 197, 1);
+    	border-radius: 0.3rem;
+	    -webkit-background-clip: padding-box;
+	    background-clip: padding-box;
+		color: #ffffff;
+		font-size: 1.8rem;
+		line-height: 3.4rem;
+		text-align: center;
+		margin: 3rem auto;
+    }
+    .product-name img{
+    	width: 4rem;
+    	vertical-align: middle;
+    }
+    </style>
+</head>
+<body>
+	<div class="image-box">
+		
+	</div>
+	<div class="split"></div>
+	<div class="content-box">
+		<p class="product-name">
+
+		</p>
+		<p class="product-des"></p>
+	</div>
+	<div class="btn-submit btn" tapmode onclick="fnSubmit()">Submit</div>
+	<div style="height:1px"></div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript">
+	var account = $api.getStorage('loginInfo');
+
+	var thisData;
+	apiready = function(){
+	  	var pageParam = api.pageParam;
+        thisData = pageParam.thisData;
+        setInfo();
+        console.log(JSON.stringify(thisData))
+	};
+	function setInfo(){
+		var strImg = '';
+		thisData.VideoPath && (strImg += '<img src="../../image/project/play.png" alt="">');
+		thisData.ProductName && (strImg += thisData.ProductName);
+		$api.html($api.dom('.product-name'), strImg);
+
+		thisData.ProductPath && getImageCache($api.dom('.image-box'), (host + thisData.ProductPath.replace('~/', '')));
+		thisData.ProductProfile && $api.text($api.dom('.product-des'), thisData.ProductProfile);
+
+	};
+
+	function fnSubmit(){
+		thisData.UserID = parseInt(account.userid);
+		thisData.BatchNo = account.batchno;
+		thisData.ProductPath = host + thisData.ProductPath.replace('~/', '');
+
+		ajaxRequest('/APPUserInfo/APPProductReleaseAdd.aspx', 'post', thisData,
+
+		function(ret, err){
+			if (ret && ret.res) {
+                api.alert({
+                    title: '', 
+                    msg: ret.des
+                }, function(){
+                	api.sendEvent({
+                	    name: 'projectDetailRefresh'
+                	});
+                	api.closeWin({
+                		name: 'publish_win'
+                	});
+                	api.closeWin({
+                		name: 'publish_detail'
+                	});
+                	api.closeWin();
+                });
+            } else {
+                api.toast({
+	global: true,
+                    msg: JSON.stringify(ret),
+                    duration: 2000,
+                    location: 'middle'
+                });
+            }
+            if (err) {
+                api.toast({
+	global: true,
+                    msg: JSON.stringify(err),
+                    duration: 2000,
+                    location: 'middle'
+                });
+            }
+		});
+	};
+
+	function getImageCache(el){
+        var url = $api.attr(el, 'data-url');
+        api.imageCache({
+            url: url,
+            thumbnail: false
+        }, function(ret, err){
+            if ( ret && ret.status) {
+                // $api.attr(el, 'src', ret.url);
+                $api.css(el, 'background-image: url('+ ret.url +')');
+            }
+            if (err) {}
+        });
+    };
+</script>
+</html>

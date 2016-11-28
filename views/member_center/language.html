@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+        <style>
+            html {
+                height: 100%;
+            }
+            
+            body {
+                width: 100%;
+                height: 100%;
+                min-height: 100%;
+                background-color: #f0eff7;
+            }
+            
+            .header {
+                position: relative;
+                widht: 100%;
+                height: 44px;
+                background-color: #0171c5;
+            }
+            
+            .header .back {
+                position: absolute;
+                left: 0px;
+                bottom: 0;
+                width: 44px;
+                height: 44px;
+                line-height: 44px;
+                text-align: center;
+                color: #fff;
+                font-size: 14px;
+                z-index: 2;
+            }
+            
+            .header .title {
+                position: relative;
+                bottom: 0;
+                width: 100%;
+                height: 44px;
+                font-size: 16px;
+                line-height: 44px;
+                color: #fff;
+                text-align: center;
+            }
+            
+            .header .right {
+                position: absolute;
+                right: 0px;
+                bottom: 0;
+                width: 44px;
+                height: 44px;
+                line-height: 44px;
+                text-align: center;
+                color: #fff;
+                font-size: 14px;
+            }
+            
+            .group {
+                position: relative;
+                margin-top: 16px;
+                margin-bottom: 16px;
+                width: 100%;
+                height: auto;
+            }
+            
+            .group .row {
+                position: relative;
+                box-sizing: border-box;
+                padding-left: 16px;
+                padding-right: 16px;
+                margin-bottom: 4px;
+                width: 100%;
+                height: 44px;
+                color: #444;
+                background-color: #fff;
+            }
+            
+            .group .row .name {
+                position: relative;
+                box-sizing: border-box;
+                padding-right: 16px;
+                width: 100%;
+                height: 44px;
+                font-size: 15px;
+                text-align: left;
+                line-height: 44px;
+            }
+            
+            .group .disabled .name {
+                opacity: 0.3;
+            }
+            
+            .group .row .status {
+                position: absolute;
+                top: 0;
+                right: 16px;
+                width: 16px;
+                height: 100%;
+                background-repeat: no-repeat;
+                background-size: 16px 16px;
+                background-position: center center;
+            }
+            
+            .group .row .status.selected {
+                background-image: url(../../image/list-selected.png);
+            }
+            
+            .highlight {
+                opacity: 0.7;
+                
+            }
+            .hover{
+                 opacity: 0.7;
+                background-color: #0060A8 !important;
+            }
+        </style>
+    </head>
+
+    <body>
+        <header id="header" class="header">
+            <!-- <div class="back" tapmode="highlight" onclick="api.closeWin()">Cancel</div>
+            <div class="title">Select language</div>
+            <div class="right" tapmode="highlight" onclick="fnChangeLanguage()">Save</div> -->
+        </header>
+        <section class="group">
+            <div class="row" tapmode="highlight" onclick="changeSwitch(this)">
+                <div class="name">中文</div>
+                <div class="status" data-lang="zh-cn"></div>
+            </div>
+            <div class="row" tapmode="highlight" onclick="changeSwitch(this)">
+                <div class="name">English(Demo Version)</div>
+                <div class="status" data-lang="en-us"></div>
+            </div>
+        </section>
+    </body>
+</html>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript">
+    var thisLang = $api.getStorage('app_language');
+        
+        
+    var zhuge;
+    apiready = function() {
+
+        $api.dom('#header').innerHTML=
+        '    <div class="back" tapmode="hover" onclick="api.closeWin()">'+fnLanguageSwitch('取消')+'</div>'+
+        '    <div class="title">'+fnLanguageSwitch('选择语言')+'</div>'+
+        '    <div class="right" tapmode="hover" onclick="fnChangeLanguage()">'+fnLanguageSwitch('保存')+'</div>';
+         api.parseTapmode();
+
+    var thisLangBtn = $api.domAll('.group .status');
+        if ( ( $api.getStorage('app_language') || fnGetSysLanguage() ) === 'zh-cn' ) {
+            $api.addCls(thisLangBtn[0], 'selected');
+        } else {
+            $api.addCls(thisLangBtn[1], 'selected');
+        }
+
+        zhuge = api.require('zhuge');
+        if (zhuge) {
+            zhuge.initZhuge();
+        }
+        fnInit();
+    };
+
+    function fnInit() {
+        var header = $api.byId('header');
+        $api.fixStatusBar(header);
+    };
+
+    function fnChangeLanguage() {
+        var lang = $api.attr($api.dom('.group .selected'), 'data-lang');
+        if (lang == 'zh-cn') {
+            $api.setStorage('app_language', 'zh-cn');
+            if (zhuge) {
+                zhuge.track({
+                    eventName: '语言切换',
+                    eventPro: {
+                        '选择中文': ''
+                    }
+                });
+            }
+        } else {
+            $api.setStorage('app_language', 'en-us');
+            if (zhuge) {
+                zhuge.track({
+                    eventName: '语言切换',
+                    eventPro: {
+                        '选择English': ''
+                    }
+                });
+            }
+        }
+        
+        api.sendEvent({
+            name: 'language_changed'
+        });
+    };
+
+    function changeSwitch(el){
+        $api.removeCls($api.dom('.group .selected'), 'selected');
+        $api.addCls($api.dom(el, '.status'), 'selected');
+    };
+</script>

@@ -1,0 +1,1544 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>Updates</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" href="../../css/common.css">
+    <style type="text/css">
+    body{
+    	height: auto;
+    	min-height: 100%;
+    }
+
+	.border-1px-bottom:after{
+		color: #B3B7BA;
+	}
+
+	/*表单*/
+	#content_group{
+		position: relative;
+	}
+	#content_group .form-header{
+		background: #DDF0FF url(../../image/project/new_1_highlight.png) 1.5rem 50% no-repeat;
+		background-size: 2.8rem;
+		height: 4.8rem;
+		line-height: 4.8rem;
+		color: #0071C5;
+		font-size: 1.8rem;
+		padding-left: 5.4rem;
+		border-bottom: 0.2rem solid #BABABA;
+	}
+	#content_group .content-box{
+	}
+	#content_group .content-box2 .form-header{
+		background-image: url(../../image/project/new_2_highlight.png);
+	}
+	#content_group .content-box3 .form-header{
+		background-image: url(../../image/project/new_3_highlight.png);
+	}
+	#content_group .content-box3{
+		background-color: #FFFFFF;
+	}
+	#content_group .form label{
+		font-size: 1.5rem;
+		float: left;
+	}
+	#content_group .form .ellipsis-1{
+	}
+	#content_group .form .form-right-text{
+		font-size: 1.8rem;
+		line-height: 2.4rem;
+        width: 10rem;
+		color: #666666;
+	}
+	#content_group .form .form-row {
+	    height: 4.8rem;
+	    background-color: #FFFFFF;
+	    font-size: 1.4rem;
+	    line-height: normal;
+	    -webkit-box-sizing: border-box;
+	    box-sizing: border-box;
+		padding-top: 1.3rem;
+	}
+	
+	#content_group .form-row .tips{
+		position: absolute;
+		right: 1.5rem;
+		top: 1.5rem;
+		font-style: normal;
+		font-size: 1.2rem;
+		color: #808183;
+	}
+	#content_group .form1{
+
+	}
+	#content_group .form1 label{
+		width: 13rem;
+		text-align: right;
+		color: #000000;
+	}
+	
+
+	#content_group .form4 label{
+		width: 16rem;
+		text-align: right;
+	}
+	#content_group .form2{
+		color: #555555;
+		margin-bottom: 4rem;
+	}
+	#content_group .form2:last-child{
+		margin-bottom: 0;
+	}
+	#content_group .content-des{
+		height: 4.3rem;
+		line-height: 4.3rem;
+		color: #0071C5;
+		padding-left: 1.8rem;
+		font-size: 1.3rem;
+	}
+	#content_group .form2 .form-row{
+		padding-left: 1.8rem;
+	}
+	#content_group .form2 .product-model{
+		font-size: 1.4rem;
+		line-height: normal;
+	}
+	#content_group .form2 label{
+		text-align: right;
+		color: #000000;
+	}
+
+	#content_group .form3{
+		color: #555555;
+	}
+
+	#content_group .form3 label{
+		width: 16rem;
+		text-align: right;
+		color: #000000;
+	}
+	#content_group .form3 .form-row.form-row-lg{
+		height: 12rem;
+		padding-top: 1.2rem;
+	}
+	#content_group .form3 .product-description{
+		width: 21rem;
+		height: 7.7rem;
+		border: 1px solid #CCCCCC;
+		resize: none;
+	}
+	#content_group .form3 .form-row .form-row-left{
+		float: left;
+		width: 13rem;
+	}
+	#content_group .form3 .form-row .form-row-right{
+		display: inline-block;
+		width: 15rem;
+		font-size: 0.9rem;
+		color: #8E8E90;
+		float: right;
+		padding-top: 2rem;
+		overflow: hidden;
+	}
+	#content_group .form3 .form-row .form-row-right span{
+		display: block;
+		line-height: 1rem;
+	}
+	#content_group .form3 .form-row .form-row-right .pic-name{
+		font-size: 1rem;
+	    line-height: 1.2rem;
+    	margin-bottom: 1rem;
+	}
+	#content_group .form3 .form-row.form-row-lg label{
+
+	}
+	#content_group .form3 .form-row .product-picture{
+		height: 7.5rem;
+		width: 7.5rem;
+	}
+	.btn-submit{
+		width: 18rem;
+		height: 3.8rem;
+		background-color: #005BBC;
+		border-radius: 1px;
+		line-height: 3.8rem;
+		text-align: center;
+		margin: 1.6rem auto;
+		color: #FFFFFF;
+		font-size: 1.7rem;
+
+	}
+
+	#content_group.partner .for-maker{
+		display: none;
+	}
+    #content_group.maker .for-partner{
+        display: none;
+    }
+    </style>
+</head>
+<body>
+    <div id="content_group" class="border-1px-bottom">
+    	<!-- 第一步 -->
+        <div class="content-box content-box1">
+            <div class="form-header">
+                What to do 
+            </div>
+            <ul class="form1 form">
+                <li class="form-row border-1px-top clearfix">
+                    <label>Project name ：</label>
+                    <input type="text" class="project-name form-right-text" placeholder="Project name">
+                </li>
+                <li class="form-row border-1px-top clearfix">
+                    <label>Application：</label>
+                    <span class="project-apply form-right-text ellipsis-1" tapmode onclick="setMarketApp(this)">---Select---</span>
+                </li>
+                <li class="form-row for-maker border-1px-top clearfix">
+                    <label>Est. Annual Sale：</label>
+                    <input class="project-estimated form-right-text" type="number">
+                    <i class="tips">Thousand</i>
+                </li>
+                <li class="form-row border-1px-top clearfix">
+                    <label>Project Status：</label>
+                    <span class="project-state form-right-text ellipsis-1" tapmode onclick="setProjectState(this)">---Select---</span>
+                </li>
+            </ul>
+        </div>
+    	<!-- 第二步 -->
+        <div class="content-box content-box2">
+            <div class="form-header">
+                How to do
+            </div>
+            <ul class="form4 form for-maker">
+                <li class="form-row clearfix">
+                    <label>Type of Motherboard：</label>
+                    <span class="project-boardtype form-right-text ellipsis-1" tapmode onclick="setBoardType(this)">---Select---</span>
+                </li>
+                <li class="form-row clearfix" style="display: none">
+                    <label>Motherboard MDF：</label>
+                    <input type="text" style="width:10.3rem" class="project-motherboard form-right-text" placeholder="">
+                </li>
+            </ul>
+            <p class="content-des">
+                Intel products used status：
+            </p>
+            <ul class="form2 form form-intel-product1">
+                <li class="form-row border-1px-top clearfix">
+                    <label>Intel Product Type：</label>
+                    <span class="product-type form-right-text ellipsis-1" tapmode onclick="setIntelProduct(this)">---Select---</span>
+                </li>
+                <li class="form-row border-1px-top clearfix">
+                    <label>Intel Product Model：</label>
+                    <input type="text" class="product-model form-right-text" placeholder="">
+                </li>
+                <li class="form-row border-1px-top clearfix">
+                    <label>Equipment Used Volume：</label>
+                    <span class="product-count form-right-text ellipsis-1" tapmode onclick="setProductNum(this)">---Select---</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 第三步 -->
+    	<div class="content-box content-box3">
+            <div class="form-header">When to do</div>
+            <ul class="form3 form">
+                <li class="form-row border-1px-top clearfix">
+                    <label>Project starts at：</label>
+                    <span class="product-start-date form-right-text" tapmode onclick="setStartDate(this)">---Select---</span>
+                </li>
+                <li class="form-row for-partner border-1px-top clearfix">
+                    <label>Est. Prod. Date：</label>
+                    <span class="product-purchase-date form-right-text" tapmode onclick="setPurchaseDate(this)">---Select---</span>
+                </li>
+                <li class="form-row for-maker border-1px-top clearfix">
+                    <label>Est. Pilot. Date：</label>
+                    <span class="product-buy-date form-right-text" tapmode onclick="setBuyDate(this)">---Select---</span>
+                </li>
+                <li class="form-row for-maker border-1px-top clearfix">
+                    <label>Est. Pilot. Volume：</label>
+                    <input class="project-estimated-buy form-right-text" type="number">
+                    <i class="tips">Thousand</i>
+                </li>
+                <li class="form-row for-maker border-1px-top clearfix">
+                    <label>Est. Order Channel：</label>
+                    <span class="product-buy-channel form-right-text ellipsis-1" tapmode onclick="setPurchaseChannel(this)">---Select---</span>
+                </li>
+                <li class="form-row border-1px-top clearfix" style="display: none">
+                    <label>Other Order Channels：</label>
+                    <input class="project-otherchannel form-right-text" type="text">
+                </li>
+                <li class="form-row for-partner border-1px-top clearfix form-row-lg">
+                    <label>Project Descriptions：</label>
+                    <textarea class="project-depict product-description form-right-text"></textarea>
+                </li>
+                <li class="form-row form-row-lg border-1px-top upload-group clearfix">
+                    <div class="form-row-left">
+                        <label style="width: 12rem;">Images：</label>
+                    </div>
+                    <img id="upload_img" class="product-picture" src="../../image/project/add_pic.png" alt="" data-url data-url-o tapmode onclick="chooseGetType()">
+                    <p class="form-row-right">
+                        <span class="pic-name ellipsis-1">Haven't chosen images</span>
+                        <span>ODM please upload motherboard image.</span>
+                        <span>OEM please upload product image.</span>
+                        <span>The file is 10M to maximum。</span>
+                    </p>
+                </li>
+                <li class="border-1px-top"></li>
+            </ul>
+            <div class="btn-submit btn" tapmode onclick="submitProjectInfo(this)">Submit</div>
+            <div style="height:1px"></div>
+        </div>
+    </div>
+<div id="modal_selector" tapmode="" onclick="selectCancel()">
+    <div class="select">
+        <div class="select-control">
+            <div class="select-control-cancel" tapmode="" onclick="selectCancel()">Cancel</div>
+            <div class="select-control-placeHolder"></div>
+            <div class="select-control-ok" tapmode="" onclick="selectCancel()">Finished</div>
+        </div>
+        <div class="select-content">
+
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript" src="../../script/translation.js"></script>
+<script type="text/javascript">
+    var account = $api.getStorage('loginInfo');
+    var usertype = account.usertype;
+    if (usertype == 2) {
+        $api.addCls(content_group, 'maker');
+    } else {
+        $api.addCls(content_group, 'partner');
+    }
+	var pageParam = {};
+    var projectID = '';
+    var UICustomPicker;
+    var zhuge;
+
+    apiready = function () {
+        fnAjax({
+            url: 'projects/findOneProjectMessage',
+            headers: {
+                authorization: USER.token
+            },
+            data: {
+                values: {
+                    projectId: api.pageParam.projectID
+                }
+            },
+            debug: true
+        }, function( ret, err ){
+            if( ret ){
+                var _html = '';
+                '<div class="content-box content-box1">'+
+                '    <div class="form-header">'+fnLanguageSwitch( '做什么' )+'</div>'+
+                '    <ul class="form1 form">'+
+                '        <li class="form-row border-1px-top clearfix">'+
+                '            <label>'+fnLanguageSwitch( '项目名称' )+'：</label>'+
+                '            <input type="text" class="project-name form-right-text" value="'+ret.projectName+'" placeholder="'+fnLanguageSwitch( '项目名称' )+'">'+
+                '        </li>'+
+                '        <li class="form-row border-1px-top clearfix">'+
+                '            <label>'+fnLanguageSwitch( '市场应用' )+'：</label>'+
+                '            <span class="project-apply form-right-text ellipsis-1" tapmode onclick="setMarketApp(this)">'+( typeof ret.projectAppId === 'undefined' ? '---'+fnLanguageSwitch( '请选择' )+'---' : fnApplicationMarketJson()[ ret.projectAppId ] )+'</span>'+
+                '        </li>'+
+                '        <li class="form-row for-maker border-1px-top clearfix">'+
+                '            <label>'+fnLanguageSwitch( '预计年销量' )+'：</label>'+
+                '            <input class="project-estimated form-right-text" value="'+ret.planQty+'" type="number">'+
+                '            <i class="tips">'+fnLanguageSwitch( '单位' )+'：'+fnLanguageSwitch( '千台' )+'</i>'+
+                '        </li>'+
+                '        <li class="form-row border-1px-top clearfix">'+
+                '            <label>'+fnLanguageSwitch( '目前项目状态' )+'：</label>'+
+                '            <span class="project-state form-right-text ellipsis-1" tapmode onclick="setProjectState(this)">'+( typeof ret.projectAppId === 'undefined' ? '---'+fnLanguageSwitch( '请选择' )+'---' : fnApplicationMarketJson()[ ret.projectAppId ] )+'</span>'+
+                '        </li>'+
+                '    </ul>'+
+                '</div>';
+
+
+                var _intelProducts = '';
+                for( var x in ret.intelProducts ){
+                    _intelProducts +=
+                    '    <ul class="form2 form form-intel-product1">'+
+                    '        <li class="form-row border-1px-top clearfix">'+
+                    '            <label>'+fnLanguageSwitch( '英特尔产品类型' )+'：</label>'+
+                    '            <span class="product-type form-right-text ellipsis-1" tapmode onclick="setIntelProduct(this)">'+( typeof ret.intelProducts[x].type === 'undefined' ? '---'+fnLanguageSwitch( '请选择' )+'---' : fnProductTypeJson()[ ret.intelProducts[x].type ] )+'</span>'+
+                    '        </li>'+
+                    '        <li class="form-row border-1px-top clearfix">'+
+                    '            <label>'+fnLanguageSwitch( '英特尔产品型号' )+'：</label>'+
+                    '            <input type="text" class="product-model form-right-text" value="'+ret.intelProducts[x].num+'" placeholder="'+fnLanguageSwitch( '英特尔产品型号' )+'">'+
+                    '        </li>'+
+                    '        <li class="form-row border-1px-top clearfix">'+
+                    '            <label>'+fnLanguageSwitch( '单套设备中使用数量' )+'：</label>'+
+                    '            <span class="product-count form-right-text ellipsis-1" tapmode onclick="setProductNum(this)">'+( typeof ret.intelProducts[x].qty === 'undefined' ? '---'+fnLanguageSwitch( '请选择' )+'---' : ret.intelProducts[x].qty )+'</span>'+
+                    '        </li>'+
+                    '    </ul>';
+                };
+
+
+                _html+=
+                '<div class="content-box content-box2">'+
+                '    <div class="form-header">'+fnLanguageSwitch( '怎么做' )+'</div>'+
+                '    <ul class="form4 form for-maker">'+
+                '        <li class="form-row clearfix">'+
+                '            <label>'+fnLanguageSwitch( '主板类型' )+'：</label>'+
+                '            <span class="project-boardtype form-right-text ellipsis-1" tapmode onclick="setBoardType(this)">---'+fnLanguageSwitch( '请选择' )+'---</span>'+
+                '        </li>'+
+                '        <li class="form-row clearfix" style="display: none">'+
+                '            <label>'+fnLanguageSwitch( '主板厂商' )+'：</label>'+
+                '            <input type="text" style="width:10.3rem" class="project-motherboard form-right-text" placeholder="'+fnLanguageSwitch( '主板厂商' )+'">'+
+                '        </li>'+
+                '    </ul>'+
+                '    <p class="content-des">'+fnLanguageSwitch( '项目中使用英特尔产品情况' )+'</p>'+_intelProducts+'</div>';
+
+                _html += 
+                '<div class="content-box content-box3">'+
+                '    <div class="form-header">'+fnLanguageSwitch( '什么时候做' )+'</div>'+
+                '    <ul class="form3 form">'+
+                '        <li class="form-row border-1px-top clearfix">'+
+                '            <label>'+fnLanguageSwitch( '项目起始时间' )+'：</label>'+
+                '            <span class="product-start-date form-right-text" tapmode onclick="setStartDate(this)">---Select---</span>'+
+                '        </li>'+
+                '        <li class="form-row for-partner border-1px-top clearfix">'+
+                '            <label>'+fnLanguageSwitch( '预计量产时间' )+'：</label>'+
+                '            <span class="product-purchase-date form-right-text" tapmode onclick="setPurchaseDate(this)">---Select---</span>'+
+                '        </li>'+
+                '        <li class="form-row for-maker border-1px-top clearfix">'+
+                '            <label>'+fnLanguageSwitch( '小批量采购时间' )+'：</label>'+
+                '            <span class="product-buy-date form-right-text" tapmode onclick="setBuyDate(this)">---Select---</span>'+
+                '        </li>'+
+                '        <li class="form-row for-maker border-1px-top clearfix">'+
+                '            <label>'+fnLanguageSwitch( '预计小批采购量' )+'：</label>'+
+                '            <input class="project-estimated-buy form-right-text" type="number">'+
+                '            <i class="tips">'+fnLanguageSwitch( '单位' )+'：'+fnLanguageSwitch( '千台' )+'</i>'+
+                '        </li>'+
+                '        <li class="form-row for-maker border-1px-top clearfix">'+
+                '            <label>'+fnLanguageSwitch( '预计采购渠道' )+'：</label>'+
+                '            <span class="product-buy-channel form-right-text ellipsis-1" tapmode onclick="setPurchaseChannel(this)">---Select---</span>'+
+                '        </li>'+
+                '        <li class="form-row border-1px-top clearfix" style="display: none">'+
+                '            <label>'+fnLanguageSwitch( '其他采购渠道' )+'：</label>'+
+                '            <input class="project-otherchannel form-right-text" type="text">'+
+                '        </li>'+
+                '        <li class="form-row for-partner border-1px-top clearfix form-row-lg">'+
+                '            <label>'+fnLanguageSwitch( '项目描述' )+'：</label>'+
+                '            <textarea class="project-depict product-description form-right-text"></textarea>'+
+                '        </li>'+
+                '        <li class="form-row form-row-lg border-1px-top upload-group clearfix">'+
+                '            <div class="form-row-left">'+
+                '                <label style="width: 12rem;">'+fnLanguageSwitch( '图片' )+'：</label>'+
+                '            </div>'+
+                '            <img id="upload_img" class="product-picture" src="../../image/project/add_pic.png" alt="" data-url data-url-o tapmode onclick="chooseGetType()">'+
+                '            <p class="form-row-right">'+
+                '                <span class="pic-name ellipsis-1">'+fnLanguageSwitch( '未选择图片' )+'</span>'+
+                '                <span>'+fnLanguageSwitch( 'ODM请上传主板图片' )+'.</span>'+
+                '                <span>'+fnLanguageSwitch( 'OEM请上传主机图片' )+'.</span>'+
+                '                <span>'+fnLanguageSwitch( '文件最大为10M' )+'。</span>'+
+                '            </p>'+
+                '        </li>'+
+                '        <li class="border-1px-top"></li>'+
+                '    </ul>'+
+                '    <div class="btn-submit btn" tapmode onclick="submitProjectInfo(this)">'+fnLanguageSwitch( '提交' )+'</div>'+
+                '    <div style="height:1px"></div>'+
+                '</div>';
+
+                $api.dom( '#content_group' ).innerHTML = _html;
+            }else{
+                api.toast({
+	         global: true,
+                    msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                });
+            }
+        });
+        return debugAlert();
+        pageParam = api.pageParam;
+        projectID = pageParam.projectID;
+        zhuge = api.require('zhuge');
+        if (zhuge) {
+            zhuge.initZhuge();
+        }
+        UICustomPicker = api.require('UICustomPicker');
+        getProjectDetail();
+        getPurchaseChannel();
+		getIntelProduct();
+		getMarketApp();
+		getDateInterval();
+	};
+
+	var purchaseChannelList = [];
+
+	// 获取采购渠道列表
+	function getPurchaseChannel(){
+        // APPGetPurchaseChannelList
+		var data = $api.getStorage('APPGetPurchaseChannelList');
+        if (api.connectionType == 'none') {
+            if (data) {
+                purchaseChannelList = data;
+            } else {
+                api.toast({
+	global: true,
+                    msg: "The information about Intel products hasn't been obtained.",
+                    duration: 2000,
+                    location: 'middle'
+                });
+            }
+            
+        } else {
+            ajaxRequest('/APPGetDataType/APPGetPurchaseChannelList.aspx', 'get', {
+                UserID: account.userid,
+                BatchNo: account.batchno,
+            }, function(ret, err){
+                if(ret && ret.res == undefined){
+                    // console.log('ret:normal===='+ JSON.stringify(ret));
+                    var data = ret.appdatalist;
+                    for (var i = 0; i < data.length; i++) {
+                        purchaseChannelList.push({
+                            value: data[i].ExpectedPurChan,
+                            id: i
+                        });
+                    }
+                } else{
+                    console.log('ret:err===='+ JSON.stringify(ret));
+                }
+                if (err) {
+                    console.log('err===='+ JSON.stringify(err));
+                }
+            });
+        }
+	};
+	function setPurchaseChannel(el){
+        pickerType = 1;
+		openSelector(el, purchaseChannelList);
+	};
+
+	var intelProductList = [];
+
+	// 获取英特尔产品列表
+	function getIntelProduct(){
+        var data = $api.getStorage('APPGetIntelProductList');
+        if (api.connectionType == 'none') {
+            if (data) {
+                intelProductList = data;
+            } else {
+                api.toast({
+	global: true,
+                    msg: "The information about Intel products hasn't been obtained.",
+                    duration: 2000,
+                    location: 'middle'
+                });
+            }
+            
+        } else {
+    		ajaxRequest('/APPGetDataType/APPGetIntelProductList.aspx', 'get', {
+    			UserID: account.userid,
+                BatchNo: account.batchno,
+    		}, function(ret, err){
+    			if(ret && ret.res == undefined){
+                    // console.log('ret:normal===='+ JSON.stringify(ret));
+                    var data = ret.appdatalist;
+                    for (var i = 0; i < data.length; i++) {
+                        intelProductList.push({
+                            value: data[i].IntelProductType,
+                            id: i
+                        });
+                    }
+                    $api.setStorage('APPGetIntelProductList', intelProductList);
+    			} else{
+                    console.log('ret:err===='+ JSON.stringify(ret));
+                }
+                if (err) {
+                    console.log('err===='+ JSON.stringify(err));
+                }
+    		});
+        }
+	};
+	// setIntelProduct
+	function setIntelProduct(el){
+		pickerType = 0;
+		for( var x in intelProductList ){
+			intelProductList[x].value = fnTranslation( intelProductList[x].value, true );
+		}
+        openSelector(el, intelProductList);
+        $api.html($api.dom($api.closest(el, '.form'), '.product-count'), '---Select---');
+	};
+	// setProductNum
+	function setProductNum(el){
+        var len = 10;
+        var thisIntelProductType = $api.trim($api.text($api.dom($api.closest(el, '.form'), '.product-type')));
+        if(thisIntelProductType == 'CPU'){
+            len = 2;
+        } else if(thisIntelProductType == 'CHIPSET'){
+            len = 1;
+        } else if(thisIntelProductType == 'Board or NUC'){
+            len = 1;
+        } else if(thisIntelProductType == 'LAN'){
+            len = 8;
+        } else{
+            len = 10;
+        }
+		var scope = [];
+        for (var i = 0; i < len; i++) {
+            scope.push({
+                value: i + 1,
+                id: i
+            });
+        }
+        pickerType = 0;
+        openSelector(el, scope);
+	};
+
+	var marketAppList = [];
+
+	// 获取市场应用列表
+	function getMarketApp(){
+        var data = $api.getStorage('APPGetMarketApplicationList');
+        if (api.connectionType == 'none') {
+            if (data) {
+                marketAppList = data;
+            } else {
+                api.toast({
+	global: true,
+                    msg: 'The information about Application hasn\'t been obtained',
+                    duration: 2000,
+                    location: 'middle'
+                });
+            }
+            
+        } else {
+    		ajaxRequest('/APPGetDataType/APPGetMarketApplicationList.aspx', 'get', {
+    			UserID: account.userid,
+                BatchNo: account.batchno,
+                UserType: usertype
+    		}, function(ret, err){
+    			if(ret && ret.res == undefined){
+                    // console.log('ret:normal===='+ JSON.stringify(ret));
+                    var data = ret.appdatalist;
+                    for (var i = 0; i < data.length; i++) {
+                        marketAppList.push({
+                            value: data[i].ProjectAppName,
+                            id: i
+                        });
+                    }
+                    $api.setStorage('APPGetMarketApplicationList', marketAppList);
+    			} else{
+                    console.log('ret:err===='+ JSON.stringify(ret));
+                }
+                if (err) {
+                    console.log('err===='+ JSON.stringify(err));
+                }
+    		});
+        }
+	};
+	function setMarketApp(el){
+        pickerType = 0;
+        for( var x in marketAppList ){
+        	marketAppList[x].value = fnTranslation( marketAppList[x].value, true);
+        }
+        openSelector(el, marketAppList);
+	};
+
+	var dateIntervalList = [];
+
+	// 获取日期
+	function getDateInterval(){
+        var data = $api.getStorage('APPGetDateIntervalList');
+        if (api.connectionType == 'none') {
+            if (data) {
+                dateIntervalList = data;
+            } else {
+                api.toast({
+	global: true,
+                    msg: 'The information about Date hasn\'t been obtained.',
+                    duration: 2000,
+                    location: 'middle'
+                });
+            }
+            
+        } else {
+    		ajaxRequest('/APPGetDataType/APPGetDateIntervalList.aspx', 'get', {
+    			UserID: account.userid,
+                BatchNo: account.batchno,
+                UserType: usertype
+    		}, function(ret, err){
+    			if(ret && ret.res == undefined){
+                    // console.log('ret:normal===='+ JSON.stringify(ret));
+                    var data = ret.appdatalist;
+                    for (var i = 0; i < data.length; i++) {
+                        dateIntervalList.push({
+                            value: data[i].RangeDate,
+                            id: data[i].RangeID
+                        });
+                    }
+                    $api.setStorage('APPGetDateIntervalList', dateIntervalList);
+    			} else{
+                    console.log('ret:err===='+ JSON.stringify(ret));
+                }
+                if (err) {
+                    console.log('err===='+ JSON.stringify(err));
+                }
+    		});
+        }
+	};
+	function setStartDate(el){
+        pickerType = 0;
+        for( var x in dateIntervalList ){
+        	dateIntervalList[x].value = fnFormatDate( dateIntervalList[x].value, true);
+        }
+		openSelector(el, dateIntervalList);
+	};
+	function setBuyDate(el){
+        pickerType = 0;
+        for( var x in dateIntervalList ){
+        	dateIntervalList[x].value = fnFormatDate( dateIntervalList[x].value, true);
+        }
+		openSelector(el, dateIntervalList);
+	};
+    function setPurchaseDate(el){
+        pickerType = 0;
+        for( var x in dateIntervalList ){
+        	dateIntervalList[x].value = fnFormatDate( dateIntervalList[x].value, true);
+        }
+        openSelector(el, dateIntervalList);
+    };
+
+	// 获取Project Details
+	function getProjectDetail(){
+		ajaxRequest('/APPProjectManage/APPGetProjectDetail.aspx', 'get', {
+			UserID: account.userid,
+            BatchNo: account.batchno,
+            ProjectID: projectID
+		}, function(ret, err){
+			if(ret && ret.res == undefined){
+                // console.log('ret:normal===='+ JSON.stringify(ret));
+                var data = ret.appdatalist[0];
+                // IntelProductType1
+                // 第一步
+                data.ProjectName && $api.val($api.dom('.project-name'), data.ProjectName);
+                data.ProjectApp && $api.text($api.dom('.project-apply'), fnTranslation( data.ProjectApp, true) );
+                data.PlanQty && $api.val($api.dom('.project-estimated'), data.PlanQty);
+                data.ProjectStatus && $api.text($api.dom('.project-state'), fnTranslation( data.ProjectStatus, true));
+
+                // 第二步
+                data.ProjectType && $api.text($api.dom('.project-boardtype'), fnTranslation( data.ProjectType, true ));
+                data.MotherBoard && ($api.val($api.dom('.project-motherboard'), data.MotherBoard), $api.css($api.closest($api.dom('.project-motherboard'), 'li'), 'display: block'));
+                if(data.IntelProductType1){
+                	data.IntelProductType1 && $api.text($api.dom('.form-intel-product1 .product-type'), fnTranslation( data.IntelProductType1, true) );
+                	data.IntelProductNum1 && $api.val($api.dom('.form-intel-product1 .product-model'), data.IntelProductNum1);
+					data.IntelProductQty1 && $api.text($api.dom('.form-intel-product1 .product-count'), data.IntelProductQty1);
+                }
+                if(data.IntelProductType2){
+                	data.IntelProductType2 && $api.text($api.dom('.form-intel-product2 .product-type'), data.IntelProductType2);
+                	data.IntelProductNum2 && $api.val($api.dom('.form-intel-product2 .product-model'), data.IntelProductNum2);
+					data.IntelProductQty2 && $api.text($api.dom('.form-intel-product2 .product-count'), data.IntelProductQty2);
+                }
+                if(data.IntelProductType3){
+                	data.IntelProductType3 && $api.text($api.dom('.form-intel-product3 .product-type'), data.IntelProductType3);
+                	data.IntelProductNum3 && $api.val($api.dom('.form-intel-product3 .product-model'), data.IntelProductNum3);
+					data.IntelProductQty3 && $api.text($api.dom('.form-intel-product3 .product-count'), data.IntelProductQty3);
+                }
+                if(data.IntelProductType4){
+                	data.IntelProductType4 && $api.text($api.dom('.form-intel-product4 .product-type'), data.IntelProductType4);
+                	data.IntelProductNum4 && $api.val($api.dom('.form-intel-product4 .product-model'), data.IntelProductNum4);
+					data.IntelProductQty4 && $api.text($api.dom('.form-intel-product4 .product-count'), data.IntelProductQty4);
+                }
+                if(data.IntelProductType5){
+                	data.IntelProductType5 && $api.text($api.dom('.form-intel-product5 .product-type'), data.IntelProductType5);
+                	data.IntelProductNum5 && $api.val($api.dom('.form-intel-product5 .product-model'), data.IntelProductNum5);
+					data.IntelProductQty5 && $api.text($api.dom('.form-intel-product5 .product-count'), data.IntelProductQty5);
+                }
+
+                // 第三步
+                data.StartDate && $api.text($api.dom('.product-start-date'),fnFormatDate(  data.StartDate, true ) );
+                if (account.usertype == 2) {
+                    data.PurchaseDate && $api.text($api.dom('.product-buy-date'), fnFormatDate( data.PurchaseDate, true ) );
+                } else {
+                    data.PurchaseDate && $api.text($api.dom('.product-purchase-date'), fnFormatDate(  data.PurchaseDate, true ) );
+                }
+                
+                data.PurchaseQTY && $api.val($api.dom('.project-estimated-buy'), data.PurchaseQTY);
+                data.ExpectedPurChan && $api.text($api.dom('.product-buy-channel'), data.ExpectedPurChan);
+                if(data.ExpectedPurChan == 'Other'){
+                	data.PurchaseChannel && $api.val($api.dom('.project-otherchannel'), data.PurchaseChannel);
+                	$api.css($api.closest($api.dom('.project-otherchannel'), 'li'), 'display: block');
+                } else{
+                	$api.css($api.closest($api.dom('.project-otherchannel'), 'li'), 'display: none');
+                }
+                data.ProjectDepict && $api.val($api.dom('.project-depict'), data.ProjectDepict);
+                if (data.Photo) {
+                	api.imageCache({
+                        url: host + data.Photo.replace('~/', ''),
+                        thumbnail: false
+                    }, function(ret, err){
+                        // 
+                        if (ret && ret.status) {
+                            $api.attr(uploadImg, 'src', ret.url);
+                        }
+                        if (err) {}
+                    });
+                    $api.attr(uploadImg, 'data-url', data.Photo);
+                    $api.attr(uploadImg, 'data-url-o', data.Photo);
+                	$api.html($api.dom($api.closest(uploadImg, '.upload-group'), '.pic-name'), data.Photo.substring(data.Photo.lastIndexOf('/') + 1));
+                }
+				
+            } else{
+                console.log('ret:err===='+ JSON.stringify(ret));
+            }
+            if (err) {
+                console.log('err===='+ JSON.stringify(err));
+            }
+		});
+	};
+
+	// 设置Project Status
+	function setProjectState(el){
+		var scope = [];
+
+		if (usertype == 2) {
+			scope = [{
+                value: '项目量产',
+                id: 0
+            },{
+                value: '项目研发',
+                id: 1
+            },{
+                value: '项目预研',
+                id: 2
+            }];
+		} else{
+            scope = [{
+                value: '原型完成',
+                id: 0
+            },{
+                value: '项目研发',
+                id: 1
+            },{
+                value: '项目预研',
+                id: 2
+            }];
+		}
+        pickerType = 0;
+        for( var x in scope){
+        	scope[x].value = fnTranslation( scope[x].value, true );
+        }
+        openSelector(el, scope);
+	};
+	// 设置主板类型
+	// setBoardType
+	function setBoardType(el){
+		var scope = [];
+        scope = [{
+            value: '自研主板',
+            id: 0
+        },{
+            value: '外购主板',
+            id: 1
+        }];
+        pickerType = 2;
+        for( var x in scope){
+        	scope[x].value = fnTranslation( scope[x].value, true );
+        }
+        openSelector(el, scope);
+	};
+
+	var uploadImg = $api.dom('#upload_img');
+    // 获取图片方式选择
+    function chooseGetType(){
+        api.actionSheet({
+            title: 'Select',
+            cancelTitle: 'Cancel',
+            buttons: ['Photo upload', 'Album']
+        },function(ret,err){
+            if (ret.buttonIndex == 1) {
+                getPicture('camera');
+            } else if(ret.buttonIndex == 2){
+                getPicture('library');
+            }
+        });
+    };
+
+    // 获取图片
+    function getPicture(type){
+        // library camera
+        api.getPicture({
+            sourceType: type,
+            encodingType: 'png',
+            mediaValue: 'pic',
+            destinationType: 'url',
+            allowEdit: true,
+            quality: 50,
+            saveToPhotoAlbum: false
+        }, function(ret, err){ 
+            if (ret && ret.data) {
+                if (zhuge) {
+                    zhuge.track({
+                        eventName: '项目支持_图片提交',
+                        eventPro: {
+                            '页面来源': '更新状态'
+                        }
+                    });
+                }
+                $api.attr(uploadImg, 'src', ret.data);
+                $api.attr(uploadImg, 'data-url', ret.data);
+                $api.html($api.dom($api.closest(uploadImg, '.upload-group'), '.pic-name'), ret.data.substring(ret.data.lastIndexOf('/') + 1));
+                
+            }
+        });
+    };
+
+    // 提交修改
+    var submitLock = false;
+    function isEmepty(str){
+        if (str == undefined || str == null) {
+            return true;
+        } else {}
+        if ($api.trim(str) == '' || $api.trim(str) == '---Select---' || $api.trim(str) == '---please---') {
+            return true;
+        } else {
+            return false;
+        }
+    };
+
+    function submitProjectInfo(el){
+
+    	// 第一步
+    	var ProjectName = $api.trim($api.val($api.dom('.project-name')));
+    	if (isEmepty(ProjectName)) {
+    		api.alert({
+    		    title: 'Notice', 
+    		    msg: 'Please fill in Project Name',
+                buttons: ['I got it.']
+    		});
+    		return false;
+    	}
+    	var ProjectApp = fnTranslation( $api.trim($api.text($api.dom('.project-apply'))));
+    	if (isEmepty(ProjectApp)) {
+    		api.alert({
+    		    title: 'Notice', 
+    		    msg: 'Please Select Application',
+                buttons: ['I got it.']
+    		});
+    		return false;
+    	}
+    	var PlanQTY = $api.trim($api.val($api.dom('.project-estimated')));
+        if (account.usertype != 2) {
+            PlanQTY = '';
+        } else {
+            if (isEmepty(PlanQTY)) {
+                api.alert({
+                    title: 'Notice', 
+                    msg: 'Please fill in Est. Annual Sale',
+                    buttons: ['I got it.']
+                });
+                return false;
+            }
+        }
+    	
+    	var ProjectStatus = fnTranslation( $api.trim($api.text($api.dom('.project-state'))) );
+
+    	if (isEmepty(ProjectStatus)) {
+    		api.alert({
+    		    title: 'Notice', 
+    		    msg: 'Please Select the status',
+                buttons: ['I got it.']
+    		});
+    		return false;
+    	}
+
+		// 第二步
+		var ProjectType = fnTranslation( $api.trim($api.text($api.dom('.project-boardtype'))) );
+        if (account.usertype != 2) {
+            ProjectType = '';
+        } else {
+            if (isEmepty(ProjectType)) {
+                api.alert({
+                    title: 'Notice', 
+                    msg: 'Please select the type of motherboard',
+                    buttons: ['I got it.']
+                });
+                return false;
+            }
+        }
+    	
+    	var MotherBoard = '';
+        if (account.usertype != 2) {
+            MotherBoard = '';
+        } else {
+            if (ProjectType == '外购主板') {
+                MotherBoard = $api.trim($api.val($api.dom('.project-motherboard')));
+                if (isEmepty(ProjectType)) {
+                    api.alert({
+                        title: 'Notice', 
+                        msg: 'Please fill in the motherboard manufacturer',
+                        buttons: ['I got it.']
+                    });
+                    return false;
+                }
+            }
+        }
+        	
+    	var IntelProductType1 = fnTranslation( $api.trim($api.text($api.dom('.form-intel-product1 .product-type'))));
+    	var IntelProductNum1 = $api.trim($api.val($api.dom('.form-intel-product1 .product-model')));
+    	var IntelProductQty1 = $api.trim($api.text($api.dom('.form-intel-product1 .product-count')));
+    	if (isEmepty(IntelProductType1)) {
+    		api.alert({
+    		    title: 'Notice', 
+    		    msg: 'Please Select the type of the first group of product',
+                buttons: ['I got it.']
+    		});
+    		return false;
+    	} else {
+    		if(isEmepty(IntelProductNum1) || isEmepty(IntelProductQty1)){
+    			api.alert({
+	    		    title: 'Notice', 
+	    		    msg: 'Please complete the information of the first Intel product group.',
+                    buttons: ['I got it.']
+	    		});
+	    		return false;
+    		}
+    	}
+
+    	var IntelProductType2 = '',
+			IntelProductNum2 = '',
+			IntelProductQty2 = '',
+			IntelProductType3 = '',
+			IntelProductNum3 = '',
+			IntelProductQty3 = '',
+			IntelProductType4 = '',
+			IntelProductNum4 = '',
+			IntelProductQty4 = '',
+			IntelProductType5 = '',
+			IntelProductNum5 = '',
+			IntelProductQty5 = '';
+    	if (usertype == 2) {
+    		IntelProductType2 = $api.trim($api.text($api.dom('.form-intel-product2 .product-type')));
+    		IntelProductNum2 = $api.trim($api.val($api.dom('.form-intel-product2 .product-model')));
+	    	IntelProductQty2 = $api.trim($api.text($api.dom('.form-intel-product2 .product-count')));
+            if (isEmepty(IntelProductType2)) {
+                IntelProductType2 = '';
+                IntelProductNum2 = '';
+                IntelProductQty2 = '';
+            } else {
+                if(isEmepty(IntelProductNum2) || isEmepty(IntelProductQty2)){
+                    api.alert({
+                        title: 'Notice', 
+                        msg: 'Please complete the information of the second Intel product group.',
+                        buttons: ['I got it.']
+                    });
+                    return false;
+                }
+            }
+    		
+	    	IntelProductType3 = $api.trim($api.text($api.dom('.form-intel-product3 .product-type')));
+    		IntelProductNum3 = $api.trim($api.val($api.dom('.form-intel-product3 .product-model')));
+	    	IntelProductQty3 = $api.trim($api.text($api.dom('.form-intel-product3 .product-count')));
+	    	if (isEmepty(IntelProductType3)) {
+                IntelProductType3 = '';
+                IntelProductNum3 = '';
+                IntelProductQty3 = '';
+            } else {
+                if(isEmepty(IntelProductNum3) || isEmepty(IntelProductQty3)){
+                    api.alert({
+                        title: 'Notice', 
+                        msg: 'Please complete the information of the third Intel product group.',
+                        buttons: ['I got it.']
+                    });
+                    return false;
+                }
+            }
+	    	IntelProductType4 = $api.trim($api.text($api.dom('.form-intel-product4 .product-type')));
+    		IntelProductNum4 = $api.trim($api.val($api.dom('.form-intel-product4 .product-model')));
+	    	IntelProductQty4 = $api.trim($api.text($api.dom('.form-intel-product4 .product-count')));
+	    	if (isEmepty(IntelProductType4)) {
+                IntelProductType4 = '';
+                IntelProductNum4 = '';
+                IntelProductQty4 = '';
+            } else {
+                if(isEmepty(IntelProductNum4) || isEmepty(IntelProductQty4)){
+                    api.alert({
+                        title: 'Notice', 
+                        msg: 'Please complete the information of the fourth Intel product group.',
+                        buttons: ['I got it.']
+                    });
+                    return false;
+                }
+            }
+	    	IntelProductType5 = $api.trim($api.text($api.dom('.form-intel-product5 .product-type')));
+    		IntelProductNum5 = $api.trim($api.val($api.dom('.form-intel-product5 .product-model')));
+	    	IntelProductQty5 = $api.trim($api.text($api.dom('.form-intel-product5 .product-count')));
+	    	if (isEmepty(IntelProductType5)) {
+                IntelProductType5 = '';
+                IntelProductNum5 = '';
+                IntelProductQty5 = '';
+            } else {
+                if(isEmepty(IntelProductNum5) || isEmepty(IntelProductQty5)){
+                    api.alert({
+                        title: 'Notice', 
+                        msg: 'Please complete the information of the fifth Intel product group.',
+                        buttons: ['I got it.']
+                    });
+                    return false;
+                }
+            }
+            var limitCpu = 0,
+                limitChipset = 0,
+                limitBoard = 0,
+                limitLan = 0,
+                limitSsd = 0;
+            var productTypes = $api.domAll('.form2 .product-type');
+            for (var i = 0; i < productTypes.length; i++) {
+                var _productType = $api.trim($api.text(productTypes[i]));
+                if (_productType == 'CPU') {
+                    limitCpu ++;//1
+                } else if(_productType == 'CHIPSET'){
+                    limitChipset ++;//1
+                } else if(_productType == 'Board or NUC'){
+                    limitBoard ++;//1
+                } else if(_productType == 'LAN'){
+                    limitLan ++;//3
+                } else if(_productType == 'SSD'){
+                    limitSsd ++;//1
+                }  
+            }
+            if (limitCpu > 1) {
+                api.alert({
+                    title: 'Notice',
+                    msg: 'CPU can only be chosen once',
+                    buttons: ['I got it.']
+                }, function (ret, err) {
+
+                });
+                return false;
+            }
+            if (limitChipset > 1) {
+                api.alert({
+                    title: 'Notice',
+                    msg: 'CHIPSET can only be chosen once',
+                    buttons: ['I got it.']
+                }, function (ret, err) {
+
+                });
+                return false;
+            }
+            if (limitBoard > 1) {
+                api.alert({
+                    title: 'Notice',
+                    msg: 'Board or NUC can only be chosen once',
+                    buttons: ['I got it.']
+                }, function (ret, err) {
+
+                });
+                return false;
+            }
+            if (limitLan > 3) {
+                api.alert({
+                    title: 'Notice',
+                    msg: 'LAN can only be chosen three times',
+                    buttons: ['I got it.']
+                }, function (ret, err) {
+
+                });
+                return false;
+            }
+            if (limitSsd > 1) {
+                api.alert({
+                    title: 'Notice',
+                    msg: 'SSD can only be chosen three times',
+                    buttons: ['I got it.']
+                }, function (ret, err) {
+
+                });
+                return false;
+            }
+            if (limitCpu == 1 && limitChipset == 0) {
+                api.confirm({
+                    title: 'Notice',
+                    msg: 'Please confirm that you have selected to the single chip plan, otherwise please enter the specific model of this corresponding chipset. Continue to submit, please click "confirm", return to fill out, please click "cancel".',
+                    buttons:['cancel', 'Credit']
+                },function(ret,err){
+                    if(ret.buttonIndex == 1){
+                        return false;
+                    } else{
+                       submitEnsure(); 
+                    }
+                });
+                return false;
+            }
+            if (limitCpu == 0 && limitChipset == 1) {
+                api.confirm({
+                    title: 'Notice',
+                    msg: 'Please confirm that the final product includes CHIPSET only, otherwise input the model of CPU.Continue to submit, please click "confirm", return to fill out, please click "cancel".',
+                    buttons:['cancel', 'Credit']
+                },function(ret,err){
+                    if(ret.buttonIndex == 1){
+                        return false;
+                    } else{
+                       submitEnsure(); 
+                    }
+                });
+                return false;
+            }
+            submitEnsure(); 
+    	} else{
+            submitEnsure();
+        }
+
+		// 第三步
+    		
+        function submitEnsure(){
+            var StartDate = '',
+                PurchaseDate = '',
+                PurchaseQTY = '',
+                ExpectedPurChan = '',
+                PurchaseChannel = '',
+                ProjectDepict = '';
+            var Photo = $api.trim($api.attr(uploadImg, 'data-url'));
+            StartDate = fnFormatDate( $api.trim($api.text($api.dom('.product-start-date'))));
+             
+            if(usertype == 2){
+                PurchaseDate = fnFormatDate( $api.trim($api.text($api.dom('.product-buy-date'))) );
+
+                if (isEmepty(StartDate)) {
+                    api.alert({
+                        title: 'Notice', 
+                        msg: 'Please Select Start Date',
+                        buttons: ['I got it.']
+                    });
+                    return false;
+                }
+                if (isEmepty(StartDate)) {
+                    api.alert({
+                        title: 'Notice', 
+                        msg: 'Please Select Est. Pilot. Date',
+                        buttons: ['I got it.']
+                    });
+                    return false;
+                }
+                if (parseInt(StartDate) > parseInt(PurchaseDate)) {
+                    api.alert({
+                        title: 'Notice', 
+                        msg: 'Pilot. Date should be no early than Start Date',
+                        buttons: ['I got it.']
+                    });
+                    return false;
+                } else if(parseInt(StartDate) == parseInt(PurchaseDate)){
+                    if (parseInt(StartDate.substr(5)) > parseInt(PurchaseDate.substr(5))) {
+                        api.alert({
+                            title: 'Notice', 
+                            msg: 'Pilot. Date should be no early than Start Date',
+                            buttons: ['I got it.']
+                        });
+                        return false;
+                    }
+                }
+                PurchaseQTY = $api.trim($api.val($api.dom('.project-estimated-buy')));
+                if (isEmepty(PurchaseQTY) || PurchaseQTY == 0) {
+                    api.alert({
+                        title: 'Notice', 
+                        msg: 'Please fill in Est. Pilot. Volume',
+                        buttons: ['I got it.']
+                    });
+                    return false;
+                }
+                if (isNaN(PurchaseQTY)) {
+                    api.alert({
+                        title: 'Notice',
+                        msg: 'Pilot. Volume should be a number',
+                        buttons: ['I got it.']
+                    }, function (ret, err) {
+
+                    });
+                    return false;
+                }
+                if (ProjectStatus == '项目量产' || ProjectStatus == '原型完成') {
+                    if (PurchaseQTY < ( 50 / 1000 ) ) {
+                        api.alert({
+                            title: 'Notice',
+                            msg: 'In ' + fnTranslation( ProjectStatus, true ) +' Pilot. Volume cannot be smaller than 50',
+                            buttons: ['I got it.']
+                        }, function (ret, err) {
+
+                        });
+                        return;
+                    }
+                    if (isEmepty(Photo)) {
+                        api.alert({
+                            title: 'Notice',
+                            msg: 'Image cannot be empty',
+                            buttons: ['I got it.']
+                        }, function (ret, err) {
+
+                        });
+                        return;
+                    }
+                }
+
+                ExpectedPurChan = $api.trim($api.text($api.dom('.product-buy-channel')));
+                if (isEmepty(ExpectedPurChan)) {
+                    api.alert({
+                        title: 'Notice', 
+                        msg: 'Please fill in Order Channel',
+                        buttons: ['I got it.']
+                    });
+                    return false;
+                }
+                if (ExpectedPurChan == 'Other') {
+                    PurchaseChannel = $api.trim($api.val($api.dom('.project-otherchannel')));
+                    if (isEmepty(PurchaseChannel)) {
+                        api.alert({
+                            title: 'Notice', 
+                            msg: 'Please fill in Order Channel',
+                            buttons: ['I got it.']
+                        });
+                        return false;
+                    }
+                }
+            } else{
+                PurchaseDate = fnFormatDate( $api.trim($api.text($api.dom('.product-purchase-date'))));
+                if (isEmepty(StartDate)) {
+                    api.alert({
+                        title: 'Notice', 
+                        msg: 'Please Select Start Date',
+                        buttons: ['I got it.']
+                    });
+                    return false;
+                }
+                if (isEmepty(StartDate)) {
+                    api.alert({
+                        title: 'Notice', 
+                        msg: 'Please Select Prod. Date ',
+                        buttons: ['I got it.']
+                    });
+                    return false;
+                }
+                if (parseInt(StartDate) > parseInt(PurchaseDate)) {
+                    api.alert({
+                        title: 'Notice', 
+                        msg: 'Prod. Date should be no early than Start Date',
+                        buttons: ['I got it.']
+                    });
+                    return false;
+                } else if(parseInt(StartDate) == parseInt(PurchaseDate)){
+                    if (parseInt(StartDate.substr(5)) > parseInt(PurchaseDate.substr(5))) {
+                        api.alert({
+                            title: 'Notice', 
+                            msg: 'Prod. Date should be no early than Start Date',
+                            buttons: ['I got it.']
+                        });
+                        return false;
+                    }
+                }
+                ProjectDepict = $api.trim($api.val($api.dom('.project-depict')));
+                if (isEmepty(ProjectDepict)) {
+                    api.alert({
+                        title: 'Notice', 
+                        msg: 'Please fill in the project description',
+                        buttons: ['I got it.']
+                    });
+                    return false;
+                }
+            }
+            if (submitLock) {
+                return false;
+            } else {
+                submitLock = true;
+                $api.attr(el, 'disabled', 'disabled');
+            }
+            if (zhuge) {
+                zhuge.track({
+                    eventName: '项目支持_更新状态',
+                    eventPro: {}
+                });
+            }
+
+            if (Photo == $api.trim($api.attr(uploadImg, 'data-url-o'))) {
+                Photo = '';
+            }
+
+			var param = {
+                UserID: account.userid,
+                BatchNo: account.batchno,
+                projectID: projectID,
+                SubType: 2,
+                UserType: usertype,
+                // 第一步
+                ProjectName: ProjectName,
+                ProjectStatus: ProjectStatus,
+                ProjectApp: ProjectApp,
+                PlanQTY: PlanQTY,
+                // 第二步
+                ProjectType: ProjectType,
+                MotherBoard: MotherBoard,
+                IntelProductType1: IntelProductType1,
+                IntelProductNum1: IntelProductNum1,
+                IntelProductQty1: IntelProductQty1,
+                IntelProductType2: IntelProductType2,
+                IntelProductNum2: IntelProductNum2,
+                IntelProductQty2: IntelProductQty2,
+                IntelProductType3: IntelProductType3,
+                IntelProductNum3: IntelProductNum3,
+                IntelProductQty3: IntelProductQty3,
+                IntelProductType4: IntelProductType4,
+                IntelProductNum4: IntelProductNum4,
+                IntelProductQty4: IntelProductQty4,
+                IntelProductType5: IntelProductType5,
+                IntelProductNum5: IntelProductNum5,
+                IntelProductQty5: IntelProductQty5,
+                // 第三步
+                StartDate: StartDate,
+                PurchaseDate: PurchaseDate,
+                PurchaseQTY: PurchaseQTY,
+                ExpectedPurChan: ExpectedPurChan,
+                PurchaseChannel: PurchaseChannel,
+                ProjectDepict: ProjectDepict,
+                ActiveItemID: 0,
+            };
+            ajaxRequest('/APPProjectManage/APPSubmitProjectInfo.aspx', 'post', param, {
+                Photo: Photo
+            }, function(ret, err){
+                submitLock = false;
+                $api.removeAttr(el, 'disabled');
+                if(ret && ret.res){
+                    // console.log('ret:normal===='+ JSON.stringify(ret));
+                    api.toast({
+	global: true,
+                        msg: 'The project has been updated successfully.',
+                        duration: 2000,
+                        location: 'middle'
+                    });
+                    api.sendEvent({
+                        name: 'projectDetailRefresh'
+                    });
+                    setTimeout(function(){
+                        api.closeWin();
+                    },2000);
+                } else{
+                    api.toast({
+	global: true,
+                        msg: JSON.stringify(ret),
+                        duration: 2000,
+                        location: 'middle'
+                    });
+                }
+                if (err) {
+                    api.toast({
+	global: true,
+                        msg: JSON.stringify(err),
+                        duration: 2000,
+                        location: 'middle'
+                    });
+                }
+            });
+        };
+
+        // 用户ID	UserID	
+        // 用户随机码	BatchNo	
+        // 提交类型	SubType	提交项目：1   修改项目：2
+        // 用户类型	UserType	个人用户：1   公司用户：2
+        // 项目ID	ProjectID	提交项目：0   修改项目：项目ID
+		
+    };
+
+    
+    // 调用selector
+    var UICustomPickerElement,
+        UICustomPickerId,
+        selectorValue,
+        selectorId,
+        blurInput = $api.domAll('input'),
+        blurText = $api.domAll('textarea'),
+        pickerType;
+
+    function openSelector(el, data){
+        for (var i = 0; i < blurInput.length; i++) {
+            blurInput[i].blur();
+        }
+        for (var j = 0; j < blurText.length; j++) {
+            blurText[j].blur();
+        }
+        var scope = data;
+        UICustomPickerElement = el;
+        $api.addCls($api.dom('body'), 'selector-modal-show');
+        var UICustomPickerContentOffset = $api.offset($api.dom('.select-content'));
+
+        UICustomPicker.open({
+            rect: {
+                x: 0,
+                y: api.frameHeight - UICustomPickerContentOffset.h,
+                h: UICustomPickerContentOffset.h
+            },
+            styles: {
+                bg: 'rgba(0,0,0,0)',
+                normalColor: '#959595',
+                selectedColor: '#3685dd',
+                selectedSize: 30,
+                tagColor: '#3685dd',
+                tagSize: 10
+            },
+            data: [{
+                scope: scope
+            }],
+            autoHide: false,
+            rows: 5,
+            fixedOn: api.frameName,
+            fixed: true
+        }, function( ret, err ){
+            UICustomPickerId = ret.id;
+            if(ret){
+                // console.log( JSON.stringify( ret ) );
+                if(ret.eventType=='show'){
+                    selectorValue = scope[0].value;
+                    selectorId = scope[0].id;
+                }else{
+                    selectorValue = ret.data[0].value;
+                    selectorId = ret.data[0].id;
+                }
+                selectOK();
+            }
+        });
+    };
+    function selectCancel() {
+        UICustomPicker.close({
+            id: UICustomPickerId
+        });
+        $api.removeCls($api.dom('body'), 'selector-modal-show');
+        if( event ){event.cancelBubble = true;}
+        return false;
+    };
+
+    function selectOK() {
+        if (UICustomPickerElement.tagName.toLowerCase() == 'input') {
+            // pickerType
+            $api.val(UICustomPickerElement, selectorValue);
+            $api.attr(UICustomPickerElement, 'data-selectorid', selectorId);
+        } else {
+            // pickerType
+            $api.html(UICustomPickerElement, selectorValue);
+            $api.attr(UICustomPickerElement, 'data-selectorid', selectorId);
+        }
+        if (pickerType == 1) {
+            if (selectorValue == 'Other') {
+                $api.css($api.closest($api.dom('.project-otherchannel'), 'li'), 'display: block');
+            } else{
+                $api.css($api.closest($api.dom('.project-otherchannel'), 'li'), 'display: none');
+            }
+        } else if(pickerType == 2){
+            if (fnTranslation( selectorValue ) == '外购主板') {
+                $api.css($api.closest($api.dom('.project-motherboard'), 'li'), 'display: block');
+            } else{
+                $api.css($api.closest($api.dom('.project-motherboard'), 'li'), 'display: none');
+            }
+        } else{
+
+        }
+            
+        if( event ){event.cancelBubble = true;}
+        return false;
+    };
+</script>
+</html>

@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>my</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <style>
+        html {
+            height: 100%;
+        }
+
+        body {
+            width: 100%;
+            height: 100%;
+            min-height: 100%;
+            background-color: #f0eff7;
+        }
+
+        .container {
+            position: relative;
+            box-sizing: border-box;
+            top: 21px;
+            padding-left: 16px;
+            width: 100%;
+            height: auto;
+            overflow: hidden;
+            border-top: 1px solid #bababa;
+            border-bottom: 1px solid #bababa;
+            background-color: #fff;
+        }
+
+        .container .row {
+            position: relative;
+            box-sizing: border-box;
+            padding-right: 16px;
+            top: -1px;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-orient: horizontal;
+            -webkit-flex-flow: row;
+            flex-flow: row;
+            width: 100%;
+            height: 44px;
+            border-top: 1px solid #bababa;
+        }
+
+        .container .row .name {
+            box-sizing: border-box;
+            padding-left: 24px;
+            width: 100px;
+            height: 44px;
+            color: #000;
+            font-size: 16px;
+            line-height: 44px;
+            text-align: left;
+            background-repeat: no-repeat;
+            background-size: 16px 21px;
+            background-position: left center;
+        }
+
+        .container .account .name {
+            background-image: url(../image/login/account.png);
+        }
+
+        .container .password .name {
+            background-image: url(../image/login/pwd.png);
+        }
+
+        .container .row .value {
+            -webkit-box-flex: 1;
+            -webkit-flex: 1;
+            flex: 1;
+            height: 44px;
+            display: -webkit-box;
+            -webkit-box-align: center;
+        }
+
+        .container .row .value input {
+            box-sizing: border-box;
+            /*padding-top: 11px;*/
+            width: 100%;
+            vertical-align: middle;
+            border: none;
+            outline: none;
+            font-size: 15px;
+            line-height: normal;
+        }
+
+        .container .row .holder {
+            height: 44px;
+            width: 44px;
+        }
+
+        .container .password .hide {
+            background-image: url(../image/login/hidden.png);
+            background-position: 14px center;
+            background-repeat: no-repeat;
+            background-size: 24px 9px;
+        }
+
+        .container .password .saw {
+            background-image: url(../image/login/saw.png);
+            background-size: 24px 14px;
+        }
+
+        .button {
+            position: relative;
+            top: 21px;
+            margin-top: 24px;
+            margin-left: 16px;
+            margin-right: 16px;
+            width: auto;
+            height: 44px;
+            color: #fff;
+            font-size: 16px;
+            line-height: 44px;
+            text-align: center;
+            background-color: #00AEEF;
+            border-radius: 8px;
+        }
+
+        .extra {
+            position: relative;
+            margin-top: 24px;
+            width: 100%;
+            height: 44px;
+        }
+
+        .extra .remember {
+            position: absolute;
+            box-sizing: border-box;
+            padding-left: 18px;
+            left: 40px;
+            top: 0;
+            width: 90px;
+            height: 44px;
+            color: #888;
+            text-align: left;
+            line-height: 44px;
+            font-size: 14px;
+            background-image: url(../image/login/select.png);
+            background-position: left center;
+            background-repeat: no-repeat;
+            background-size: 10px 10px;
+
+            font-size: 12px;
+            width: auto;
+            left: 20px;
+        }
+
+        .extra .remember.checked {
+            background-image: url(../image/login/select-checked.png);
+        }
+
+        .extra .forget {
+            position: absolute;
+            box-sizing: border-box;
+            padding-left: 26px;
+            right: 40px;
+            top: 0;
+            width: 90px;
+            height: 44px;
+            color: #888;
+            text-align: right;
+            line-height: 44px;
+            font-size: 14px;
+
+            font-size: 12px;
+            width: auto;
+            right: 20px;
+        }
+
+        .highlight {
+            opacity: 0.7;
+        }
+        .cancel {
+            background-image: url("../image/ic_code_wrong.png");
+            background-size: 18px;
+            background-position: center center;
+            background-repeat: no-repeat no-repeat;
+            width: 30px;
+            height: 44px;
+        }
+    </style>
+</head>
+
+<body>
+<!--<section class="container">
+    <div class="row account">
+        <div class="name">Account</div>
+        <div class="value">
+            <input value="" id="username" autocomplete="false" type="text" placeholder="Tel/E-mail" oninput="fnInput( this );" onfocus="fnInput( this );">
+        </div>
+        <div class="cancel hidden" tapmode onclick="$('#username').val('');$(this).addClass('hidden')"></div>
+
+        <div class="holder"></div>
+    </div>
+    <div class="row password">
+        <div class="name">Password</div>
+        <div class="value">
+            <input value="" id="password" autocomplete="false" type="password" placeholder="Enter password" oninput="fnInput( this );" onfocus="fnInput( this );">
+        </div>
+        <div class="cancel hidden" tapmode onclick="$('#password').val('');$('.cancel').addClass('hidden')"></div>
+        <div id="controller" class="holder hide" tapmode onclick="fnControllerChange( this )"></div>
+    </div>
+</section>
+<div class="button" tapmode="highlight" onclick="fnLogin()">Login</div>
+<div class="extra">
+    <div id="rememberCheck" class="remember checked" tapmode onclick="fnRemember( this )">Remember Password</div>
+    <div class="forget" tapmode="highlight" onclick="fnOpenForgetPassword()">Forgot Password?</div>
+</div>-->
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../script/md5.js"></script>
+<script type="text/javascript" src="../script/languge.js"></script>
+<script type="text/javascript">
+    var zhuge;
+    var signature = null;
+
+    //提供给注销页面用到的方法,注销就清除输入框取消记住密码
+    function reload4logout() {
+        account.value = '';
+        password.value = '';
+        $api.removeCls(rememberCheck, 'checked');
+    }
+
+
+    // 显示隐藏输入框删除内容按钮
+    function fnInput( el ){
+        if( el.value.length ){
+            $api.removeCls($api.dom($api.closest(el, '.row'), '.cancel'), 'hidden');
+        }else{
+            $api.addCls($api.dom($api.closest(el, '.row'), '.cancel'), 'hidden');
+        }
+    }
+
+    function fnCancel( el ){
+        $('#username').val('');$( el ).addClass('hidden')
+    }
+
+    function fnCancel2( el ){
+        $('#password').val('');$('.cancel').addClass('hidden')
+    }
+    
+    var ajpush = null;
+    apiready = function () {
+        ajpush = api.require('ajpush');
+        ajpush.init();
+    	$api.dom( 'body' ).innerHTML =
+    	'<section class="container">'+
+		'    <div class="row account">'+
+		'        <div class="name">'+fnLanguageSwitch( '账号' )+'</div>'+
+		'        <div class="value">'+
+		'            <input value="" id="username" autocomplete="false" type="text" placeholder="'+fnLanguageSwitch( '请输入手机号/邮箱' )+'" oninput="fnInput( this );" onfocus="fnInput( this );">'+
+		'        </div>'+
+		'        <div class="cancel hidden" tapmode onclick="fnCancel( this );"></div>'+
+		
+		'        <div class="holder"></div>'+
+		'    </div>'+
+		'    <div class="row password">'+
+		'        <div class="name">'+fnLanguageSwitch( '密码' )+'</div>'+
+		'        <div class="value">'+
+		'            <input value="" id="password" autocomplete="false" type="password" placeholder="'+fnLanguageSwitch( '请输入密码' )+'" oninput="fnInput( this );" onfocus="fnInput( this );">'+
+		'        </div>'+
+		'        <div class="cancel hidden" tapmode onclick="fnCancel2( this )"></div>'+
+		'        <div id="controller" class="holder hide" tapmode onclick="fnControllerChange( this )"></div>'+
+		'    </div>'+
+		'</section>'+
+		'<div class="button" tapmode="highlight" onclick="fnLogin()">'+fnLanguageSwitch( '登录' )+'</div>'+
+		'<div class="extra">'+
+		'    <div id="rememberCheck" class="remember checked" tapmode onclick="fnRemember( this )">'+fnLanguageSwitch( '记住密码' )+'</div>'+
+		'    <div class="forget" tapmode="highlight" onclick="fnOpenForgetPassword()">'+fnLanguageSwitch( '忘记密码' )+'?</div>'+
+		'</div>';
+        //$api.clearStorage();
+        zhuge = api.require('zhuge');
+        signature = api.require('signature');
+        var loginInfo = $api.getStorage('loginInfo');
+        zhuge.initZhuge();
+
+        api.removeLaunchView();
+
+        if( USER ){
+            $api.dom( '#username' ).value = USER.username;
+        }
+        $api.dom( '#password' ).value = '';
+
+        if ( $api.getStorage('autoLogin') ) {
+            fnLogin({
+                username: USER.username,
+                password: $api.getStorage('password')
+            });
+        } /* else {
+            setTimeout(function () {
+                api.closeWin({
+                    name: 'index'
+                });
+                api.closeWin({
+                    name: 'setting'
+                });
+            }, 1000);
+        }
+        */
+    };
+
+
+    function fnReLogin(){
+        apiready();
+    }
+    // 是否记住密码
+    function fnRemember( el ) {
+        if ( $api.hasCls(el, 'checked') ) {
+            $api.removeCls(el, 'checked');
+            $api.rmStorage('password');
+        } else {
+            $api.addCls(el, 'checked');
+        }
+    }
+
+    // 显示隐藏密码
+    function fnControllerChange( el ) {
+        if ( $api.hasCls(el, 'saw') ) {
+            $api.removeCls(el, 'saw');
+            $api.dom( '#password' ).type = 'password';
+        } else {
+            $api.addCls(el, 'saw');
+            $api.dom( '#password' ).type = 'text';
+        }
+    }
+
+    // 登陆
+    function fnLogin( obj ) {
+        var _Username = obj && obj.username || $api.dom( '#username' ).value;
+        var _Password = obj && obj.password || $api.dom( '#password' ).value;
+        if ( ! $.trim( _Username ) ) {
+            api.toast({
+                msg: fnLanguageSwitch( '账号不能为空！' )
+            });
+        }else if( ! $.trim( _Password ) ) {
+            api.toast({
+                msg: fnLanguageSwitch( '密码不能为空！' )
+            });
+        }else{
+            signature.md5({
+                data: _Password
+            }, function(ret, err) {
+                if( ret.status ){
+                    USER = {};
+                    // 登陆
+                    fnAjax({
+                        url: 'users/loginIOS',
+                        data: {
+                            values: {
+                                username: _Username,
+                                password: ret.value,
+                                userphonetype: api.systemType === 'ios' ? 'I' : 'A',
+                                machineno: api.deviceId,
+                                loginType: 1
+                            }
+                        },
+                        cache: false
+                    }, function( ret, err ){
+                        if( ret ){
+                            zhuge.track({
+                                eventName: 'APP-登录' ,
+                                eventPro: {
+                                    '状态': '成功',
+                                    '原因': ''
+                                }
+                            });
+                            $api.setStorage('loginInfo', ret);
+                            $api.setStorage('password', _Password);
+                            USER = $api.getStorage( 'loginInfo' );
+                            if( $api.hasCls($api.dom( '#rememberCheck' ), 'checked') ){
+                                $api.setStorage('autoLogin', 1);
+                            }else{
+                                $api.rmStorage('autoLogin');
+                            };
+                            fnAjax({
+                                url: 'users/getFullInfo',
+                                cache: false
+                            }, function( ret, err){
+                                if( ret ){
+                                    USER.info = ret;
+                                    $api.setStorage('loginInfo', USER);
+                                    fnBuindAj( ret );
+                                    fnOpen({
+                                        name: 'index',
+                                        url: 'widget://' + DIR + '/index.html'
+                                    });
+                                }else{
+                                    api.toast({
+                                        msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                                    });
+                                }
+                            });
+
+                        }else{
+                            api.toast({
+                                msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                            });
+                            zhuge.track({
+                                eventName:'APP-登录' ,
+                                eventPro: {
+                                    '状态': '失败',
+                                    '原因': fnErrorJson( err.body.error.message )
+                                }
+                            });
+                        }
+                    })
+                }
+            });
+        }
+    }
+
+    var vGlobalBuindAj = null;
+    function fnBuindAj( data ){
+        clearTimeout( vGlobalBuindAj );
+        api.cancelAjax({
+            tag: 'users/updatePushId'
+        });
+        // 绑定用户极光 ID
+        ajpush.getRegistrationId(function ( ajpushId ) {
+            fnAjax({
+                url: 'users/updatePushId',
+                cache: false,
+                data: {
+                    values: {
+                        'JPushID': ajpushId.id
+                    }
+                }
+            }, function( ret, err ){
+                if( ret ){
+                    clearTimeout( vGlobalBuindAj );
+                    ret.ajpushId = ajpushId;
+                    api.sendEvent({
+                       name: 'updatePushId',
+                       extra: ret
+                    });
+                }else{
+                    vGlobalBuindAj = setTimeout(function(){
+                        fnBuindAj( data );
+                    }, 5000)
+                }
+            })
+        }); 
+
+        vGlobalBuindAj = setTimeout(function(){
+            fnBuindAj( data );
+        }, 5000)
+    }
+
+    function fnOpenForgetPassword() {
+        api.actionSheet({
+            buttons: [fnLanguageSwitch( '手机找回密码' ),fnLanguageSwitch( '邮箱找回密码' )],
+            cancelTitle: fnLanguageSwitch( '取消' )
+        }, function(ret, err){
+            if( ret.buttonIndex === 1){
+	            fnOpen({
+	                name: 'forget_password',
+	                url: 'widget://' + DIR + '/member_center/forget_password.html'
+	            })
+            }else if( ret.buttonIndex === 2 ){
+	            fnOpen({
+                    name: 'forget_password',
+                    url: 'widget://' + DIR + '/member_center/forget_password_email.html'
+	            })
+            }
+        });
+    }
+</script>
+</html>

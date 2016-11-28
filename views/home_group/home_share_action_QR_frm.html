@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>simple-page</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" href="../../css/common.css">
+    <style type="text/css">
+        body {
+            padding: 0 3.6rem;
+            background-color: #ffffff;
+            height: auto;
+        }
+
+        /*#qr {
+            background: url(../../image/images/39_03.jpg)no-repeat 0 0;
+            background-size: 258px 258px;
+            width:258px;
+            height:258px;
+            margin-top: 20px;
+           
+            
+        }*/
+
+        .shareDetail {
+            margin-top: 4rem;
+            line-height: 2rem;
+            font-size: 1.3rem;
+        }
+    </style>
+</head>
+<body>
+<div class="" id="qr">
+
+</div>
+<div class="shareDetail">
+   <!--  Please install CCE APP to get Intel tech support and matchmaking service. 
+！ -->
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript" src="../../script/qrcode.js"></script>
+<script type="text/javascript">
+    var loginInfo = $api.getStorage('loginInfo');
+    //debugAlert(loginInfo)
+    var shareID;
+    apiready = function () {
+
+        shareID = api.pageParam.shareID;
+        var qrcode = new QRCode($api.dom('#qr'), {
+            width: $api.dom('#qr').offsetWidth,
+            height: $api.dom('#qr').offsetHeight
+        });
+
+        //      获取分享内容
+        fnAjax({
+            url: 'shares/getShareDetail?shareId='+shareID
+        }, function( ret, err){
+            if( ret ){
+                new QRCode($api.dom('#qr'), ret.url+USER.userId);
+                $(".shareDetail").html( fnLanguageSwitch( ret.shareDetail ) )
+            }else{
+                api.toast({
+                    global: true,
+                    msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                });
+            }
+        });
+    };
+</script>
+</html>

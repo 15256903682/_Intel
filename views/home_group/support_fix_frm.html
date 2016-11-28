@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>support</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/common.css"/>
+    <style>
+    	body{
+    		background-color: #FFFFFF;
+    	}
+    	.nav-group{
+    		font-size: 0;
+    		text-align: center;
+    		padding-top: 1rem;
+		    padding-bottom: 0.2rem;
+    	}
+		.nav-group .nav-btn{
+			width: 12.4rem;
+			height: 3.2rem;
+			background-color: #FFFFFF;
+			color: #005BBC;
+			text-align: center;
+			font-size: 1.2rem;
+			border-radius: 0.4rem;
+			border: 0.1rem solid #00AEEF;
+			line-height: 3.4rem;
+			/*-webkit-transition: all .05s linear;*/
+			        /*transition: all .05s linear;*/
+		}
+		.nav-group .nav-btn:first-child{
+			border-top-right-radius: 0;
+			border-bottom-right-radius: 0;
+			border-right: none;
+		}
+		.nav-group .nav-btn:last-child{
+			border-bottom-left-radius: 0;
+			border-top-left-radius: 0;
+			border-left: none;
+		}
+		.nav-group .nav-btn:active{
+			background-color: rgba(0, 91, 188, 0.2);
+		}
+		.nav-group .nav-btn.active{
+			background-color: #00AEEF;
+			color: #FFFFFF;
+		}
+		.tip{
+			font-size: 1.1rem;
+			line-height: 2.5rem;
+			color: #005BBC;
+			padding: 0 1.2rem;
+		}
+		.border{
+			-webkit-box-sizing: border-box;
+    		        box-sizing: border-box;
+    		border-bottom: 1px solid #E2E2E2;
+    		height: 100%;
+		}
+    </style>
+</head>
+<body>
+  <!--   <div class="border">
+		<div class="nav-group">
+			<span class="nav-btn active" tapmode onclick="changeSupportContent(0)">Project Support</span>
+			<span class="nav-btn" tapmode onclick="changeSupportContent(1)">Support History</span>
+		</div>
+		<p class="tip">Select the project you want to request support for:</p>
+    </div> -->
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript">
+	var tips = $api.dom('.tip');
+	var zhuge;
+	apiready = function(){
+		$api.dom('body').innerHTML=
+		'<div class="border">'+
+		'	<div class="nav-group">'+
+		'		<span class="nav-btn active" tapmode onclick="changeSupportContent(0)">'+fnLanguageSwitch( '项目' )+'</span>'+
+		'		<span class="nav-btn" tapmode onclick="changeSupportContent(1)">'+fnLanguageSwitch( '历史支持获取' )+'</span>'+
+		'	</div>'+
+		'	<p class="tip">'+fnLanguageSwitch( '请选择您要获得支持的项目' )+':</p>'+
+		' </div>';
+
+		zhuge = api.require('zhuge');
+        if (zhuge) {
+            zhuge.initZhuge();
+        }
+		api.addEventListener({
+		    name: 'support_tips_hidden'
+		}, function(ret, err){
+			// debugAlert(111)
+			// debugAlert(JSON.stringify(ret))
+		    var status = ret.value.status;
+		    if (status == 'hidden') {
+		    	$api.addCls(tips, 'hidden');
+		    } else {
+		    	$api.removeCls(tips, 'hidden');
+		    }
+		});
+		var supportId = api.pageParam.supportId;
+		changeSupportContent(supportId);
+	};
+
+	function changeSupportContent(index){
+		var btns = $api.domAll('.nav-btn');
+		$api.removeCls($api.dom('.nav-btn.active'), 'active');
+		$api.addCls(btns[index], 'active');
+		if (index == 1) {
+			$api.addCls(tips, 'hidden');
+			if (zhuge) {
+                zhuge.track({
+                    eventName: '项目支持_历史支持获取tab点击',
+                    eventPro: {}
+                });
+            }
+		} else{
+			if (zhuge) {
+                zhuge.track({
+                    eventName: '项目支持_项目tab点击',
+                    eventPro: {}
+                });
+            }
+		}
+		api.sendEvent({
+		    name: 'changeSupportContent',
+		    extra: {
+		    	index: index
+		    }
+		});
+	};
+</script>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <style>
+        body{
+          background-color: #EEEEEE;
+          margin:0px;
+          padding: 0px;  
+        }
+        b{display: inline-block;}
+        .topic{
+        	background-color: #fff;
+        	font-size: 14px;
+        	color:#303030;
+        	font-weight: normal;
+        	vertical-align: top;
+        	margin-bottom: 5px;
+
+        }
+        .project{
+        	background: url('../../image/efg_03.jpg')no-repeat 0 0;
+        	background-size: 14px 16px;
+        	width:14px ;
+        	height:16px;
+        }
+        .curie{
+        	background: url('../../image/efg_06.jpg')no-repeat 0 0;
+        	background-size: 13px;
+        	width:13px;
+        	height:13px;
+        }
+        .classify{
+        	padding: 16px 20px;
+
+        }
+        .title{
+            margin-bottom: 16px; 
+
+        }
+        .caption{
+        	margin-left: 20px;
+        }
+        .caption span{
+        	font-size:14px;
+        	color:#303030;
+        }
+        .topic_ca{
+        	border-bottom: 1px solid #EEEEEE;
+        }
+         .button_true{
+         text-align: center;
+         margin-top: 10px;
+
+       }
+       .button_true input{
+         width:80%;
+         height:40px;
+         background-color:#00AEEF;
+         border:none;
+         outline: none;
+         color:#fff;
+         border-radius: 5px;
+         font-size:14px;
+       }
+
+       nav{ overflow: hidden; }
+       nav label{ width: 25%; float: left; 
+            font-size: 13px;
+            color: #303030;
+           font-weight: normal; padding: 10px 0; }
+       nav label input{ margin-right: 5px; }
+       .topic_ca{ display: block; }
+       .topic_ca .flex-con{ padding-left: 10px; }
+       .caption { padding: 10px 0; }
+       .topic_ca input{ width: 100%; }
+       .topic_ca textarea{ width: 100%; min-height: 100px; }
+       input[type="submit"]{ cursor: pointer; -webkit-appearance: none; } 
+    </style>
+</head>
+<body>
+   <!--  <div class="topic">
+    	<div class="classify">
+    		<div class="title"><b class="project"></b><b class="abuse">话题分类</b></div>
+            <nav>
+                <!-- <label><input type="radio" name="nav">剧里</label> -->
+           <!--  </nav>
+    	</div>
+    </div>
+    <div class="topic">
+        <div class="topic_ca">
+	    	<div class="caption flex-wrap">
+	    		<span>标题</span>
+                <div class="flex-con">
+                    <input id="title" type="text" placeholder="请输入标题">
+                </div>
+	    	</div>
+	    	<div class="caption flex-wrap">
+	    		<span>内容</span>
+                <div class="flex-con">
+                    <textarea id="content" placeholder="请输入内容"></textarea>
+                </div>
+	    	</div>
+    	</div>
+    </div>
+ -->
+    <!-- 底部按钮 -->
+   <!--  <div class="button_true">
+         <input tapmode onclick="fnSubmit( this );" type="submit" name="" value="发布">
+    </div> --> 
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript">
+    apiready = function(){
+        $api.dom('body').innerHTML=
+         '      <div class="topic">'+
+         '       <div class="classify">'+
+         '           <div class="title"><b class="project"></b><b class="abuse">'+fnLanguageSwitch('话题分类')+'</b></div>'+
+         '           <nav>'+
+                        // <!-- <label><input type="radio" name="nav">剧里</label> -->
+         '            </nav>'+
+         '       </div>'+
+         '   </div>'+
+         '   <div class="topic">'+
+         '       <div class="topic_ca">'+
+         '           <div class="caption flex-wrap">'+
+         '               <span>'+fnLanguageSwitch('标题')+'</span>'+
+         '               <div class="flex-con">'+
+         '                   <input id="title" type="text" placeholder="'+fnLanguageSwitch('请输入标题')+'">'+
+         '               </div>'+
+         '           </div>'+
+         '           <div class="caption flex-wrap">'+
+         '               <span>'+fnLanguageSwitch('内容')+'</span>'+
+         '               <div class="flex-con">'+
+         '                   <textarea id="content" placeholder="'+fnLanguageSwitch('请输入内容')+'"></textarea>'+
+         '               </div>'+
+         '           </div>'+
+         '       </div>'+
+         '   </div>'+
+
+            // <!-- 底部按钮 -->
+         '   <div class="button_true">'+
+         '        <input tapmode onclick="fnSubmit( this );" type="submit" name="" value="'+fnLanguageSwitch('发布')+'">'+
+         '   </div>';
+
+
+        //debugAlert( api.pageParam )
+        fnAjax({
+            url: 'communityTypes/findType',
+            method: 'post'
+        }, function( ret, err ){
+            if( ret ){
+                if( ret.length ){
+                    for( var x in ret ){
+                        $api.append($api.dom('nav'), '<label><input '+( api.pageParam.id == ret[x].id ? 'checked' : '')+' type="radio" data-id="'+ret[x].id+'" name="nav">'+ret[x].type+'</label>');
+                    }
+                }
+            }else{
+                api.toast({
+                    msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                });
+            }
+        });
+    };
+
+    function fnSubmit( el ){
+        var _title = $api.dom( '#title' ).value.trim(),
+            _content = $api.dom( '#content' ).value.trim();
+        if( ! _title ){
+            api.toast({
+                msg: fnLanguageSwitch( '标题不能为空' )
+            });
+        }else if( ! _content ){
+            api.toast({
+                msg: fnLanguageSwitch( '内容不能为空' )
+            });
+        }else{
+            fnAjax({
+                url: 'communityQuestions/createQuestion',
+                data: {
+                    values: {
+                        title: _title,
+                        content: _content,
+                        tid: $api.attr($api.dom('nav input:checked'), 'data-id' )
+                    }
+                }
+            }, function( ret, err ){
+                if( ret ){
+                    api.toast({
+                        msg: fnLanguageSwitch( '发布成功' )
+                    });
+                    api.execScript({
+                        name: 'community_win',
+                        script: 'fnChangeAlot();'
+                    });
+                    setTimeout(function(){
+                        api.closeWin();
+                    }, 1000);
+                }else{
+                    api.toast({
+                        msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                    });
+                }
+            });
+        }
+    }
+</script>
+</html>

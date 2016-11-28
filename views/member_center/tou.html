@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+        <style>
+            html {
+                height: 100%;
+            }
+            
+            body {
+                width: 100%;
+                height: 100%;
+                min-height: 100%;
+                background-color: #f0eff7;
+            }
+            
+            .header {
+                position: relative;
+                widht: 100%;
+                height: 44px;
+                background-color: #0171c5;
+            }
+            
+            .header .back {
+                position: absolute;
+                box-sizing: border-box;
+                bottom: 0;
+                padding-left: 16px;
+                width: 44px;
+                height: 44px;
+                background-image: url(../../image/arrow-left-white.png);
+                background-repeat: no-repeat;
+                background-size: 16px 16px;
+                background-position: center center;
+                z-index: 2;
+            }
+            
+            .header .title {
+                position: relative;
+                bottom: 0;
+                width: 100%;
+                height: 44px;
+                font-size: 16px;
+                line-height: 44px;
+                color: #fff;
+                text-align: center;
+            }
+            
+            .group {
+                position: relative;
+                margin-top: 16px;
+                margin-bottom: 16px;
+                width: 100%;
+                height: auto;
+                text-align: center;
+            }
+            
+            .highlight {
+                opacity: 0.7;
+                background-color: #0060A8 !important;
+            }
+        </style>
+    </head>
+
+    <body>
+        <header id="header" class="header">
+           <!--  <div class="back" tapmode="highlight" onclick="api.closeWin()"></div>
+            <div class="title">Terms of Use</div> -->
+        </header>
+    </body>
+</html>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+        $api.dom('#header').innerHTML=
+        ' <div class="back" tapmode="highlight" onclick="api.closeWin()"></div>'+
+        '<div class="title">'+fnLanguageSwitch('使用条款')+'</div>';
+      api.parseTapmode();
+        var header = $api.byId('header');
+        $api.fixStatusBar(header);
+        var headerPos = $api.offset(header);
+        var zhuge = api.require('zhuge');
+        if (zhuge) {
+            zhuge.initZhuge();
+            zhuge.track({
+                eventName: '我的_关于',
+                eventPro: {
+                    '名称': 'Terms of Use'
+                }
+            });
+        }
+        api.openFrame({
+            name: 'tou_frm',
+            url: 'http://www.intel.cn/content/www/cn/zh/legal/terms-of-use.html',
+            bounces: true,
+            rect: {
+                x: 0,
+                y: headerPos.h,
+                w: 'auto',
+                h: 'auto'
+            },
+            progress: {
+                type: 'page',
+                title: 'default',
+                text: 'default',
+                color: '#0171c5'
+            },
+        });
+    };
+</script>

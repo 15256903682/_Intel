@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+        <link rel="stylesheet" href="../../css/common.css">
+        <style>
+            body{
+                background-color: #FFFFFF;
+            }
+            .container {
+                position: relative;
+                box-sizing: border-box;
+                padding-left: 16px;
+                width: 100%;
+                height: auto;
+                overflow: hidden;
+            }
+            
+            .container .row {
+                position: relative;
+                box-sizing: border-box;
+                padding-right: 16px;
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: flex;
+                -webkit-box-orient: horizontal;
+                -webkit-flex-flow: row;
+                flex-flow: row;
+                width: 100%;
+                height: 44px;
+                border-bottom: 1px solid #bababa;
+            }
+            
+            .container .avatar {
+                padding-right: 16px;
+                padding-top: 20px;
+                height: 140px;
+                border-bottom: none;
+            }
+            
+            .container .avatar .icon {
+                position: relative;
+                box-sizing: border-box;
+                width: 100px;
+                height: 100px;
+                margin: auto;
+                border-radius: 3px;
+                background-clip: border-box;
+                border: 1px solid #bababa;
+                background-image: url(../../image/Macthmaking/MacthmakingNewneed/default.png);
+                background-size: 94px 94px;
+                background-repeat: no-repeat;
+                background-position: center center;
+            }
+            
+            .container .row .name {
+                position: relative;
+                box-sizing: border-box;
+                width: 119px;
+                height: 44px;
+                color: #000;
+                font-size: 16px;
+                line-height: 44px;
+                text-align: left;
+            }
+            
+            .container .row .value {
+                -webkit-box-flex: 1;
+                -webkit-flex: 1;
+                flex: 1;
+                height: 44px;
+                line-height: 44px;
+                color: #888;
+                font-size: 15px;
+                
+            }
+            
+            .container .row .value input {
+                box-sizing: border-box;
+                padding-top: 9px;
+                padding-bottom: 11px;
+                width: 100%;
+                vertical-align: middle;
+                border: none;
+                outline: none;
+                font-size: 15px;
+                 color: #888;
+                line-height: normal;
+            }
+            
+            .container .row .code-button {
+                height: 44px;
+                width: 99px;
+                font-size: 14px;
+                color: #0171c5;
+                text-align: center;
+                line-height: 44px;
+            }
+            
+            .button {
+                position: relative;
+                margin-top: 36px;
+                margin-left: 48px;
+                margin-right: 48px;
+                margin-bottom: 36px;
+                width: auto;
+                height: 44px;
+                color: #fff;
+                font-size: 16px;
+                line-height: 44px;
+                text-align: center;
+                background-color: #00AEEF;
+                border-radius: 8px;
+            }
+            
+            .highlight {
+                opacity: 0.7;
+            }
+            #mobile[disabled], #email[disabled]{
+                color: rgb(143, 143, 143);
+            }
+            #city{
+                color:#888;
+                font-size: 15px;
+            }
+        </style>
+    </head>
+
+   <body> 
+ <!--        <section class="container">
+            <div class="row avatar">
+                <div id="avatar" class="icon" tapmode onclick="fnChooseAvatar()"></div>
+            </div>
+            <div class="row">
+                <div class="name">真实姓名</div>
+                <div class="value">
+                    <input id="username" type="text" placeholder="'+fnLanguageSwitch( '必填项' )+'">
+                </div>
+            </div>
+            <div class="row">
+                <div class="name">昵称</div>
+                <div class="value">
+                    <input id="nick" type="text" placeholder="'+fnLanguageSwitch( '必填项' )+'">
+                </div>
+            </div>
+            <div class="row">
+                <div class="name">手机号</div>
+                <div class="value">
+                    <input id="mobile" type="number" placeholder="'+fnLanguageSwitch( '必填项' )+'" tapmode onfocus="showControlMobile()">
+                </div>
+            </div>
+            <div id="controlMobile" class="row hidden">
+                <div class="name">验证码</div>
+                <div class="value">
+                    <input id="codeMobile" type="number" placeholder="请输入验证码">
+                </div>
+                <div class="code-button" tapmode="highlight" tapmode onclick="getCaptcha(1, this)">获取验证码</div>
+            </div>
+            <div class="row">
+                <div class="name">邮箱</div>
+                <div class="value">
+                    <input id="email" type="email" placeholder="'+fnLanguageSwitch( '必填项' )+'" tapmode onfocus="showControlEmail()">
+                </div>
+            </div>
+            <div id="controlEmail" class="row hidden">
+                <div class="name">验证码</div>
+                <div class="value">
+                    <input id="codeEmail" type="number" placeholder="请输入验证码">
+                </div>
+                <div class="code-button" tapmode="highlight" tapmode onclick="getCaptcha(2, this)">获取验证码</div>
+            </div>
+            <div class="row">
+                <div class="name">QQ</div>
+                <div class="value">
+                    <input id="qq" type="text" placeholder="选填项">
+                </div>
+            </div>
+            <div class="row">
+                <div class="name">用户类型</div>
+                <div id="userType" class="value" tapmode onclick="fnOpenSelector(1, this)">个人</div>
+            </div>
+            <div class="row">
+                <div class="name">company name</div>
+                <div class="value">
+                    <input id="company" type="text" placeholder="'+fnLanguageSwitch( '必填项' )+'">
+                </div>
+            </div>
+            <div class="row">
+                <div class="name">职位</div>
+                <div id="job" class="value" tapmode onclick="fnOpenSelector(2, this)">采购</div>
+            </div>
+            <div class="row">
+                <div class="name">城市</div>
+                <input id="city" type="text"  placeholder=" 必填项">
+            </div>
+            <div class="row">
+                <div class="name">注册时间</div>
+                <div id="createdAt" class="value"></div>
+            </div>
+        </section>
+        <div class="button btn" tapmode="highlight" tapmode onclick="fnSubmit(this)">Done</div>
+        <div style="height:1px"></div>
+        <div id="modal_selector" tapmode="" onclick="selectCancel()">
+            <div class="select">
+                <div class="select-control">
+                    <div class="select-control-cancel" tapmode="" onclick="selectCancel()">Cancel</div>
+                    <div class="select-control-placeHolder"></div>
+                    <div class="select-control-ok" tapmode="" onclick="selectCancel()">Done</div>
+                </div>
+                <div class="select-content">
+
+                </div>
+            </div>
+        </div> -->
+    </body> 
+    <script type="text/javascript" src="../../script/api.js"></script>
+    <script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+    <script type="text/javascript">
+        var loginInfo = $api.getStorage('loginInfo');
+        var account = $api.getStorage('loginInfo');
+        var usertype = loginInfo.roleId;
+        var UICustomPicker;
+        var zhuge;
+
+        apiready = function() {
+            UICustomPicker = api.require('UICustomPicker');
+            zhuge = api.require('zhuge');
+             if (zhuge) {
+                zhuge.initZhuge();
+                zhuge.track({
+                    eventName: '我的_基本信息',
+                    eventPro: {}
+                });
+            }
+
+            fnLayout( USER.info );
+        // 这里开始重构
+   //      return;
+            // if( api.pageParam.hasUpgrade ){
+            //  $api.dom( '.button' ).innerHTML = 'Next';
+            // }
+   //          if (zhuge) {
+   //              zhuge.initZhuge();
+   //              zhuge.track({
+   //                  eventName: '我的_基本信息',
+   //                  eventPro: {}
+   //              });
+   //          }
+   //       fnInit();
+        };
+
+        function fnLayout( _ ){
+            $api.dom( 'body' ).innerHTML = 
+            '<section class="container">'+
+            '    <div class="row avatar">'+
+            '        <div id="avatar" class="icon" tapmode data-selectorid="'+_.photo+'" onclick="fnGetPicture( this )"></div>'+
+            '    </div>'+
+            '    <div class="row">'+
+            '        <div class="name">'+fnLanguageSwitch( '真实姓名' )+'</div>'+
+            '        <div class="value">'+
+            '            <input id="username" type="text" '+( _.realname && 'value="'+_.realname+'"')+' placeholder="'+fnLanguageSwitch( '必填项' )+'">'+
+            '        </div>'+
+            '    </div>'+
+            '    <div class="row">'+
+            '        <div class="name">'+fnLanguageSwitch( '昵称' )+'</div>'+
+            '        <div class="value">'+
+            '            <input id="nick" type="text" '+( _.nickname && 'value="'+_.nickname+'"')+'  placeholder="'+fnLanguageSwitch( '必填项' )+'">'+
+            '        </div>'+
+            '    </div>'+
+            '    <div class="row">'+
+            '        <div class="name">'+fnLanguageSwitch( '手机号' )+'</div>'+
+            '        <div class="value">'+
+            '            <input id="mobile" type="tel" tapmode oninput="showControl( this, \'#controlMobile\')" placeholder="'+fnLanguageSwitch( '必填项' )+'"  '+( _.cellPhone ? 'value="'+_.cellPhone+'"' + ( _.username === _.cellPhone && 'readonly' ) : ' ' ) +'>'+
+            '        </div>'+
+            '    </div>'+
+            '    <div id="controlMobile" class="row hidden">'+
+            '        <div class="name">'+fnLanguageSwitch( '验证码' )+'</div>'+
+            '        <div class="value">'+
+            '            <input id="codeMobile" type="tel" placeholder="'+fnLanguageSwitch( '请输入验证码' )+'">'+
+            '        </div>'+
+            '        <div class="code-button" tapmode="highlight" tapmode onclick="getCaptcha(1, this)">'+fnLanguageSwitch( '获取验证码' )+'</div>'+
+            '    </div>'+
+            '    <div class="row">'+
+            '        <div class="name">'+fnLanguageSwitch( '邮箱' )+'</div>'+
+            '        <div class="value">'+
+            '            <input id="email" type="email" tapmode oninput="showControl(this ,\'#controlEmail\')" '+( _.email ? 'value="'+_.email+'"' + ( _.username === _.email && 'readonly' ) : '' )+'   placeholder="'+fnLanguageSwitch( '必填项' )+'" >'+
+            '        </div>'+
+            '    </div>'+
+            '    <div id="controlEmail" class="row hidden">'+
+            '        <div class="name">'+fnLanguageSwitch( '验证码' )+'</div>'+
+            '        <div class="value">'+
+            '            <input id="codeEmail" type="number" placeholder="'+fnLanguageSwitch( '请输入验证码' )+'">'+
+            '        </div>'+
+            '        <div class="code-button" tapmode="highlight" tapmode onclick="getCaptcha(2, this)">'+fnLanguageSwitch( '获取验证码' )+'</div>'+
+            '    </div>'+
+            '    <div class="row">'+
+            '        <div class="name">QQ</div>'+
+            '        <div class="value">'+
+            '            <input id="qq" type="tel" '+( _.QQ ? 'value="'+_.QQ+'"' : '' )+' placeholder="'+fnLanguageSwitch( '选填项' )+'">'+
+            '        </div>'+
+            '    </div>'+
+            '    <div class="row">'+
+            '        <div class="name">'+fnLanguageSwitch( '用户类型' )+'</div>'+
+            '        <div id="userType" onclick="fnTypeSelector( this )" data-selectorid="'+( _.type ? _.type: '')+'" class="value">'+( _.type ?  fnTypeJson()[ _.type ]: fnLanguageSwitch( '必填项' ) )+'</div>'+
+            '    </div>'+
+            '    <div class="row">'+
+            '        <div class="name">'+fnLanguageSwitch( '公司名称' )+'</div>'+
+            '        <div class="value">'+
+            '            <input id="company" type="text" '+( _.company && _.company.FullNameChinese ? 'value="'+_.company.FullNameChinese+'"' : '' )+' placeholder="'+fnLanguageSwitch( '必填项' )+'">'+
+            '        </div>'+
+            '    </div>'+
+            '    <div class="row">'+
+            '        <div class="name">'+fnLanguageSwitch( '职位' )+'</div>'+
+            '        <div id="job" class="value"  tapmode onclick="fnOpenSelector( this )" data-selectorid="'+( _.profession ? _.profession: '')+'">'+( _.profession ?  fnJobJson()[ _.profession ]: fnLanguageSwitch( '必填项' ) )+'</div>'+
+            '    </div>'+
+            '    <div class="row">'+
+            '        <div class="name">'+fnLanguageSwitch( '城市' )+'</div>'+
+            '        <input id="city" type="text" '+( _.countyId ? 'value="'+_.countyId+'"' : '' )+' placeholder="'+fnLanguageSwitch( '必填项' )+'">'+
+            '    </div>'+
+            '    <div class="row">'+
+            '        <div class="name">'+fnLanguageSwitch( '注册时间' )+'</div>'+
+            '        <div id="createdAt" class="value" >'+new Date( _.created ).Format( 'yyyy/MM/dd' )+'</div>'+
+            '    </div>'+
+            '</section>'+
+            '<div class="button btn" tapmode="highlight" tapmode onclick="fnSubmit(this)">'+fnLanguageSwitch( '提交' )+'</div>'+
+            '    <div style="height:1px"></div>'+
+            '    <div id="modal_selector" tapmode="" onclick="selectCancel()">'+
+            '        <div class="select">'+
+            '            <div class="select-control">'+
+            '                <div class="select-control-cancel" tapmode="" onclick="selectCancel()">'+fnLanguageSwitch('取消')+'</div>'+
+            '                <div class="select-control-placeHolder"></div>'+
+            '                <div class="select-control-ok" tapmode="" onclick="selectCancel()">'+fnLanguageSwitch('完成')+'</div>'+
+            '            </div>'+
+            '            <div class="select-content">'+
+
+            '            </div>'+
+            '        </div>'+
+            '    </div>';
+
+
+            getImageCache( $api.dom( '#avatar' ) );
+        }
+
+        function showControl( el, tag ){
+            if( el.value.trim().length ){
+                if( el.id === 'mobile' ){
+                    if( USER.info.cellPhone === el.value.trim() ){
+                        $api.addCls($api.dom( tag ), 'hidden');  
+                    }else{
+                        $api.removeCls($api.dom( tag ), 'hidden');
+                    }
+                }else{
+                    if( USER.info.email === el.value.trim() ){
+                        $api.addCls($api.dom( tag ), 'hidden');  
+                    }else{
+                        $api.removeCls($api.dom( tag ), 'hidden');
+                    }
+                }
+            }else{
+                $api.addCls($api.dom( tag ), 'hidden');     
+            };
+        };
+
+    //获取验证码
+        function getCaptcha( type, el){
+            if( ! $api.hasCls(el, 'disabled') ){
+                if (type == 1) {
+                    var mobile = $api.dom( '#mobile' ).value.trim();
+                    if( ! mobile ){
+                        api.toast({
+							global: true,
+                            msg: fnLanguageSwitch( '手机不能为空' )
+                        });
+                    }else if( ! fnVerify( 'Phone' ).test( mobile ) ){
+                        api.toast({
+							global: true,
+                            msg: fnLanguageSwitch( '手机格式有误' )
+                        });
+                    }else{
+                        $api.addCls(el, 'disabled');
+                        fnAjax({
+                            url: 'randomCodes/getCodeByMobile',
+                            data: {
+                                values: {
+                                    loginname: mobile,
+                                    type: 3
+                                }
+                            }
+                        }, function( ret, err){
+                            if( ret ){
+                                fnCountDown(60, el);
+                            }else{
+                                $api.removeCls(el, 'disabled');
+//                              $api.addCls($api.closest(el, '.row'), 'hidden'); 
+                                api.toast({
+	                                global: true,
+                                    msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                                });
+                            }
+                         })
+                    }
+                } else{
+                    var email = $api.dom( '#email' ).value.trim();
+                    if( ! email ){
+                        api.toast({
+                         	global: true,
+                            msg: fnLanguageSwitch( '邮箱不能为空' )
+                        });
+                    }else if( ! fnVerify( 'Email' ).test( email ) ){
+                        api.toast({
+	                      global: true,
+                            msg: fnLanguageSwitch( '邮箱格式有误' )
+                        });
+                    }else{
+                        $api.addCls(el, 'disabled');
+                        fnAjax({
+                            url: 'randomCodes/getCodeByEmail',
+                            data: {
+                                values: {
+                                    loginname: email,
+                                    type: 1
+                                }
+                            }
+                        }, function( ret, err){
+                            if( ret ){
+                                fnCountDown(60, el);
+                            }else{
+                                $api.removeCls(el, 'disabled')
+//                              $api.addCls($api.closest(el, '.row'), 'hidden'); 
+                                api.toast({
+	                                 global: true,
+                                     msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                                });
+                            }
+                         })
+                    }
+                 }
+            }
+        };
+
+        var vTime = null;
+        function fnCountDown( num, el) {
+            if (num <= 0) {
+                el.innerHTML = fnLanguageSwitch('重新获取');
+                $api.removeCls(el, 'disabled');
+                clearTimeout( vTime );
+            }else{
+                vTime = setTimeout(function(){
+                    --num;
+                    el.innerHTML = num+' '+fnLanguageSwitch('秒后重发')
+                    fnCountDown( num, el);
+                },1000);
+            }
+        }
+
+        function fnOpenSelector( el ){
+            openSelector(el, fnJobJson());
+        }
+
+
+        function fnTypeSelector( el ){
+            openSelector(el, fnTypeJson());
+        }
+
+
+    //提交函数(输入验证，按钮变色，更新用户信息接口)    
+        function fnSubmit(el){
+            var cellPhone = $api.dom( '#mobile' ).value.trim(),
+                phone_captcha = $api.dom( '#controlMobile' ),
+                email = $api.dom( '#email' ).value.trim(),
+                email_captcha = $api.dom( '#controlEmail' ),
+                QQ = $api.dom( '#qq' ).value.trim();
+
+                _ = {
+                    photo: $api.attr($api.dom( '#avatar'), 'data-selectorid' ),
+                    realname: $api.dom( '#username' ).value.trim(),
+                    nickname: $api.dom( '#nick' ).value.trim(),
+                    type: $api.attr($api.dom( '#userType'), 'data-selectorid' ),
+                    companyName: $api.dom( '#company' ).value.trim(),
+                    profession: $api.attr($api.dom( '#job'), 'data-selectorid' ),
+                    countyId: $api.dom( '#city' ).value.trim()
+                };
+
+                // phone_captcha
+                // email_captcha
+                if( ! $api.hasCls(phone_captcha, 'hidden') || ! USER.info.cellPhone ){
+                    _.phone_captcha = $api.dom( '#codeMobile' ).value.trim();
+                    _.cellPhone = cellPhone;
+                    if( ! cellPhone ){
+                        return api.toast({
+	                       global: true,
+                           msg: fnLanguageSwitch( '手机不能为空' )
+                        });
+                    }else if( ! fnVerify( 'Phone' ).test( cellPhone ) ){
+                        return api.toast({
+	                       global: true,
+                           msg: fnLanguageSwitch( '手机格式有误' )
+                        });
+                    }else if( ! _.phone_captcha ){
+                        return api.toast({
+	                       global: true,
+                           msg: fnLanguageSwitch( '手机验证码不能为空' )
+                        });
+                    }
+                }
+
+                if( ! $api.hasCls(email_captcha, 'hidden') || ! USER.info.email  ){
+                    _.email_captcha = $api.dom( '#codeEmail' ).value.trim();
+                    _.email = email;
+                    if( ! email ){
+                        return api.toast({
+	                       global: true,
+                           msg: fnLanguageSwitch( '邮箱不能为空' )
+                        });   
+                    }else if( ! fnVerify( 'Email' ).test( email ) ){
+                        return api.toast({
+	                       global: true,
+                            msg: fnLanguageSwitch( '邮箱格式有误' )
+                        });
+                    }else if( ! _.email_captcha ){
+                        return api.toast({
+	                       global: true,
+                            msg: fnLanguageSwitch( '邮箱验证码不能为空' )
+                        });
+                    }
+                }
+
+
+                if( ! _.photo ){
+                    api.toast({
+	                       global: true,
+                        msg: fnLanguageSwitch( '头像不能为空' )
+                    });
+                }else if( ! _.realname ){
+                    api.toast({
+	                       global: true,
+                        msg: fnLanguageSwitch( '真实姓名不能为空' )
+                    });
+                }else if( ! _.nickname ){
+                    api.toast({
+	                   global: true,
+                        msg: fnLanguageSwitch( '昵称不能为空' )
+                    });
+                }else if( ! _.type ){
+                    api.toast({
+	                   global: true,
+                        msg: fnLanguageSwitch( '用户类型不能为空' )
+                    });
+                }else if( ! _.companyName ){
+                    api.toast({
+	                   global: true,
+                        msg: fnLanguageSwitch( '公司名称不能为空' )
+                    });
+                }else if( ! _.profession ){
+                    api.toast({
+	                   global: true,
+                        msg: fnLanguageSwitch( '职位不能为空' )
+                    });
+                }else if( ! _.countyId ){
+                    api.toast({
+	                   global: true,
+                        msg: fnLanguageSwitch( '城市不能为空' )
+                    });
+                }else{
+                    if( QQ ){
+                        _.QQ = QQ;
+                    }
+
+                    //更新用户信息
+                    fnAjax({
+                        url: 'users/updateInfo',
+                        data: {
+                            values: _
+                        }
+                    }, function( ret, err){
+                        if( ret ){
+
+                            api.toast({
+	                           global: true,
+                               msg: fnLanguageSwitch( '更新成功' )
+                            });
+                            api.execScript({
+                                name: 'index',
+                                frameName:'frm_my',
+                                script: 'apiready()'
+                            });
+                            setTimeout(function(){
+                                api.closeToWin({
+                                    name: 'index'
+                                });
+                            }, 2000)
+                        }else{
+                            api.toast({
+	                           global: true,
+                               msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                            });
+                        }
+                    });
+                }
+            };
+    </script>
+
+</html>

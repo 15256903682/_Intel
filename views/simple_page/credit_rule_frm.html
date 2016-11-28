@@ -1,0 +1,191 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>How to get and use credits?-frm</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/fonts_awesome/font-awesome.min.css">
+    <style type="text/css">
+    body{
+    	height: auto;
+    	min-height: 100%;
+    	background-color: #FFFFFF;
+    }
+    .placeholder{
+    	height: 1rem;
+    	background-color: #F5F5F5;
+    }
+    .container{
+    	padding: 0 1rem;
+    }
+    .container label.text{
+		font-size: 1.7rem;
+		line-height: 4.7rem;
+		color: #000000;
+    }
+    .table{
+		width: 29.4rem;
+		margin: 0 auto;
+		margin-bottom: 1.5rem;
+    }
+    .table td{
+    	font-size: 1.6rem;
+    	line-height: 2rem;
+    	padding: 0.9rem;
+    	color: #101010;
+    	border: 1px solid #AEAEAE;
+    }
+
+    .table tr td:first-child{
+        width: 61%;
+    }
+    .table tr td:last-child{
+        width: 39%;
+    }
+	p.content{
+		color: #101010;
+		font-size: 1.5rem;
+		line-height: 2.6rem;
+	}
+
+    </style>
+</head>
+<body>
+    <!-- <div class="placeholder"></div>
+    <div class="container">
+    	<label class="text">
+    		How to get and use credits?：
+    	</label>
+    	<table class="table">
+    		<tbody>
+    			<tr>
+    				<th>
+    				</th>
+    			</tr>
+
+    		</tbody>
+    	</table>
+    	<p class="content">
+    		Notice:
+    	</p>
+    	<p class="content">
+    		1. Please complete your profile before redeeming the gift。
+    	</p>
+    	<p class="content">
+    		2. Credit accumulation rules and gifts will be adjusted due to different supply and exchange situations. Please check the latest rules in APP.。
+    	</p>
+    	<p class="content">
+    		3.Intel has the right to cancel credits if there exists malicious behavior and reserves the right of final interpretation of credits.。
+    	</p>
+    </div> -->
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript">
+    var account = $api.getStorage('loginInfo');
+
+	apiready = function(){
+        $api.dom('body').innerHTML=
+        '        <div class="placeholder"></div>'+
+        '        <div class="container">'+
+        '            <label class="text"> '+fnLanguageSwitch( '累计及使用规则')+'： </label>'+
+        '            <table class="table">'+
+        '                <tbody>'+
+        '                    <tr>'+
+        '                        <th>'+
+        '                        </th>'+
+        '                    </tr>'+
+
+        '                </tbody>'+
+        '            </table>'+
+        '            <p class="content">  '+fnLanguageSwitch( '注')+'：</p>'+
+        '            <p class="content">'+fnLanguageSwitch( '1.兑换积分前，请先完善个人的基本资料')+'。</p>'+
+        '            <p class="content"> '+fnLanguageSwitch( '2.积分累计规则和商家礼品会根据礼品的供货和兑换情况进行不定时的调整，以在APP中最新显示为准')+'。</p>'+
+        '            <p class="content"> '+fnLanguageSwitch( '3.如发现恶意刷积分的行为，英特尔公司有权取消其积分。积分的最终解释权属于英特尔公司')+'。 </p>'+
+        '        </div>';
+
+
+
+
+	  	var pageParam = api.pageParam;
+        var zhuge = api.require('zhuge');
+        if (zhuge) {
+            zhuge.initZhuge();
+            zhuge.track({
+                eventName: '我的_我的积分-累计及使用规则',
+                eventPro: {}
+            });
+        }
+        getRule();
+
+	};
+
+    function getRule(){
+        fnAjax({
+            url: 'integralRules/getRule'
+        }, function( ret, err ){
+            if( ret ){
+                if( ret.length ){
+                    var str = '';
+                    for( var x in ret ){
+                        str += '<tr>';
+                            str += '<td>'+ ret[x].ruleName +'</td>';
+                            str += '<td>'+ ret[x].ruleIntegral +'</td>';
+                        str += '</tr>';
+                        $api.append($api.dom('.table tbody'), str);
+                    }
+                }
+            }else{
+                api.toast({
+                    msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                });
+            }
+        });
+        return;
+        // /APPIntegral/APPGetIntegralRule.aspx
+        var integralRule = $api.getStorage('APPGetIntegralRule');
+        if (api.connectionType == 'none') {
+            if (integralRule) {
+            } else {
+                api.toast({
+	global: true,
+                    msg: 'The information of credit rules hasn\'t been obtained.',
+                    duration: 2000,
+                    location: 'middle'
+                });
+            }
+            
+        } else{
+            ajaxRequest('/APPIntegral/APPGetIntegralRule.aspx', 'get', {
+                UserID: parseInt(account.userid),
+                BatchNo: account.batchno, 
+            }, function(ret, err){
+                if(ret && ret.res == undefined){
+                    var data = ret.appdatalist;
+                    // table
+                    // tbody
+                    var str = '';
+                    for (var i = 0; i < data.length; i++) {
+                        str += '<tr>';
+                            str += '<td>'+ data[i].RuleName +'</td>';
+                            str += '<td>'+ data[i].RuleIntegral +'</td>';
+                        str += '</tr>';
+                    }
+                    $api.setStorage('APPGetIntegralRule', data);
+                    $api.append($api.dom('.table tbody'), str);
+                } else{
+                    console.log('ret:err===='+ JSON.stringify(ret));
+                }
+                if (err) {
+                    console.log('err===='+ JSON.stringify(err));
+                }
+            });
+        }
+    };
+
+</script>
+</html>

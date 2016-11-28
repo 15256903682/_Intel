@@ -1,0 +1,454 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>我的积分-frm</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" href="../../css/common.css">
+    <style type="text/css">
+    body{
+        background-color: #FFFFFF;
+    }
+    .fixed-header{
+        background-color: #037FDC;
+        padding: 0.6rem 0;
+        width: 100%;
+        height: 13rem;
+    }
+    .fixed-inner{
+        padding: 2.1rem 1.7rem;
+        font-size: 1.4rem;
+        line-height: 2.6rem;
+        background-color: #FFFFFF;
+        color: #999999;
+    }
+    .fixed-inner .pull-right{
+        color: #006FC4;
+    }
+    .fixed-inner .count{
+        font-size: 3.6rem;
+        color: #006FC4;
+        line-height: 5rem;
+    }
+    .fixed-shadow{
+        height: 13rem;
+        margin-bottom: 0.5rem;
+    }
+    .card-container{
+        padding: 0.5rem 1rem;
+    }
+    .goods-card{
+        border: 1px solid #A7A7A7;
+        border-radius: 0.4rem;
+        padding: 1.4rem 0.6rem;
+        padding-bottom: 0;
+        margin-bottom: 1rem;
+    }
+    .goods-card img{
+        display: block;
+        width: 100%;
+        margin-bottom: 1.6rem;
+    }
+    .goods-card .goods-detail{
+        font-size: 1.8rem;
+        color: #000000;
+        height: 3.4rem;
+        line-height: 3.4rem;
+        border-bottom: 1px solid #A7A7A7;
+        margin-bottom: 1rem;
+    }
+    .goods-card .goods-cost{
+        line-height: 5rem;
+    }
+    .goods-card .cost{
+        line-height: 5rem;
+        font-size: 2rem;
+        color: #0171C5;
+    }
+    .goods-card .text{
+        line-height: 5rem;
+        font-size: 1.5rem;
+        color: #0171C5;
+    }
+    .goods-card .btn-exchange{
+        line-height: 3.4rem;
+        background-color: #00AEEF;
+        color: #FFFFFF;
+        float: right;
+        width: 11.4rem;
+        height: 3.4rem;
+        text-align: center;
+        border-radius: 999px;
+        -webkit-background-clip:padding-box;
+                background-clip:padding-box;
+        position: relative;
+        top: 0.8rem;
+    }
+    .flex-con{ overflow: auto; }
+    </style>
+</head>
+<body class="flex-wrap flex-vertical" >
+    <div class="fixed-header">
+<!--         <div class="fixed-inner">
+            当前积分
+            <span class="pull-right" tapmode onclick="goCreditRule()">
+                累计及使用规则
+            </span>
+            <p class="count">0</p>
+        </div> -->
+    </div>
+    <div class="flex-con" >
+        <div class="card-container">
+            <!-- <div class="goods-card">
+                <img src="../../image/common/placeholderimg.png" alt="">
+                <p class="goods-detail ellipsis-1">
+                    DFRobot 商城200元代金券（里面不知道是什么内容）
+                </p>
+                <p class="goods-cost">
+                    <span class="btn-exchange" tapmode onclick="fnExchange(this)">积分兑换</span>
+                    <span class="cost">200</span>
+                    <span class="text">积分</span>
+                </p>
+            </div> -->
+        </div>
+    </div>
+
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript">
+    var account = $api.getStorage('loginInfo');
+    var zhuge;
+    var vGlobalParam = {};
+    apiready = function(){  
+        getGiftList();
+          zhuge = api.require('zhuge');
+        if (zhuge) {
+            zhuge.initZhuge();
+            zhuge.track({
+                eventName: '我的_我的积分',
+                eventPro: {}
+            });
+        }
+
+        return;
+
+
+
+        var pageParam = api.pageParam;
+        zhuge = api.require('zhuge');
+        if (zhuge) {
+            zhuge.initZhuge();
+            zhuge.track({
+                eventName: '我的_我的积分',
+                eventPro: {}
+            });
+        }
+        getUserIntegral();
+        getGiftList('html');
+        api.addEventListener({
+            name:'scrolltobottom',
+            extra:{
+                threshold: 5
+            }
+        }, function(ret, err){
+            getGiftList('append');
+        });
+        api.setRefreshHeaderInfo({
+            visible: true,
+            loadingImg: 'widget://image/common/blueArrow@2x.png',
+            bgColor: '#FFF',
+            textColor: '#000000',
+            textDown: '下拉刷新',
+            textUp: '松手加载',
+            showTime: true
+        }, function(ret, err){
+            CurrentPage = 1;
+            getGiftList('html');
+        });
+
+        api.addEventListener({
+            name: 'point_frame_refresh'
+        }, function(ret, err){
+            location.reload();
+        });
+    };
+
+    function getUserIntegral(){
+        var userIntegral = $api.getStorage('APPGetUserIntegral');
+        if (api.connectionType == 'none') {
+            if (userIntegral) {
+                $api.text($api.dom('.fixed-header .count'), userIntegral.TotalIntegral);
+            } else {
+                api.toast({
+	                global: true,
+                    msg: '尚未获取积分信息信息',
+                    duration: 2000,
+                    location: 'middle'
+                });
+            }
+            
+        } else{
+            ajaxRequest('APPIntegral/APPGetUserIntegral.aspx', 'get', {
+                UserID: parseInt(account.userid),
+                BatchNo: account.batchno, 
+            }, function(ret, err){
+                if(ret && ret.res == undefined){
+                    var data = ret.appdatalist[0];
+                    $api.setStorage('APPGetUserIntegral', data);
+                    $api.text($api.dom('.fixed-header .count'), data.TotalIntegral);
+                } else{
+                    console.log('ret:err===='+ JSON.stringify(ret));
+                }
+                if (err) {
+                    console.log('err===='+ JSON.stringify(err));
+                }
+            });
+        }
+        
+    };
+
+    var CurrentPage = 1;
+    var LineQTY = 10;
+    var ajaxLock = false;
+    function getGiftList(){
+        fnAjax({
+            url: 'gifts/getGift'
+        }, function( ret, err ){
+            if( ret ){
+                $api.dom( '.fixed-header' ).innerHTML = 
+                '<div class="fixed-inner">'+fnLanguageSwitch('当前积分')+'<span class="pull-right" tapmode onclick="goCreditRule()">'+fnLanguageSwitch('累计及使用规则')+'</span>'+
+                '    <p class="count">'+ret.integral+'</p>'+
+                '</div>';
+                if( ret.gifts.length ){
+                    $api.dom( '.card-container' ).innerHTML = '';
+                    for( var x in ret.gifts ){
+                        vGlobalParam[ ret.gifts[x].id ] = ret.gifts[x];
+                        $api.append($api.dom( '.card-container' ), 
+                        '<div class="goods-card">'+
+                        '    <img src="../../image/common/placeholderimg.png" onload="getImageCache( this )" data-selectorid="'+ret.gifts[x].picPath+'" >'+
+                        '    <p class="goods-detail ellipsis-1">'+ret.gifts[x].name+'</p>'+
+                        '    <p class="goods-cost">'+
+                        '        <span class="btn-exchange" tapmode onclick="fnExchange(this)" data-id="'+ret.gifts[x].id+'">'+fnLanguageSwitch('积分兑换')+'</span>'+
+                        '        <span class="cost">'+ret.gifts[x].integral+'</span>'+
+                        '        <span class="text">'+fnLanguageSwitch('积分')+'</span>'+
+                        '    </p>'+
+                        '</div>');
+                    }
+                }
+            }else{
+                api.toast({
+	               global: true,
+                    msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                });
+            }
+        });
+
+        return;
+
+        if (ajaxLock) {
+            return false;
+        } 
+        ajaxLock = true;
+        ajaxRequest('/APPGiftExchange/APPGetGiftList.aspx', 'get', {
+            UserID: parseInt(account.userid),
+            BatchNo: account.batchno, 
+            GiftType: 1,
+            CurrentPage: CurrentPage,
+            LineQTY: LineQTY
+        }, function(ret, err){
+            ajaxLock = false;
+            api.refreshHeaderLoadDone();
+            if(ret && ret.res == undefined){
+                var data = ret.getgiftlist;
+                var str = '';
+                for (var i = 0; i < data.length; i++) {
+                    str += '<div class="goods-card">';
+                        str += '<img src="../../image/Macthmaking/MacthmakingMain/MC_morentu.png" data-url="'+ data[i].PicPathBig +'" onload="getImageCache(this)" alt="">';
+                        str += '<p class="goods-detail ellipsis-1">';
+                            str += data[i].GiftName;
+                        str += '</p>';
+                        str += '<p class="goods-cost">';
+                            str += '<span class="btn-exchange" data-id='+ data[i].GiftID
+ +' data-cost="'+ data[i].GiftIntegral +'" tapmode onclick="fnExchange(this)">积分兑换</span>';
+                            str += '<span class="cost">'+ data[i].GiftIntegral +'</span>';
+                            str += '<span class="text">积分</span>';
+                        str += '</p>';
+                    str += '</div>';
+                }
+                if (type == 'html') {
+                    $api.html($api.dom('.card-container'), str); 
+                } else{
+                    $api.append($api.dom('.card-container'), str);
+                }
+                CurrentPage ++;
+            } else{
+                console.log('ret:err===='+ JSON.stringify(ret));
+            }
+            if (err) {
+                console.log('err===='+ JSON.stringify(err));
+            }
+        });
+
+    };
+
+    function goCreditRule(){
+        fnOpen({
+            name: 'simple_win',
+            url: 'widget://' + DIR + '/simple_page/simple_win.html',
+            pageParam: {
+                name: 'credit_rule',
+                title: '累计及使用规则',
+            }
+        });
+    };
+
+    function fnExchange(el){
+        var _data = vGlobalParam[ $api.attr(el, 'data-id' ) ];
+        if( +$api.dom( '.fixed-header .count' ).innerHTML < _data.integral ){
+            api.toast({
+	                global: true,
+                msg: fnLanguageSwitch( '您的积分不足哦' )
+            });
+        }else{
+            api.confirm({
+                title: fnLanguageSwitch( '提示' ),
+                msg: fnLanguageSwitch( '确定是否兑换商品？' ),
+                buttons:[fnLanguageSwitch('取消'), fnLanguageSwitch('确定')]
+            },function(ret,err){
+                if(ret.buttonIndex == 2){
+                    fnAjax({
+                        url: 'giftApplies/apply',
+                        data: {
+                            values: {
+                                giftId: _data.id,
+                                giftQty: 1
+                            }
+                        }
+                    }, function( ret, err ){
+                        if( ret ){
+                            api.toast({
+	                         global: true,
+                                msg: fnLanguageSwitch( '您的兑换已经成功，我们的工作人员会在3个工作日之内和您联系寄送礼品。谢谢。' )
+                            });
+                            getGiftList();
+                        }else{
+                            api.toast({
+	                          global: true,
+                                msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                            });
+                        }
+                    });
+                }
+            })
+        }
+return;
+        var GiftIntegral = $api.attr(el, 'data-cost');
+        var myIntegral = parseInt($api.text($api.dom('.fixed-header .count')));
+        if (myIntegral < GiftIntegral) {
+            api.alert({
+                title: '您的积分不足哦', 
+                msg: ''
+            });
+            return false;
+        } else {}
+        api.confirm({
+            title: '确定是否兑换商品',
+            buttons:['取消', '确定']
+        },function(ret,err){
+            if(ret.buttonIndex == 2){
+                ajaxRequest('/APPUserInfo/IfUserInfoPerfect.aspx', 'get', {
+                    UserID: parseInt(account.userid),
+                    BatchNo: account.batchno, 
+                }, function(ret, err){
+                    if(ret && ret.res == 1){
+                        APPGiftExchange(el);
+                    } else{
+                        api.alert({
+                            title: '提醒', 
+                            msg: '您的个人信息尚未完善，请先完善信息'
+                        }, function(){
+                            var move = isHuawei();
+                            var animation = {};
+                            if (move) {
+                                animation = {
+                                    type: 'movein',
+                                    subType: 'from_right'
+                                }          
+                            }
+                            api.openWin({
+                                name: 'profile_win',
+                                url: 'widget://' + DIR + '/simple_page/profile.html',
+                                bounces: false,
+                                animation: animation
+                            });
+                        });
+                    }
+                    if (err) {
+                        console.log('err===='+ JSON.stringify(err));
+                    }
+                });
+            }
+        });
+        if( event ){event.cancelBubble = true;}
+        return false;
+    };
+    var exchageLock = false;
+
+    function APPGiftExchange(el){
+        if (exchageLock) {
+            return false;
+        }
+        exchageLock = true;
+        var GiftID = $api.attr(el, 'data-id');
+        
+        var GiftIntegral = $api.attr(el, 'data-cost');
+        if (zhuge) {
+            zhuge.track({
+                eventName: '我的_我的积分-积分兑换',
+                eventPro: {}
+            });
+        }
+        ajaxRequest('/APPGiftExchange/APPGiftExchange.aspx', 'post', {
+            UserID: parseInt(account.userid),
+            BatchNo: account.batchno, 
+            GiftID: GiftID,
+            GiftNum: 1,
+            GiftIntegral: GiftIntegral
+        }, function(ret, err){
+            exchageLock = false;
+            if(ret && ret.res){
+                getUserIntegral();
+                api.alert({
+                    title: '', 
+                    msg: '您的兑换已经成功，我们的工作人员会在3个工作日之内和您联系寄送礼品。谢谢。'
+                }, function(){
+
+                });
+            } else{
+                console.log('ret:err===='+ JSON.stringify(ret));
+            }
+            if (err) {
+                console.log('err===='+ JSON.stringify(err));
+            }
+        });
+
+    };
+
+    function getImageCache(el){
+        var url = $api.attr(el, 'data-url');
+        api.imageCache({
+            url: url,
+            thumbnail: false
+        }, function(ret, err){
+            if ( ret && ret.status) {
+                $api.attr(el, 'src', ret.url);
+            }
+            if (err) {}
+        });
+    };
+</script>
+</html>

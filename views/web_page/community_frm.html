@@ -1,0 +1,301 @@
+<!doctype html>
+<html> 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>postGet web page</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/common.css"/>
+    <style type="text/css">
+    html{
+    	height: 100%;
+    }
+    body{
+    	height: auto;
+    	min-height: 100%;
+    	background-color: #EEEEEE;
+    }
+    *{
+    	margin: 0;
+    	padding: 0;
+    }
+    .wrap_con{
+    	height: 43px;
+    	line-height: 43px;
+    }
+    .matter{
+    	font-size: 15px;
+    	border-right: 1px solid #D7D7D7;
+    	color: #333333;
+    	 background-color: #fff;
+    	
+    	text-align: center;
+    	font-weight: bold;
+
+    }
+    .tags{
+    	font-size: 15px;
+    	color: #333333;
+    	text-align: center;
+    	font-weight: bold;
+    	 background-color: #fff;
+    	
+    }
+    .batch{
+    	font-size: 11px;
+    	color:#32BEFF;
+    	text-align: center;
+    	 background-color: #fff;
+    	
+
+    }
+    .flex{-webkit-box-flex: 1;     -webkit-flex: 1;    flex: 1;}
+    .con{-webkit-box-flex: 2;     -webkit-flex: 2;    flex: 2;}
+   .hot{
+   	   font-size: 13px;
+   	   color:#32BEFF;
+   	   border-top: 1px solid #D7D7D7;
+   	   border-right: 1px solid #D7D7D7;
+   	   height: 37px;
+   	   line-height: 37px;
+   	   text-align: center;
+   	    background-color: #fff;
+   }
+   .quark{
+   	    font-size: 13px;
+   	    border-top: 1px solid #D7D7D7;
+   	    border-right: 1px solid #D7D7D7;
+   	    height: 37px;
+   	    line-height: 37px;
+   	     text-align: center;
+   	      background-color: #fff;
+   }
+   .hot_buy{
+     border-top: 1px solid #D7D7D7;
+     background-color: #fff;
+     padding: 10px;
+     padding-bottom:5px;
+     margin-bottom: 5px;
+
+   }
+   .hot_buy:first-child{border: 0;}
+   div.hot_buy .title{
+   	  font-size: 14px;
+   	  color: #303030;
+   	  padding-bottom: 5px;
+
+   }
+   .content{
+        font-size: 11px;
+        display:-webkit-box;
+        -webkit-line-clamp:3;
+        -webkit-box-orient:vertical;
+        overflow:hidden;
+        color: #8C8C8C;
+        line-height: 17px;
+   }
+  .content.top:after{ content: 'hot'; color: red; padding: 0 10px; position: relative; top: -4px;  }
+   b{display: inline-block;}
+   .eye{
+   	background: url('../../image/zxc_03.jpg')no-repeat 0 0;
+   	background-size: 13px 9px;
+   	width:13px;
+   	height:10px;
+   	 vertical-align:bottom;
+   }
+   .talk{
+   	background: url('../../image/zxc_05.jpg')no-repeat 0 0;
+    background-size: 10px  10px;
+    width:10px ;
+    height: 10px;
+    vertical-align:bottom;
+   }
+   .zan{
+   	background: url('../../image/zxc_07.jpg')no-repeat 0 0;
+   	background-size: 10px 10px;
+   	width: 10px;
+   	height: 10px;
+   	vertical-align:bottom;
+   }
+   .num{
+   	font-size: 9px;
+   	color:#999999;
+    vertical-align:bottom;
+    margin-left: 5px;
+   }
+   .center{
+    text-align: center;
+   }
+   .figure{padding-top:6px;}
+   .edit{ width: 50px; height: 50px; border-radius: 50%; background: url(../../image/a_13.jpg) no-repeat center; background-size: 100% auto; position: fixed; right: 20px; bottom: 20px;  }
+    </style>
+</head>
+<body id="wrapper">
+   <div class="flex-wrap">
+     	<div class="con flex-vertical">
+     		<!--<div tamode onclick="api.openWin({name:'details_win',url:'./details_win.html'});" class="flex-con hot_buy">
+     			<p class="title">标题淘宝推出全新购物方式BUY+，您看好VR前景吗？</p>
+     			<p class="content top">淘宝推出全新的购物方式Buy+,Buy+使用VirtualReality(虚拟现实)技术,利用计算机图形系统和辅助传感器,生成可交互的三位购物环境。您怎么看虚拟现实已应用前景</p>
+     			<div class="flex-wrap figure">
+     				<span class="flex-con center"><b class="eye"></b><b class="num">88</b></span>
+     				<span class="flex-con center"><b class="talk"></b><b class="num">88</b></span>
+     				<span class="flex-con center"><b class="zan"></b><b class="num">88</b></span>
+     			</div>
+     		</div>--> 
+     	</div>
+   </div>
+   <div tapmode onclick="fnOpenEdit( this )" class="edit"></div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript">
+  var vGlobalParam = {};
+  apiready = function( reload ){
+    api.setRefreshHeaderInfo({
+        loadingImg: 'widget://image/common/blueArrow@2x.png',
+        textDown: fnLanguageSwitch( '下拉刷新' ),
+        textUp: fnLanguageSwitch( '松手加载' ),
+        textLoading: fnLanguageSwitch( '刷新中' ),
+        showTime: false,
+        bgColor: '#FFF',
+        textColor: '#000'
+    }, function(ret, err){
+      if( reload ){
+        SKIP = SKIP;
+      }else{
+        SKIP = 0;
+      }
+        fnGetProjectList( reload );
+        reload = false;
+    });
+    api.refreshHeaderLoading();
+
+    api.addEventListener({
+        name:'scrolltobottom',
+        extra:{
+            threshold: 50
+        }
+    }, function(ret, err){
+        fnGetProjectList();
+    });
+  }
+
+    function fnGetProjectList( reload ){
+    	var _data = {
+              values: {
+                  limit: LIMIT,
+                  skip: typeof reload === 'string' ? 0 : SKIP,
+                  title: typeof reload === 'string' ? reload : ''
+              }
+          },
+          _url = 'communityQuestions/questions';
+		  if( ! isNaN( +api.pageParam.id ) ){
+		  		_data.values[ 'tid' ] = api.pageParam.id;
+		  }else{
+	  		_url = api.pageParam.id;
+		  }
+		  
+	      fnAjax({
+	          url: _url,
+	          data: _data
+	      }, function( ret, err ){
+		      api.refreshHeaderLoadDone();
+		      if( ret ){
+		          if( reload || ! SKIP ){
+		            $api.dom( '.con' ).innerHTML = '';
+		          }
+		          if( ret.data.length ){
+		            SKIP += LIMIT;
+		            for( var x in ret.data ){
+		              vGlobalParam[ ret.data[x].id ] = ret.data[x];
+		              $api.append($api.dom( '.con' ),
+		              '<div tapmode onclick="fnOpenDetail( this );" class="flex-con hot_buy" data-id="'+ret.data[x].id+'">'+
+		              '  <p class="title">'+ret.data[x].title+'</p>'+
+		              '  <p class="content '+( ret.data[x].isTop == true ? 'top' : '' )+'">'+ret.data[x].content+'</p>'+
+		              '  <div class="flex-wrap figure">'+
+		              '    <span class="flex-con center"><b class="eye"></b><b class="num">'+ret.data[x].browses+'</b></span>'+
+		              '    <span class="flex-con center"><b class="talk"></b><b class="num">'+ret.data[x].comment+'</b></span>'+
+		              '    <span class="flex-con center"><b class="zan"></b><b class="num">'+ret.data[x].zambia+'</b></span>'+
+		              '  </div>'+
+		              '</div>');
+		            }
+		          }else{
+		            if( reload || ! SKIP ){
+		              $api.dom( '.con' ).innerHTML = '<div class="empty" >'+fnLanguageSwitch( '暂无数据' )+'</div>';
+		            }
+		          }
+		      }else{
+		        api.toast({
+		            msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+		        });
+		      }
+	    })
+  }
+
+
+  function fnOpenDetail( el ){
+    fnOpen({
+      name:'details_win',
+      url: 'widget://' + DIR + '/web_page/details_win.html',
+      pageParam: vGlobalParam[ $api.attr(el, 'data-id' ) ],
+      animation: {
+        type: 'movein'
+      }
+    });
+  }
+
+  function fnOpenEdit( el ){
+    // fnOpen({
+    //   name: 'answer_win',
+    //   url: 'widget://' + DIR + '/member_center/answer_win.html',
+    //   pageParam: api.pageParam,
+    //   animation: {
+    //     type: 'movein'
+    //   }
+    // });
+    
+    fnOpen({
+      name: 'quiz_win',
+      url: 'widget://' + DIR + '/member_center/quiz_win.html',
+      pageParam: api.pageParam,
+      animation: {
+        type: 'movein'
+      }
+    });
+  }
+
+  
+	// var account = $api.getStorage('loginInfo');
+	// apiready = function(){
+	//   	var pageParam = api.pageParam;
+	//   	api.ajax({
+	//   	    url: pageParam.url,
+	//   	    method: 'post',
+	//   	    timeout: 30,
+	//   	    dataType: 'text',
+	//   	    returnAll: false,
+	//   	    data: {
+	// 	        values: {
+	// 	        	UserID: account.userid,
+	//   				CaptchaNo: account.batchno
+	// 	        }
+	// 	    }
+	//   	},function(ret,err){
+	//   	    if (ret) {
+	//   	        window.location.href = pageParam.url;
+	//   	    } else {
+	//   	        api.toast({
+	//            global: true,
+	//   	            msg: JSON.stringify(err),
+	//   	            duration: 2000,
+	//   	            location: 'middle'
+	//   	        });
+	//   	    };
+	//   	});	  	
+
+	// };
+
+</script>
+</html>

@@ -1,0 +1,278 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>活动-frm</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" href="../../css/common.css">
+    <style type="text/css">
+    body{
+        height: auto;
+        min-height: 100%;
+    }
+    .event-outer{
+        padding: 1.4rem 1.7rem;
+    }
+    .event-card{
+        background-color: #FFFFFF;
+        border-radius: 0.4rem;
+        border: 1px solid #E6E6E6;
+        padding: 0 1.5rem;
+        margin-top: 2rem;
+    }
+    .event-card .title-box{
+        border-bottom: 1px solid #E6E6E6;
+    }
+    .event-card .title-box .state{
+        float: right;
+        font-size: 1.5rem;
+        color: #96989B;
+        line-height: 4.3rem;
+    }
+    .event-card .title-box .state.active{
+        color: #3685dd;
+    }
+    .event-card .title-box .title{
+        font-size: 1.5rem;
+        color: #000000;
+        margin-right: 6.5rem;
+        line-height: 4.3rem;
+    }
+    .event-card .content-box{
+        height: 16.3rem;
+        border-bottom: 1px solid #E6E6E6;
+        padding: 1rem 0;
+    }
+    .event-card .content-box img{
+        margin: 0 auto;
+        height: 100%;
+        max-width: 100%;
+        max-height: 100%;
+        display: block;
+    }
+    .event-card .date-box{
+
+    }
+    .event-card .date-state{
+        font-size: 1.3rem;
+        color: #96989B;
+        line-height: 3.4rem;
+        float: right;
+    }
+    .event-card .date-state.active{
+        color: #000000;
+    }
+    .event-card .date{
+        font-size: 1.3rem;
+        color: #000000;
+        line-height: 3.4rem;
+    }
+    
+    </style>
+</head>
+<body>
+    <div class="event-outer">
+<!--         <div class="event-card">
+            <div class="title-box">
+                <span class="state">已参加</span>
+                <p class="title ellipsis-1">
+                    样式未知样式未知
+                </p>
+            </div>
+            <div class="content-box">
+                <img src="../../image/common/placeholderimg.png" alt="">
+            </div>
+            <div class="date-box">
+                <span class="date-state">
+                    活动已结束
+                </span>
+                <p class="date">2016/3/13 16:30</p>
+            </div>
+        </div> -->
+    </div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/languge.js"></script>
+<script type="text/javascript" src="../../script/ajaxRequest.js"></script>
+<script type="text/javascript">
+    var account = $api.getStorage('loginInfo');
+    var vGlobalParam = {};
+	apiready = function(){
+	  	var pageParam = api.pageParam;
+        var zhuge = api.require('zhuge');
+        if (zhuge) {
+            zhuge.initZhuge();
+            zhuge.track({
+                eventName: '我的_My Activity',
+                eventPro: {}
+            });
+        }
+        getActiveList();
+	};
+    function getActiveList(){
+        //  	我的活动列表
+        fnAjax({
+            url: 'activityEntryRecords/getMyActivity'
+        }, function( ret, err){
+            if( ret ){
+                if( ret.data.length ){
+                    for( var x in ret.data ){
+                        if( ret.data[x].activity ){
+                            var _name = ret.data[x].activity.name;
+                            var _endDate = ret.data[x].activity.endDate;
+                            var _id = ret.data[x].activity.id;
+                            var _photo = ret.data[x].activity.appPhoto;
+                        }else if( ret.data[x].live ){
+                            var _name = ret.data[x].live.subject;
+                            var _endDate = ret.data[x].live.livetime;
+                            var _id = ret.data[x].live.id;
+                            var _photo = ret.data[x].live.appPhoto;
+                        }
+                        ret.data[x].id = _id;
+                        vGlobalParam[ _id ] = ret.data[x];
+                        $api.append($api.dom( '.event-outer' ), 
+                        '<div class="event-card" data-id="'+_id+'" onclick="openActiveDetail( this )">'+
+                        '    <div class="title-box">'+
+                        '        <span class="state">'+fnActivetyStatusJson()[ret.data[x].active]+'</span>'+
+                        '        <p class="title ellipsis-1">'+fnStringEmpty( _name )+'</p>'+
+                        '    </div>'+
+                        '    <div class="content-box">'+
+                        '        <img onload="getImageCache( this )" data-selectorid="'+_photo+'" src="../../image/common/placeholderimg.png" >'+
+                        '    </div>'+
+                        '    <div class="date-box">'+
+                        '        <span class="date-state">'+fnLanguageSwitch( Date.parse( _endDate ) > Date.now() ? fnLanguageSwitch('活动报名中') : fnLanguageSwitch('活动已结束'))+'</span>'+
+                        '        <p class="date">'+new Date( _endDate ).Format( 'yyyy/MM/dd hh:mm' )+'</p>'+
+                        '    </div>'+
+                        '</div>');
+                    }
+                }else{
+                    $api.dom( '.event-outer' ).innerHTML = '<div class="empty">'+fnLanguageSwitch( '暂无活动' )+'</div>';
+                }
+            }else{
+                api.toast({
+                    msg: fnLanguageSwitch( fnErrorJson( err.body.error.message ) )
+                });
+            }
+        })
+
+        // 这里开始重构
+        return;
+        var userActiveList = $api.getStorage('APPGetUserActiveList');
+        if (api.connectionType == 'none') {
+            if (userActiveList) {
+                var str = '';
+                if(userActiveList.length){
+                    for (var i = 0; i < userActiveList.length; i++) {
+                        str += '<div class="event-card" tapmode onclick="openActiveDetail(this)" data-id="'+ userActiveList[i].ItemID +'" data-id-rel="'+ userActiveList[i].RelActiveID +'">';
+                            str += '<div class="title-box">';
+                            if (userActiveList[i].SignUpStatus == 'Already registered') {
+                                str += '<span class="state active">'+ fnTranslation(userActiveList[i].SignUpStatus, true) +'</span>';
+                            } else {
+                                str += '<span class="state">'+ fnTranslation(userActiveList[i].SignUpStatus, true) +'</span>';
+                            }
+                                str += '<p class="title ellipsis-1">';
+                                    str += userActiveList[i].ItemName;
+                                str += '</p>';
+                            str += '</div>';
+                            str += '<div class="content-box">';
+                                str += '<img src="../image/common/placeholderimg.png" data-url="'+ userActiveList[i].ItemURL +'" alt="" onload="getImageCache(this)">';
+                            str += '</div>';
+                            str += '<div class="date-box">';
+                            if (userActiveList[i].ActiveStatus == 'In registration') {
+                                str += '<span class="date-state active">';
+                            } else {
+                                str += '<span class="date-state">';
+                            }
+                                    str += fnTranslation(userActiveList[i].ActiveStatus, true);
+                                str += '</span>';
+                                str += '<p class="date">'+ userActiveList[i].CreateDate +'</p>'
+                            str += '</div>';
+                        str += '</div>';
+
+                    }
+                }else{
+                    str = '<p>You haven\'t registered in any activity！</p>';
+                }
+                
+                $api.html($api.dom('.event-outer'), str);
+            } else {
+                api.toast({
+	global: true,
+                    msg: 'Information about the activity hasn\'t been obtained.',
+                    duration: 2000,
+                    location: 'middle'
+                });
+            }
+            
+        } else{
+            ajaxRequest('/APPUserInfo/APPGetUserActiveList.aspx', 'get', {
+                UserID: parseInt(account.userid),
+                BatchNo: account.batchno, 
+            }, function(ret, err){
+                
+                if(ret && ret.res == undefined){
+                    var data = ret.appdatalist;
+                    var str = '';
+                    if(data.length){
+                        for (var i = 0; i < data.length; i++) {
+//							alert( JSON.stringify( data[i] ) )
+                            str += '<div class="event-card" tapmode onclick="openActiveDetail(this)" data-id="'+ data[i].ItemID +'" data-id-rel="'+ data[i].RelActiveID +'">';
+                                str += '<div class="title-box">';
+                                if (data[i].SignUpStatus == 'Already registered') {
+                                    str += '<span class="state active">'+ fnTranslation(data[i].SignUpStatus, true) +'</span>';
+                                } else {
+                                    str += '<span class="state">'+ fnTranslation(data[i].SignUpStatus, true) +'</span>';
+                                }
+                                    str += '<p class="title ellipsis-1">';
+                                        str += data[i].ItemName;
+                                    str += '</p>';
+                                str += '</div>';
+                                str += '<div class="content-box">';
+                                    str += '<img src="../image/common/placeholderimg.png" data-url="'+ data[i].ItemURL +'" alt="" onload="getImageCache(this)">';
+                                str += '</div>';
+                                str += '<div class="date-box">';
+                                if (data[i].ActiveStatus == 'In registration') {
+                                    str += '<span class="date-state active">';
+                                } else {
+                                    str += '<span class="date-state">';
+                                }
+                                        str += fnTranslation(data[i].ActiveStatus, true);
+                                    str += '</span>';
+                                    str += '<p class="date">'+ data[i].CreateDate +'</p>'
+                                str += '</div>';
+                            str += '</div>';
+
+                        }
+                    }else{
+                        str = '<p>You haven\'t registered in any activity！</p>';
+                    }
+                    
+                    $api.html($api.dom('.event-outer'), str);
+                    $api.setStorage('APPGetUserActiveList', data);
+                } else{
+                    console.log('ret:err===='+ JSON.stringify(ret));
+                }
+                if (err) {
+                    console.log('err===='+ JSON.stringify(err));
+                }
+            });
+        }
+        
+    };
+
+    function openActiveDetail( el ){
+        fnOpen({
+            name: 'simple_win',
+            url: 'widget://' + DIR + '/simple_page/simple_win.html',
+            pageParam: {
+                name: 'event_detail',
+                title: fnLanguageSwitch( '活动详情' ),
+                data: vGlobalParam[ $api.attr(el, 'data-id' ) ].id
+            }
+        });
+    };
+
+</script>
+</html>
